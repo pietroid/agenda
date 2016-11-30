@@ -24,7 +24,7 @@ public class RealizaData {
         ps.setInt(3, realiza.getEVEid());
      
         int result = ps.executeUpdate();
-    }
+    }// incluir
 
     public void excluir(RealizaDO realiza, Transacao tr) throws Exception {
         Connection con = tr.obterConexao();
@@ -56,5 +56,23 @@ public class RealizaData {
         realiza.setEVEid(rs.getInt("EVEid"));
         return realiza;
     } // buscar
+    
+    public List<RealizaDO> pesquisarPorGEid(int GEid, Transacao tr) throws Exception {
+        Connection con = tr.obterConexao();
+        String sql = "select * from agenda.realiza where GEid = ?";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setInt(1, GEid);
+        ResultSet rs = ps.executeQuery();
+        System.out.println("Query executada");
+        List<RealizaDO> Items = new ArrayList<RealizaDO>();
+        while (rs.next()) {
+            RealizaDO i = new RealizaDO();
+            i.setREALid (rs.getInt("REALid"));
+            i.setGEid (rs.getInt("GEid"));
+            i.setEVEid(rs.getInt("EVEid"));
+            Items.add(i);
+        }
+        return Items;
+    } // pesquisar por GEid
     
 }
