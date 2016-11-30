@@ -5,6 +5,10 @@
  */
 package data;
 
+import java.sql.*;
+import java.util.*;
+import utils.Transacao;
+
 /**
  *
  * @author Marcus
@@ -46,7 +50,7 @@ public class RealizaData {
         ps.setInt(1, REALid);
         ResultSet rs = ps.executeQuery();
         rs.next();
-        RealizaDO realiza = new RealizaDo();
+        RealizaDO realiza = new RealizaDO();
         realiza.setREALid(rs.getInt("REALid"));
         realiza.setGEid(rs.getInt("GEid"));
         realiza.setEVEid(rs.getInt("EVEid"));
