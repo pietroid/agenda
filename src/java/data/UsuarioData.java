@@ -27,9 +27,7 @@ public class UsuarioData {
             usuario.setIngresso(rs.getDate("USingresso"));
             usuario.setPasta(rs.getString("USpasta"));
         }
-
-        return usuario;
-    } // buscar
   
-
+        return usuario;
+    }
 }

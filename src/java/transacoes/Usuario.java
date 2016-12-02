@@ -11,8 +11,9 @@ public class Usuario {
 
     public boolean verificar(UsuarioDO usuario) throws Exception{
         //Regras de negocio
-        if(usuario == null || usuario.getUsername() == null)
+        if(usuario == null || usuario.getUsername() == null){
             return false;
+        }
         
         Transacao tr = new Transacao();
         
