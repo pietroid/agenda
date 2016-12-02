@@ -17,7 +17,7 @@
   <td><center><a href="../GE.jsp" target=" _top">ThundeRatz</a><center>
 </tr>
 <tr>
-  <td width=10% height=150 ><center><iframe src="../PastadeImagens/GrupodeExtensao2/Grupodeextensao2-imagem 1.PNG" 
+  <td width=10% height=150 ><center><iframe src="../PastadeImagens/GrupodeExtensao2/Grupodeextensao2-imagem1.PNG" 
           scrolling= no width=120 height=150></iframe><center>
   <td><center><a href="../GE.jsp" target=" _top">Poli Social</a><center><center>
 </tr>
