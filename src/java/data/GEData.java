@@ -17,7 +17,7 @@ public class GEData {
     
     public void incluir(GEDO GE, Transacao tr) throws Exception {
         Connection con = tr.obterConexao();
-        String sql = "insert into agenda.GE (id,nome,descricao,ano,site,face,email,imagem,local,tel,tipo) values (?,?,?,?,?,?,?,?,?,?,?)";
+        String sql = "insert into agenda.grupodeextensao (GEid,GEnome,GEdescricao,GEano_de_inicio,GEsite,GEpagina_do_fb,GEemail,GEpasta_de_imagens,GElocal,GEtel,GEtipo) values (?,?,?,?,?,?,?,?,?,?,?)";
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setInt(1, GE.getId());
         ps.setString(2, GE.getNome());
@@ -38,7 +38,7 @@ public class GEData {
 
     public void excluir(GEDO GE, Transacao tr) throws Exception {
         Connection con = tr.obterConexao();
-        String sql = "delete from agenda.GE where id = ?";
+        String sql = "delete from agenda.grupodeextensao where GEid = ?";
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setInt(1, GE.getId());
         int result = ps.executeUpdate();
@@ -46,23 +46,23 @@ public class GEData {
 
     public GEDO buscar(int id, Transacao tr) throws Exception {
         Connection con = tr.obterConexao();
-        String sql = "select * from agenda.GE where id = ?";
+        String sql = "select * from agenda.grupodeextensao where GEid = ?";
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setInt(1, id);
         ResultSet rs = ps.executeQuery();
         rs.next();
         GEDO GE = new GEDO();
-        GE.setId(rs.getInt("id"));
-        GE.setNome(rs.getString("nome"));
-        GE.setDescricao(rs.getString("descricao"));
-        GE.setAno(rs.getDate("ano"));
-        GE.setSite(rs.getString("site"));
-        GE.setFace(rs.getString("face"));
-        GE.setEmail(rs.getString("email"));
-        GE.setImagem(rs.getString("imagem"));
-        GE.setLocal(rs.getString("local"));
-        GE.setTel(rs.getInt("tel"));
-        GE.setTipo(rs.getString("tipo"));
+        GE.setId(rs.getInt("GEid"));
+        GE.setNome(rs.getString("GEnome"));
+        GE.setDescricao(rs.getString("GEdescricao"));
+        GE.setAno(rs.getDate("GEano_de_inicio"));
+        GE.setSite(rs.getString("GEsite"));
+        GE.setFace(rs.getString("GEpagina_do_fb"));
+        GE.setEmail(rs.getString("GEemail"));
+        GE.setImagem(rs.getString("GEpasta_de_imagens"));
+        GE.setLocal(rs.getString("GElocal"));
+        GE.setTel(rs.getInt("GEtel"));
+        GE.setTipo(rs.getString("GEtipo"));
         return GE;
     } // buscar
 }
