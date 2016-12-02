@@ -5,6 +5,8 @@
  */
 package data;
 
+import java.sql.Date;
+
 /**
  *
  * @author Pietro
@@ -14,11 +16,11 @@ public class UsuarioDO {
  private int id;
     private String username;
     private String senha;
-    private int nome;
+    private String nome;
     private String email;
     private String bio;
     private String imagem;
-    private String data;
+    private Date data;
     private String curso;
     private String ingresso;
     private String pasta;
@@ -68,14 +70,14 @@ public class UsuarioDO {
     /**
      * @return the nome
      */
-    public int getNome() {
+    public String getNome() {
         return nome;
     }
 
     /**
      * @param nome the nome to set
      */
-    public void setNome(int nome) {
+    public void setNome(String nome) {
         this.nome = nome;
     }
 
@@ -124,14 +126,14 @@ public class UsuarioDO {
     /**
      * @return the data
      */
-    public String getData() {
+    public Date getData() {
         return data;
     }
 
     /**
      * @param data the data to set
      */
-    public void setData(String data) {
+    public void setData(Date data) {
         this.data = data;
     }
 
