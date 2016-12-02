@@ -22,7 +22,7 @@ public class UsuarioDO {
     private String imagem;
     private Date data;
     private String curso;
-    private String ingresso;
+    private Date ingresso;
     private String pasta;
 
     /**
@@ -154,14 +154,14 @@ public class UsuarioDO {
     /**
      * @return the ingresso
      */
-    public String getIngresso() {
+    public Date getIngresso() {
         return ingresso;
     }
 
     /**
      * @param ingresso the ingresso to set
      */
-    public void setIngresso(String ingresso) {
+    public void setIngresso(Date ingresso) {
         this.ingresso = ingresso;
     }
 
