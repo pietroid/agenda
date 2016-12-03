@@ -52,5 +52,21 @@ public class Usuario {
 	}
 	return false;
     }
+    public UsuarioDO buscarPorUsername(String username) throws Exception{
+        UsuarioDO usuario;
+        Transacao tr = new Transacao();
+        try{
+            tr.beginReadOnly();
+  	    UsuarioData dt = new UsuarioData();
+	    usuario = dt.buscar(username, tr);
+            tr.commit();
+            return usuario;
+	} catch (Exception e) {
+            tr.rollback();
+            System.out.println("Erro ao buscar" + username);
+            e.printStackTrace();
+            return null;
+	}
+    }
 
 }
