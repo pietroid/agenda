@@ -16,10 +16,6 @@ public class Realiza {
     
     public boolean incluir (RealizaDO realiza) throws Exception{
         
-        if(isEmpty(String.valueOf(realiza.getREALid())))  {
-            return false;
-        }
-        
         Transacao tr = new Transacao();
         try {
             
@@ -31,7 +27,7 @@ public class Realiza {
        
         } catch(Exception e) {
             tr.rollback();
-            System.out.println("Erro ao incluir " + realiza.getREALid());
+            System.out.println("Erro ao incluir ");
             e.printStackTrace();
         }
         return false;
@@ -48,7 +44,7 @@ public class Realiza {
             return true;
 	} catch (Exception e) {
             tr.rollback();
-            System.out.println("Erro ao atualizar" + realiza.getREALid());
+            System.out.println("Erro ao atualizar" + realiza.getId());
             e.printStackTrace();
 	}
 	return false;
@@ -96,14 +92,4 @@ public class Realiza {
         return false;
     }
 
-    public static void main(String[] args) {
-        Realiza a = new Realiza();
-        RealizaDO realizainicial = new RealizaDO();
-        try {
-	    realizainicial = a.buscar(2);
-            System.out.println(realizainicial.getREALid());
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
-    } // main
 }
