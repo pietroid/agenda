@@ -12,17 +12,17 @@
 <table align="center" border=1 cellpadding=10 width=1000>
 <th>Imagem <th>Grupo de extensão
 <tr>
-  <td width=10% height=150 ><center><iframe src="../Pastadeimagens/GrupodeExtensao1/GrupodeExtensao1-imagem1.PNG" 
+  <td width=10% height=150 ><center><iframe src="../PastadeImagens/GrupodeExtensao1/Grupodeextensao1-imagem1.PNG" 
           scrolling= no width=120 height=150 ></iframe><center>
   <td><center><a href="../GE.jsp" target=" _top">ThundeRatz</a><center>
 </tr>
 <tr>
-  <td width=10% height=150 ><center><iframe src="../Pastadeimagens/GrupodeExtensao2/GrupodeExtensao2-imagem 1.PNG" 
+  <td width=10% height=150 ><center><iframe src="../PastadeImagens/GrupodeExtensao2/Grupodeextensao2-imagem1.PNG" 
           scrolling= no width=120 height=150></iframe><center>
   <td><center><a href="../GE.jsp" target=" _top">Poli Social</a><center><center>
 </tr>
 <tr>
-  <td width=10% height=150 ><center><iframe src="../Pastadeimagens/GrupodeExtensao3/GrupodeExtensao3-imagem1.PNG" 
+  <td width=10% height=150 ><center><iframe src="../PastadeImagens/GrupodeExtensao3/Grupodeextensao3-imagem1.PNG" 
           scrolling= no width=120 height=150></iframe><center>
   <td><center><a href="../GE.jsp" target=" _top">Matemática em Movimento</a><center><center>
 </tr>

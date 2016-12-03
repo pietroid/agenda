@@ -9,6 +9,9 @@
 <p><font size="2" face="verdana"><a href="body_GE.jsp">Clique aqui
  para ver uma lista com todos os Grupos do seu interesse</a></font></p> 
 
+<p><font size="2" face="verdana"><a href="body_AltPass.jsp">Clique aqui
+ para alterar sua senha</a></font></p>
+
 <h2> Calendário </h2>
 <center>
 <table align="center" border=1 cellpadding=10 width=1000>
@@ -31,6 +34,7 @@
 <td>25 <td>26 <td>27 <td>28 <td>29 <td>30 <td>
 </tr>
 </table>
+    
 <center>
 
 </font>
