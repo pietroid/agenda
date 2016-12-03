@@ -5,7 +5,7 @@
 <center>
   <FORM action="http://www.google.com.br/formtest" method="post">
     Usuário:<BR>
-    <INPUT type="text" name="usuario" value="Digite aqui seu usuário"><BR><BR>
+    <INPUT type="text" name="usuario" value="OI TUDO BEM"><BR><BR>
     Senha:<BR>
     <INPUT type="password" name="senha" value="Digite aqui sua senhaaa"><BR><BR>
     Digite novamente a sua senha:<BR>
