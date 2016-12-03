@@ -33,7 +33,7 @@
             Descrição:<BR>
             <INPUT type="text" name="EVEdescricao" value="Digite aqui uma breve descrição do seu evento"><BR><BR>
             Tipo:<BR>
-            <INPUT type="text" name="EVEtipo" value="Digite o tpo do seu evento"><BR><BR>
+            <INPUT type="text" name="EVEtipo" value="Digite o tipo do seu evento"><BR><BR>
             Horário de início:<BR>
             <INPUT type="text" name="EVEhorario_de_inicio" value="Digite aqui o horário de início do seu evento"><BR><BR>
             Horário de término:<BR>
@@ -55,7 +55,7 @@
            if (request.getParameter("EVEdata") != null) evento.setData(request.getParameter("EVEdata"));
            if (request.getParameter("EVEmacro_evento") != null){
                EventoDO macro = eventotn.buscarNome("EVEmacro_evento");
-               evento.setMacroEvento(macro.getMacroEvento());
+               evento.setMacroEvento(macro.getId());
            }
         }
         if(action == 0){%>
@@ -66,7 +66,7 @@
             Descrição:<BR>
             <INPUT type="text" name="EVEdescricao" value="Digite aqui uma breve descrição do seu evento"><BR><BR>
             Tipo:<BR>
-            <INPUT type="text" name="EVEtipo" value="Digite o tpo do seu evento"><BR><BR>
+            <INPUT type="text" name="EVEtipo" value="Digite o tipo do seu evento"><BR><BR>
             Horário de início:<BR>
             <INPUT type="text" name="EVEhorario_de_inicio" value="Digite aqui o horário de início do seu evento"><BR><BR>
             Horário de término:<BR>
