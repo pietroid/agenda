@@ -2,6 +2,15 @@
 <body BGCOLOR =#EAD1A4>
 <font face="verdana">
 
+<%@ page import="transacoes.Usuario" %>
+<%@ page import="data.UsuarioDO" %>
+<%@ page import="java.util.Vector" %>
+
+<%
+    if(session.getAttribute("Username")!= null)
+    {
+       
+%>
 <h1><center> Perfil <center> </h1>
 
 <h2><font face="verdana"> Olá, João! </font><h2>
@@ -16,7 +25,7 @@
 <center>
 <table align="center" border=1 cellpadding=10 width=1000>
 <tr>
-<th>Domingo <th>Segunda <th>Terça <th>Quarta <th>Quinta <th>Sexta <th>Saturday
+<th>Domingo <th>Segunda <th>Terça <th>Quarta <th>Quinta <th>Sexta <th>Sábado
 </tr>
 <tr>
 <td> <td> <td> <td> <td>1 <td>2 <td>3
@@ -36,7 +45,21 @@
 </table>
     
 <center>
-
+    
+<%    
+   }else{
+        
+ %>
+ 
+ <h1><center> Você ainda não tem um Perfil.<center> </h1>
+ <h2><center>      Deseja se cadastrar?    <center> </h2>
+<center>  <BR><a href="../Cadastro.jsp" target=" _top">Quero me Cadastrar</a><center>
+ <%      
+        
+    }
+        
+        
+%>
 </font>
 </body>
 </html>

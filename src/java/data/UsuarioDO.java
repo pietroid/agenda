@@ -25,6 +25,8 @@ public class UsuarioDO {
     private Date ingresso;
     private String pasta;
     private boolean superUser;
+    private String Pergunta;
+    private String Resposta;
 
     /**
      * @return the id
@@ -194,7 +196,20 @@ public class UsuarioDO {
         this.superUser = superUser;
     }
     
+    public String getResposta(){
+            return this.Resposta;
+    }
     
+    public void setResposta(String resposta){
+            this.Resposta = resposta ;
+    }
     
+    public String getPergunta(){
+            return this.Pergunta;
+    }
+    
+    public void setPergunta(String resposta){
+            this.Pergunta = resposta ;
+    }
     
 }
