@@ -15,22 +15,16 @@
         <title>Editar evento</title>
     </head>
     <body BGCOLOR =#EAD1A4>
-        <center>
-        <form>
-        <INPUT TYPE="RADIO" NAME="Eve " VALUE="macro"> opção1
-        <INPUT TYPE="RADIO" NAME="Eve" VALUE="micro"> opção2 
-        </form>
-        </center>
         <%
-            if ( session.getAttribute("EVEid") == null) {
+            if ( request.getAttribute("EVEid") == null) {
                pageContext.forward("index.jsp");
             }
-            int EVEid = Integer.parseInt((String)session.getAttribute("EVEid"));
+            int EVEid = Integer.parseInt((String)request.getAttribute("EVEid"));
             Evento eventotn = new Evento();
             EventoDO evento = new EventoDO();
             evento = eventotn.buscar(EVEid);
-            String action = request.getParameter("Eve");
-            if(action.equals ("micro")){%>
+            int action = Integer.parseInt((String)request.getAttribute("EVEmacro_evento"));
+            if(action != 0){%>
         <center>
           <FORM action="http://www.google.com.br/formtest" method="post">
 
@@ -64,7 +58,7 @@
                evento.setMacroEvento(macro.getMacroEvento());
            }
         }
-        if(action.equals ("macro")){%>
+        if(action == 0){%>
         <center>
           <FORM action="http://www.google.com.br/formtest" method="post">
               Nome do Evento:<BR>
