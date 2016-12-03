@@ -4,6 +4,9 @@
     Author     : fernandohitoshiwatanabe
 --%>
 
+<%@ page import="transacoes.Evento" %>
+<%@ page import="data.EventoDO" %>
+<%@ page import="java.util.*" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -17,6 +20,8 @@
 </form>
 </center>
 <% String action = request.getParameter("Eve");
+    Evento eventotn = new Evento();
+    EventoDO evento = new EventoDO();
     if(action.equals ("micro")){%>
 <center>
   <FORM action="http://www.google.com.br/formtest" method="post">
@@ -26,7 +31,7 @@
     Descrição:<BR>
     <INPUT type="text" name="EVEdescricao" value="Digite aqui uma breve descrição do seu evento"><BR><BR>
     Tipo:<BR>
-    <INPUT type="text" name="EVEtipo" value="Digite o tpo do seu evento"><BR><BR>
+    <INPUT type="text" name="EVEtipo" value="Digite o tipo do seu evento"><BR><BR>
     Horário de início:<BR>
     <INPUT type="text" name="EVEhorario_de_inicio" value="Digite aqui o horário de início do seu evento"><BR><BR>
     Horário de término:<BR>
@@ -40,7 +45,19 @@
   </FORM>
 <BR><BR>
 </center>
-<% }
+<% 
+    evento.setNome(request.getParameter("EVEnome"));
+    evento.setDescricao(request.getParameter("EVEdescricao"));
+    evento.setTipo(request.getParameter("EVEtipo"));
+    evento.setHoraInicial(request.getParameter("EVEnome"));
+    evento.setHoraFinal(request.getParameter("EVEnome"));
+    evento.setData(request.getParameter("EVEnome"));
+    if (request.getParameter("EVEmacro_evento") != null){
+               EventoDO macro = eventotn.buscarNome("EVEmacro_evento");
+               evento.setMacroEvento(macro.getId());
+    }
+    boolean ok = eventotn.incluir(evento);
+}
 if(action.equals ("macro")){%>
 <center>
   <FORM action="http://www.google.com.br/formtest" method="post">
@@ -50,7 +67,7 @@ if(action.equals ("macro")){%>
     Descrição:<BR>
     <INPUT type="text" name="EVEdescricao" value="Digite aqui uma breve descrição do seu evento"><BR><BR>
     Tipo:<BR>
-    <INPUT type="text" name="EVEtipo" value="Digite o tpo do seu evento"><BR><BR>
+    <INPUT type="text" name="EVEtipo" value="Digite o tipo do seu evento"><BR><BR>
     Horário de início:<BR>
     <INPUT type="text" name="EVEhorario_de_inicio" value="Digite aqui o horário de início do seu evento"><BR><BR>
     Horário de término:<BR>
@@ -62,6 +79,14 @@ if(action.equals ("macro")){%>
   </FORM>
 <BR><BR>
 </center>
-<% } %>
+<%  evento.setNome(request.getParameter("EVEnome"));
+    evento.setDescricao(request.getParameter("EVEdescricao"));
+    evento.setTipo(request.getParameter("EVEtipo"));
+    evento.setHoraInicial(request.getParameter("EVEnome"));
+    evento.setHoraFinal(request.getParameter("EVEnome"));
+    evento.setData(request.getParameter("EVEnome"));
+    evento.setMacroEvento(0);
+    boolean ok = eventotn.incluir(evento);
+} %>
     </body>
 </html>
