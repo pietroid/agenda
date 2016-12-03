@@ -56,14 +56,4 @@ public class Evento {
         return false;
     }
 
-    public static void main(String[] args) {
-        Evento a = new Evento();
-        EventoDO Eventoinicial = new EventoDO();
-        try {
-	    Eventoinicial = a.buscar(2);
-            System.out.println(Eventoinicial.getId());
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
-    } // main
 }

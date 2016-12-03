@@ -8,7 +8,24 @@ import java.sql.ResultSet;
 import java.util.*;
 
 public class Usuario {
-
+    public boolean incluir (UsuarioDO usuario) throws Exception{
+        
+        Transacao tr = new Transacao();
+        try {
+            
+            tr.begin();
+                UsuarioData usuarioData = new UsuarioData();
+                usuarioData.incluir(usuario, tr);
+            tr.commit();
+            return true;
+       
+        } catch(Exception e) {
+            tr.rollback();
+            System.out.println("Erro ao incluir ");
+            e.printStackTrace();
+        }
+        return false;
+    } // incluir
     public boolean verificar(UsuarioDO usuario) throws Exception{
         //Regras de negocio
         if(usuario == null || usuario.getUsername() == null){

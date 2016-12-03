@@ -92,14 +92,4 @@ public class Realiza {
         return false;
     }
 
-    public static void main(String[] args) {
-        Realiza a = new Realiza();
-        RealizaDO realizainicial = new RealizaDO();
-        try {
-	    realizainicial = a.buscar(2);
-            System.out.println(realizainicial.getId());
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
-    } // main
 }

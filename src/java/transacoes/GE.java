@@ -49,22 +49,5 @@ public class GE {
 	return null;
     } // buscar
 
-    private boolean isEmpty(String s) {
-        if (null == s)
-            return true;
-        if (s.length() == 0)
-            return true;
-        return false;
-    }
 
-    public static void main(String[] args) {
-        GE a = new GE();
-        GEDO GEinicial = new GEDO();
-        try {
-	    GEinicial = a.buscar(2);
-            System.out.println(GEinicial.getId());
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
-    } // main
 }
