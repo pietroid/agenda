@@ -17,19 +17,18 @@ public class GEData {
     
     public void incluir(GEDO GE, Transacao tr) throws Exception {
         Connection con = tr.obterConexao();
-        String sql = "insert into agenda.grupodeextensao (GEid,GEnome,GEdescricao,GEano_de_inicio,GEsite,GEpagina_do_fb,GEemail,GEpasta_de_imagens,GElocal,GEtel,GEtipo) values (?,?,?,?,?,?,?,?,?,?,?)";
+        String sql = "insert into agenda.grupodeextensao (GEnome,GEdescricao,GEano_de_inicio,GEsite,GEpagina_do_fb,GEemail,GEpasta_de_imagens,GElocal,GEtel,GEtipo) values (?,?,?,?,?,?,?,?,?,?)";
         PreparedStatement ps = con.prepareStatement(sql);
-        ps.setInt(1, GE.getId());
-        ps.setString(2, GE.getNome());
-        ps.setString(3, GE.getDescricao());
-        ps.setDate(4, GE.getAno());
-        ps.setString(5,GE.getSite());
-        ps.setString(6, GE.getFace());
-        ps.setString(7, GE.getEmail());
-        ps.setString(8, GE.getImagem());
-        ps.setString(9, GE.getLocal());
-        ps.setInt(10, GE.getTel());
-        ps.setString(11, GE.getTipo());
+        ps.setString(1, GE.getNome());
+        ps.setString(2, GE.getDescricao());
+        ps.setDate(3, GE.getAno());
+        ps.setString(4,GE.getSite());
+        ps.setString(5, GE.getFace());
+        ps.setString(6, GE.getEmail());
+        ps.setString(7, GE.getImagem());
+        ps.setString(8, GE.getLocal());
+        ps.setInt(9, GE.getTel());
+        ps.setString(10, GE.getTipo());
         
         
         

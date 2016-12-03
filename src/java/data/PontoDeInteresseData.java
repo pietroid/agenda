@@ -17,14 +17,13 @@ public class PontoDeInteresseData {
     
     public void incluir(PontoDeInteresseDO  PontoDeInteresse, Transacao tr) throws Exception {
         Connection con = tr.obterConexao();
-        String sql = "insert into agenda.POI (POI_id,nome,descrição,endereço,link_para_maps,pasta_de_imagens) values (?,?,?,?,?,?)";
+        String sql = "insert into agenda.POI (nome,descrição,endereço,link_para_maps,pasta_de_imagens) values (?,?,?,?,?)";
         PreparedStatement ps = con.prepareStatement(sql);
-        ps.setInt(1, PontoDeInteresse.getPOI_id());
-        ps.setString(2, PontoDeInteresse.getNome());
-        ps.setString(3, PontoDeInteresse.getDescrição());
-        ps.setString(4, PontoDeInteresse.getEndereço());
-        ps.setString(5,PontoDeInteresse.getLink_para_maps());
-        ps.setString(6, PontoDeInteresse.getPasta_de_imagens());
+        ps.setString(1, PontoDeInteresse.getNome());
+        ps.setString(2, PontoDeInteresse.getDescrição());
+        ps.setString(3, PontoDeInteresse.getEndereço());
+        ps.setString(4,PontoDeInteresse.getLink_para_maps());
+        ps.setString(5, PontoDeInteresse.getPasta_de_imagens());
         
         
         

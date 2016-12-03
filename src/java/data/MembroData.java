@@ -15,12 +15,11 @@ import utils.Transacao;
 public class MembroData {
     public void incluir(MembroDO Membro, Transacao tr) throws Exception {
         Connection con = tr.obterConexao();
-        String sql = "insert into agenda.Membro (MEMBERid, GEid, USUid, ADMid) values (?,?,?,?)";
+        String sql = "insert into agenda.Membro (GEid, USUid, ADMid) values (?,?,?)";
         PreparedStatement ps = con.prepareStatement(sql);
-        ps.setInt(1, Membro.getMEMBERid());
-        ps.setInt(2, Membro.getGEid());
-        ps.setInt(3, Membro.getUSUid());
-        ps.setInt(4, Membro.getADM());
+        ps.setInt(1, Membro.getGEid());
+        ps.setInt(2, Membro.getUSUid());
+        ps.setInt(3, Membro.getADM());
      
         int result = ps.executeUpdate();
     }// incluir

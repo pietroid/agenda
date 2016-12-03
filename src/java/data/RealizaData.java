@@ -17,9 +17,8 @@ public class RealizaData {
     
     public void incluir(RealizaDO realiza, Transacao tr) throws Exception {
         Connection con = tr.obterConexao();
-        String sql = "insert into agenda.realiza (REALid,GEid,EVEid) values (?,?,?)";
+        String sql = "insert into agenda.realiza (GEid,EVEid) values (?,?)";
         PreparedStatement ps = con.prepareStatement(sql);
-        ps.setInt(1, realiza.getId());
         ps.setInt(2, realiza.getGEid());
         ps.setInt(3, realiza.getEVEid());
      
@@ -40,6 +39,7 @@ public class RealizaData {
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setInt(1, realiza.getGEid());
         ps.setInt(2, realiza.getEVEid());
+        ps.setInt(3, realiza.getId());
         int result = ps.executeUpdate();
     } // atualizar
 
