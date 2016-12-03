@@ -1,3 +1,4 @@
+<%@page import="transacoes.GE"%>
 <%@page import="data.GEDO"%>
 <html>
 <body BGCOLOR =#EAD1A4>
@@ -36,22 +37,12 @@ if (request.getParameter("submit") != null){
     grupo.setTipo(request.getParameter("tipo"));
     grupo.setSite(request.getParameter("site"));
     grupo.setEmail(request.getParameter("email"));
-    grupo.setTel(tel);
+    grupo.setTel(request.getParameter("tel"));
     grupo.setLocal(request.getParameter("local"));
     grupo.setDescricao(request.getParameter("descricao"));
     grupo.setAno(request.getParameter("ano"));
-    boolean valido = tru.verificar(grupo);
-    if (valido){
-        session.setAttribute("USnome", usuario.getNome());  //Decidir com os demais   
-        pageContext.forward("body_Perfil.jsp");
-    }
-    else
-    {
-        %>
-        
-        
-        "Este grupo já existe!"
-        <%
+    GE novo=new GE();
+    novo.incluir(grupo);
 }
 %>
     
@@ -62,7 +53,6 @@ if (request.getParameter("submit") != null){
     
     <INPUT type="reset" name="reset" value="Reset">
   
-<BR><BR><a href="../EsqueceuSenha.jsp" target=" _top">Esqueceu sua senha?</a>
 
 </body>
 </html>
