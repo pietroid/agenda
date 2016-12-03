@@ -1,13 +1,28 @@
 
-   <html>
+<%@page import="data.EventoDO"%>
+<%@page import="data.UsuarioDO"%>
+<%@page import="java.util.List"%>
+
+<html>
+<%@ page import="transacoes.Usuario" %>
+<%@ page import="data.UsuarioDO" %>
+<%@ page import="java.util.Vector" %>
+
 <body BGCOLOR =#EAD1A4>
 <h1><center>Nome do Evento</center></h1>
 <BR><BR>
 <table align="left" border=1 cellpadding=10 width=500>
+    <tfoot>
+        <tr><th><a href="../Isncricao.jsp" <%// request.setAttribute("evento",EventoDO);*/
+                   
+                   %>target=" _top">Inscrever-se</a></th></tr>
+    </tfoot>
 <th>Descrição</th>
 <tr>
     <td width=10% height=200></td>
 </tr>
+
+
 </table>
 
 
@@ -19,7 +34,7 @@
 
 
 
-<BR><BR><BR><BR><BR>
+<BR><BR>
 
 
   
