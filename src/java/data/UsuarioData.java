@@ -43,6 +43,8 @@ public class UsuarioData {
             usuario.setIngresso(rs.getDate("USingresso"));
             usuario.setPasta(rs.getString("USpasta"));
             usuario.setSuperUser(rs.getInt("USuperuser")==1);
+            usuario.setPergunta(rs.getString("PerguntaDeSegurança"));
+            usuario.setResposta(rs.getString("Resposta"));
         }
   
         return usuario;
