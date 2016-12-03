@@ -37,7 +37,7 @@ Senha:<BR><INPUT type="password" name="senha" value= "Digite aqui sua senha"><BR
 <INPUT type="submit" name="submit" value= "Submit">   
 <INPUT type="reset" name="reset" value= "Reset">
 </FORM>
-<BR><a href="../Recsenha.jsp" target=" _top">Esqueceu sua senha?</a>
+<BR><a href="../Recsenha.jsp" target="_top">Esqueceu sua senha?</a>
 </center>
 </body>
 </html>
