@@ -12,7 +12,7 @@
 <center>
 <table align="center" border=1 cellpadding=10 width=1000>
 <tr>
-<th>Domingo <th>Segunda <th>Terça <th>Quarta <th>Quinta <th>Sexta <th>Saturday
+<th>Domingo <th>Segunda <th>Terça <th>Quarta <th>Quinta <th>Sexta <th>Sábado
 </tr>
 <tr>
 <td> <td> <td> <td> <td>1 <td>2 <td>3

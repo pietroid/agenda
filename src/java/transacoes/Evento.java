@@ -32,7 +32,7 @@ public class Evento {
         } catch(Exception e) {
             tr.rollback();
             System.out.println("Erro ao incluir " + Evento.getId());
-            e.printStackTrace();
+            
         }
         return false;
     } // incluir
@@ -48,7 +48,7 @@ public class Evento {
 	} catch (Exception e) {
             tr.rollback();
             System.out.println("Erro ao buscar" + id);
-            e.printStackTrace();
+           
 	}
 	return null;
     } // buscar
@@ -68,7 +68,7 @@ public class Evento {
 	    Eventoinicial = a.buscar(2);
             System.out.println(Eventoinicial.getId());
         } catch(Exception e) {
-            e.printStackTrace();
+            
         }
     } // main
 }
