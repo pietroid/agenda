@@ -11,7 +11,7 @@ public class GEDO {
  private int id;
     private String nome;
     private String descricao;
-    private Date ano;
+    private String ano;
     private String site;
     private String face;
     private String email;
@@ -65,14 +65,14 @@ public class GEDO {
     /**
      * @return the ano
      */
-    public Date getAno() {
+    public String getAno() {
         return ano;
     }
 
     /**
      * @param ano the ano to set
      */
-    public void setAno(Date ano) {
+    public void setAno(String ano) {
         this.ano = ano;
     }
 
