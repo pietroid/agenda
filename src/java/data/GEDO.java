@@ -17,7 +17,7 @@ public class GEDO {
     private String email;
     private String imagem;
     private String local;
-    private int tel;
+    private String tel;
     private String tipo;
 
     /**
@@ -149,14 +149,14 @@ public class GEDO {
     /**
      * @return the tel
      */
-    public int getTel() {
+    public String getTel() {
         return tel;
     }
 
     /**
      * @param tel the tel to set
      */
-    public void setTel(int tel) {
+    public void setTel(String tel) {
         this.tel = tel;
     }
 
