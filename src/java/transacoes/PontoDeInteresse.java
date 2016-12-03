@@ -61,14 +61,4 @@ public class PontoDeInteresse {
         return false;
     }
 
-    public static void main(String[] args) {
-        PontoDeInteresse a = new PontoDeInteresse();
-        PontoDeInteresseDO PontoDeInteresseinicial = new PontoDeInteresseDO();
-        try {
-	    PontoDeInteresseinicial = a.buscar(2);
-            System.out.println(PontoDeInteresseinicial.getPOI_id());
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
-    } // main
 }
