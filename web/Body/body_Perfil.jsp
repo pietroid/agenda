@@ -2,18 +2,32 @@
 <body BGCOLOR =#EAD1A4>
 <font face="verdana">
 
+<%@ page import="transacoes.Usuario" %>
+<%@ page import="data.UsuarioDO" %>
+<%@ page import="java.util.Vector" %>
+
+
+<%
+    if(session.getAttribute("Usuario")== null)
+    {
+ UsuarioDO usuario = (UsuarioDO)session.getAttribute("Usuario");
+ String nome = "Pedro" ;//*usuario.getNome()
+%>
 <h1><center> Perfil <center> </h1>
 
-<h2><font face="verdana"> Olá, João! </font><h2>
+<h2><font face="verdana">Olá,<%=nome%>  </font><h2>
 <h2><font face="verdana"> Interesses </font><h2>
 <p><font size="2" face="verdana"><a href="body_GE.jsp">Clique aqui
  para ver uma lista com todos os Grupos do seu interesse</a></font></p> 
+
+<p><font size="2" face="verdana"><a href="body_AltPass.jsp">Clique aqui
+ para alterar sua senha</a></font></p>
 
 <h2> Calendário </h2>
 <center>
 <table align="center" border=1 cellpadding=10 width=1000>
 <tr>
-<th>Domingo <th>Segunda <th>Terça <th>Quarta <th>Quinta <th>Sexta <th>Saturday
+<th>Domingo <th>Segunda <th>Terça <th>Quarta <th>Quinta <th>Sexta <th>Sábado
 </tr>
 <tr>
 <td> <td> <td> <td> <td>1 <td>2 <td>3
@@ -31,8 +45,23 @@
 <td>25 <td>26 <td>27 <td>28 <td>29 <td>30 <td>
 </tr>
 </table>
+    
 <center>
+    
+<%    
+   }else{
 
+ %>
+ 
+ <h1><center> Você ainda não tem um Perfil.<center> </h1>
+ <h2><center>      Deseja se cadastrar?    <center> </h2>
+<center>  <BR><a href="../Cadastro.jsp" target=" _top">Quero me Cadastrar</a><center>
+ <%      
+
+    }
+        
+        
+%>
 </font>
 </body>
 </html>

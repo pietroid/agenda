@@ -8,19 +8,20 @@ package transacoes;
 import utils.*;
 import data.*;
 import java.util.*;
+
 /**
  *
- * @author Marcus;
+ * @author Lucas Freitas
  */
-public class Evento {
-    
-    public boolean incluir (EventoDO Evento) throws Exception{
+public class PontoDeInteresse {
+    public boolean incluir (PontoDeInteresseDO PontoDeInteresse) throws Exception{
+        
         Transacao tr = new Transacao();
         try {
             
             tr.begin();
-                EventoData EventoData = new EventoData();
-                EventoData.incluir(Evento, tr);
+                PontoDeInteresseData PontoDeInteresseData = new PontoDeInteresseData();
+                PontoDeInteresseData.incluir(PontoDeInteresse, tr);
             tr.commit();
             return true;
        
@@ -32,18 +33,18 @@ public class Evento {
         return false;
     } // incluir
     
-    public EventoDO buscar(int id) throws Exception{
+    public PontoDeInteresseDO buscar(int POI_id) throws Exception{
         Transacao tr = new Transacao();
 	try{
             tr.beginReadOnly();
-  	    EventoData EventoData = new EventoData();
-	    EventoDO i = EventoData.buscar(id, tr);
+  	    PontoDeInteresseData PontoDeInteresseData = new PontoDeInteresseData();
+	    PontoDeInteresseDO i = PontoDeInteresseData.buscar(POI_id, tr);
             tr.commit();
             return i;
 	} catch (Exception e) {
             tr.rollback();
-            System.out.println("Erro ao buscar" + id);
-           
+            System.out.println("Erro ao buscar" + POI_id);
+            e.printStackTrace();
 	}
 	return null;
     } // buscar

@@ -9,7 +9,15 @@
 </tr>
 </table>
 
-<img src="../Pasta de Imagens/Grupo de Extensao 1/Grupo de extensao 1 - imagem 1.PNG"   scrolling=no align="right" width=200 height=250 alt="Imagem do GE">
+<table align="right" border=1 cellpadding=10 width=200>
+    <tfoot>
+        <tr><th><a href="../Fotos.jsp" target=" _top">Mais Fotos</a></th></tr>
+    </tfoot>
+    <td width=200 height=200>
+        <img src ="../PastadeImagens/GrupodeExtensao1/Grupodeextensao1-imagem1.PNG" width = 100% height=100%>
+    </td>
+    
+</table>
 <BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR>
 
 
@@ -46,7 +54,7 @@
 </tr>
 <tr>
   <td><b>5.</b></td>
-  <td><a href="../Evento.jsp" target=" _top">Evento bluh</a></td>
+   <td><a href="../Evento.jsp" target=" _top">Evento bluh</a></td>
 </tr>
 </table>
 

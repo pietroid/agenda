@@ -16,7 +16,7 @@ public class InscricaoData {
     
     public void incluir(InscricaoDO inscricao, Transacao tr) throws Exception {
         Connection con = tr.obterConexao();
-        String sql = "insert into inscricao (INSCid,EVEid,USUid) values (?,?,?)";
+        String sql = "insert into inscricao (EVEid,USUid) values (?,?)";
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setInt(1, inscricao.getId());       
         ps.setInt(2, inscricao.getEveId());
@@ -49,7 +49,6 @@ public class InscricaoData {
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setInt(1,id);
         ResultSet rs = ps.executeQuery();
-        rs.next();
         InscricaoDO inscricao = new InscricaoDO();
         inscricao.setId(rs.getInt("INSCid"));
         inscricao.setEveId(rs.getInt("EVEid"));

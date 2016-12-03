@@ -24,6 +24,7 @@ public class UsuarioDO {
     private String curso;
     private Date ingresso;
     private String pasta;
+    private boolean superUser;
 
     /**
      * @return the id
@@ -178,6 +179,21 @@ public class UsuarioDO {
     public void setPasta(String pasta) {
         this.pasta = pasta;
     }
+
+    /**
+     * @return the superUser
+     */
+    public boolean isSuperUser() {
+        return superUser;
+    }
+
+    /**
+     * @param superUser the superUser to set
+     */
+    public void setSuperUser(boolean superUser) {
+        this.superUser = superUser;
+    }
+    
     
     
     

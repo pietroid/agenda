@@ -10,17 +10,18 @@ import data.*;
 import java.util.*;
 /**
  *
- * @author Marcus;
+ * @author Pietro
  */
-public class Evento {
+public class Pertence {
     
-    public boolean incluir (EventoDO Evento) throws Exception{
+    public boolean incluir (PertenceDO pertence) throws Exception{
+        
         Transacao tr = new Transacao();
         try {
             
             tr.begin();
-                EventoData EventoData = new EventoData();
-                EventoData.incluir(Evento, tr);
+                PertenceData pertenceData = new PertenceData();
+                pertenceData.incluir(pertence, tr);
             tr.commit();
             return true;
        
@@ -32,28 +33,20 @@ public class Evento {
         return false;
     } // incluir
     
-    public EventoDO buscar(int id) throws Exception{
+    public List<Integer> pesquisarMicroPorMacro(EventoDO evento) throws Exception{
         Transacao tr = new Transacao();
 	try{
             tr.beginReadOnly();
-  	    EventoData EventoData = new EventoData();
-	    EventoDO i = EventoData.buscar(id, tr);
+  	    PertenceData pertenceData = new PertenceData();
+	    List<Integer> i = pertenceData.pesquisarMicroPorMacro(evento, tr);
             tr.commit();
             return i;
 	} catch (Exception e) {
             tr.rollback();
-            System.out.println("Erro ao buscar" + id);
-           
+            System.out.println("Erro ao buscar" + evento.getId());
+            e.printStackTrace();
 	}
 	return null;
     } // buscar
-
-    private boolean isEmpty(String s) {
-        if (null == s)
-            return true;
-        if (s.length() == 0)
-            return true;
-        return false;
-    }
 
 }

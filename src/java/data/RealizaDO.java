@@ -11,22 +11,22 @@ package data;
  */
 public class RealizaDO {
     
-    private int REALid;
+    private int id;
     private int GEid;
     private int EVEid;
 
     /**
      * @return the REALid
      */
-    public int getREALid() {
-        return REALid;
+    public int getId() {
+        return id;
     }
 
     /**
      * @param REALid the REALid to set
      */
-    public void setREALid(int REALid) {
-        this.REALid = REALid;
+    public void setId(int id) {
+        this.id = id;
     }
 
     /**

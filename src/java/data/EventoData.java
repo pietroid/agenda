@@ -16,18 +16,17 @@ public class EventoData {
     
     public void incluir(EventoDO evento, Transacao tr) throws Exception {
         Connection con = tr.obterConexao();
-        String sql = "insert into evento (EVEid,EVEnome,EVEdescricao,EVEtipo,EVEmacro_evento,EVEhorario_de_inicio,EVEhora_de_termino,EVEdata,EVEpasta_de_imagens,EVEavaliação) values (?,?,?,?,?,?,?,?,?,?)";
-        PreparedStatement ps = con.prepareStatement(sql);
-        ps.setInt(1, evento.getId());       
-        ps.setString(2, evento.getNome());
-        ps.setString(3, evento.getDescrição());
-        ps.setString(4, evento.getTipo());
-        ps.setInt(5, evento.getSelo());
-        ps.setInt(6, evento.getHoraInicial());
-        ps.setInt(7, evento.getHoraFinal());
-        ps.setInt(8, evento.getData());
-        ps.setString(9, evento.getPastaimagens());
-        ps.setInt(10, evento.getAvaliação());
+        String sql = "insert into evento (EVEnome,EVEdescricao,EVEtipo,EVEmacro_evento,EVEhorario_de_inicio,EVEhora_de_termino,EVEdata,EVEpasta_de_imagens,EVEavaliação) values (?,?,?,?,?,?,?,?,?)";
+        PreparedStatement ps = con.prepareStatement(sql);   
+        ps.setString(1, evento.getNome());
+        ps.setString(2, evento.getDescrição());
+        ps.setString(3, evento.getTipo());
+        ps.setInt(4, evento.getSelo());
+        ps.setInt(5, evento.getHoraInicial());
+        ps.setInt(6, evento.getHoraFinal());
+        ps.setInt(7, evento.getData());
+        ps.setString(8, evento.getPastaimagens());
+        ps.setInt(9, evento.getAvaliação());
         int result = ps.executeUpdate();
     }// incluir
 
@@ -63,7 +62,6 @@ public class EventoData {
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setInt(1,id);
         ResultSet rs = ps.executeQuery();
-        rs.next();
         EventoDO evento = new EventoDO();
         evento.setId(rs.getInt("EVEid"));
         evento.setNome(rs.getString("EVEnome"));
