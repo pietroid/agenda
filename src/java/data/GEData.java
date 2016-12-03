@@ -50,7 +50,6 @@ public class GEData {
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setInt(1, id);
         ResultSet rs = ps.executeQuery();
-        rs.next();
         GEDO GE = new GEDO();
         GE.setId(rs.getInt("GEid"));
         GE.setNome(rs.getString("GEnome"));

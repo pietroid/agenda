@@ -63,7 +63,6 @@ public class EventoData {
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setInt(1,id);
         ResultSet rs = ps.executeQuery();
-        rs.next();
         EventoDO evento = new EventoDO();
         evento.setId(rs.getInt("EVEid"));
         evento.setNome(rs.getString("EVEnome"));

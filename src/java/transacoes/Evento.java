@@ -15,11 +15,6 @@ import java.util.*;
 public class Evento {
     
     public boolean incluir (EventoDO Evento) throws Exception{
-        
-        if(isEmpty(String.valueOf(Evento.getId())))  {
-            return false;
-        }
-        
         Transacao tr = new Transacao();
         try {
             
@@ -31,7 +26,7 @@ public class Evento {
        
         } catch(Exception e) {
             tr.rollback();
-            System.out.println("Erro ao incluir " + Evento.getId());
+            System.out.println("Erro ao incluir ");
             e.printStackTrace();
         }
         return false;

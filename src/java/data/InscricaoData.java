@@ -49,7 +49,6 @@ public class InscricaoData {
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setInt(1,id);
         ResultSet rs = ps.executeQuery();
-        rs.next();
         InscricaoDO inscricao = new InscricaoDO();
         inscricao.setId(rs.getInt("INSCid"));
         inscricao.setEveId(rs.getInt("EVEid"));

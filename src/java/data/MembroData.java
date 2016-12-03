@@ -49,7 +49,6 @@ public class MembroData {
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setInt(1, MEMBERid);
         ResultSet rs = ps.executeQuery();
-        rs.next();
         MembroDO Membro = new MembroDO();
         Membro.setMEMBERid(rs.getInt("REALid"));
         Membro.setGEid(rs.getInt("GEid"));

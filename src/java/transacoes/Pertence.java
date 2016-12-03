@@ -10,18 +10,18 @@ import data.*;
 import java.util.*;
 /**
  *
- * @author Marcus;
+ * @author Pietro
  */
-public class GE {
+public class Pertence {
     
-    public boolean incluir (GEDO GE) throws Exception{
+    public boolean incluir (PertenceDO pertence) throws Exception{
         
         Transacao tr = new Transacao();
         try {
             
             tr.begin();
-                GEData GEData = new GEData();
-                GEData.incluir(GE, tr);
+                PertenceData pertenceData = new PertenceData();
+                pertenceData.incluir(pertence, tr);
             tr.commit();
             return true;
        
@@ -33,38 +33,20 @@ public class GE {
         return false;
     } // incluir
     
-    public GEDO buscar(int id) throws Exception{
+    public List<Integer> pesquisarMicroPorMacro(EventoDO evento) throws Exception{
         Transacao tr = new Transacao();
 	try{
             tr.beginReadOnly();
-  	    GEData GEData = new GEData();
-	    GEDO i = GEData.buscar(id, tr);
+  	    PertenceData pertenceData = new PertenceData();
+	    List<Integer> i = pertenceData.pesquisarMicroPorMacro(evento, tr);
             tr.commit();
             return i;
 	} catch (Exception e) {
             tr.rollback();
-            System.out.println("Erro ao buscar" + id);
+            System.out.println("Erro ao buscar" + evento.getId());
             e.printStackTrace();
 	}
 	return null;
     } // buscar
 
-    private boolean isEmpty(String s) {
-        if (null == s)
-            return true;
-        if (s.length() == 0)
-            return true;
-        return false;
-    }
-
-    public static void main(String[] args) {
-        GE a = new GE();
-        GEDO GEinicial = new GEDO();
-        try {
-	    GEinicial = a.buscar(2);
-            System.out.println(GEinicial.getId());
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
-    } // main
 }

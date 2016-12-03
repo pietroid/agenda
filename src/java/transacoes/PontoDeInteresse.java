@@ -16,10 +16,6 @@ import java.util.*;
 public class PontoDeInteresse {
     public boolean incluir (PontoDeInteresseDO PontoDeInteresse) throws Exception{
         
-        if(isEmpty(String.valueOf(PontoDeInteresse.getPOI_id())))  {
-            return false;
-        }
-        
         Transacao tr = new Transacao();
         try {
             
@@ -31,7 +27,7 @@ public class PontoDeInteresse {
        
         } catch(Exception e) {
             tr.rollback();
-            System.out.println("Erro ao incluir " + PontoDeInteresse.getPOI_id());
+            System.out.println("Erro ao incluir ");
             e.printStackTrace();
         }
         return false;
