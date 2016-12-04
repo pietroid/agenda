@@ -10,7 +10,7 @@
 <%@ page import="transacoes.Pertence" %>
 <%@ page import="data.PertenceDO" %>
 <%@ page import="java.util.*" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEnco    ding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <body BGCOLOR = #f2f2f2>
@@ -19,7 +19,7 @@
     <BR>
     <center>
     <form>
-        Selecione se o evento √© macro ou micro: <BR><BR>
+        Selecione se o evento È macro ou micro: <BR><BR>
         <input type="radio" name="Eve" value="macro" checked> Macro<br>
         <input type="radio" name="Eve" value="micro"> Micro<br>
         <INPUT type="submit" name="submit" value= "Ok"><BR><BR>
@@ -38,13 +38,13 @@
         <FORM>
             Nome do Evento:
             <INPUT type="text" name="EVEnome" maxlength = "30"><BR>
-            Descri√ß√£o:
+            DescriÁ„o:
             <INPUT type="text" name="EVEdescricao" maxlength = "140" size = "140"><BR>
             Tipo do evento:
             <INPUT type="text" name="EVEtipo"><BR>
-            Hor√°rio de in√≠cio:
+            Hor·rio de inÌcio:
             <INPUT type="number" name="EVEhoraI" min = "0" max = "23" size = "2">:<INPUT type="number" name="EVEminI" min = "0" max = "59" size = "2"><BR>
-            Hor√°rio de t√©rmino:
+            Hor·rio de tÈrmino:
             <INPUT type="number" name="EVEhoraT" min = "0" max = "23" size = "2">:<INPUT type="number" name="EVEminT" min = "0" max = "59" size = "2"><BR>
             Data (dd/mm/yyyy):
             <INPUT type="number" name="EVEdataD" min = "1" max = "31" size = "2">/<INPUT type="number" name="EVEdataM" min = "1" max = "12" size = "2">/<INPUT type="number" name="EVEdataY" min = "2016" max = "2050" size = "4"><BR><BR>
@@ -81,13 +81,13 @@
         <FORM>
             Nome do Evento:
             <INPUT type="text" name="EVEnome" maxlength = "30"> <BR>
-            Descri√ß√£o:
+            DescriÁ„o:
             <INPUT type="text" name="EVEdescricao" maxlength = "140" size = "140"><BR>
             Tipo:
             <INPUT type="text" name="EVEtipo"><BR>
-             Hor√°rio de in√≠cio:
+             Hor·rio de inÌcio:
             <INPUT type="number" name="EVEhoraI" min = "0" max = "23" size = "2">:<INPUT type="number" name="EVEminI" min = "0" max = "59" size = "2"><BR>
-            Hor√°rio de t√©rmino:
+            Hor·rio de tÈrmino:
             <INPUT type="number" name="EVEhoraT" min = "0" max = "23" size = "2">:<INPUT type="number" name="EVEminT" min = "0" max = "59" size = "2"><BR>
             Data (dd/mm/yyyy):
             <INPUT type="number" name="EVEdataD" min = "1" max = "31" size = "2">/<INPUT type="number" name="EVEdataM" min = "1" max = "12" size = "2">/<INPUT type="number" name="EVEdataY" min = "2016" max = "2050" size = "4"><BR><BR>
