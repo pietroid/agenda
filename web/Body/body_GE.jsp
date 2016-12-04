@@ -44,7 +44,7 @@
 
 <table align="left" border=1 cellpadding=10 width=500>
 <th> 
-     <center> <a href="../AlterarInfoGE.jsp" target="_top"> Alterar Informações </a> </center> 
+     <center> <a href="/agenda/AlterarInfoGE.jsp" target="_top"> Alterar Informações </a> </center> 
 </th>
 </table>
 <BR><BR><BR><BR><BR>
