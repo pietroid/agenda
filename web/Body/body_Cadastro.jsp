@@ -1,3 +1,7 @@
+<%@page import="java.time.LocalDate"%>
+<%@page import="java.time.format.DateTimeFormatter"%>
+<%@page import="transacoes.Usuario"%>
+<%@page import="java.sql.Date"%>
 <%@page import="data.UsuarioDO"%>
 <html>
 <body BGCOLOR = #f2f2f2>
@@ -5,7 +9,9 @@
 <h1><center>Cadastro<center></h1>
 <BR>
 <center>
-  <%if(request.getParameter("submit")==null){%>
+  <%UsuarioDO usuario1=new UsuarioDO();
+            
+      if(request.getParameter("submit")==null){%>
   
   <FORM action="body_Cadastro.jsp" method="post" id="usrform">
       Username <br>
@@ -46,7 +52,7 @@
     E-mail <br>
     <input type="email" name="email" value="<%=request.getParameter("email")%>"><%if(request.getParameter("email").equals("")){%><b style="color:red">*</b><%}%></input>  <br><br>
     Curso atual <br>
-    <input type="text" name="nome" value="<%=request.getParameter("curso")%>"/><br><br>
+    <input type="text" name="curso" value="<%=request.getParameter("curso")%>"/><br><br>
      Ano de ingresso <br>
      <input type="text" name="ano" value="<%=request.getParameter("ano")%>"/><br><br>
     Pergunta de segurança <br>
@@ -58,6 +64,7 @@
     <textarea rows="4" cols="50" name="bio" form="usrform"><%=request.getParameter("bio")%></textarea><br><br>
   <input type="submit" name="submit" value="Cadastrar"  form="usrform"/>
   <%
+      
         }else if(!request.getParameter("senha").equals(request.getParameter("senha_rep"))){
             %>
             <b style="color:red">As senhas não são iguais</b> <br><br>
@@ -73,7 +80,7 @@
     E-mail <br>
     <input type="email" name="email" value="<%=request.getParameter("email")%>"><br><br>
     Curso atual <br>
-    <input type="text" name="nome" value="<%=request.getParameter("curso")%>"/><br><br>
+    <input type="text" name="curso" value="<%=request.getParameter("curso")%>"/><br><br>
      Ano de ingresso <br>
      <input type="text" name="ano" value="<%=request.getParameter("ano")%>"/><br><br>
     Pergunta de segurança <br>
@@ -89,6 +96,25 @@
             UsuarioDO usuario=new UsuarioDO();
             usuario.setUsername(request.getParameter("username"));
             usuario.setNome(request.getParameter("nome"));
+            usuario.setSenha(request.getParameter("senha"));
+            usuario.setEmail(request.getParameter("email"));
+            usuario.setCurso(request.getParameter("curso"));
+            if(!request.getParameter("ano").equals("")){ 
+                Date dt=Date.valueOf(request.getParameter("ano")+"-01-01");
+                usuario.setIngresso(dt);
+            }
+            usuario.setPergunta(request.getParameter("pergunta"));
+            usuario.setResposta(request.getParameter("resposta"));
+            usuario.setBio(request.getParameter("bio"));
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            LocalDate localDate = LocalDate.now();
+            usuario.setData(Date.valueOf(dtf.format(localDate)));
+            Usuario usdat=new Usuario();
+            if(usdat.incluir(usuario)){
+                %> <font face="verdana">
+<h2><center>Cadastro bem sucedido!<center></h2> 
+            <BR><a href="body_LoginOut.jsp" target="_top">Fazer login</a><%
+            }
         }
 }
   %>
