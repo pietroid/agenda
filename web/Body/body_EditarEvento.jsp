@@ -27,27 +27,27 @@
             int action = Integer.parseInt((String)request.getAttribute("EVEmacro_evento"));
             if(action != 0){%>
         <center>
-          <FORM action="http://www.google.com.br/formtest" method="post">
+         <FORM action="http://www.google.com.br/formtest" method="post">
 
-              Nome do Evento:<BR>
-            <INPUT type="text" name="EVEnome" value="Digite aqui o nome do seu evento"><BR><BR>
-            Descrição:<BR>
-            <INPUT type="text" name="EVEdescricao" value="Digite aqui uma breve descrição do seu evento"><BR><BR>
-            Tipo:<BR>
-            <INPUT type="text" name="EVEtipo" value="Digite o tipo do seu evento"><BR><BR>
-            Horário de início:<BR>
-            <INPUT type="text" name="EVEhorario_de_inicio" value="Digite aqui o horário de início do seu evento"><BR><BR>
-            Horário de término:<BR>
-            <INPUT type="text" name="EVEhorario_de_termino" value="Digite aqui o horário de término do seu evento"><BR><BR>
-            Data:<BR>
-            <INPUT type="text" name="EVEdata" value="Digite a data do seu evento"><BR><BR>
-            Macro evento:<BR>
-            <INPUT type="text" name="EVEmacro_evento" value="Digite a qual o macro evento o seu evento pertence"><BR><BR>
-            <INPUT type="submit" name="submit" value="Submit">
-            <INPUT type="reset" name="reset" value="Reset">
-          </FORM>
-        <BR><BR>
-        </center>
+             Nome do Evento:<BR>
+           <INPUT type="text" name="EVEnome">Digite aqui o nome do seu evento<BR><BR>
+           Descrição:<BR>
+           <INPUT type="text" name="EVEdescricao">Digite aqui uma breve descrição do seu evento<BR><BR>
+           Tipo:<BR>
+           <INPUT type="text" name="EVEtipo"> Digite o tipo do seu evento <BR><BR>
+           Horário de início:<BR>
+           <INPUT type="time" name="EVEhorario_de_inicio"> Digite aqui o horário de início do seu evento <BR><BR>
+           Horário de término:<BR>
+           <INPUT type="time" name="EVEhorario_de_termino"> teste teste Digite aqui o horário de término do seu evento <BR><BR>
+           Data:<BR>
+           <INPUT type="date" name="EVEdata"> Digite a data do seu evento <BR><BR>
+           Macro evento:<BR>
+           <INPUT type="text" name="EVEmacro_evento"> Digite a qual o macro evento o seu evento pertence <BR><BR>
+           <INPUT type="submit" name="submit" value="Submit">
+           <INPUT type="reset" name="reset" value="Reset">
+         </FORM>
+       <BR><BR>
+       </center>
         <% if (request.getParameter("EVEnome") != null) evento.setNome(request.getParameter("EVEnome"));
            if (request.getParameter("EVEdescricao") != null) evento.setDescricao(request.getParameter("EVEdescricao"));
            if (request.getParameter("EVEtipo") != null) evento.setTipo(request.getParameter("EVEtipo"));
@@ -60,25 +60,26 @@
            }
         }
         if(action == 0){%>
-        <center>
-          <FORM action="http://www.google.com.br/formtest" method="post">
-              Nome do Evento:<BR>
-            <INPUT type="text" name="EVEnome" value="Digite aqui o nome do seu evento"><BR><BR>
-            Descrição:<BR>
-            <INPUT type="text" name="EVEdescricao" value="Digite aqui uma breve descrição do seu evento"><BR><BR>
-            Tipo:<BR>
-            <INPUT type="text" name="EVEtipo" value="Digite o tipo do seu evento"><BR><BR>
-            Horário de início:<BR>
-            <INPUT type="text" name="EVEhorario_de_inicio" value="Digite aqui o horário de início do seu evento"><BR><BR>
-            Horário de término:<BR>
-            <INPUT type="text" name="EVEhorario_de_termino" value="Digite aqui o horário de término do seu evento"><BR><BR>
-            Data:<BR>
-            <INPUT type="text" name="EVEdata" value="Digite a data do seu evento"><BR><BR>
-            <INPUT type="submit" name="submit" value="Submit">
-            <INPUT type="reset" name="reset" value="Reset">
-          </FORM>
-        <BR><BR>
-        </center>
+      <center>
+      <FORM action="http://www.google.com.br/formtest" method="post">
+
+          Nome do Evento:<BR>
+          <INPUT type="text" name="EVEnome"> Digite aqui o nome do seu evento <BR><BR>
+        Descrição:<BR>
+        <INPUT type="text" name="EVEdescricao"> Digite aqui uma breve descrição do seu evento <BR><BR>
+        Tipo:<BR>
+        <INPUT type="text" name="EVEtipo"> Digite o tipo do seu evento <BR><BR>
+        Horário de início:<BR>
+        <INPUT type="text" name="EVEhorario_de_inicio"> Digite aqui o horário de início do seu evento <BR><BR>
+        Horário de término:<BR>
+        <INPUT type="text" name="EVEhorario_de_termino"> Digite aqui o horário de término do seu evento <BR><BR>
+        Data:<BR>
+        <INPUT type="text" name="EVEdata"> Digite a data do seu evento <BR><BR>
+        <INPUT type="submit" name="submit" value="Submit">
+        <INPUT type="reset" name="reset" value="Reset">
+      </FORM>
+    <BR><BR>
+    </center>
         <% 
            if (request.getParameter("EVEnome") != null) evento.setNome(request.getParameter("EVEnome"));
            if (request.getParameter("EVEdescricao") != null) evento.setDescricao(request.getParameter("EVEdescricao"));
