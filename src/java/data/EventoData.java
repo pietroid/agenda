@@ -21,12 +21,12 @@ public class EventoData {
         ps.setString(1, evento.getNome());
         ps.setString(2, evento.getDescricao());
         ps.setString(3, evento.getTipo());
-        ps.setInt(4, evento.getMacroEvento());
-        ps.setString(5, evento.getHoraInicial());
-        ps.setString(6, evento.getHoraFinal());
-        ps.setString(7, evento.getData());
-        ps.setString(8, evento.getPastaimagens());
-        ps.setInt(9, evento.getAvaliação());
+        ps.setTime(4,evento.getHoraInicial());
+        ps.setTime(5,evento.getHoraFinal());
+        ps.setDate(6, evento.getData());
+        ps.setInt(7, 0);
+        ps.setString(8, "sdas");
+        ps.setInt(9, 2);
         int result = ps.executeUpdate();
     }// incluir
 
@@ -45,10 +45,10 @@ public class EventoData {
      ps.setString(1, evento.getNome());
      ps.setString(2, evento.getDescricao());
      ps.setString(3, evento.getTipo());
-     ps.setInt(4, evento.getMacroEvento());
-     ps.setString(5, evento.getHoraInicial());
-     ps.setString(6, evento.getHoraFinal());
-     ps.setString(7, evento.getData());
+     ps.setString(4, evento.getMacroEvento());
+     ps.setTime(5, evento.getHoraInicial());
+     ps.setTime(6, evento.getHoraFinal());
+     ps.setDate(7, evento.getData());
      ps.setString(8, evento.getPastaimagens());
      ps.setInt(9, evento.getAvaliação());
      ps.setInt(10, evento.getId());
@@ -68,10 +68,10 @@ public class EventoData {
         evento.setNome(rs.getString("EVEnome"));
         evento.setDescricao(rs.getString("EVEdescricao"));
         evento.setTipo(rs.getString("EVEtipo"));
-        evento.setHoraInicial(rs.getString("EVEhorario_de_inicio"));
-        evento.setHoraFinal(rs.getString("EVEhorario_de_termino"));
-        evento.setData(rs.getString("EVEdata"));
-        evento.setMacroEvento(rs.getInt("EVEmacro_evento"));
+        evento.setHoraInicial(rs.getTime("EVEhorario_de_inicio"));
+        evento.setHoraFinal(rs.getTime("EVEhorario_de_termino"));
+        evento.setData(rs.getDate("EVEdata"));
+        evento.setMacroEvento(rs.getString("EVEmacro_evento"));
         evento.setPastaimagens(rs.getString("EVEpasta_de_imagens"));
         evento.setAvaliação(rs.getInt("EVEavaliacao"));
         return evento;
@@ -88,10 +88,10 @@ public class EventoData {
         evento.setNome(rs.getString("EVEnome"));
         evento.setDescricao(rs.getString("EVEdescricao"));
         evento.setTipo(rs.getString("EVEtipo"));
-        evento.setHoraInicial(rs.getString("EVEhorario_de_inicio"));
-        evento.setHoraFinal(rs.getString("EVEhorario_de_termino"));
-        evento.setData(rs.getString("EVEdata"));
-        evento.setMacroEvento(rs.getInt("EVEmacro_evento"));
+        evento.setHoraInicial(rs.getTime("EVEhorario_de_inicio"));
+        evento.setHoraFinal(rs.getTime("EVEhorario_de_termino"));
+        evento.setData(rs.getDate("EVEdata"));
+        evento.setMacroEvento(rs.getString("EVEmacro_evento"));
         evento.setPastaimagens(rs.getString("EVEpasta_de_imagens"));
         evento.setAvaliação(rs.getInt("EVEavaliacao"));
         return evento;
