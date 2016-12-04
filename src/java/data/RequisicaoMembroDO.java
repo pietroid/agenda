@@ -10,7 +10,7 @@ import java.sql.*;
  *
  * @author LUIS FELIPE
  */
-public class RequisicaoAdminDO {
+public class RequisicaoMembroDO {
     private int userId;
     private int GEId;
     private Date dataReq;
@@ -47,5 +47,5 @@ public class RequisicaoAdminDO {
     public void setMensagem(String mensagem) {
         this.mensagem = mensagem;
     }
-
+    
 }
