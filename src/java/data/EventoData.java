@@ -35,7 +35,7 @@ public class EventoData {
         String sql = "delete from evento where EVEid = ?";
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setInt(1, evento.getId());
-        int result = ps.executeUpdate();
+        ps.executeUpdate();
     } // excluir
 
   public void atualizar(EventoDO evento, Transacao tr) throws Exception {
