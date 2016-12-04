@@ -2,7 +2,6 @@
 <body BGCOLOR = #f2f2f2>
 <font face="verdana">
 
-<br>
 <h1><center> Home <center> </h1>
 
 <h2><font face="verdana"> Grupos de extensão </font><h2>
