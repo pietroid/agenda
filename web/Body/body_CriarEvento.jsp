@@ -4,7 +4,6 @@
     Author     : fernandohitoshiwatanabe
 --%>
 
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ page import="transacoes.Evento" %>
 <%@ page import="data.EventoDO" %>
 <%@ page import="transacoes.Pertence" %>
@@ -18,7 +17,7 @@
     <h1><center>Criar Evento<center></h1>
     <BR>
     <center>
-    <form>
+    <form action = "body_CriarEvento.jsp" methd = "post">
         Selecione se o evento é macro ou micro: <BR><BR>
         <input type="radio" name="Eve" value="macro" checked> Macro<br>
         <input type="radio" name="Eve" value="micro"> Micro<br>
@@ -35,7 +34,7 @@
             if(action.equals("micro")){
     %>
     <div align = "left|justify">
-        <FORM>
+        <FORM action = "body_CriarEvento.jsp" method = "post">
             Nome do Evento:
             <INPUT type="text" name="EVEnome" maxlength = "30"><BR>
             Descrição:
@@ -51,7 +50,6 @@
             Macro evento:
             <INPUT type="text" name="EVEmacro_evento"> <BR>
             <INPUT type="submit" name="submit1" value="Enviar"><BR><BR>
-            <input type="hidden" name="action" value="UserOK" />
         </FORM>
         <BR><BR>
     </div>
@@ -78,7 +76,7 @@
             if(action.equals ("macro")){
     %>
     <div align = "left|justify">
-        <FORM>
+        <FORM action = "body_CriarEvento.jsp" method = "post">
             Nome do Evento:
             <INPUT type="text" name="EVEnome" maxlength = "30"> <BR>
             Descrição:
@@ -96,6 +94,7 @@
         <BR><BR>
     </div>
     <%  
+                System.out.println("asdasd");
                 if (request.getParameter("submit2") != null){
                     System.out.println("oi");
                     evento.setNome(request.getParameter("EVEnome"));
