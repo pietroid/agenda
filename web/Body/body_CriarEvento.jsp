@@ -4,6 +4,8 @@
     Author     : fernandohitoshiwatanabe
 --%>
 
+<%@page import="java.sql.Time"%>
+<%@page import="java.sql.Date"%>
 <%@ page import="transacoes.Evento" %>
 <%@ page import="data.EventoDO" %>
 <%@ page import="transacoes.Pertence" %>
@@ -16,6 +18,9 @@
     <font face="verdana">
     <h1><center>Criar Evento<center></h1>
     <BR>
+    <%
+        if (request.getParameter("submit") == null){
+    %>
     <center>
     <form action = "body_CriarEvento.jsp" methd = "post">
         Selecione se o evento é macro ou micro: <BR><BR>
@@ -25,13 +30,43 @@
     </form>
     </center>
     <% 
-        if (request.getParameter("submit") != null){
+        }
+        else{
             String action = request.getParameter("Eve");
             Evento eventotn = new Evento();
             EventoDO evento = new EventoDO();
             Pertence pertencetn = new Pertence();
             PertenceDO pertence = new PertenceDO();
-            if(action.equals("micro")){
+            if (request.getParameter("submit").equals("Enviar micro")){
+                evento.setNome(request.getParameter("EVEnome"));
+                evento.setDescricao(request.getParameter("EVEdescricao"));
+                evento.setTipo(request.getParameter("EVEtipo"));
+               evento.setHoraInicial(new Time(Integer.valueOf(request.getParameter("EVEhoraI")), Integer.valueOf(request.getParameter("EVEminI")), 0));
+                evento.setHoraFinal(new Time(Integer.valueOf(request.getParameter("EVEhoraT")), Integer.valueOf(request.getParameter("EVEminT")), 0));
+                evento.setData(new Date(Integer.valueOf(request.getParameter("EVEdataD")), Integer.valueOf(request.getParameter("EVEdataM")), Integer.valueOf(request.getParameter("EVEdataY"))));
+                if (request.getParameter("EVEmacro_evento") != null){
+                     EventoDO macro = eventotn.buscarNome("EVEmacro_evento");
+                     evento.setMacroEvento(macro.getNome());
+                }
+                boolean ok = eventotn.incluir(evento);
+                if (ok == true){
+                    pertence.setMicroId(eventotn.buscarNome(evento.getNome()).getId());
+                    pertence.setMacroId(eventotn.buscarNome(evento.getMacroEvento()).getId());
+                    boolean pertenceok = pertencetn.incluir(pertence);
+                }
+            }
+            if (request.getParameter("submit").equals("Enviar macro")){
+                evento.setNome(request.getParameter("EVEnome"));
+                evento.setDescricao(request.getParameter("EVEdescricao"));
+                evento.setTipo(request.getParameter("EVEtipo"));
+                evento.setHoraInicial(new Time(Integer.valueOf(request.getParameter("EVEhoraI")), Integer.valueOf(request.getParameter("EVEminI")), 0));
+                evento.setHoraFinal(new Time(Integer.valueOf(request.getParameter("EVEhoraT")), Integer.valueOf(request.getParameter("EVEminT")), 0));
+                evento.setData(new Date(Integer.valueOf(request.getParameter("EVEdataD")), Integer.valueOf(request.getParameter("EVEdataM")), Integer.valueOf(request.getParameter("EVEdataY"))));
+                evento.setMacroEvento("");
+                boolean ok = eventotn.incluir(evento);
+            }
+            if(action != null){
+                if(action.equals("micro")){
     %>
     <div align = "left|justify">
         <FORM action = "body_CriarEvento.jsp" method = "post">
@@ -49,31 +84,13 @@
             <INPUT type="number" name="EVEdataD" min = "1" max = "31" size = "2">/<INPUT type="number" name="EVEdataM" min = "1" max = "12" size = "2">/<INPUT type="number" name="EVEdataY" min = "2016" max = "2050" size = "4"><BR><BR>
             Macro evento:
             <INPUT type="text" name="EVEmacro_evento"> <BR>
-            <INPUT type="submit" name="submit1" value="Enviar"><BR><BR>
+            <INPUT type="submit" name="submit" value="Enviar micro"><BR><BR>
         </FORM>
         <BR><BR>
     </div>
     <%  
-                if (request.getParameter("submit1") != null){
-                    evento.setNome(request.getParameter("EVEnome"));
-                    evento.setDescricao(request.getParameter("EVEdescricao"));
-                    evento.setTipo(request.getParameter("EVEtipo"));
-                    evento.setHoraInicial(request.getParameter("EVEhoraI") + ":" + request.getParameter("EVEminI"));
-                    evento.setHoraFinal(request.getParameter("EVEhoraT") + ":" + request.getParameter("EVEminT"));
-                    evento.setData(request.getParameter("EVEdataD") + "/" + request.getParameter("EVEdataM") + "/" + request.getParameter("EVEdataY"));
-                    if (request.getParameter("EVEmacro_evento") != null){
-                         EventoDO macro = eventotn.buscarNome("EVEmacro_evento");
-                         evento.setMacroEvento(macro.getNome());
-                    }
-                    boolean ok = eventotn.incluir(evento);
-                    if (ok == true){
-                        pertence.setMicroId(eventotn.buscarNome(evento.getNome()).getId());
-                        pertence.setMacroId(eventotn.buscarNome(evento.getMacroEvento()).getId());
-                        boolean pertenceok = pertencetn.incluir(pertence);
-                    }
                 }
-            }
-            if(action.equals ("macro")){
+                if(action.equals ("macro")){
     %>
     <div align = "left|justify">
         <FORM action = "body_CriarEvento.jsp" method = "post">
@@ -89,24 +106,13 @@
             <INPUT type="number" name="EVEhoraT" min = "0" max = "23" size = "2">:<INPUT type="number" name="EVEminT" min = "0" max = "59" size = "2"><BR>
             Data (dd/mm/yyyy):
             <INPUT type="number" name="EVEdataD" min = "1" max = "31" size = "2">/<INPUT type="number" name="EVEdataM" min = "1" max = "12" size = "2">/<INPUT type="number" name="EVEdataY" min = "2016" max = "2050" size = "4"><BR><BR>
-            <INPUT type="submit" name="submit2" value="Enviar"><BR><BR>
+            <INPUT type="submit" name="submit" value="Enviar macro"><BR><BR>
         </FORM>
         <BR><BR>
     </div>
     <%  
-                System.out.println("asdasd");
-                if (request.getParameter("submit2") != null){
-                    System.out.println("oi");
-                    evento.setNome(request.getParameter("EVEnome"));
-                    evento.setDescricao(request.getParameter("EVEdescricao"));
-                    evento.setTipo(request.getParameter("EVEtipo"));
-                    evento.setHoraInicial(request.getParameter("EVEhoraI") + ":" + request.getParameter("EVEminI"));
-                    evento.setHoraFinal(request.getParameter("EVEhoraT") + ":" + request.getParameter("EVEminT"));
-                    evento.setData(request.getParameter("EVEdataD") + "/" + request.getParameter("EVEdataM") + "/" + request.getParameter("EVEdataY"));
-                    evento.setMacroEvento("");
-                    boolean ok = eventotn.incluir(evento);
-                }
-            } 
+                } 
+            }
         }
     %>
     </body>
