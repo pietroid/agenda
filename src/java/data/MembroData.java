@@ -15,7 +15,7 @@ import utils.Transacao;
 public class MembroData {
     public void incluir(MembroDO Membro, Transacao tr) throws Exception {
         Connection con = tr.obterConexao();
-        String sql = "insert into agenda.Membro (GEid, USUid, ADMid) values (?,?,?)";
+        String sql = "insert into agenda.Membro (GEid, USUid, ADM) values (?,?,?)";
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setInt(1, Membro.getGEid());
         ps.setInt(2, Membro.getUSUid());
@@ -26,7 +26,7 @@ public class MembroData {
 
     public void excluir(MembroDO Membro, Transacao tr) throws Exception {
         Connection con = tr.obterConexao();
-        String sql = "delete from agenda.Membro where REALid = ?";
+        String sql = "delete from agenda.Membro where MEMBERid = ?";
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setInt(1, Membro.getMEMBERid());
         int result = ps.executeUpdate();
@@ -34,7 +34,7 @@ public class MembroData {
 
     public void atualizar(MembroDO Membro, Transacao tr) throws Exception {
         Connection con = tr.obterConexao();
-        String sql = "update agenda.realiza set GEid = ?, USUid = ?, ADM = ? where MEMBERid = ?";
+        String sql = "update agenda.Membro set GEid = ?, USUid = ?, ADM = ? where MEMBERid = ?";
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setInt(1, Membro.getGEid());
         ps.setInt(2, Membro.getUSUid());
@@ -44,12 +44,13 @@ public class MembroData {
 
     public MembroDO buscar(int MEMBERid, Transacao tr) throws Exception {
         Connection con = tr.obterConexao();
-        String sql = "select * from agenda.realiza where MEMBERid = ?";
+        String sql = "select * from agenda.Membro where MEMBERid = ?";
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setInt(1, MEMBERid);
         ResultSet rs = ps.executeQuery();
+        rs.first();
         MembroDO Membro = new MembroDO();
-        Membro.setMEMBERid(rs.getInt("REALid"));
+        Membro.setMEMBERid(rs.getInt("MEMBERid"));
         Membro.setGEid(rs.getInt("GEid"));
         Membro.setUSUid(rs.getInt("USUid"));
         Membro.setADM(rs.getInt("ADM"));
@@ -58,7 +59,7 @@ public class MembroData {
     
     public List<MembroDO> pesquisarPorGEid(int GEid, Transacao tr) throws Exception {
         Connection con = tr.obterConexao();
-        String sql = "select * from agenda.realiza where GEid = ?";
+        String sql = "select * from agenda.Membro where GEid = ?";
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setInt(1, GEid);
         ResultSet rs = ps.executeQuery();

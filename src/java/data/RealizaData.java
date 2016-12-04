@@ -19,8 +19,8 @@ public class RealizaData {
         Connection con = tr.obterConexao();
         String sql = "insert into agenda.realiza (GEid,EVEid) values (?,?)";
         PreparedStatement ps = con.prepareStatement(sql);
-        ps.setInt(2, realiza.getGEid());
-        ps.setInt(3, realiza.getEVEid());
+        ps.setInt(1, realiza.getGEid());
+        ps.setInt(2, realiza.getEVEid());
      
         int result = ps.executeUpdate();
     }// incluir
@@ -49,6 +49,7 @@ public class RealizaData {
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setInt(1, REALid);
         ResultSet rs = ps.executeQuery();
+        rs.first();
         RealizaDO realiza = new RealizaDO();
         realiza.setId(rs.getInt("REALid"));
         realiza.setGEid(rs.getInt("GEid"));
