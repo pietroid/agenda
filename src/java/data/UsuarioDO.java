@@ -13,7 +13,7 @@ import java.sql.Date;
  */
 public class UsuarioDO {
     
- private int id;
+    private int id;
     private String username;
     private String senha;
     private String nome;
