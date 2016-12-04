@@ -10,12 +10,12 @@ import java.sql.*;
  *
  * @author LUIS FELIPE
  */
-public class RequisicaoAdminDO {
+public class RequisicaoGEDO {
     private int userId;
     private int GEId;
     private Date dataReq;
     private String mensagem;
-
+    
     public int getUserId() {
         return userId;
     }
