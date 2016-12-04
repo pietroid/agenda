@@ -78,28 +78,6 @@
 </table>
 <BR><BR><BR><BR><BR><BR><BR><BR>
 
-<%
-    if( usuario.isSuperUser() == true){
-    }
- %>   
-<table align="left" border=1 cellpadding=10 width=500>
-<tr>
-  <td><a href="../ExcluirMembro.jsp" target="_top"><font size="5" color="#ff0000">Excluir Usuário</font></a></td>
-</tr>
-
-<%
-}
-%>
-<%--<table align="left" border=1 cellpadding=10 width=500>
-<th colspan="2"><%=username%> é membro dos seguintes grupos</th>
-<tr>
-  <td><b>5.</b></td>
-   <td><a href="../Evento.jsp" target="_top">Evento bluh</a></td>
-</tr>
-</table>--%>
-
-
-
 
 </body>
 </html>
