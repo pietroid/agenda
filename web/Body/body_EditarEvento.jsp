@@ -38,7 +38,7 @@
            Horário de início:<BR>
            <INPUT type="time" name="EVEhorario_de_inicio"> Digite aqui o horário de início do seu evento <BR><BR>
            Horário de término:<BR>
-           <INPUT type="time" name="EVEhorario_de_termino"> Digite aqui o horário de término do seu evento <BR><BR>
+           <INPUT type="time" name="EVEhorario_de_termino"> Daaaaaaigite aqui o horário de término do seu evento <BR><BR>
            Data:<BR>
            <INPUT type="date" name="EVEdata"> Digite a data do seu evento <BR><BR>
            Macro evento:<BR>
