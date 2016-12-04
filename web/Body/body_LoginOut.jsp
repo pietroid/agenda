@@ -36,8 +36,8 @@ Senha:<BR><INPUT type="password" name="senha" value= ""><BR><BR>
 <INPUT type="submit" name="submit" value= "Login">   
 <INPUT type="reset" name="reset" value= "Reset">
 </FORM>
-<BR><a href="../Recsenha.jsp" target=" _top">Esqueceu sua senha?</a>
-<BR><a href="../Cadastro.jsp" target=" _top">Fazer cadastro</a>
+<BR><a href="../Recsenha.jsp" target="_top">Esqueceu sua senha?</a>
+<BR><a href="../Cadastro.jsp" target="_top">Fazer cadastro</a>
 </center>
 </body>
 </html>
