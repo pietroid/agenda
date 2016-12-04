@@ -28,19 +28,19 @@
   <FORM action="http://www.google.com.br/formtest" method="post">
     
       Nome do Evento:<BR>
-    <INPUT type="text" name="EVEnome" value="Digite aqui o nome do seu evento"><BR><BR>
+    <INPUT type="text" name="EVEnome">Digite aqui o nome do seu evento<BR><BR>
     Descrição:<BR>
-    <INPUT type="text" name="EVEdescricao" value="Digite aqui uma breve descrição do seu evento"><BR><BR>
+    <INPUT type="text" name="EVEdescricao">Digite aqui uma breve descrição do seu evento<BR><BR>
     Tipo:<BR>
-    <INPUT type="text" name="EVEtipo" value="Digite o tipo do seu evento"><BR><BR>
+    <INPUT type="text" name="EVEtipo"> Digite o tipo do seu evento <BR><BR>
     Horário de início:<BR>
-    <INPUT type="text" name="EVEhorario_de_inicio" value="Digite aqui o horário de início do seu evento"><BR><BR>
+    <INPUT type="time" name="EVEhorario_de_inicio"> Digite aqui o horário de início do seu evento <BR><BR>
     Horário de término:<BR>
-    <INPUT type="text" name="EVEhorario_de_termino" value="Digite aqui o horário de término do seu evento"><BR><BR>
+    <INPUT type="time" name="EVEhorario_de_termino"> Digite aqui o horário de término do seu evento <BR><BR>
     Data:<BR>
-    <INPUT type="text" name="EVEdata" value="Digite a data do seu evento"><BR><BR>
+    <INPUT type="date" name="EVEdata"> Digite a data do seu evento <BR><BR>
     Macro evento:<BR>
-    <INPUT type="text" name="EVEmacro_evento" value="Digite a qual o macro evento o seu evento pertence"><BR><BR>
+    <INPUT type="text" name="EVEmacro_evento"> Digite a qual o macro evento o seu evento pertence <BR><BR>
     <INPUT type="submit" name="submit" value="Submit">
     <INPUT type="reset" name="reset" value="Reset">
   </FORM>
@@ -50,9 +50,9 @@
     evento.setNome(request.getParameter("EVEnome"));
     evento.setDescricao(request.getParameter("EVEdescricao"));
     evento.setTipo(request.getParameter("EVEtipo"));
-    evento.setHoraInicial(request.getParameter("EVEnome"));
-    evento.setHoraFinal(request.getParameter("EVEnome"));
-    evento.setData(request.getParameter("EVEnome"));
+    evento.setHoraInicial(request.getParameter("EVEhorario_de_inicio"));
+    evento.setHoraFinal(request.getParameter("EVEhorario_de_termino"));
+    evento.setData(request.getParameter("EVEdata"));
     if (request.getParameter("EVEmacro_evento") != null){
                EventoDO macro = eventotn.buscarNome("EVEmacro_evento");
                evento.setMacroEvento(macro.getId());
@@ -64,17 +64,17 @@ if(action.equals ("macro")){%>
   <FORM action="http://www.google.com.br/formtest" method="post">
     
       Nome do Evento:<BR>
-    <INPUT type="text" name="EVEnome" value="Digite aqui o nome do seu evento"><BR><BR>
+      <INPUT type="text" name="EVEnome"> Digite aqui o nome do seu evento <BR><BR>
     Descrição:<BR>
-    <INPUT type="text" name="EVEdescricao" value="Digite aqui uma breve descrição do seu evento"><BR><BR>
+    <INPUT type="text" name="EVEdescricao"> Digite aqui uma breve descrição do seu evento <BR><BR>
     Tipo:<BR>
-    <INPUT type="text" name="EVEtipo" value="Digite o tipo do seu evento"><BR><BR>
+    <INPUT type="text" name="EVEtipo"> Digite o tipo do seu evento <BR><BR>
     Horário de início:<BR>
-    <INPUT type="text" name="EVEhorario_de_inicio" value="Digite aqui o horário de início do seu evento"><BR><BR>
+    <INPUT type="text" name="EVEhorario_de_inicio"> Digite aqui o horário de início do seu evento <BR><BR>
     Horário de término:<BR>
-    <INPUT type="text" name="EVEhorario_de_termino" value="Digite aqui o horário de término do seu evento"><BR><BR>
+    <INPUT type="text" name="EVEhorario_de_termino"> Digite aqui o horário de término do seu evento <BR><BR>
     Data:<BR>
-    <INPUT type="text" name="EVEdata" value="Digite a data do seu evento"><BR><BR>
+    <INPUT type="text" name="EVEdata"> Digite a data do seu evento <BR><BR>
     <INPUT type="submit" name="submit" value="Submit">
     <INPUT type="reset" name="reset" value="Reset">
   </FORM>
