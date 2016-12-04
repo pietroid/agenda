@@ -1,7 +1,8 @@
 <%@page import="data.UsuarioDO"%>
 <%@page import="java.util.List"%>
 <html>
-<body BGCOLOR =#EAD1A4>
+<body BGCOLOR = #f2f2f2>
+<font face="verdana">
 <h1> <center> Login <center> </h1>
 <BR>
 <%@ page import="transacoes.Usuario" %>
@@ -17,7 +18,9 @@ if (request.getParameter("submit") != null){
     usuario.setSenha(request.getParameter("senha"));
     Usuario tru = new Usuario();
     boolean valido = tru.verificar(usuario);
+    usuario=tru.buscarPorUsername(usuario.getUsername());
     if (valido){
+        
         session.setAttribute("Usuario", usuario);  //Decidir com os demais   
         pageContext.forward("body_Perfil.jsp");
     }

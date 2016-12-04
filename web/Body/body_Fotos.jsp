@@ -5,7 +5,8 @@
 --%>
 
 <html>
-<body BGCOLOR =#EAD1A4>
+<body BGCOLOR = #f2f2f2>
+<font face="verdana">
 <h1><center>Fotos</center></h1>
 <BR><BR><BR>
 <img src ="../PastadeImagens/GrupodeExtensao1/Grupodeextensao1-imagem1.PNG" align ="left" width = 250 height =" 300" >

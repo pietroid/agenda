@@ -17,18 +17,17 @@ public class GEData {
     
     public void incluir(GEDO GE, Transacao tr) throws Exception {
         Connection con = tr.obterConexao();
-        String sql = "insert into agenda.grupodeextensao (GEnome,GEdescricao,GEano_de_inicio,GEsite,GEpagina_do_fb,GEemail,GEpasta_de_imagens,GElocal,GEtel,GEtipo) values (?,?,?,?,?,?,?,?,?,?)";
+        String sql = "insert into agenda.grupodeextensao (GEnome,GEdescricao,GEano_de_inicio,GEsite,GEpagina_do_fb,GEemail,GEpasta_de_imagens,GEtel,GEtipo) values (?,?,?,?,?,?,?,?,?)";
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setString(1, GE.getNome());
         ps.setString(2, GE.getDescricao());
-        ps.setDate(3, GE.getAno());
+        ps.setInt(3, GE.getAno());
         ps.setString(4,GE.getSite());
         ps.setString(5, GE.getFace());
         ps.setString(6, GE.getEmail());
         ps.setString(7, GE.getImagem());
-        ps.setString(8, GE.getLocal());
-        ps.setInt(9, GE.getTel());
-        ps.setString(10, GE.getTipo());
+        ps.setString(8, GE.getTel());
+        ps.setString(9, GE.getTipo());
         
         
         
@@ -50,16 +49,16 @@ public class GEData {
         ps.setInt(1, id);
         ResultSet rs = ps.executeQuery();
         GEDO GE = new GEDO();
+        rs.first();
         GE.setId(rs.getInt("GEid"));
         GE.setNome(rs.getString("GEnome"));
         GE.setDescricao(rs.getString("GEdescricao"));
-        GE.setAno(rs.getDate("GEano_de_inicio"));
+        GE.setAno(rs.getInt("GEano_de_inicio"));
         GE.setSite(rs.getString("GEsite"));
         GE.setFace(rs.getString("GEpagina_do_fb"));
         GE.setEmail(rs.getString("GEemail"));
         GE.setImagem(rs.getString("GEpasta_de_imagens"));
-        GE.setLocal(rs.getString("GElocal"));
-        GE.setTel(rs.getInt("GEtel"));
+        GE.setTel(rs.getString("GEtel"));
         GE.setTipo(rs.getString("GEtipo"));
         return GE;
     } // buscar

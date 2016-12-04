@@ -16,15 +16,15 @@ public class EventoData {
     
     public void incluir(EventoDO evento, Transacao tr) throws Exception {
         Connection con = tr.obterConexao();
-        String sql = "insert into evento (EVEnome,EVEdescricao,EVEtipo,EVEmacro_evento,EVEhorario_de_inicio,EVEhora_de_termino,EVEdata,EVEpasta_de_imagens,EVEavaliação) values (?,?,?,?,?,?,?,?,?)";
+        String sql = "insert into evento (EVEnome,EVEdescricao,EVEtipo,EVEhorario_de_inicio,EVEhorario_de_termino,EVEdata,EVEmacro_evento,EVEpasta_de_imagens,EVEavaliacao) values (?,?,?,?,?,?,?,?,?)";
         PreparedStatement ps = con.prepareStatement(sql);   
         ps.setString(1, evento.getNome());
         ps.setString(2, evento.getDescricao());
         ps.setString(3, evento.getTipo());
         ps.setInt(4, evento.getMacroEvento());
-        ps.setString(5, evento.getHoraInicial());
-        ps.setString(6, evento.getHoraFinal());
-        ps.setString(7, evento.getData());
+        ps.setTime(5, evento.getHoraInicial());
+        ps.setTime(6, evento.getHoraFinal());
+        ps.setDate(7, evento.getData());
         ps.setString(8, evento.getPastaimagens());
         ps.setInt(9, evento.getAvaliação());
         int result = ps.executeUpdate();
@@ -40,15 +40,15 @@ public class EventoData {
 
   public void atualizar(EventoDO evento, Transacao tr) throws Exception {
      Connection con = tr.obterConexao();
-     String sql = "update evento set EVEnome=?, EVEdescricao=?, EVEtipo=?, EVEmacro_evento=?, EVEhorario_de_inicio=?, EVEhorario_de_termino, EVEdata=?, EVEpasta_de_imagens=?, EVE_avaliação=?  where EVEid=?";
+     String sql = "update evento set EVEnome=?, EVEdescricao=?, EVEtipo=?, EVEmacro_evento=?, EVEhorario_de_inicio=?, EVEhorario_de_termino=?, EVEdata=?, EVEpasta_de_imagens=?, EVEavaliacao=?  where EVEid=?";
      PreparedStatement ps = con.prepareStatement(sql);
      ps.setString(1, evento.getNome());
      ps.setString(2, evento.getDescricao());
      ps.setString(3, evento.getTipo());
      ps.setInt(4, evento.getMacroEvento());
-     ps.setString(5, evento.getHoraInicial());
-     ps.setString(6, evento.getHoraFinal());
-     ps.setString(7, evento.getData());
+     ps.setTime(5, evento.getHoraInicial());
+     ps.setTime(6, evento.getHoraFinal());
+     ps.setDate(7, evento.getData());
      ps.setString(8, evento.getPastaimagens());
      ps.setInt(9, evento.getAvaliação());
      ps.setInt(10, evento.getId());
@@ -63,13 +63,14 @@ public class EventoData {
         ps.setInt(1,id);
         ResultSet rs = ps.executeQuery();
         EventoDO evento = new EventoDO();
+        rs.first();
         evento.setId(rs.getInt("EVEid"));
         evento.setNome(rs.getString("EVEnome"));
         evento.setDescricao(rs.getString("EVEdescricao"));
         evento.setTipo(rs.getString("EVEtipo"));
-        evento.setHoraInicial(rs.getString("EVEhorario_de_inicio"));
-        evento.setHoraFinal(rs.getString("EVEhorario_de_termino"));
-        evento.setData(rs.getString("EVEdata"));
+        evento.setHoraInicial(rs.getTime("EVEhorario_de_inicio"));
+        evento.setHoraFinal(rs.getTime("EVEhorario_de_termino"));
+        evento.setData(rs.getDate("EVEdata"));
         evento.setMacroEvento(rs.getInt("EVEmacro_evento"));
         evento.setPastaimagens(rs.getString("EVEpasta_de_imagens"));
         evento.setAvaliação(rs.getInt("EVEavaliacao"));
@@ -81,14 +82,15 @@ public class EventoData {
         String sql = "select * from evento where EVEnome = ?";
         PreparedStatement ps = con.prepareStatement(sql);
         ResultSet rs = ps.executeQuery();
+        rs.first();
         EventoDO evento = new EventoDO();
         evento.setId(rs.getInt("EVEid"));
         evento.setNome(rs.getString("EVEnome"));
         evento.setDescricao(rs.getString("EVEdescricao"));
         evento.setTipo(rs.getString("EVEtipo"));
-        evento.setHoraInicial(rs.getString("EVEhorario_de_inicio"));
-        evento.setHoraFinal(rs.getString("EVEhorario_de_termino"));
-        evento.setData(rs.getString("EVEdata"));
+        evento.setHoraInicial(rs.getTime("EVEhorario_de_inicio"));
+        evento.setHoraFinal(rs.getTime("EVEhorario_de_termino"));
+        evento.setData(rs.getDate("EVEdata"));
         evento.setMacroEvento(rs.getInt("EVEmacro_evento"));
         evento.setPastaimagens(rs.getString("EVEpasta_de_imagens"));
         evento.setAvaliação(rs.getInt("EVEavaliacao"));

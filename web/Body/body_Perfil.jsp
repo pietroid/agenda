@@ -1,5 +1,5 @@
 <html>
-<body BGCOLOR =#EAD1A4>
+<body BGCOLOR = #f2f2f2>
 <font face="verdana">
 
 <%@ page import="transacoes.Usuario" %>
@@ -8,10 +8,10 @@
 
 
 <%
-    if(session.getAttribute("Usuario")== null)
+    if(session.getAttribute("Usuario")!= null)
     {
  UsuarioDO usuario = (UsuarioDO)session.getAttribute("Usuario");
- String nome = "Pedro" ;//*usuario.getNome()
+ String nome = usuario.getNome();
 %>
 <h1><center> Perfil <center> </h1>
 
