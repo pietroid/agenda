@@ -1,7 +1,8 @@
 <%@page import="data.UsuarioDO"%>
 <%@page import="java.util.List"%>
 <html>
-<body BGCOLOR =#EAD1A4>
+<body BGCOLOR = #f2f2f2>
+<font face="verdana">
 <h1> <center> Login <center> </h1>
 <BR>
 <%@ page import="transacoes.Usuario" %>
