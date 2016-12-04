@@ -88,7 +88,7 @@
 </tr>
 
 <%
-}elif(){
+}
 %>
 <%--<table align="left" border=1 cellpadding=10 width=500>
 <th colspan="2"><%=username%> é membro dos seguintes grupos</th>
