@@ -7,14 +7,14 @@ import utils.Transacao;
 public class UsuarioData {
     public void incluir(UsuarioDO usuario, Transacao tr) throws Exception {
         Connection con = tr.obterConexao();
-        String sql = "insert into usuario (Username, Senha, USnome, E-mail, USbio, USimagem, USdata, UScurso, USingresso, USpasta, USuperuser,USpergunta,USresposta) values (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        String sql = "insert into agenda.Usuario (Username, Senha, USnome, Email, USbio, USimagem, USdata, UScurso, USingresso, USpasta, USuperuser,USpergunta,USresposta) values (?,?,?,?,?,?,?,?,?,?,?,?,?)";
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setString(1, usuario.getUsername());
         ps.setString(2, usuario.getSenha());
         ps.setString(3, usuario.getNome());
         ps.setString(4, usuario.getEmail());
         ps.setString(5, usuario.getBio());
-        ps.setString(6,usuario.getImagem());
+        ps.setString(6, usuario.getImagem());
         ps.setDate(7, usuario.getData());
         ps.setString(8, usuario.getCurso());
         ps.setDate(9, usuario.getIngresso());
@@ -37,7 +37,7 @@ public class UsuarioData {
         usuario.setSenha(rs.getString("Senha"));
         usuario.setId(rs.getInt("USUid"));
         usuario.setNome(rs.getString("USnome"));
-        usuario.setEmail(rs.getString("E-mail"));
+        usuario.setEmail(rs.getString("Email"));
         usuario.setBio(rs.getString("USbio"));
         usuario.setImagem(rs.getString("USimagem"));
         usuario.setData(rs.getDate("USdata"));

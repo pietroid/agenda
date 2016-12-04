@@ -15,17 +15,16 @@ public class Transacao {
   private boolean _readOnly = false;
 
   public void begin() throws Exception{
-      Class.forName(ODBC_DRIVER).newInstance();
-      _conexao = DriverManager.getConnection(DSN,USER,PWD);
-      _conexao.setSchema("agenda");
+      Class.forName("com.mysql.jdbc.Driver");
+      _conexao = DriverManager.getConnection(DSN,USER,PWD); 
       _conexao.setAutoCommit(false);
 	  _readOnly = false;
   } // begin
 
   public void beginReadOnly() throws Exception{
-      Class.forName(ODBC_DRIVER).newInstance();
+      Class.forName("com.mysql.jdbc.Driver");
       _conexao = DriverManager.getConnection(DSN,USER,PWD);
-	  _readOnly = true;
+      _readOnly = true;
   } // begin
 
   public void commit() throws Exception {

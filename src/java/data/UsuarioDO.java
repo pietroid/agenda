@@ -19,12 +19,12 @@ public class UsuarioDO {
     private String nome;
     private String email;
     private String bio;
-    private String imagem;
+    private String imagem="";
     private Date data;
     private String curso;
     private Date ingresso;
-    private String pasta;
-    private boolean superUser;
+    private String pasta="";
+    private boolean superUser=false;
     private String Pergunta;
     private String Resposta;
 
