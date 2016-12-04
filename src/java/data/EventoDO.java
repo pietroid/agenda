@@ -18,9 +18,9 @@ public class EventoDO {
     private String descricao;
     private String tipo;
     private int macroEvento;
-    private Time HoraInicial;
-    private Time HoraFinal;
-    private Date data;
+    private String HoraInicial;
+    private String HoraFinal;
+    private String data;
     private String pastaimagens;
     private int avaliação;
 
@@ -97,42 +97,42 @@ public class EventoDO {
     /**
      * @return the HoraInicial
      */
-    public Time getHoraInicial() {
+    public String getHoraInicial() {
         return HoraInicial;
     }
 
     /**
      * @param HoraInicial the HoraInicial to set
      */
-    public void setHoraInicial(Time HoraInicial) {
+    public void setHoraInicial(String HoraInicial) {
         this.HoraInicial = HoraInicial;
     }
 
     /**
      * @return the HoraFinal
      */
-    public Time getHoraFinal() {
+    public String getHoraFinal() {
         return HoraFinal;
     }
 
     /**
      * @param HoraFinal the HoraFinal to set
      */
-    public void setHoraFinal(Time HoraFinal) {
+    public void setHoraFinal(String HoraFinal) {
         this.HoraFinal = HoraFinal;
     }
 
     /**
      * @return the data
      */
-    public Date getData() {
+    public String getData() {
         return data;
     }
 
     /**
      * @param data the data to set
      */
-    public void setData(Date data) {
+    public void setData(String data) {
         this.data = data;
     }
 
