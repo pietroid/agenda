@@ -17,7 +17,9 @@ if (request.getParameter("submit") != null){
     usuario.setSenha(request.getParameter("senha"));
     Usuario tru = new Usuario();
     boolean valido = tru.verificar(usuario);
+    usuario=tru.buscarPorUsername(usuario.getUsername());
     if (valido){
+        
         session.setAttribute("Usuario", usuario);  //Decidir com os demais   
         pageContext.forward("body_Perfil.jsp");
     }

@@ -8,10 +8,10 @@
 
 
 <%
-    if(session.getAttribute("Usuario")== null)
+    if(session.getAttribute("Usuario")!= null)
     {
  UsuarioDO usuario = (UsuarioDO)session.getAttribute("Usuario");
- String nome = "Pedro" ;//*usuario.getNome()
+ String nome = usuario.getNome();
 %>
 <h1><center> Perfil <center> </h1>
 
