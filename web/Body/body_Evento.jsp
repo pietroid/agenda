@@ -15,7 +15,7 @@
     <tfoot>
         <tr><th><a href="../Isncricao.jsp" <%// request.setAttribute("evento",EventoDO);*/
                    
-                   %>target=" _top">Inscrever-se</a></th></tr>
+                   %>target="_top">Inscrever-se</a></th></tr>
     </tfoot>
 <th>Descrição</th>
 <tr>
@@ -38,14 +38,14 @@
 
 
   
-<p align="right"><a href="../Calendário.jsp" target=" _top">Clique aqui para voltar ao calendário</a></p>
+<p align="right"><a href="../Calendário.jsp" target="_top">Clique aqui para voltar ao calendário</a></p>
 <BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR>
 
 <table align="left" border=1 cellpadding=10 width=500>
 <tr>
-  <td><a href="../CriarEvento.jsp" target=" _top"><font size="5" color="#ff0000">Criar evento</font></a></td>
-  <td><a href="../ExcluirEvento.jsp" target=" _top"><font size="5" color="#ff0000">Excluir evento</font></a></td>
-  <td><a href="../AlterarEvento.jsp" target=" _top"><font size="5" color="#ff0000">Alterar evento</font></a></td>
+  <td><a href="../CriarEvento.jsp" target="_top"><font size="5" color="#ff0000">Criar evento</font></a></td>
+  <td><a href="../ExcluirEvento.jsp" target="_top"><font size="5" color="#ff0000">Excluir evento</font></a></td>
+  <td><a href="../AlterarEvento.jsp" target="_top"><font size="5" color="#ff0000">Alterar evento</font></a></td>
 </tr>
 </table>
 

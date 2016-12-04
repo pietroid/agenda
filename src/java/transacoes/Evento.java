@@ -85,8 +85,8 @@ public class Evento {
         Transacao tr = new Transacao();
 	try{
             tr.begin();
-                EventoData eventoData = new EventoData();
-                eventoData.excluir(evento, tr);
+            EventoData eventoData = new EventoData();
+            eventoData.excluir(evento, tr);
             tr.commit();
             return true;
 	} catch (Exception e) {
