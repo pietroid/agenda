@@ -13,7 +13,7 @@
 <BR><BR>
 <table align="left" border=1 cellpadding=10 width=500>
     <tfoot>
-        <tr><th><a href="../Isncricao.jsp" <%// request.setAttribute("evento",EventoDO);*/
+        <tr><th><a href="../Inscricao.jsp" <%// request.setAttribute("evento",EventoDO);*/
                    
                    %>target="_top">Inscrever-se</a></th></tr>
     </tfoot>
@@ -21,7 +21,9 @@
 <tr>
     <td width=10% height=200></td>
 </tr>
-
+<tr><th><a href="../body_CriarComentario.jsp" <%// request.setAttribute("evento",EventoDO);*/
+                   
+                   %>target="_top">Comentar</a></th></tr>
 
 </table>
 
