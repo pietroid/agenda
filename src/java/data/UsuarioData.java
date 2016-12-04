@@ -7,7 +7,7 @@ import utils.Transacao;
 public class UsuarioData {
     public void incluir(UsuarioDO usuario, Transacao tr) throws Exception {
         Connection con = tr.obterConexao();
-        String sql = "insert into usuario (Username, Senha, USnome, E-mail, USbio, USimagem, USdata, UScurso, USingresso, USpasta, USuperuser,USpergunta,USresposta) values (?,?,?,?,?,?,?,?,?)";
+        String sql = "insert into usuario (Username, Senha, USnome, E-mail, USbio, USimagem, USdata, UScurso, USingresso, USpasta, USuperuser,USpergunta,USresposta) values (?,?,?,?,?,?,?,?,?,?,?,?,?)";
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setString(1, usuario.getUsername());
         ps.setString(2, usuario.getSenha());
@@ -31,23 +31,22 @@ public class UsuarioData {
         ps.setString(1, username);
         ResultSet rs = ps.executeQuery();
         UsuarioDO usuario = null;
-        if (rs.next()) {
-            usuario = new UsuarioDO();
-            usuario.setUsername(rs.getString("Username"));
-            usuario.setSenha(rs.getString("Senha"));
-            usuario.setId(rs.getInt("USUid"));
-            usuario.setNome(rs.getString("USnome"));
-            usuario.setEmail(rs.getString("E-mail"));
-            usuario.setBio(rs.getString("USbio"));
-            usuario.setImagem(rs.getString("USimagem"));
-            usuario.setData(rs.getDate("USdata"));
-            usuario.setCurso(rs.getString("UScurso"));
-            usuario.setIngresso(rs.getDate("USingresso"));
-            usuario.setPasta(rs.getString("USpasta"));
-            usuario.setSuperUser(rs.getInt("USuperuser")==1);
-            usuario.setPergunta(rs.getString("USpergunta"));
-            usuario.setResposta(rs.getString("USresposta"));
-        }
+        rs.first();
+        usuario = new UsuarioDO();    
+        usuario.setUsername(rs.getString("Username"));
+        usuario.setSenha(rs.getString("Senha"));
+        usuario.setId(rs.getInt("USUid"));
+        usuario.setNome(rs.getString("USnome"));
+        usuario.setEmail(rs.getString("E-mail"));
+        usuario.setBio(rs.getString("USbio"));
+        usuario.setImagem(rs.getString("USimagem"));
+        usuario.setData(rs.getDate("USdata"));
+        usuario.setCurso(rs.getString("UScurso"));
+        usuario.setIngresso(rs.getDate("USingresso"));
+        usuario.setPasta(rs.getString("USpasta"));
+        usuario.setSuperUser(rs.getInt("USuperuser")==1);
+        usuario.setPergunta(rs.getString("USpergunta"));
+        usuario.setResposta(rs.getString("USresposta"));
   
         return usuario;
     }

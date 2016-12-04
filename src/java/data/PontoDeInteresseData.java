@@ -45,6 +45,7 @@ public class PontoDeInteresseData {
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setInt(1, POI_id);
         ResultSet rs = ps.executeQuery();
+        rs.first();
         PontoDeInteresseDO PontoDeInteresse = new PontoDeInteresseDO();
         PontoDeInteresse.setPOI_id(rs.getInt("POI_id"));
         PontoDeInteresse.setNome(rs.getString("nome"));

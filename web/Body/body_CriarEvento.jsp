@@ -10,7 +10,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <body BGCOLOR =#EAD1A4>
+<body BGCOLOR = #f2f2f2>
+<font face="verdana">
        <h1><center>Criar Evento<center></h1>
 <BR>
 <center>
