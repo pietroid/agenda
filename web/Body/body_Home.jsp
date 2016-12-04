@@ -9,7 +9,7 @@
 <p><font size="2" face="verdana"><a href="../ListadosGE.jsp" target=" _top">Clique aqui
  para ver uma lista com todos os Grupos de Extensão</a></font></p> 
 
-<iframe src="/Agenda/Body/Calendario/body_Calendario.jsp" align="center" width="1340" height="1000" frameBorder="0" scrolling="no"></iframe><BR>
+<iframe src="../body_Calendario.jsp" align="center" width="1340" height="1000" frameBorder="0" scrolling="no"></iframe><BR>
 
 </font>
 </body>
