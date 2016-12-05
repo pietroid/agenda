@@ -1,3 +1,6 @@
+<%@page import="data.MembroDO"%>
+<%@page import="java.util.List"%>
+<%@page import="transacoes.Membro"%>
 <html>
 <body BGCOLOR = #f2f2f2>
 <font face="verdana">
@@ -8,10 +11,13 @@
 
 
 <%
-    if(session.getAttribute("Usuario")!= null)
-    {
- UsuarioDO usuario = (UsuarioDO)session.getAttribute("Usuario");
- String nome = usuario.getNome();
+ if(session.getAttribute("Usuario")!= null)
+ {
+    UsuarioDO usuario = (UsuarioDO)session.getAttribute("Usuario");
+    int IDusuario = usuario.getId();
+    String nome = usuario.getNome();
+    Membro lista = new Membro();
+    List<MembroDO> ListaMembro = lista.buscarPorUSUid(IDusuario);
 %>
 <h1><center> Perfil <center> </h1>
 
@@ -23,7 +29,9 @@
  para alterar sua senha</a></font></p>
 
 
-
+<%
+    
+%>
 <p><font size="3" face="verdana">Notificações:</p>
 <table align="cente" border=3    cellpadding = 10 width=1000   >
     <tr>
