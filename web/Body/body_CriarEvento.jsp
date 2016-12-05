@@ -1,5 +1,5 @@
 <%-- 
-    Document   : body_CriarEvento
+    Document   : CriarEvento
     Created on : 02/12/2016, 17:36:54
     Author     : fernandohitoshiwatanabe
 --%>
@@ -26,7 +26,7 @@
         if (request.getParameter("submit") == null){
     %>
     <center>
-    <form action = "body_CriarEvento.jsp" methd = "post">
+    <form action = "CriarEvento.jsp" methd = "post">
         Selecione se o evento é macro ou micro: <BR><BR>
         <input type="radio" name="Eve" value="macro" checked> Macro<br>
         <input type="radio" name="Eve" value="micro"> Micro<br>
@@ -139,7 +139,7 @@
             if(action.equals("micro")){
     %>
     <div align = "left|justify">
-        <FORM action = "body_CriarEvento.jsp" method = "post">
+        <FORM action = "CriarEvento.jsp" method = "post">
             Nome do Evento:
             <INPUT type="text" name="EVEnome" maxlength = "30"><BR>
             Descrição:
@@ -163,7 +163,7 @@
             if(action.equals ("macro")){
     %>
     <div align = "left|justify">
-        <FORM action = "body_CriarEvento.jsp" method = "post">
+        <FORM action = "CriarEvento.jsp" method = "post">
             Nome do Evento:
             <INPUT type="text" name="EVEnome" maxlength = "30"> <BR>
             Descrição:

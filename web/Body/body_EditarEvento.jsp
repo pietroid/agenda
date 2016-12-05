@@ -78,7 +78,7 @@
         if(macro){
     %>
     <div align = "left|justify">
-        <form action = "body_EditarEvento.jsp" method = "post">
+        <form action = "EditarEvento.jsp" method = "post">
             Nome do Evento:
             <INPUT type="text" name="EVEnome" maxlength = "30"><BR>
             Descrição:
@@ -102,7 +102,7 @@
         if(!macro){
     %>
     <div align = "left|justify">
-        <form action = "body_EditarEvento.jsp" method = "post">
+        <form action = "EditarEvento.jsp" method = "post">
             Nome do Evento:
             <INPUT type="text" name="EVEnome" maxlength = "30"> <BR>
             Descrição:

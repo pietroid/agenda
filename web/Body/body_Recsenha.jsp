@@ -1,5 +1,9 @@
 <%@page import="data.UsuarioDO"%>
 <%@page import="java.util.List"%>
+<%@ page import="transacoes.Usuario" %>
+<%@page import="data.UsuarioDO"%>
+<%@page import="java.util.List"%>
+<%@page import="data.UsuarioData"%>
 
 <html>
 <body BGCOLOR = #f2f2f2>
@@ -7,10 +11,7 @@
 <h1> <center> Recuperação de Senha <center> </h1>
 <BR>
 <center>
-<%@ page import="transacoes.Usuario" %>
-<%@page import="data.UsuarioDO"%>
-<%@page import="java.util.List"%>
-<%@page import="data.UsuarioData"%>
+
 
 <% 
     UsuarioDO user = new UsuarioDO();
@@ -31,7 +32,7 @@ if (request.getParameter("submit") != null){
         }
     }
 %>
-<FORM action="body_Recsenha.jsp" method="post" align = "left">
+<FORM action="Recsenha.jsp" method="post" align = "left">
 UserName:<INPUT type="text" name="username"  > 
 <br>
 Pergunta: <INPUT type="text" name="" value= "<%= pergunta%>">  

@@ -19,19 +19,19 @@
 <table align="center" border=1 cellpadding=10 width=1000>
 <th>Imagem <th>Grupo de extensão
 <tr>
-  <td width=10% height=150 ><center><iframe src="../PastadeImagens/GrupodeExtensao1/Grupodeextensao1-imagem1.PNG" 
+  <td width=10% height=150 ><center><iframe src="PastadeImagens/GrupodeExtensao1/Grupodeextensao1-imagem1.PNG" 
           scrolling= no width=120 height=150 ></iframe><center>
-              <td><center><a href="../Body/body_GE.jsp" <% request.setAttribute("GEDO", getn.buscar(1)); %>>ThundeRatz</a><center>
+              <td><center><a href="GE.jsp" <% request.setAttribute("GEDO", getn.buscar(1)); %>>ThundeRatz</a><center>
 </tr>
 <tr>
-  <td width=10% height=150 ><center><iframe src="../PastadeImagens/GrupodeExtensao2/Grupodeextensao2-imagem1.PNG" 
+  <td width=10% height=150 ><center><iframe src="PastadeImagens/GrupodeExtensao2/Grupodeextensao2-imagem1.PNG" 
           scrolling= no width=120 height=150></iframe><center>
-  <td><center><a href="../Body/body_GE.jsp" <% request.setAttribute("GEDO", getn.buscar(2)); %>>Poli Social</a><center><center>
+  <td><center><a href="GE.jsp" <% request.setAttribute("GEDO", getn.buscar(2)); %>>Poli Social</a><center><center>
 </tr>
 <tr>
-  <td width=10% height=150 ><center><iframe src="../PastadeImagens/GrupodeExtensao3/Grupodeextensao3-imagem1.PNG" 
+  <td width=10% height=150 ><center><iframe src="PastadeImagens/GrupodeExtensao3/Grupodeextensao3-imagem1.PNG" 
           scrolling= no width=120 height=150></iframe><center>
-  <td><center><a href="../Body/body_GE.jsp" <% request.setAttribute("GEDO", getn.buscar(3)); %>>Matemática em Movimento</a><center><center>
+  <td><center><a href="GE.jsp" <% request.setAttribute("GEDO", getn.buscar(3)); %>>Matemática em Movimento</a><center><center>
 </tr>
 </table>
 <center>
@@ -46,7 +46,7 @@
     {
         
         %>
-        <FORM action="body_Cadastro_GE.jsp" method="post">
+        <FORM action="Cadastro_GE.jsp" method="post">
         <INPUT type="submit" name="submit3" value="Cadastrar">    
 
 <%    
@@ -55,7 +55,7 @@
  %>
  <BR>
         Você precisar Logar antes
-        <FORM action="body_LoginOut.jsp" method="post">
+        <FORM action="LoginOut.jsp" method="post">
         <INPUT type="submit" name="submit2" value="Logar">    
  
  

@@ -1,5 +1,5 @@
 <%-- 
-    Document   : body_ExcluirEvento
+    Document   : ExcluirEvento
     Created on : 03/12/2016, 18:24:01
     Author     : Marcus;
 --%>
