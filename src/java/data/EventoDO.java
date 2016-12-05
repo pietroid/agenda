@@ -17,7 +17,7 @@ public class EventoDO {
     private String nome;
     private String descricao;
     private String tipo;
-    private String macroEvento;
+    private int macroEvento;
     private Time HoraInicial;
     private Time HoraFinal;
     private Date data;
@@ -83,14 +83,14 @@ public class EventoDO {
     /**
      * @return the macroEvento
      */
-    public String getMacroEvento() {
+    public int getMacroEvento() {
         return macroEvento;
     }
 
     /**
      * @param macroEvento the macroEvento to set
      */
-    public void setMacroEvento(String macroEvento) {
+    public void setMacroEvento(int macroEvento) {
         this.macroEvento = macroEvento;
     }
 
