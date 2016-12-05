@@ -21,7 +21,8 @@
                     </form>
                     Comentário:<BR>
                     <INPUT type="text" name="EVEcomentario" value="Digite aqui um breve comentário sobre o evento"><BR><BR>
-                <BR><BR>
+                    <INPUT type="submit" name="submit" value= "Enviar">  
+                    
 </center>
     </body>
 </html>
