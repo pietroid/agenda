@@ -39,10 +39,21 @@
     if (LiderGE==0){
 %>
 <p><font size="3" face="verdana">Notificações:</p>
-<table align="cente" border=3    cellpadding = 10 width=1000   >
+<table align="center" border=3    cellpadding = 10 width=1000   >
     <tr>
         <th>Eventos Cancelados</th>
     </tr>
+    <table align ="center" border =3 cellpadding =10  >
+        <tr>
+            Notificação
+        </tr>
+        <tr>
+            Notificação
+        </tr>
+        <tr>
+            Notificação
+        </tr>
+    </table>
     <tr>
         <th>Eventos próximos</th>
     </tr>
