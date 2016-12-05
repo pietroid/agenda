@@ -21,6 +21,7 @@
     int IDusuario = usuario.getId();
     Membro lista = new Membro();
     List<MembroDO> ListaMembro = lista.buscarPorUSUid(IDusuario);
+    
     //Cria uma lista de notificacoes
     NotificacaoGeral list = new NotificacaoGeral();
     List<NotificacaoGeralDO> ListaNotificacao = list.BuscaNotporUSId(IDusuario);
