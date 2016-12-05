@@ -43,9 +43,9 @@
 
 <table align="left" border=1 cellpadding=10 width=500>
 <tr>
-  <td><a href="../CriarEvento.jsp" target="_top"><font size="5" color="#ff0000">Criar evento</font></a></td>
-  <td><a href="../ExcluirEvento.jsp" target="_top"><font size="5" color="#ff0000">Excluir evento</font></a></td>
-  <td><a href="../AlterarEvento.jsp" target="_top"><font size="5" color="#ff0000">Alterar evento</font></a></td>
+  <td><a href="../agenda/CriarEvento.jsp" target="_top"><font size="5" color="#ff0000">Criar evento</font></a></td>
+  <td><a href="../agenda/ExcluirEvento.jsp" target="_top"><font size="5" color="#ff0000">Excluir evento</font></a></td>
+  <td><a href="../agenda/AlterarEvento.jsp" target="_top"><font size="5" color="#ff0000">Alterar evento</font></a></td>
 </tr>
 </table>
 
