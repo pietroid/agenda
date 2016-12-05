@@ -19,9 +19,22 @@
 <h2><font face="verdana"> Interesses </font><h2>
 <p><font size="2" face="verdana"><a href="body_GE.jsp">Clique aqui
  para ver uma lista com todos os Grupos do seu interesse</a></font></p> 
-
 <p><font size="2" face="verdana"><a href="body_AltPass.jsp">Clique aqui
  para alterar sua senha</a></font></p>
+
+
+
+<p><font size="3" face="verdana">Notificações:</p>
+<table align="cente" border=3    cellpadding = 10 width=1000   >
+    <tr>
+        <th>Eventos Cancelados</th>
+    </tr>
+    <tr>
+        <th>Eventos próximos</th>
+    </tr>
+</table>
+
+
 
 <h2> Calendário </h2>
 <center>
