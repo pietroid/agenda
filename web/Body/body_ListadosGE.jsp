@@ -35,6 +35,35 @@
 </tr>
 </table>
 <center>
+    <BR>
+    <BR>
+    Deseja cadastrar um novo grupo de extensão? 
+    <BR> <BR>
+    
+    
+<%
+    if(session.getAttribute("Usuario")!= null) //HOME LOGADO
+    {
+        
+        %>
+        <FORM action="body_Cadastro_GE.jsp" method="post">
+        <INPUT type="submit" name="submit3" value="Cadastrar">    
 
+<%    
+   }else{ //HOME DESLOGADO
+
+ %>
+ <BR>
+        Você precisar Logar antes
+        <FORM action="body_LoginOut.jsp" method="post">
+        <INPUT type="submit" name="submit2" value="Logar">    
+ 
+ 
+ 
+<%    
+   }
+%>
+    
+    
 </body>
 </html>
