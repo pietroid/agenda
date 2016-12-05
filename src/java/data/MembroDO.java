@@ -10,7 +10,7 @@ package data;
  * @author Guilherme
  */
 public class MembroDO {
-    private int MEMBERid;
+    private int id;
     private int GEid;
     private int USUid;
     private int ADM;
@@ -18,15 +18,15 @@ public class MembroDO {
     /**
      * @return the MEMBERid
      */
-    public int getMEMBERid() {
-        return MEMBERid;
+    public int getId() {
+        return id;
     }
 
     /**
      * @param MEMBERid the MEMBERid to set
      */
-    public void setMEMBERid(int MEMBERid) {
-        this.MEMBERid = MEMBERid;
+    public void setId(int id) {
+        this.id = id;
     }
 
     /**

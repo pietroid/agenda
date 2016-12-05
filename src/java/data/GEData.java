@@ -28,10 +28,13 @@ public class GEData {
         ps.setString(7, GE.getImagem());
         ps.setString(8, GE.getTel());
         ps.setString(9, GE.getTipo());
-        
-        
-        
         int result = ps.executeUpdate();
+        
+        sql= "SELECT LAST_INSERT_ID();";
+        ps = con.prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+        rs.first();
+        GE.setId(rs.getInt("LAST_INSERT_ID()"));
     }// incluir
 
     public void excluir(GEDO GE, Transacao tr) throws Exception {

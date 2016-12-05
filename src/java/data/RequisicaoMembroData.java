@@ -21,15 +21,20 @@ public class RequisicaoMembroData {
         ps.setInt(2, req.getGEId());
         ps.setDate(3, req.getDataReq());
         ps.setString(4, req.getMensagem());
-            
         int result = ps.executeUpdate();
+        
+        sql= "SELECT LAST_INSERT_ID();";
+        ps = con.prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+        rs.first();
+        req.setId(rs.getInt("LAST_INSERT_ID()"));
     }// incluir
 
     public void excluir(RequisicaoMembroDO req, Transacao tr) throws Exception {
         Connection con = tr.obterConexao();
-        String sql = "delete from agenda.requisicaoMembro where userId = ?";
+        String sql = "delete from agenda.requisicaoMembro where id = ?";
         PreparedStatement ps = con.prepareStatement(sql);
-        ps.setInt(1, req.getUserId());
+        ps.setInt(1, req.getId());
         int result = ps.executeUpdate();
     } // excluir
 

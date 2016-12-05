@@ -13,13 +13,13 @@ import java.util.*;
  * @author LUIS FELIPE
  */
 public class Inscricao {
-    public boolean incluir (InscricaoDO ins) throws Exception{
+    public boolean incluir (SeguindoDO ins) throws Exception{
         
         Transacao tr = new Transacao();
         try {
             
             tr.begin();
-                InscricaoData a = new InscricaoData();
+                SeguindoData a = new SeguindoData();
                 a.incluir(ins, tr);
             tr.commit();
             return true;
@@ -32,12 +32,12 @@ public class Inscricao {
         return false;
     } // incluir
     
-    public InscricaoDO buscar(int INSCid) throws Exception{
+    public SeguindoDO buscar(int INSCid) throws Exception{
         Transacao tr = new Transacao();
 	try{
             tr.beginReadOnly();
-  	    InscricaoData a = new InscricaoData();
-	    InscricaoDO i = a.buscar(INSCid, tr);
+  	    SeguindoData a = new SeguindoData();
+	    SeguindoDO i = a.buscar(INSCid, tr);
             tr.commit();
             return i;
 	} catch (Exception e) {

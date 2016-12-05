@@ -21,6 +21,11 @@ public class PertenceData {
         ps.setInt(2, pertence.getMacroId());
      
         int result = ps.executeUpdate();
+        sql= "SELECT LAST_INSERT_ID();";
+        ps = con.prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+        rs.first();
+        pertence.setId(rs.getInt("LAST_INSERT_ID()"));
     }// incluir
 
     public void excluir(PertenceDO pertence, Transacao tr) throws Exception {

@@ -45,7 +45,7 @@ li a:hover:not(.active) {
   <li><a href="/agenda/ListadosGE.jsp">Grupos de Extensão</a></li>
   <li><a href="/agenda/Calendario.jsp">Calendário Geral</a></li>
   <li><a href="/agenda/Perfil.jsp">Perfil</a></li>
-  <li style="float:right"><a href="/Agenda/LoginOut.jsp">Login/Out</a></li>
+  <li style="float:right"><a href="/agenda/LoginOut.jsp">Login/Out</a></li>
 </ul>
 
 </body>
