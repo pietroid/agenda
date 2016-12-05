@@ -49,6 +49,7 @@ public class Evento {
 	return false;
     }
     
+    
     public EventoDO buscar(int id) throws Exception{
         Transacao tr = new Transacao();
 	try{
