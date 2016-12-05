@@ -9,11 +9,10 @@ package data;
  *
  * @author Guilherme
  */
-public class MembroDO {
+public class PreferenciaDO {
     private int id;
     private int GEid;
     private int USUid;
-    private int ADM;
 
     /**
      * @return the MEMBERid
@@ -55,19 +54,5 @@ public class MembroDO {
      */
     public void setUSUid(int USUid) {
         this.USUid = USUid;
-    }
-
-    /**
-     * @return the ADM
-     */
-    public int getADM() {
-        return ADM;
-    }
-
-    /**
-     * @param ADM the ADM to set
-     */
-    public void setADM(int ADM) {
-        this.ADM = ADM;
     }
 }

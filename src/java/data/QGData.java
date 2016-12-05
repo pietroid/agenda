@@ -16,20 +16,24 @@ import utils.Transacao;
 public class QGData {
      public void incluir(QGDO local, Transacao tr) throws Exception {
         Connection con = tr.obterConexao();
-        String sql = "insert into agenda.QG (QGid,POI_id,GEid) values (?,?,?)";
+        String sql = "insert into agenda.QG (POI_id,GEid) values (?,?)";
         PreparedStatement ps = con.prepareStatement(sql);
-        ps.setInt(1, local.getQGid());
-        ps.setInt(2, local.getPOI_id());
-        ps.setInt(3, local.getGEid()); 
-            
+        ps.setInt(1, local.getPOI_id());
+        ps.setInt(2, local.getGEid()); 
         int result = ps.executeUpdate();
+        
+        sql= "SELECT LAST_INSERT_ID();";
+        ps = con.prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+        rs.first();
+        local.setId(rs.getInt("LAST_INSERT_ID()"));
     }// incluir
 
     public void excluir(QGDO acontece, Transacao tr) throws Exception {
         Connection con = tr.obterConexao();
         String sql = "delete from agenda.QG where QGid = ?";
         PreparedStatement ps = con.prepareStatement(sql);
-        ps.setInt(1, acontece.getQGid());
+        ps.setInt(1, acontece.getId());
         int result = ps.executeUpdate();
     } // excluir
 
@@ -40,7 +44,7 @@ public class QGData {
         ps.setInt(1, QGid);
         ResultSet rs = ps.executeQuery();
         QGDO local = new QGDO();
-        local.setQGid(rs.getInt("QGid"));
+        local.setId(rs.getInt("QGid"));
         local.setPOI_id(rs.getInt("EVEid"));
         local.setGEid(rs.getInt("GEid"));
         return local;

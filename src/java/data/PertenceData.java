@@ -21,6 +21,11 @@ public class PertenceData {
         ps.setInt(2, pertence.getMacroId());
      
         int result = ps.executeUpdate();
+        sql= "SELECT LAST_INSERT_ID();";
+        ps = con.prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+        rs.first();
+        pertence.setId(rs.getInt("LAST_INSERT_ID()"));
     }// incluir
 
     public void excluir(PertenceDO pertence, Transacao tr) throws Exception {
@@ -31,7 +36,7 @@ public class PertenceData {
         int result = ps.executeUpdate();
     } // excluir
 
-    public List<Integer> pesquisarMicroPorMacro(EventoDO macroEvento, Transacao tr) throws Exception {
+    public List<Integer> buscarMicroPorMacro(EventoDO macroEvento, Transacao tr) throws Exception {
         Connection con = tr.obterConexao();
         String sql = "select * from pertence where macroEventoId = ?";
         PreparedStatement ps = con.prepareStatement(sql);
@@ -43,6 +48,29 @@ public class PertenceData {
         }
         return itens;
     } // buscar
+    
+    public void atualizar(PertenceDO pertence, Transacao tr) throws Exception {
+        Connection con = tr.obterConexao();
+        String sql = "update evento set macroEventoIdnome=? where id=?";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setInt(1, pertence.getMacroId());
+        ps.setInt(2, pertence.getId());
+        int result = ps.executeUpdate(); 
+    }
+    
+    public PertenceDO buscar(int microID, Transacao tr) throws Exception {
+        Connection con = tr.obterConexao();
+        String sql = "select * from pertence where microEventoId = ?";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setInt(1, microID);
+        ResultSet rs = ps.executeQuery();
+        PertenceDO pertence = new PertenceDO();
+        rs.first();
+        pertence.setId(rs.getInt("id"));
+        pertence.setMacroId(rs.getInt("macroEventoId"));
+        pertence.setMicroId(rs.getInt("microEventoId"));
+        return pertence;
+    }
     
     
     

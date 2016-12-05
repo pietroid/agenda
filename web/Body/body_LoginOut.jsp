@@ -5,6 +5,7 @@
 <font face="verdana">
 <h1> <center> Login <center> </h1>
 <BR>
+
 <%@ page import="transacoes.Usuario" %>
 <%@ page import="data.UsuarioDO" %>
 <%@ page import="java.util.Vector" %>
@@ -17,8 +18,13 @@ if (request.getParameter("submit") != null){
     Usuario tru = new Usuario();
     usuario=tru.buscarPorUsername(request.getParameter("login"));
     if (usuario!=null && usuario.getSenha().equals(request.getParameter("senha"))){
-        session.setAttribute("Usuario", usuario);  //Decidir com os demais   
+        session.setAttribute("Usuario", usuario);  //Decidir com os demais 
+        if( usuario.isSuperUser()== false){
         pageContext.forward("body_Perfil.jsp");
+        }else{
+            pageContext.forward("body_PaineldeControle.jsp");
+        }
+        
     }
     else
     {

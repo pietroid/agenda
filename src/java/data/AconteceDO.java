@@ -10,16 +10,16 @@ package data;
  * @author LUIS FELIPE
  */
 public class AconteceDO {
-    private int acontece_id;
+    private int id;
     private int EVEid;
     private int POI_id;
 
-    public int getAcontece_id() {
-        return acontece_id;
+    public int getId() {
+        return id;
     }
 
-    public void setAcontece_id(int acontece_id) {
-        this.acontece_id = acontece_id;
+    public void setId(int id) {
+        this.id= id;
     }
 
     public int getEVEid() {

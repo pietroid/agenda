@@ -10,16 +10,16 @@ package data;
  * @author LUIS FELIPE
  */
 public class QGDO {
-    private int QGid;
+    private int id;
     private int POI_id;
     private int GEid;
 
-    public int getQGid() {
-        return QGid;
+    public int getId() {
+        return id;
     }
 
-    public void setQGid(int QGid) {
-        this.QGid = QGid;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getPOI_id() {
