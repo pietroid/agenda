@@ -64,7 +64,7 @@
 
 <table align="left" border=1 cellpadding=10 width=500>
 <tr>
-  <td><a href="../agenda/CriarEvento.jsp" <% request.setAttribute("GEDO", ge); %> target="_top"><font size="5" color="#ff0000">Criar evento</font></a></td>
+  <td><a href="../agenda/CriarEvento.jsp" <% session.setAttribute("GEDO", ge); %> target="_top"><font size="5" color="#ff0000">Criar evento</font></a></td>
 </tr>
 </table>
 
