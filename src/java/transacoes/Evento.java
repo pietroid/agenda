@@ -26,7 +26,7 @@ public class Evento {
        
         } catch(Exception e) {
             tr.rollback();
-            System.out.println("Erro ao incluir ");
+            System.out.println("Erro ao incluir " + Evento.getId());
             e.printStackTrace();
         }
         return false;
@@ -43,7 +43,7 @@ public class Evento {
             return true;
 	} catch (Exception e) {
             tr.rollback();
-            System.out.println("Erro ao atualizar" + evento.getId());
+            System.out.println("Erro ao atualizar " + evento.getId());
             e.printStackTrace();
 	}
 	return false;
@@ -59,7 +59,7 @@ public class Evento {
             return i;
 	} catch (Exception e) {
             tr.rollback();
-            System.out.println("Erro ao buscar" + id);
+            System.out.println("Erro ao buscar " + id);
 	}
 	return null;
     } // buscar
@@ -74,7 +74,7 @@ public class Evento {
             return i;
 	} catch (Exception e) {
             tr.rollback();
-            System.out.println("Erro ao buscar" + nome);
+            System.out.println("Erro ao buscar " + nome);
            
 	}
 	return null;
