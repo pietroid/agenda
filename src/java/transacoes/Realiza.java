@@ -33,6 +33,22 @@ public class Realiza {
         return false;
     } // incluir
     
+    public boolean excluirPorEVEid(int EVEid) throws Exception{
+        Transacao tr = new Transacao();
+	try{
+            tr.begin();
+            RealizaData realizaData = new RealizaData();
+            realizaData.excluirPorEVEid(EVEid, tr);
+            tr.commit();
+            return true;
+	} catch (Exception e) {
+            tr.rollback();
+            System.out.println("Erro ao excluir " + EVEid);
+            e.printStackTrace();
+	}
+	return false;
+    }
+    
     public boolean atualizar(RealizaDO realiza) throws Exception {
         Transacao tr = new Transacao();
 	try{
