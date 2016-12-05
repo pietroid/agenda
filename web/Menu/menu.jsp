@@ -48,17 +48,17 @@ li a:hover:not(.active) {
   <li><a href="/agenda/Calendario.jsp">Calendário Geral</a></li>
   
   <%
-      UsuarioDO usuario = (UsuarioDO)session.getAttribute("Usuario");
+      UsuarioDO usr_menu= (UsuarioDO)session.getAttribute("Usuario");
       
       
-      if(usuario == null || usuario.isSuperUser()== false){
+      if(usr_menu == null || usr_menu.isSuperUser()== false){
   %>
   
-  <li><a href="/agenda/Perfil.jsp">Perfil</a></li>
+  <li><a href="Perfil.jsp">Perfil</a></li>
   <%
       }else{ 
   %>
-    <li><a href="/agenda/PaineldeControle.jsp">Painel de Controle</a></li>
+    <li><a href="PaineldeControle.jsp">Painel de Controle</a></li>
   <%
   }
   %>

@@ -1,5 +1,5 @@
 <%-- 
-    Document   : body_CriarEvento
+    Document   : CriarEvento
     Created on : 02/12/2016, 17:36:54
     Author     : fernandohitoshiwatanabe
 --%>
@@ -26,7 +26,7 @@
         if (request.getParameter("submit") == null){
     %>
     <center>
-    <form action = "body_CriarEvento.jsp" methd = "post">
+    <form action = "CriarEvento.jsp" methd = "post">
         Selecione se o evento é macro ou micro: <BR><BR>
         <input type="radio" name="Eve" value="macro" checked> Macro<br>
         <input type="radio" name="Eve" value="micro"> Micro<br>
@@ -41,7 +41,7 @@
             boolean ok = false;
             Evento eventotn = new Evento();
             EventoDO evento = new EventoDO();
-            GEDO ge = (GEDO)request.getAttribute("GEDO");
+            GEDO ge = (GEDO)session.getAttribute("GEDO");
             GE getn = new GE();
             RealizaDO realiza = new RealizaDO();
             Realiza realizatn = new Realiza();
@@ -65,15 +65,15 @@
                     evento.setTipo(request.getParameter("EVEtipo"));
                     evento.setHoraInicial(new Time(Integer.valueOf(request.getParameter("EVEhoraI")), Integer.valueOf(request.getParameter("EVEminI")), 0));
                     evento.setHoraFinal(new Time(Integer.valueOf(request.getParameter("EVEhoraT")), Integer.valueOf(request.getParameter("EVEminT")), 0));
-                    evento.setData(new Date(Integer.valueOf(request.getParameter("EVEdataD")), Integer.valueOf(request.getParameter("EVEdataM")), Integer.valueOf(request.getParameter("EVEdataY"))));
-                    evento.setMacroEvento(1);
+                    evento.setData(new Date(Integer.valueOf(request.getParameter("EVEdataY")) - 1900, Integer.valueOf(request.getParameter("EVEdataM")) - 1, Integer.valueOf(request.getParameter("EVEdataD"))));
+                    evento.setMacroEvento(true);
                     ok = eventotn.incluir(evento);
                     if (ok == true){
-                        /*if (ge != null){
+                        if (ge != null){
                             realiza.setEVEid(eventotn.buscarNome(evento.getNome()).getId());
                             realiza.setGEid(ge.getId());
                             boolean realizaok = realizatn.incluir(realiza);
-                        }*/
+                        }
                         if (eventotn.buscarNome(request.getParameter("EVEmacro_evento")) != null){
                             EventoDO macro = eventotn.buscarNome(request.getParameter("EVEmacro_evento"));
                             pertence.setMicroId(eventotn.buscarNome(evento.getNome()).getId());
@@ -103,15 +103,15 @@
                     evento.setTipo(request.getParameter("EVEtipo"));
                     evento.setHoraInicial(new Time(Integer.valueOf(request.getParameter("EVEhoraI")), Integer.valueOf(request.getParameter("EVEminI")), 0));
                     evento.setHoraFinal(new Time(Integer.valueOf(request.getParameter("EVEhoraT")), Integer.valueOf(request.getParameter("EVEminT")), 0));
-                    evento.setData(new Date(Integer.valueOf(request.getParameter("EVEdataD")), Integer.valueOf(request.getParameter("EVEdataM")), Integer.valueOf(request.getParameter("EVEdataY"))));
-                    evento.setMacroEvento(0);
+                    evento.setData(new Date(Integer.valueOf(request.getParameter("EVEdataY")) - 1900, Integer.valueOf(request.getParameter("EVEdataM")) - 1, Integer.valueOf(request.getParameter("EVEdataD"))));
+                    evento.setMacroEvento(false);
                     ok = eventotn.incluir(evento);
                     if (ok == true){
-                        /*if (ge != null){
+                        if (ge != null){
                             realiza.setEVEid(eventotn.buscarNome(evento.getNome()).getId());
                             realiza.setGEid(ge.getId());
                             boolean realizaok = realizatn.incluir(realiza);
-                        }*/
+                        }
                     }
                 }
                 else{
@@ -127,7 +127,7 @@
 
                 <%
             }
-            if (ok == true){
+            if (ok == true && campospreenchidos == true){
                 %>
 
                     <center>
@@ -136,10 +136,10 @@
 
                 <%
             }
-            if(action.equals("micro")){
+            if((action != null) && action.equals("micro")){
     %>
     <div align = "left|justify">
-        <FORM action = "body_CriarEvento.jsp" method = "post">
+        <FORM action = "CriarEvento.jsp" method = "post">
             Nome do Evento:
             <INPUT type="text" name="EVEnome" maxlength = "30"><BR>
             Descrição:
@@ -160,10 +160,10 @@
     </div>
     <%  
             }
-            if(action.equals ("macro")){
+            if((action != null) && action.equals ("macro")){
     %>
     <div align = "left|justify">
-        <FORM action = "body_CriarEvento.jsp" method = "post">
+        <FORM action = "CriarEvento.jsp" method = "post">
             Nome do Evento:
             <INPUT type="text" name="EVEnome" maxlength = "30"> <BR>
             Descrição:

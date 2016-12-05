@@ -7,8 +7,6 @@
 <%@page import="java.sql.Time"%>
 <%@page import="java.sql.Date"%>
 <%@ page import="transacoes.Evento" %>
-<%@ page import="transacoes.Pertence" %>
-<%@ page import="data.PertenceDO" %>
 <%@ page import="data.EventoDO" %>
 <%@ page import="java.util.*" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -17,18 +15,68 @@
 <html>
 <head>
 <title>George</title>
+    <style>
+    table {
+        font-family: "Verdana";
+        border-collapse: collapse;
+        width: 70%;
+    }
+
+    td, th {
+        height: 70px;
+        border: 1px solid #ddd;
+        padding: 8px;
+        background-color: #ffffff;
+    }
+
+    tr:nth-child(even){background-color: #f2f2f2;}
+
+    th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: center;
+        background-color: #4CAF50;
+        color: white;
+    }
+    </style>
 </head>
 <iframe src="Título\título.jpg" width="1350" height="150" frameBorder="0" scrolling="no"></iframe>
 <%@include  file="Menu/menu.jsp"%>
 <br>
 
-<%
-    String a = request.getParameter("tag1");
-        
-        
-        
-        
-%>
+<table align="center">
+  <tr>
+      <th>Nome</th>
+      <th>Descrição</th>
+      <th>Tipo</th>
+      <th>Macro Evento</th>
+      <th>Hora Inicial</th>
+      <th>Hora Final</th>
+      <th>Data</th>
+      <th>Avaliação</th>
+  </tr>    
+
+<% String str_ClickedDate =(String)session.getAttribute("str_ClickedDate");
+
+//java.sql.Date date_ClickedDate = java.sql.Date.valueOf(str_ClickedDate);
+      
+
+Evento tre = new Evento();
+List<EventoDO> eventos_do_Dia=new ArrayList<EventoDO>(); // = tre.buscarData(date_ClickedDate);
+%><%= str_ClickedDate %>---<%
+for (EventoDO evento_temp : eventos_do_Dia) { %>
+<tr>
+    <td>fff<%=evento_temp.getNome()%></td>
+    <td><%=evento_temp.getDescricao()%></td>
+    <td><%=evento_temp.getTipo()%></td>
+    <td><%=evento_temp.getMacroEvento()%></td>
+    <td><%=evento_temp.getHoraInicial()%></td>
+    <td><%=evento_temp.getHoraFinal()%></td>
+    <td><%=evento_temp.getData()%></td>
+    <td><%=evento_temp.getAvaliação()%></td>
+</tr>    
+<%}%>
+</table>
 
 <iframe src="Footer\footer.jsp" width="1350" height="200" frameBorder="0" scrolling="no">    
 </html>
