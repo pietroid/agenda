@@ -65,7 +65,7 @@
                     evento.setTipo(request.getParameter("EVEtipo"));
                     evento.setHoraInicial(new Time(Integer.valueOf(request.getParameter("EVEhoraI")), Integer.valueOf(request.getParameter("EVEminI")), 0));
                     evento.setHoraFinal(new Time(Integer.valueOf(request.getParameter("EVEhoraT")), Integer.valueOf(request.getParameter("EVEminT")), 0));
-                    evento.setData(new Date(Integer.valueOf(request.getParameter("EVEdataY")), Integer.valueOf(request.getParameter("EVEdataM")), Integer.valueOf(request.getParameter("EVEdataD"))));
+                    evento.setData(new Date(Integer.valueOf(request.getParameter("EVEdataY")) - 1900, Integer.valueOf(request.getParameter("EVEdataM")) - 1, Integer.valueOf(request.getParameter("EVEdataD"))));
                     evento.setMacroEvento(true);
                     ok = eventotn.incluir(evento);
                     if (ok == true){
@@ -103,7 +103,7 @@
                     evento.setTipo(request.getParameter("EVEtipo"));
                     evento.setHoraInicial(new Time(Integer.valueOf(request.getParameter("EVEhoraI")), Integer.valueOf(request.getParameter("EVEminI")), 0));
                     evento.setHoraFinal(new Time(Integer.valueOf(request.getParameter("EVEhoraT")), Integer.valueOf(request.getParameter("EVEminT")), 0));
-                    evento.setData(new Date(Integer.valueOf(request.getParameter("EVEdataY")), Integer.valueOf(request.getParameter("EVEdataM")), Integer.valueOf(request.getParameter("EVEdataD"))));
+                    evento.setData(new Date(Integer.valueOf(request.getParameter("EVEdataY")) - 1900, Integer.valueOf(request.getParameter("EVEdataM")) - 1, Integer.valueOf(request.getParameter("EVEdataD"))));
                     evento.setMacroEvento(false);
                     ok = eventotn.incluir(evento);
                     if (ok == true){
