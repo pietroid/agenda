@@ -2,25 +2,25 @@
 <%@ page import="data.GEDO" %>
 <%
     GE getn = new GE();
-    GEDO ge = (GEDO)request.getAttribute("GEDO");
+    GEDO ge = (GEDO)session.getAttribute("GEDO");
 %>
 <html>
-<body BGCOLOR = #f2f2f2>
-<font face="verdana">
-<h1><center>Nome do Grupo</center></h1>
-<BR><BR>
+    <body BGCOLOR = #f2f2f2>
+        <font face="verdana">
+        <h1><center>Nome do Grupo</center></h1>
+        <BR><BR>
 
-<p align="left"><a href="/agenda/Calendario.jsp" target="_top">Voltar ao calendário</a></p>
-<BR><BR>
+        <p align="left"><a href="/agenda/Calendario.jsp" target="_top">Voltar ao calendário</a></p>
+        <BR><BR>
 
-<table align="left" border=1 cellpadding=10 width=500>
-<th>Descrição do grupo</th>
-<tr>
-  <td width=10% height=150>Escreva aqui a descrição do grupo. Limite: 140 caracteres.</td>
-</tr>
-</table>
+        <table align="left" border=1 cellpadding=10 width=500>
+            <th>Descrição do grupo</th>
+            <tr>
+                <td width=10% height=150> <%= ge.getDescricao() %> </td>
+            </tr>
+        </table>
 
-<BR>
+        <BR>
 
 <table align="right" border=1 cellpadding=10 width=200>
     <tfoot>
@@ -34,33 +34,33 @@
 <BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR>
 
 
-<table align="left" border=1 cellpadding=10 width=500>
-<th colspan="2">Informações do grupo</th>
-<tr>
-  <td><b>E-mail</b></td>
-  <td>algum_email@usp.br</td>
-</tr>
-<tr>
-  <td><b>Localização</b></td>
-  <td>prédio da mecânica/não há/etc...</td>
-</tr>
-</table>
-<BR><BR><BR><BR><BR><BR><BR><BR>
+        <table align="left" border=1 cellpadding=10 width=500>
+        <th colspan="2">Informações do grupo</th>
+        <tr>
+          <td><b>E-mail</b></td>
+          <td> <%= ge.getEmail() %></td>
+        </tr>
+        <tr>
+          <td><b>Telefone</b></td>
+          <td> <%= ge.getTel()%></td>
+        </tr>
+        </table>
+        <BR><BR><BR><BR><BR><BR><BR><BR>
 
 
-<table align="left" border=1 cellpadding=10 width=500>
-<th> 
-     <center> <a href="/agenda/AlterarInfoGE.jsp" target="_top"> Alterar Informações </a> </center> 
-</th>
-</table>
-<BR><BR><BR><BR><BR>
+        <table align="left" border=1 cellpadding=10 width=500>
+        <th> 
+             <center> <a href="/agenda/AlterarInfoGE.jsp" target="_top"> Alterar Informações </a> </center> 
+        </th>
+        </table>
+        <BR><BR><BR><BR><BR>
 
-<table align="left" border=1 cellpadding=10 width=500>
-<th colspan="2">Lista de eventos</th>
+        <table align="left" border=1 cellpadding=10 width=500>
+        <th colspan="2">Lista de eventos</th>
 
-</table>
+        </table>
 
-<BR><BR><BR><BR><BR>
+        <BR><BR><BR><BR><BR>
 
 <table align="left" border=1 cellpadding=10 width=500>
 <tr>

@@ -70,11 +70,10 @@ public class PontoDeInteresseData {
      int result = ps.executeUpdate(); 
     } // atualizar
     
-        public List<PontoDeInteresseDO> listarPontoDeInteresseId(int PontoDeInteresseId, Transacao tr) throws Exception {
+        public List<PontoDeInteresseDO> ListarPOI(Transacao tr) throws Exception {
         Connection con = tr.obterConexao();
         String sql = "select * from agenda.POI where POI_id = ?";
         PreparedStatement ps = con.prepareStatement(sql);
-        ps.setInt(1, PontoDeInteresseId);
         ResultSet rs = ps.executeQuery();
         List<PontoDeInteresseDO> Items = new ArrayList<PontoDeInteresseDO>();
         while (rs.next()) {

@@ -1,8 +1,14 @@
 
 <%@page import="data.EventoDO"%>
+<%@page import="transacoes.Evento"%>
 <%@page import="data.UsuarioDO"%>
 <%@page import="java.util.List"%>
 
+<%
+    Evento eventotn = new Evento();
+    EventoDO evento = (EventoDO) session.getAttribute("evento");
+    session.setAttribute("evento",evento);
+%>
 <html>
 <%@ page import="transacoes.Usuario" %>
 <%@ page import="data.UsuarioDO" %>
