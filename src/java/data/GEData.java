@@ -77,10 +77,41 @@ public class GEData {
      ps.setString(5, GE.getFace());
      ps.setString(6, GE.getEmail());
      ps.setString(7, GE.getImagem());
-     ps.setString(8, GE.getLocal());
-     ps.setString(9, GE.getTel());
+     ps.setString(8, GE.getTel());
+     ps.setString(9, GE.getTipo());
      ps.setInt(10, GE.getId());
      
      int result = ps.executeUpdate(); 
     } // atualizar
+     
+     
+    public List<GEDO> ListarGE(Transacao tr) throws Exception {
+        Connection con = tr.obterConexao();
+        String sql = "select * from grupodeextensao";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+        List<GEDO> Items = new ArrayList<GEDO>();
+        while (rs.next()) {
+            GEDO i = new GEDO();
+           i.setId (rs.getInt("GEid"));
+            i.setNome (rs.getString("GEnome"));
+            i.setDescricao(rs.getString("GEdescricao"));
+            i.setAno(rs.getInt("GEano_de_inicio"));
+            i.setSite (rs.getString("GEsite"));
+            i.setFace (rs.getString("GEpagina_do_fb"));
+            i.setEmail(rs.getString("GEemail"));
+            i.setImagem(rs.getString("GEpasta_de_imagens"));            
+            i.setTel(rs.getString("GEtel"));              
+            i.setTipo(rs.getString("GEtipo"));               
+            
+            
+            Items.add(i);
+        }
+        return Items;
+    } // pesquisar por GEid     
+     
+     
+     
+     
+     
 }
