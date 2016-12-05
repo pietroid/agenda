@@ -52,9 +52,10 @@
    }else{ //HOME DESLOGADO
 
  %>
+ <BR>
         Você precisar Logar antes
         <FORM action="body_LoginOut.jsp" method="post">
-        <INPUT type="submit" name="submit" value="Cadastrar">    
+        <INPUT type="submit" name="submit" value="Logar">    
  
  
  
