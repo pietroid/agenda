@@ -195,17 +195,18 @@ public class UsuarioDO {
     public void setSuperUser(boolean superUser) {
         this.superUser = superUser;
     }
+    public void setResposta(String resposta){
+    this.Resposta = resposta;
+    }
     
     public String getResposta(){
-            return this.Resposta;
+            return Resposta;
     }
     
-    public void setResposta(String resposta){
-            this.Resposta = resposta ;
-    }
+    
     
     public String getPergunta(){
-            return this.Pergunta;
+            return Pergunta;
     }
     
     public void setPergunta(String resposta){
