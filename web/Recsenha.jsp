@@ -2,9 +2,8 @@
 <head>
 <title>George</title>
 </head>
-<iframe src="Título\título.jpg" width="1350" height="150" frameBorder="0" scrolling="no"></iframe>
+<%@include file="Título/Título.jsp" %>
 <%@include  file="Menu/menu.jsp"%>
-<br>
-<iframe src="Body\body_Recsenha.jsp" width="1350" height="700" frameBorder="0" scrolling="no"></iframe>
-<iframe src="Footer\footer.jsp" width="1350" height="200" frameBorder="0" scrolling="no">
+<%@include  file="Body/body_Recsenha.jsp"%>
+<%@include  file="Footer/footer.jsp"%>
 </html>
