@@ -26,7 +26,7 @@
         if (request.getParameter("submit") == null){
     %>
     <center>
-    <form action = "body_CriarEvento.jsp" methd = "post">
+    <form action = "body_CriarEvento.jsp" method = "post">
         Selecione se o evento é macro ou micro: <BR><BR>
         <input type="radio" name="Eve" value="macro" checked> Macro<br>
         <input type="radio" name="Eve" value="micro"> Micro<br>
