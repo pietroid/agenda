@@ -12,7 +12,7 @@ import java.util.*;
  *
  * @author LUIS FELIPE
  */
-public class Inscricao {
+public class Seguindo {
     public boolean incluir (SeguindoDO ins) throws Exception{
         
         Transacao tr = new Transacao();

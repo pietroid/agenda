@@ -44,6 +44,7 @@ public class MembroData {
         ps.setInt(1, Membro.getGEid());
         ps.setInt(2, Membro.getUSUid());
         ps.setInt(3, Membro.getADM());
+        ps.setInt(4, Membro.getId());
         int result = ps.executeUpdate();
     } // atualizar
 

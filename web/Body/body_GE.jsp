@@ -1,3 +1,9 @@
+<%@ page import="transacoes.GE" %>
+<%@ page import="data.GEDO" %>
+<%
+    GE getn = new GE();
+    GEDO ge = (GEDO)request.getAttribute("GEDO");
+%>
 <html>
 <body BGCOLOR = #f2f2f2>
 <font face="verdana">
@@ -58,9 +64,7 @@
 
 <table align="left" border=1 cellpadding=10 width=500>
 <tr>
-  <td><a href="../agenda/CriarEvento.jsp" target="_top"><font size="5" color="#ff0000">Criar evento</font></a></td>
-  <td><a href="../agenda/ExcluirEvento.jsp" target="_top"><font size="5" color="#ff0000">Excluir evento</font></a></td>
-  <td><a href="../agenda/AlterarEvento.jsp" target="_top"><font size="5" color="#ff0000">Alterar evento</font></a></td>
+  <td><a href="../agenda/CriarEvento.jsp" <% session.setAttribute("GEDO", ge); %> target="_top"><font size="5" color="#ff0000">Criar evento</font></a></td>
 </tr>
 </table>
 
