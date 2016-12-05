@@ -19,7 +19,7 @@
     PontoDeInteresseDO PontoDeInteresse = new PontoDeInteresseDO();
     PontoDeInteresse PontoDeInteressetr = new PontoDeInteresse();
     if (request.getParameter("submit")== null) {%>
-<FORM action="body_AlterarPOI.jsp" method="post">
+<FORM action="AlterarPOI.jsp" method="post">
 Nome:<BR><INPUT type="text" maxlenght="140" name="nome" value="" ><BR><BR>
 Descrição:<BR><INPUT type="text" maxlength="140" name="descrição" value= ""> <BR><BR>
 Endereço:<BR><INPUT type="text" name="endereço" value= ""><BR><BR>

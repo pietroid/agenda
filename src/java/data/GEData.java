@@ -85,7 +85,7 @@ public class GEData {
     } // atualizar
      
      
-    public List<GEDO> ListarGE(Transacao tr) throws Exception {
+    public List<GEDO> buscarTodos(Transacao tr) throws Exception {
         Connection con = tr.obterConexao();
         String sql = "select * from grupodeextensao";
         PreparedStatement ps = con.prepareStatement(sql);
@@ -103,15 +103,8 @@ public class GEData {
             i.setImagem(rs.getString("GEpasta_de_imagens"));            
             i.setTel(rs.getString("GEtel"));              
             i.setTipo(rs.getString("GEtipo"));               
-            
-            
             Items.add(i);
         }
         return Items;
-    } // pesquisar por GEid     
-     
-     
-     
-     
-     
+    }    
 }

@@ -1,5 +1,5 @@
 <%-- 
-    Document   : body_fotos
+    Document   : fotos
     Created on : 02/12/2016, 22:12:42
     Author     : Pedro
 --%>
@@ -9,9 +9,9 @@
 <font face="verdana">
 <h1><center>Fotos</center></h1>
 <BR><BR><BR>
-<img src ="../PastadeImagens/GrupodeExtensao1/Grupodeextensao1-imagem1.PNG" align ="left" width = 250 height =" 300" >
-<img src ="../PastadeImagens/GrupodeExtensao1/Grupodeextensao1-imagem 1.PNG" align = center width = 250 height =" 300" >
-<img src ="../PastadeImagens/GrupodeExtensao1/Grupodeextensao1-imagem1.PNG" align = right width = 250 height =" 300" >
+<img src ="PastadeImagens/GrupodeExtensao1/Grupodeextensao1-imagem1.PNG" align ="left" width = 250 height =" 300" >
+<img src ="PastadeImagens/GrupodeExtensao1/Grupodeextensao1-imagem 1.PNG" align = center width = 250 height =" 300" >
+<img src ="PastadeImagens/GrupodeExtensao1/Grupodeextensao1-imagem1.PNG" align = right width = 250 height =" 300" >
 <BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR>
 
 <table align=" left">

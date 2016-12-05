@@ -48,6 +48,21 @@ public class Seguindo {
 	return null;
     } // buscar
 
+    public List<EventoDO> pesquisarPorUSUid(int USUid) throws Exception{
+        Transacao tr = new Transacao();
+	try{
+            tr.beginReadOnly();
+  	    EventoData EventoData = new EventoData();
+	    List<EventoDO> i = EventoData.pesquisarPorEVEid(USUid, tr);
+            tr.commit();
+            return i;
+	} catch (Exception e) {
+            tr.rollback();
+            System.out.println("Erro ao listar ");  
+	}
+	return null;
+    }
+    
     private boolean isEmpty(String s) {
         if (null == s)
             return true;

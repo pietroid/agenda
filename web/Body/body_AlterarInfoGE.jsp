@@ -16,15 +16,15 @@
 
 
 <center>
-<% 
-    GEDO GE = new GEDO();
+<%
+    GEDO GE = (GEDO)session.getAttribute("GEDO");
     GE GEtr = new GE();
+    
     if (request.getParameter("submit")== null) {%>
-<FORM action="body_AlterarInfoGE.jsp" method="post">
+<FORM action="AlterarInfoGE.jsp" method="post">
 Nome:<BR><INPUT type="text" maxlenght="140" name="nome" value="" ><BR><BR>
 Descrição:<BR><INPUT type="text" maxlength="140" name="descrição" value= ""> <BR><BR>
 E-mail:<BR><INPUT type="text" name="email" value= ""><BR><BR>
-Local:<BR><INPUT type="text" name="local" value= ""><BR><BR>
 Ano:<BR><INPUT type="int" name="ano" value= ""><BR><BR>
 Site:<BR><INPUT type="text" name="site" value= ""><BR><BR>
 Facebook:<BR><INPUT type="text" name="face" value= ""><BR><BR>
@@ -39,7 +39,6 @@ Tipo:<BR><INPUT type="text" name="tipo" value= ""><BR><BR>
 if (request.getParameter("nome")!= null) GE.setNome(request.getParameter("nome"));
 if (request.getParameter("descrição")!= null) GE.setDescricao(request.getParameter("descrição"));
 if (request.getParameter("email")!= null) GE.setEmail(request.getParameter("email"));
-if (request.getParameter("local")!= null) GE.setLocal(request.getParameter("local"));
 if (request.getParameter("ano")!= null) GE.setAno(Integer.parseInt(request.getParameter("ano")));
 if (request.getParameter("site")!= null) GE.setSite(request.getParameter("site"));
 if (request.getParameter("face")!= null) GE.setFace(request.getParameter("face"));
@@ -50,7 +49,7 @@ if (request.getParameter("tipo")!= null) GE.setTipo(request.getParameter("tipo")
 }
 
 boolean update = GEtr.atualizar(GE);
-
+}
  %>
 </center>
 </body>
