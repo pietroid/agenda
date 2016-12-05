@@ -13,20 +13,20 @@ import java.sql.Date;
  */
 public class UsuarioDO {
     
- private int id;
+    private int id;
     private String username;
     private String senha;
     private String nome;
     private String email;
     private String bio;
-    private String imagem;
+    private String imagem="";
     private Date data;
     private String curso;
     private Date ingresso;
-    private String pasta;
-    private String pergunta;
-    private String resposta;
-    private boolean superUser;
+    private String pasta="";
+    private boolean superUser=false;
+    private String Pergunta;
+    private String Resposta;
 
     /**
      * @return the id
@@ -196,20 +196,21 @@ public class UsuarioDO {
         this.superUser = superUser;
     }
     public void setResposta(String resposta){
-    this.resposta = resposta;
+    this.Resposta = resposta;
     }
     
     public String getResposta(){
-    return this.resposta;
+            return Resposta;
     }
     
-    public void setPergunta(String pergunta){
-    this.pergunta = pergunta;
+    
+    
+    public String getPergunta(){
+            return Pergunta;
     }
     
-    public String pergunta(){
-    return this.pergunta;
+    public void setPergunta(String resposta){
+            this.Pergunta = resposta ;
     }
-    
     
 }

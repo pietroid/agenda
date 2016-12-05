@@ -49,5 +49,21 @@ public class GE {
 	return null;
     } // buscar
 
+  public boolean atualizar(GEDO GE) throws Exception {
+        Transacao tr = new Transacao();
+	try{
+            
+            tr.begin();
+                GEData GEData = new GEData();
+                GEData.atualizar(GE, tr);
+            tr.commit();
+            return true;
+	} catch (Exception e) {
+            tr.rollback();
+            System.out.println("Erro ao atualizar" + GE.getId());
+            e.printStackTrace();
+	}
+	return false;
+    }
 
 }

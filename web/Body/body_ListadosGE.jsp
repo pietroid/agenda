@@ -1,5 +1,12 @@
+<%@ page import="transacoes.GE" %>
+<%@ page import="data.GEDO" %>
+<%
+    GE getn = new GE();
+    GEDO ge = new GEDO();
+%>
 <html>
-<body BGCOLOR =#EAD1A4>
+<body BGCOLOR = #f2f2f2>
+<font face="verdana">
 <h1> <center>Grupos de Extensão <center></h1>
 
 <p>
@@ -14,17 +21,17 @@
 <tr>
   <td width=10% height=150 ><center><iframe src="../PastadeImagens/GrupodeExtensao1/Grupodeextensao1-imagem1.PNG" 
           scrolling= no width=120 height=150 ></iframe><center>
-  <td><center><a href="../GE.jsp" target=" _top">ThundeRatz</a><center>
+              <td><center><a href="../Body/body_GE.jsp" <% request.setAttribute("GEDO", getn.buscar(1)); %>>ThundeRatz</a><center>
 </tr>
 <tr>
   <td width=10% height=150 ><center><iframe src="../PastadeImagens/GrupodeExtensao2/Grupodeextensao2-imagem1.PNG" 
           scrolling= no width=120 height=150></iframe><center>
-  <td><center><a href="../GE.jsp" target=" _top">Poli Social</a><center><center>
+  <td><center><a href="../Body/body_GE.jsp" <% request.setAttribute("GEDO", getn.buscar(2)); %>>Poli Social</a><center><center>
 </tr>
 <tr>
   <td width=10% height=150 ><center><iframe src="../PastadeImagens/GrupodeExtensao3/Grupodeextensao3-imagem1.PNG" 
           scrolling= no width=120 height=150></iframe><center>
-  <td><center><a href="../GE.jsp" target=" _top">Matemática em Movimento</a><center><center>
+  <td><center><a href="../Body/body_GE.jsp" <% request.setAttribute("GEDO", getn.buscar(3)); %>>Matemática em Movimento</a><center><center>
 </tr>
 </table>
 <center>

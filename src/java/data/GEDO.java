@@ -11,13 +11,13 @@ public class GEDO {
  private int id;
     private String nome;
     private String descricao;
-    private Date ano;
+    private int ano;
     private String site;
     private String face;
     private String email;
     private String imagem;
     private String local;
-    private int tel;
+    private String tel;
     private String tipo;
 
     /**
@@ -65,14 +65,14 @@ public class GEDO {
     /**
      * @return the ano
      */
-    public Date getAno() {
+    public int getAno() {
         return ano;
     }
 
     /**
      * @param ano the ano to set
      */
-    public void setAno(Date ano) {
+    public void setAno(int ano) {
         this.ano = ano;
     }
 
@@ -149,14 +149,14 @@ public class GEDO {
     /**
      * @return the tel
      */
-    public int getTel() {
+    public String getTel() {
         return tel;
     }
 
     /**
      * @param tel the tel to set
      */
-    public void setTel(int tel) {
+    public void setTel(String tel) {
         this.tel = tel;
     }
 
@@ -173,5 +173,6 @@ public class GEDO {
     public void setTipo(String tipo) {
         this.tipo = tipo;
     }
+
 
 }

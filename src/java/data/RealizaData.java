@@ -19,10 +19,15 @@ public class RealizaData {
         Connection con = tr.obterConexao();
         String sql = "insert into agenda.realiza (GEid,EVEid) values (?,?)";
         PreparedStatement ps = con.prepareStatement(sql);
-        ps.setInt(2, realiza.getGEid());
-        ps.setInt(3, realiza.getEVEid());
-     
+        ps.setInt(1, realiza.getGEid());
+        ps.setInt(2, realiza.getEVEid());
         int result = ps.executeUpdate();
+        
+        sql= "SELECT LAST_INSERT_ID();";
+        ps = con.prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+        rs.first();
+        realiza.setId(rs.getInt("LAST_INSERT_ID()"));
     }// incluir
 
     public void excluir(RealizaDO realiza, Transacao tr) throws Exception {
@@ -49,6 +54,7 @@ public class RealizaData {
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setInt(1, REALid);
         ResultSet rs = ps.executeQuery();
+        rs.first();
         RealizaDO realiza = new RealizaDO();
         realiza.setId(rs.getInt("REALid"));
         realiza.setGEid(rs.getInt("GEid"));
@@ -62,7 +68,6 @@ public class RealizaData {
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setInt(1, GEid);
         ResultSet rs = ps.executeQuery();
-        System.out.println("Query executada");
         List<RealizaDO> Items = new ArrayList<RealizaDO>();
         while (rs.next()) {
             RealizaDO i = new RealizaDO();

@@ -68,5 +68,20 @@ public class Usuario {
             return null;
 	}
     }
-
+    public UsuarioDO buscarPorID(int id) throws Exception{
+        UsuarioDO usuario;
+        Transacao tr = new Transacao();
+        try{
+            tr.beginReadOnly();
+  	    UsuarioData dt = new UsuarioData();
+	    usuario = dt.buscarID( id, tr);
+            tr.commit();
+            return usuario;
+	} catch (Exception e) {
+            tr.rollback();
+            System.out.println("Ocorreu um erro durante a busca");
+            e.printStackTrace();
+            return null;
+	}
+    }
 }

@@ -5,6 +5,9 @@
  */
 package data;
 
+import java.sql.Time;
+import java.sql.Date;
+
 /**
  *
  * @author Convidado
@@ -12,24 +15,24 @@ package data;
 public class EventoDO {
     private int id;
     private String nome;
-    private String descrição;
+    private String descricao;
     private String tipo;
-    private int selo;
-    private int horaInicial;
-    private int horaFinal;
-    private int data;
+    private boolean macroEvento;
+    private Time HoraInicial;
+    private Time HoraFinal;
+    private Date data;
     private String pastaimagens;
     private int avaliação;
-    
+
     /**
-     * @return the nome
+     * @return the id
      */
     public int getId() {
         return id;
     }
 
     /**
-     * @param id the nome to set
+     * @param id the id to set
      */
     public void setId(int id) {
         this.id = id;
@@ -50,17 +53,17 @@ public class EventoDO {
     }
 
     /**
-     * @return the descrição
+     * @return the descricao
      */
-    public String getDescrição() {
-        return descrição;
+    public String getDescricao() {
+        return descricao;
     }
 
     /**
-     * @param descrição the descrição to set
+     * @param descricao the descricao to set
      */
-    public void setDescrição(String descrição) {
-        this.descrição = descrição;
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
     /**
@@ -78,58 +81,58 @@ public class EventoDO {
     }
 
     /**
-     * @return the selo
+     * @return the macroEvento
      */
-    public int getSelo() {
-        return selo;
+    public boolean getMacroEvento() {
+        return macroEvento;
     }
 
     /**
-     * @param selo the selo to set
+     * @param macroEvento the macroEvento to set
      */
-    public void setSelo(int selo) {
-        this.selo = selo;
+    public void setMacroEvento(boolean macroEvento) {
+        this.macroEvento = macroEvento;
     }
 
     /**
-     * @return the horaI
+     * @return the HoraInicial
      */
-    public int getHoraInicial() {
-        return horaInicial;
+    public Time getHoraInicial() {
+        return HoraInicial;
     }
 
     /**
-     * @param horaInicial the horaI to set
+     * @param HoraInicial the HoraInicial to set
      */
-    public void setHoraInicial(int horaInicial) {
-        this.horaInicial = horaInicial;
+    public void setHoraInicial(Time HoraInicial) {
+        this.HoraInicial = HoraInicial;
     }
 
     /**
-     * @return the horaF
+     * @return the HoraFinal
      */
-    public int getHoraFinal() {
-        return horaFinal;
+    public Time getHoraFinal() {
+        return HoraFinal;
     }
 
     /**
-     * @param horaFinal the horaF to set
+     * @param HoraFinal the HoraFinal to set
      */
-    public void setHoraFinal(int horaFinal) {
-        this.horaFinal = horaFinal;
+    public void setHoraFinal(Time HoraFinal) {
+        this.HoraFinal = HoraFinal;
     }
 
     /**
      * @return the data
      */
-    public int getData() {
+    public Date getData() {
         return data;
     }
 
     /**
      * @param data the data to set
      */
-    public void setData(int data) {
+    public void setData(Date data) {
         this.data = data;
     }
 
