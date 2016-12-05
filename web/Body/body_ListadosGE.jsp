@@ -1,3 +1,4 @@
+<%@page import="java.util.List"%>
 <%@ page import="transacoes.GE" %>
 <%@ page import="data.GEDO" %>
 <%
@@ -18,21 +19,26 @@
 <center>
 <table align="center" border=1 cellpadding=10 width=1000>
 <th>Imagem <th>Grupo de extensão
+<%   
+   
+   GE tr= new GE();
+   List<GEDO> Lista = tr.ListarGE();
+    
+   for(GEDO grupo: Lista){
+       String nome = grupo.getNome();
+       int id   = grupo.getId();
+ %>    
 <tr>
   <td width=10% height=150 ><center><iframe src="../PastadeImagens/GrupodeExtensao1/Grupodeextensao1-imagem1.PNG" 
           scrolling= no width=120 height=150 ></iframe><center>
-              <td><center><a href="../Body/body_GE.jsp" <% request.setAttribute("GEDO", getn.buscar(1)); %>>ThundeRatz</a><center>
+              <td><center><a href="../Body/body_GE.jsp" <% request.setAttribute("GEDO", id); %>><%=nome%></a><center>
 </tr>
-<tr>
-  <td width=10% height=150 ><center><iframe src="../PastadeImagens/GrupodeExtensao2/Grupodeextensao2-imagem1.PNG" 
-          scrolling= no width=120 height=150></iframe><center>
-  <td><center><a href="../Body/body_GE.jsp" <% request.setAttribute("GEDO", getn.buscar(2)); %>>Poli Social</a><center><center>
-</tr>
-<tr>
-  <td width=10% height=150 ><center><iframe src="../PastadeImagens/GrupodeExtensao3/Grupodeextensao3-imagem1.PNG" 
-          scrolling= no width=120 height=150></iframe><center>
-  <td><center><a href="../Body/body_GE.jsp" <% request.setAttribute("GEDO", getn.buscar(3)); %>>Matemática em Movimento</a><center><center>
-</tr>
+
+<%
+   }
+%>
+
+
 </table>
 <center>
     <BR>

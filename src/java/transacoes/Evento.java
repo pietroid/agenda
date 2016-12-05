@@ -49,6 +49,7 @@ public class Evento {
 	return false;
     }
     
+    
     public EventoDO buscar(int id) throws Exception{
         Transacao tr = new Transacao();
 	try{
@@ -76,6 +77,21 @@ public class Evento {
             tr.rollback();
             System.out.println("Erro ao buscar " + nome);
            
+	}
+	return null;
+    }
+    
+    public List<EventoDO> pesquisarPorEVEid(int EVEid) throws Exception{
+        Transacao tr = new Transacao();
+	try{
+            tr.beginReadOnly();
+  	    EventoData EventoData = new EventoData();
+	    List<EventoDO> i = EventoData.pesquisarPorEVEid(EVEid, tr);
+            tr.commit();
+            return i;
+	} catch (Exception e) {
+            tr.rollback();
+            System.out.println("Erro ao listar ");  
 	}
 	return null;
     }

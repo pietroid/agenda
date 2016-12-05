@@ -66,4 +66,32 @@ public class GE {
 	return false;
     }
 
+  
+    public List<GEDO> ListarGE() throws Exception{
+        Transacao tr = new Transacao();
+	try{
+            tr.beginReadOnly();
+  	    GEData GEData = new GEData();
+	    List<GEDO> i = GEData.ListarGE(tr);
+            tr.commit();
+            return i;
+	} catch (Exception e) {
+            tr.rollback();
+            System.out.println("Erro");
+            e.printStackTrace();
+	}
+	return null;
+    } // buscar
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 }

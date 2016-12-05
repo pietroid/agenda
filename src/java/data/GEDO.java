@@ -16,7 +16,6 @@ public class GEDO {
     private String face;
     private String email;
     private String imagem;
-    private String local;
     private String tel;
     private String tipo;
 
@@ -132,19 +131,6 @@ public class GEDO {
         this.imagem = imagem;
     }
 
-    /**
-     * @return the local
-     */
-    public String getLocal() {
-        return local;
-    }
-
-    /**
-     * @param local the local to set
-     */
-    public void setLocal(String local) {
-        this.local = local;
-    }
 
     /**
      * @return the tel
