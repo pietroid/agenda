@@ -23,6 +23,12 @@ public class UsuarioData {
         ps.setString(12, usuario.getPergunta());
         ps.setString(13, usuario.getResposta());
         int result = ps.executeUpdate();
+        
+        sql= "SELECT LAST_INSERT_ID();";
+        ps = con.prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+        rs.first();
+        usuario.setId(rs.getInt("LAST_INSERT_ID()"));
     }
     public UsuarioDO buscar(String username, Transacao tr) throws Exception {
         Connection con = tr.obterConexao();

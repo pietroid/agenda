@@ -112,8 +112,8 @@
             Usuario usdat=new Usuario();
             if(usdat.incluir(usuario)){
                 %> <font face="verdana">
-<h2><center>Cadastro bem sucedido!<center></h2> 
-            <BR><a href="body_LoginOut.jsp" target="_top">Fazer login</a><%
+<h2><center>Cadastro bem sucedido! id=<%=usuario.getId()%><center></h2> 
+            <BR><a href="LoginOut.jsp" target="_top">Fazer login</a><%
             }
         }
 }

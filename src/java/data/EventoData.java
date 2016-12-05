@@ -24,10 +24,16 @@ public class EventoData {
         ps.setTime(4,evento.getHoraInicial());
         ps.setTime(5,evento.getHoraFinal());
         ps.setDate(6, evento.getData());
-        ps.setInt(7, evento.getMacroEvento());
-        ps.setString(8, "");
-        ps.setInt(9, 2);
+        ps.setInt(7, boolToInt(evento.getMacroEvento()));
+        ps.setString(8,"evento");
+        ps.setInt(9, evento.getAvaliação());
         int result = ps.executeUpdate();
+        
+        sql= "SELECT LAST_INSERT_ID();";
+        ps = con.prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+        rs.first();
+        evento.setId(rs.getInt("LAST_INSERT_ID()"));
     }// incluir
 
     public void excluir(EventoDO evento, Transacao tr) throws Exception {
@@ -39,20 +45,21 @@ public class EventoData {
     } // excluir
 
   public void atualizar(EventoDO evento, Transacao tr) throws Exception {
-        Connection con = tr.obterConexao();
-        String sql = "update evento set EVEnome=?, EVEdescricao=?, EVEtipo=?, EVEmacro_evento=?, EVEhorario_de_inicio=?, EVEhorario_de_termino=?, EVEdata=?, EVEpasta_de_imagens=?, EVEavaliacao=?  where EVEid=?";
-        PreparedStatement ps = con.prepareStatement(sql);
-        ps.setString(1, evento.getNome());
-        ps.setString(2, evento.getDescricao());
-        ps.setString(3, evento.getTipo());
-        ps.setInt(4, evento.getMacroEvento());
-        ps.setTime(5, evento.getHoraInicial());
-        ps.setTime(6, evento.getHoraFinal());
-        ps.setDate(7, evento.getData());
-        ps.setString(8, evento.getPastaimagens());
-        ps.setInt(9, evento.getAvaliação());
-        ps.setInt(10, evento.getId());
-        int result = ps.executeUpdate(); 
+     Connection con = tr.obterConexao();
+     String sql = "update evento set EVEnome=?, EVEdescricao=?, EVEtipo=?, EVEmacro_evento=?, EVEhorario_de_inicio=?, EVEhorario_de_termino=?, EVEdata=?, EVEpasta_de_imagens=?, EVEavaliacao=?  where EVEid=?";
+     PreparedStatement ps = con.prepareStatement(sql);
+     ps.setString(1, evento.getNome());
+     ps.setString(2, evento.getDescricao());
+     ps.setString(3, evento.getTipo());
+     ps.setInt(4, boolToInt(evento.getMacroEvento()));
+     ps.setTime(5, evento.getHoraInicial());
+     ps.setTime(6, evento.getHoraFinal());
+     ps.setDate(7, evento.getData());
+     ps.setString(8, evento.getPastaimagens());
+     ps.setInt(9, evento.getAvaliação());
+     ps.setInt(10, evento.getId());
+     
+     int result = ps.executeUpdate(); 
     } // atualizar
 
     public EventoDO buscar(int id, Transacao tr) throws Exception {
@@ -70,7 +77,6 @@ public class EventoData {
         evento.setHoraInicial(rs.getTime("EVEhorario_de_inicio"));
         evento.setHoraFinal(rs.getTime("EVEhorario_de_termino"));
         evento.setData(rs.getDate("EVEdata"));
-        evento.setMacroEvento(rs.getInt("EVEmacro_evento"));
         evento.setPastaimagens(rs.getString("EVEpasta_de_imagens"));
         evento.setAvaliação(rs.getInt("EVEavaliacao"));
         return evento;
@@ -91,10 +97,17 @@ public class EventoData {
         evento.setHoraInicial(rs.getTime("EVEhorario_de_inicio"));
         evento.setHoraFinal(rs.getTime("EVEhorario_de_termino"));
         evento.setData(rs.getDate("EVEdata"));
-        evento.setMacroEvento(rs.getInt("EVEmacro_evento"));
+        evento.setMacroEvento(rs.getInt("EVEmacro_evento")==1);
         evento.setPastaimagens(rs.getString("EVEpasta_de_imagens"));
         evento.setAvaliação(rs.getInt("EVEavaliacao"));
         return evento;
+    }
+    private int boolToInt(boolean value){
+        if(value){
+            return 1;
+        }else{
+            return 0;
+        }
     }
  
 }
