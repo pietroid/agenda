@@ -73,5 +73,22 @@ public class PontoDeInteresse {
             return true;
         return false;
     }
+    
+    public List<PontoDeInteresseDO> ListarPOI() throws Exception{
+        Transacao tr = new Transacao();
+	try{
+            tr.beginReadOnly();
+  	    PontoDeInteresseData PontoDeInteresseData = new PontoDeInteresseData();
+	    List<PontoDeInteresseDO> i = PontoDeInteresseData.ListarPOI(tr);
+            tr.commit();
+            return i;
+	} catch (Exception e) {
+            tr.rollback();
+            System.out.println("Erro");
+            e.printStackTrace();
+	}
+	return null;
+    } // buscar
+    
 
 }
