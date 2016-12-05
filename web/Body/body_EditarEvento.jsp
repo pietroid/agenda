@@ -72,7 +72,7 @@
                 <%
             }
             boolean macro = evento.getMacroEvento();
-            if(macro){
+            if(!macro){
     %>
     <div align = "left|justify">
         <form action = "EditarEvento.jsp" method = "post">
@@ -96,7 +96,7 @@
     </div>
     <% 
             }
-            if(!macro){
+            if(macro){
     %>
     <div align = "left|justify">
         <form action = "EditarEvento.jsp" method = "post">
