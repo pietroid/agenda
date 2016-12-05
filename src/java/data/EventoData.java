@@ -102,6 +102,29 @@ public class EventoData {
         evento.setAvaliação(rs.getInt("EVEavaliacao"));
         return evento;
     }
+    public List<EventoDO> pesquisarPorEVEid(int EVEid, Transacao tr) throws Exception {
+        Connection con = tr.obterConexao();
+        String sql = "select * from agenda.Evento where GEid = ?";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setInt(1, EVEid);
+        ResultSet rs = ps.executeQuery();
+        List<EventoDO> Items = new ArrayList<EventoDO>();
+        while (rs.next()) {
+            EventoDO i = new EventoDO();
+            i.setId (rs.getInt("EVEid"));
+            i.setNome (rs.getString("EVEnome"));
+            i.setDescricao (rs.getString("EVEdescricao"));
+            i.setTipo (rs.getString("EVEtipo"));
+            i.setHoraInicial(rs.getTime("EVEhorario_de_inicio"));
+            i.setHoraFinal(rs.getTime("EVEhorario_de_termino"));
+            i.setData(rs.getDate("EVEdata"));
+            i.setMacroEvento(rs.getInt("EVEmacro_evento")==1);
+            i.setPastaimagens(rs.getString("EVEpasta_de_imagens"));
+            i.setAvaliação(rs.getInt("EVEavaliacao"));
+            Items.add(i);
+        }
+        return Items;
+    }
     
     public List<EventoDO> buscarData(java.sql.Date data, Transacao tr) throws Exception {
         Connection con = tr.obterConexao();
