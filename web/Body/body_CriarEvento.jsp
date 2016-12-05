@@ -1,7 +1,7 @@
 <%-- 
     Document   : CriarEvento
-    Created on : 02/12/2016, 17:36:54
-    Author     : fernandohitoshiwatanabe
+    Created on : 05/12/2016, 19:15:54
+    Author     : Marcus
 --%>
 
 <%@page import="java.sql.Time"%>
@@ -158,10 +158,12 @@
         </FORM>
         <BR><BR>
     </div>
+    
     <%  
             }
             if((action != null) && action.equals ("macro")){
     %>
+    
     <div align = "left|justify">
         <FORM action = "CriarEvento.jsp" method = "post">
             Nome do Evento:
@@ -180,9 +182,11 @@
         </FORM>
         <BR><BR>
     </div>
+    
     <%  
             }
         }
     %>
+    
     </body>
 </html>
