@@ -80,6 +80,22 @@ public class Evento {
 	return null;
     }
     
+    public List<EventoDO> buscarData(java.sql.Date data) throws Exception{
+        Transacao tr = new Transacao();
+	try{
+            tr.beginReadOnly();
+  	    EventoData EventoData = new EventoData();
+	    List<EventoDO> i = EventoData.buscarData(data, tr);
+            tr.commit();
+            return i;
+	} catch (Exception e) {
+            tr.rollback();
+            System.out.println("Erro ao buscar " + data);
+           
+	}
+	return null;
+    }    
+    
     public boolean excluir(EventoDO evento) throws Exception{
         Transacao tr = new Transacao();
 	try{
