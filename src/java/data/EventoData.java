@@ -104,7 +104,7 @@ public class EventoData {
     }
     public List<EventoDO> pesquisarPorEVEid(int EVEid, Transacao tr) throws Exception {
         Connection con = tr.obterConexao();
-        String sql = "select * from agenda.Membro where GEid = ?";
+        String sql = "select * from agenda.Evento where GEid = ?";
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setInt(1, EVEid);
         ResultSet rs = ps.executeQuery();
