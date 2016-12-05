@@ -10,6 +10,7 @@
 <%@page import="data.ComentarioDO"%>
 <%@page import="transacoes.Comentario"%>
 <%@page import="java.util.List"%>
+<%@ page import="java.util.*" %>
 <%@ page import="java.util.Vector" %>
 <!DOCTYPE html>
 <html>
