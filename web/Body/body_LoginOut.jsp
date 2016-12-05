@@ -17,7 +17,7 @@ if (request.getParameter("submit") != null){
     Usuario tru = new Usuario();
     usuario=tru.buscarPorUsername(request.getParameter("login"));
     if (usuario!=null && usuario.getSenha().equals(request.getParameter("senha"))){
-        session.setAttribute("Usuario", usuario);  //Decidir com os demais   
+        session.setAttribute("Usuario", usuario);
         pageContext.forward("body_Perfil.jsp");
     }
     else

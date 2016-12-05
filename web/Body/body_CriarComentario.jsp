@@ -22,13 +22,37 @@
     <font face="verdana">
     <BR>
     <center>
+    
+    <%
+    //Verifica se o usuário está logado
+    if (session.getAttribute("Usuario")!=null){
+        if (request.getParameter("submit") != null && request.getParameter("comentario") != null){
+            //ComentarioDO c;
+            //Comentario trc = new Comentario();
+            //c=trc.inserir(request.getParameter("login"));
+            //session.setAttribute("Comentario", comentario); //Falta criar um objeto comentario
+            //pageContext.forward("body_Evento.jsp");
+        }
+        else{
+    %>
+    Você precisa estar logado para escrever um comentário.
+    <%}
+        }
+    }
+    %>
+    
     Digite seu comentário:
     <form>
 	<textarea rows="10" cols="55" maxlength="1000"></textarea>
     </center>
-    <INPUT type="submit" name="Enviar comentário" value= "Enviar Comentário">   
-    <INPUT type="reset" name="Cancelar" value= "Cancelar">
+    <INPUT type="submit" name="comentario" value= "Enviar Comentário">   
+    <INPUT type="reset" name="cancelar" value= "Cancelar">
 	</form><BR>
 </center>    
 </body>
 </html>
+<% 
+        
+    }
+%>
+}
