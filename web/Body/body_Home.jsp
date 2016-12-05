@@ -1,10 +1,14 @@
+
 <html>
 <body BGCOLOR = #f2f2f2>
 <font face="verdana">
 
+<%@page import="data.EventoDO"%>
 <%@ page import="transacoes.Usuario" %>
 <%@ page import="data.UsuarioDO" %>
 <%@ page import="java.util.Vector" %>
+<%@ page import="transacoes.Seguindo" %>
+<%@ page import="data.SeguindoDO" %>
 
 <%
     if(session.getAttribute("Usuario")!= null) //HOME LOGADO
@@ -21,6 +25,19 @@
  para ver uma lista com todos os Grupos de Extensão</a></font></p> 
 
 <%@include  file="Calendario/body_Calendario.jsp"%>
+<%
+    SeguindoDO seguindo = new SeguindoDO();
+    Seguindo seguindotn = new Seguindo();
+    List<EventoDO> lista = seguindotn.pesquisarPorUSUid(usuario.getId());
+    for (EventoDO evento : lista){ %>
+    <tr>
+        <td> <%=evento.getNome() %> </td>
+        
+    </tr>
+    
+    <%}
+
+%>
 
 
 <%    
