@@ -10,6 +10,10 @@
 <%@ page import="data.EventoDO" %>
 <%@ page import="transacoes.Pertence" %>
 <%@ page import="data.PertenceDO" %>
+<%@ page import="transacoes.GE" %>
+<%@ page import="data.GEDO" %>
+<%@ page import="transacoes.Realiza" %>
+<%@ page import="data.RealizaDO" %>
 <%@ page import="java.util.*" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -33,22 +37,28 @@
         }
         else{
             String action = request.getParameter("Eve");
+            boolean campospreenchidos = true;
+            boolean ok = false;
             Evento eventotn = new Evento();
             EventoDO evento = new EventoDO();
+            GEDO ge = (GEDO)request.getAttribute("GEDO");
+            GE getn = new GE();
+            RealizaDO realiza = new RealizaDO();
+            Realiza realizatn = new Realiza();
             Pertence pertencetn = new Pertence();
             PertenceDO pertence = new PertenceDO();
             if (request.getParameter("submit").equals("Enviar micro")){
-                if (request.getParameter("EVEnome") != null && 
-                    request.getParameter("EVEdescricao") != null && 
-                    request.getParameter("EVEtipo") != null &&
-                    request.getParameter("EVEhoraI") != null && 
-                    request.getParameter("EVEminI") != null && 
-                    request.getParameter("EVEhoraT") != null && 
-                    request.getParameter("EVEminT") != null && 
-                    request.getParameter("EVEdataD") != null &&
-                    request.getParameter("EVEdataM") != null &&
-                    request.getParameter("EVEdataY") != null &&
-                    request.getParameter("EVEmacro_evento") != null)
+                if (request.getParameter("EVEnome") != null && !(request.getParameter("EVEnome").equals("")) &&
+                    request.getParameter("EVEdescricao") != null && !(request.getParameter("EVEnome").equals("")) &&
+                    request.getParameter("EVEtipo") != null && !(request.getParameter("EVEnome").equals("")) &&
+                    request.getParameter("EVEhoraI") != null && !(request.getParameter("EVEnome").equals("")) &&
+                    request.getParameter("EVEminI") != null && !(request.getParameter("EVEnome").equals("")) &&
+                    request.getParameter("EVEhoraT") != null && !(request.getParameter("EVEnome").equals("")) &&
+                    request.getParameter("EVEminT") != null && !(request.getParameter("EVEnome").equals("")) &&
+                    request.getParameter("EVEdataD") != null && !(request.getParameter("EVEnome").equals("")) &&
+                    request.getParameter("EVEdataM") != null && !(request.getParameter("EVEnome").equals("")) &&
+                    request.getParameter("EVEdataY") != null && !(request.getParameter("EVEnome").equals("")) &&
+                    request.getParameter("EVEmacro_evento") != null && !(request.getParameter("EVEnome").equals("")))
                 {
                     evento.setNome(request.getParameter("EVEnome"));
                     evento.setDescricao(request.getParameter("EVEdescricao"));
@@ -57,35 +67,36 @@
                     evento.setHoraFinal(new Time(Integer.valueOf(request.getParameter("EVEhoraT")), Integer.valueOf(request.getParameter("EVEminT")), 0));
                     evento.setData(new Date(Integer.valueOf(request.getParameter("EVEdataD")), Integer.valueOf(request.getParameter("EVEdataM")), Integer.valueOf(request.getParameter("EVEdataY"))));
                     evento.setMacroEvento(1);
-                    boolean ok = eventotn.incluir(evento);
-                    if (ok == true && eventotn.buscarNome("EVEmacro_evento") != null){
-                        EventoDO macro = eventotn.buscarNome("EVEmacro_evento");
-                        pertence.setMicroId(eventotn.buscarNome(evento.getNome()).getId());
-                        pertence.setMacroId(macro.getId());
-                        boolean pertenceok = pertencetn.incluir(pertence);
+                    ok = eventotn.incluir(evento);
+                    if (ok == true){
+                        /*if (ge != null){
+                            realiza.setEVEid(eventotn.buscarNome(evento.getNome()).getId());
+                            realiza.setGEid(ge.getId());
+                            boolean realizaok = realizatn.incluir(realiza);
+                        }*/
+                        if (eventotn.buscarNome(request.getParameter("EVEmacro_evento")) != null){
+                            EventoDO macro = eventotn.buscarNome(request.getParameter("EVEmacro_evento"));
+                            pertence.setMicroId(eventotn.buscarNome(evento.getNome()).getId());
+                            pertence.setMacroId(macro.getId());
+                            boolean pertenceok = pertencetn.incluir(pertence);
+                        }
                     }
                 }
                 else{
-                %>
-                    
-                <center>
-                    Preencher todos os campos!
-                </center>
-                
-                <%
+                    campospreenchidos = false;
                 }
             }
             if (request.getParameter("submit").equals("Enviar macro")){
-                if (request.getParameter("EVEnome") != null && 
-                    request.getParameter("EVEdescricao") != null && 
-                    request.getParameter("EVEtipo") != null &&
-                    request.getParameter("EVEhoraI") != null && 
-                    request.getParameter("EVEminI") != null && 
-                    request.getParameter("EVEhoraT") != null && 
-                    request.getParameter("EVEminT") != null && 
-                    request.getParameter("EVEdataD") != null &&
-                    request.getParameter("EVEdataM") != null &&
-                    request.getParameter("EVEdataY") != null)
+                if (request.getParameter("EVEnome") != null && !(request.getParameter("EVEnome").equals("")) &&
+                    request.getParameter("EVEdescricao") != null && !(request.getParameter("EVEnome").equals("")) &&
+                    request.getParameter("EVEtipo") != null && !(request.getParameter("EVEnome").equals("")) &&
+                    request.getParameter("EVEhoraI") != null && !(request.getParameter("EVEnome").equals("")) &&
+                    request.getParameter("EVEminI") != null && !(request.getParameter("EVEnome").equals("")) &&
+                    request.getParameter("EVEhoraT") != null && !(request.getParameter("EVEnome").equals("")) &&
+                    request.getParameter("EVEminT") != null && !(request.getParameter("EVEnome").equals("")) &&
+                    request.getParameter("EVEdataD") != null && !(request.getParameter("EVEnome").equals("")) &&
+                    request.getParameter("EVEdataM") != null && !(request.getParameter("EVEnome").equals("")) &&
+                    request.getParameter("EVEdataY") != null && !(request.getParameter("EVEnome").equals("")))
                 {
                     evento.setNome(request.getParameter("EVEnome"));
                     evento.setDescricao(request.getParameter("EVEdescricao"));
@@ -94,11 +105,38 @@
                     evento.setHoraFinal(new Time(Integer.valueOf(request.getParameter("EVEhoraT")), Integer.valueOf(request.getParameter("EVEminT")), 0));
                     evento.setData(new Date(Integer.valueOf(request.getParameter("EVEdataD")), Integer.valueOf(request.getParameter("EVEdataM")), Integer.valueOf(request.getParameter("EVEdataY"))));
                     evento.setMacroEvento(0);
-                    boolean ok = eventotn.incluir(evento);
+                    ok = eventotn.incluir(evento);
+                    if (ok == true){
+                        /*if (ge != null){
+                            realiza.setEVEid(eventotn.buscarNome(evento.getNome()).getId());
+                            realiza.setGEid(ge.getId());
+                            boolean realizaok = realizatn.incluir(realiza);
+                        }*/
+                    }
+                }
+                else{
+                    campospreenchidos = false;
                 }
             }
-            if(action != null){
-                if(action.equals("micro")){
+            if (campospreenchidos == false){
+                %>
+
+                <center>
+                    Preencher todos os campos!
+                </center>
+
+                <%
+            }
+            if (ok == true){
+                %>
+
+                    <center>
+                        Evento criado com sucesso.
+                    </center>
+
+                <%
+            }
+            if(action.equals("micro")){
     %>
     <div align = "left|justify">
         <FORM action = "body_CriarEvento.jsp" method = "post">
@@ -121,8 +159,8 @@
         <BR><BR>
     </div>
     <%  
-                }
-                if(action.equals ("macro")){
+            }
+            if(action.equals ("macro")){
     %>
     <div align = "left|justify">
         <FORM action = "body_CriarEvento.jsp" method = "post">
@@ -143,7 +181,6 @@
         <BR><BR>
     </div>
     <%  
-                } 
             }
         }
     %>
