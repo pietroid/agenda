@@ -6,7 +6,12 @@
 <font face="verdana">
 <h1><center>Cadastro Grupo de Extensão<center></h1>
 <BR>
-<FORM action="body_LoginOut.jsp" method="post">
+
+
+    <% 
+if (request.getParameter("submit") == null){
+    %>
+<FORM action="body_Cadastro_GE.jsp" method="post">
     
     Nome grupo:<BR>
     <INPUT type="text" name="nome"><BR><BR>
@@ -26,11 +31,14 @@
     <INPUT type="text" name="descricao"><BR><BR>
     Local do grupo (dentro da POLI)<BR>
     <INPUT type="text" name="local"><BR><BR>
+    <INPUT type="submit" name="submit" value="Submit">
+    <INPUT type="reset" name="reset" value="Reset">
+
+
+
     
     Foto?!?!?!?<BR><BR>
-    
-    
-    <INPUT type="submit" name="submit" value="Submit">
+    <% }%>
     
     <% 
 if (request.getParameter("submit") != null){
@@ -45,6 +53,10 @@ if (request.getParameter("submit") != null){
     grupo.setAno(Integer.parseInt(request.getParameter("ano")));
     GE novo=new GE();
     novo.incluir(grupo);
+    %>
+    Cadastro efetuado com sucesso!  <BR>
+    Espere a confirmação de um de nossos administradores.
+    <%
 }
 %>
     
@@ -53,7 +65,7 @@ if (request.getParameter("submit") != null){
     
     
     
-    <INPUT type="reset" name="reset" value="Reset">
+
   
 
 </body>
