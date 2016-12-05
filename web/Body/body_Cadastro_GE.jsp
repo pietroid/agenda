@@ -7,7 +7,7 @@
 <h1><center>Cadastro Grupo de Extensão<center></h1>
 <BR>
 <FORM action="body_LoginOut.jsp" method="post">
-  
+    
     Nome grupo:<BR>
     <INPUT type="text" name="nome"><BR><BR>
     Tipo/finalidade:<BR>

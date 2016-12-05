@@ -14,6 +14,7 @@ import utils.Transacao;
  * @author LUIS FELIPE
  */
 public class AconteceData {
+
     public void incluir(AconteceDO acontece, Transacao tr) throws Exception {
         Connection con = tr.obterConexao();
         String sql = "insert into agenda.acontece (EVEid,POI_id) values (?,?)";
@@ -49,5 +50,4 @@ public class AconteceData {
         acontece.setPOI_id(rs.getInt("POI_id"));
         return acontece;
     } // buscar
-    
 }
