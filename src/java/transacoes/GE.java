@@ -67,12 +67,12 @@ public class GE {
     }
 
   
-    public List<GEDO> ListarGE() throws Exception{
+    public List<GEDO> buscarTodos() throws Exception{
         Transacao tr = new Transacao();
 	try{
             tr.beginReadOnly();
   	    GEData GEData = new GEData();
-	    List<GEDO> i = GEData.ListarGE(tr);
+	    List<GEDO> i = GEData.buscarTodos(tr);
             tr.commit();
             return i;
 	} catch (Exception e) {
