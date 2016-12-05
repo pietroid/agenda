@@ -48,6 +48,23 @@ public class PontoDeInteresse {
 	}
 	return null;
     } // buscar
+    
+      public boolean atualizar(PontoDeInteresseDO PontoDeInteresse) throws Exception {
+        Transacao tr = new Transacao();
+	try{
+            
+            tr.begin();
+                PontoDeInteresseData PontoDeInteresseData = new PontoDeInteresseData();
+                PontoDeInteresseData.atualizar(PontoDeInteresse, tr);
+            tr.commit();
+            return true;
+	} catch (Exception e) {
+            tr.rollback();
+            System.out.println("Erro ao atualizar" + PontoDeInteresse.getId());
+            e.printStackTrace();
+	}
+	return false;
+    }
 
     private boolean isEmpty(String s) {
         if (null == s)
