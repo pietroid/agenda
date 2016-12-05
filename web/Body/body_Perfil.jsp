@@ -48,11 +48,13 @@
     }
     
     //Notificacao para usuario ADM
-    if (LiderGE==1){
 %>
     <p><font size="3" face="verdana">Notificações:</p>
     <table align="cente" border=3    cellpadding = 10 width=1000   >
         <tr>
+            <%
+              //  for (NotificacaoGeralDO notificacao:ListaNotificacao)
+            %>
             <th>Eventos Cancelados</th>
             <td>
                 <table>
@@ -75,7 +77,7 @@
         </tr>
     </table>
 <%
-}
+
 %>
 
 <h2> Calendário </h2>
