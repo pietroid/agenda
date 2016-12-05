@@ -80,6 +80,7 @@ public class EventoData {
         Connection con = tr.obterConexao();
         String sql = "select * from evento where EVEnome = ?";
         PreparedStatement ps = con.prepareStatement(sql);
+        ps.setString(1, nome);
         ResultSet rs = ps.executeQuery();
         rs.first();
         EventoDO evento = new EventoDO();
