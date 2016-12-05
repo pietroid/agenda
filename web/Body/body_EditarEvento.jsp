@@ -4,6 +4,8 @@
     Author     : Marcus;
 --%>
 
+<%@page import="java.sql.Time"%>
+<%@page import="java.sql.Date"%>
 <%@ page import="transacoes.Evento" %>
 <%@ page import="transacoes.Pertence" %>
 <%@ page import="data.PertenceDO" %>
@@ -26,13 +28,40 @@
         int EVEid = 1;
         Evento eventotn = new Evento();
         EventoDO evento = new EventoDO();
+        Pertence pertencetn = new Pertence();
+        PertenceDO pertence = new PertenceDO();
         evento = eventotn.buscar(EVEid);
-        EventoDO macro = eventotn.buscarNome(evento.getMacroEvento());
-        String macroNome = macro.getNome();
-        if(macroNome != null){
+        if (request.getParameter("submit1") != null){
+            if (request.getParameter("EVEnome") != null) evento.setNome(request.getParameter("EVEnome"));
+            if (request.getParameter("EVEdescricao") != null) evento.setDescricao(request.getParameter("EVEdescricao"));
+            if (request.getParameter("EVEtipo") != null) evento.setTipo(request.getParameter("EVEtipo"));
+            if (request.getParameter("EVEhoraI") != null && request.getParameter("EVEminI") != null) evento.setHoraInicial(new Time(Integer.valueOf(request.getParameter("EVEhoraI")), Integer.valueOf(request.getParameter("EVEminI")), 0));
+            if (request.getParameter("EVEhoraT") != null && request.getParameter("EVEminT") != null) evento.setHoraFinal(new Time(Integer.valueOf(request.getParameter("EVEhoraT")), Integer.valueOf(request.getParameter("EVEminT")), 0));
+            if (request.getParameter("EVEdataD") != null && request.getParameter("EVEdataM") != null && request.getParameter("EVEdataY") != null) evento.setData(new Date(Integer.valueOf(request.getParameter("EVEdataD")), Integer.valueOf(request.getParameter("EVEdataM")), Integer.valueOf(request.getParameter("EVEdataY"))));
+            if (request.getParameter("EVEmacro_evento") != null){
+                EventoDO macro2 = eventotn.buscarNome("EVEmacro_evento");
+                if (macro2 != null){
+                    pertence = pertencetn.buscar(evento.getId());
+                    pertence.setMacroId(macro2.getId());
+                    boolean updatepertence = pertencetn.atualizar(pertence);
+                }
+            }
+            boolean updateevento = eventotn.atualizar(evento);
+        }
+        if (request.getParameter("submit2") != null){
+            if (request.getParameter("EVEnome") != null) evento.setNome(request.getParameter("EVEnome"));
+            if (request.getParameter("EVEdescricao") != null) evento.setDescricao(request.getParameter("EVEdescricao"));
+            if (request.getParameter("EVEtipo") != null) evento.setTipo(request.getParameter("EVEtipo"));
+             if (request.getParameter("EVEhoraI") != null && request.getParameter("EVEminI") != null) evento.setHoraInicial(new Time(Integer.valueOf(request.getParameter("EVEhoraI")), Integer.valueOf(request.getParameter("EVEminI")), 0));
+            if (request.getParameter("EVEhoraT") != null && request.getParameter("EVEminT") != null) evento.setHoraFinal(new Time(Integer.valueOf(request.getParameter("EVEhoraT")), Integer.valueOf(request.getParameter("EVEminT")), 0));
+            if (request.getParameter("EVEdataD") != null && request.getParameter("EVEdataM") != null && request.getParameter("EVEdataY") != null) evento.setData(new Date(Integer.valueOf(request.getParameter("EVEdataD")), Integer.valueOf(request.getParameter("EVEdataM")), Integer.valueOf(request.getParameter("EVEdataY"))));
+            boolean update = eventotn.atualizar(evento);
+        }
+        int macro = evento.getMacroEvento();
+        if(macro == 1){
     %>
     <div align = "left|justify">
-        <FORM action="http://www.google.com.br/formtest" method="post">
+        <form action = "body_EditarEvento.jsp" methd = "post">
             Nome do Evento:
             <INPUT type="text" name="EVEnome" maxlength = "30"><BR>
             Descrição:
@@ -52,21 +81,8 @@
         <BR><BR>
     </div>
     <% 
-            if (request.getParameter("submit1") != null){
-                if (request.getParameter("EVEnome") != null) evento.setNome(request.getParameter("EVEnome"));
-                if (request.getParameter("EVEdescricao") != null) evento.setDescricao(request.getParameter("EVEdescricao"));
-                if (request.getParameter("EVEtipo") != null) evento.setTipo(request.getParameter("EVEtipo"));
-                if (request.getParameter("EVEhoraI") != null && request.getParameter("EVEminI") != null) evento.setHoraInicial(request.getParameter("EVEhoraI") + ":" + request.getParameter("EVEminI"));
-                if (request.getParameter("EVEhoraT") != null && request.getParameter("EVEminT") != null) evento.setHoraFinal(request.getParameter("EVEhoraT") + ":" + request.getParameter("EVEminT"));
-                if (request.getParameter("EVEdataD") != null && request.getParameter("EVEdataM") != null && request.getParameter("EVEdataY") != null) evento.setData(request.getParameter("EVEdataD") + "/" + request.getParameter("EVEdataM") + "/" + request.getParameter("EVEdataY"));
-                if (request.getParameter("EVEmacro_evento") != null){
-                    EventoDO macro2 = eventotn.buscarNome("EVEmacro_evento");
-                    evento.setMacroEvento(macro.getNome());
-                }
-                boolean update = eventotn.atualizar(evento);
-            }
         }
-        if(macroNome == null){
+        if(macro == 0){
     %>
     <div align = "left|justify">
         <FORM action="http://www.google.com.br/formtest" method="post">
@@ -87,15 +103,6 @@
         <BR><BR>
     </div>
     <% 
-            if (request.getParameter("submit2") != null){
-                if (request.getParameter("EVEnome") != null) evento.setNome(request.getParameter("EVEnome"));
-                if (request.getParameter("EVEdescricao") != null) evento.setDescricao(request.getParameter("EVEdescricao"));
-                if (request.getParameter("EVEtipo") != null) evento.setTipo(request.getParameter("EVEtipo"));
-                if (request.getParameter("EVEhoraI") != null && request.getParameter("EVEminI") != null) evento.setHoraInicial(request.getParameter("EVEhoraI") + ":" + request.getParameter("EVEminI"));
-                if (request.getParameter("EVEhoraT") != null && request.getParameter("EVEminT") != null) evento.setHoraFinal(request.getParameter("EVEhoraT") + ":" + request.getParameter("EVEminT"));
-                if (request.getParameter("EVEdataD") != null && request.getParameter("EVEdataM") != null && request.getParameter("EVEdataY") != null) evento.setData(request.getParameter("EVEdataD") + "/" + request.getParameter("EVEdataM") + "/" + request.getParameter("EVEdataY"));
-                boolean update = eventotn.atualizar(evento);
-            }
         }
     %>
     </body>
