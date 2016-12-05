@@ -11,7 +11,7 @@ package data;
  */
 public class PontoDeInteresseDO {
     
-    private int POI_id;
+    private int id;
     private String nome;
     private String descrição;
     private String endereço;
@@ -22,14 +22,14 @@ public class PontoDeInteresseDO {
      * @return the POI_id
      */
     public int getId() {
-        return POI_id;
+        return id;
     }
 
     /**
      * @param POI_id the POI_id to set
      */
-    public void setId(int POI_id) {
-        this.POI_id = POI_id;
+    public void setId(int id) {
+        this.id= id;
     }
 
     /**
