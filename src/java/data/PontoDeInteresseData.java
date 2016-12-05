@@ -57,6 +57,18 @@ public class PontoDeInteresseData {
         PontoDeInteresse.setPasta_de_imagens(rs.getString("pasta_de_imagens"));
         return PontoDeInteresse;
     } // buscar
+    public void atualizar(PontoDeInteresseDO PontoDeInteresse, Transacao tr) throws Exception {
+     Connection con = tr.obterConexao();
+     String sql = "update agenda.POI set nome=?, descrição=?,endereço=?,link_para_maps=?,pasta_de_imagens=? where POI_id=?";
+     PreparedStatement ps = con.prepareStatement(sql);
+     ps.setString(1, PontoDeInteresse.getNome());
+     ps.setString(2, PontoDeInteresse.getDescrição());
+     ps.setString(3, PontoDeInteresse.getEndereço());
+     ps.setString(4, PontoDeInteresse.getLink_para_maps());
+     ps.setString(5, PontoDeInteresse.getPasta_de_imagens());
+     
+     int result = ps.executeUpdate(); 
+    } // atualizar
      
     
 }
