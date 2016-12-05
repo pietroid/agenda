@@ -57,24 +57,4 @@ GE getn = new GE();
         }
         %>
     </body>
-        <FORM action="Cadastro_GE.jsp" method="post">
-        <INPUT type="submit" name="submit3" value="Cadastrar">    
-
-<%    
-   }else{ //HOME DESLOGADO
-
- %>
- <BR>
-        Você precisar Logar antes
-        <FORM action="LoginOut.jsp" method="post">
-        <INPUT type="submit" name="submit2" value="Logar">    
- 
- 
- 
-<%    
-   }
-%>
-    
-    
-</body>
 </html>
