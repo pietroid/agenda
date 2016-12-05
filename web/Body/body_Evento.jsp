@@ -1,8 +1,14 @@
 
 <%@page import="data.EventoDO"%>
+<%@page import="transacoes.Evento"%>
 <%@page import="data.UsuarioDO"%>
 <%@page import="java.util.List"%>
 
+<%
+    Evento eventotn = new Evento();
+    EventoDO evento = (EventoDO) session.getAttribute("evento");
+    session.setAttribute("evento",evento);
+%>
 <html>
 <%@ page import="transacoes.Usuario" %>
 <%@ page import="data.UsuarioDO" %>
@@ -13,9 +19,7 @@
 <BR><BR>
 <table align="left" border=1 cellpadding=10 width=500>
     <tfoot>
-        <tr><th><a href="../Inscricao.jsp" <%// request.setAttribute("evento",EventoDO);*/
-                   
-                   %>target="_top">Inscrever-se</a></th></tr>
+        <tr><th><a href="../Inscricao.jsp" target="_top">Inscrever-se</a></th></tr>
     </tfoot>
 <th>Descrição</th>
 <tr>
@@ -45,7 +49,6 @@
 
 <table align="left" border=1 cellpadding=10 width=500>
 <tr>
-  <td><a href="../agenda/CriarEvento.jsp" target="_top"><font size="5" color="#ff0000">Criar evento</font></a></td>
   <td><a href="../agenda/ExcluirEvento.jsp" target="_top"><font size="5" color="#ff0000">Excluir evento</font></a></td>
   <td><a href="../agenda/AlterarEvento.jsp" target="_top"><font size="5" color="#ff0000">Alterar evento</font></a></td>
 </tr>
