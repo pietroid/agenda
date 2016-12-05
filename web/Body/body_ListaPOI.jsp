@@ -29,8 +29,8 @@
        int id   = ponto.getId();
  %>    
 <tr>
-            <td><center><a href="../Body/body_AlterarPOI.jsp" <% session.setAttribute("PontoDeInteresseDO", id); %>><%=nome%></a><center>
-            <td><center><a href="../Body/body_AlterarPOI.jsp" <% session.setAttribute("PontoDeInteresseDO", id); %>><%=descricao%></a><center>
+            <td><center><a href="../Body/body_ListaPOI.jsp" <% session.setAttribute("PontoDeInteresseDO", id); %>><%=nome%></a><center>
+            <td><center><a href="../Body/body_ListaPOI.jsp" <% session.setAttribute("PontoDeInteresseDO", id); %>><%=descricao%></a><center>
 </tr>
 
 <%
