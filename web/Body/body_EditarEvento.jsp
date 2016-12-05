@@ -13,15 +13,8 @@
 <%@ page import="java.util.*" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Editar evento</title>
-    </head>
-    <body BGCOLOR = #f2f2f2>
-    <font face="verdana">
-    <%
-        /*if ( request.getAttribute("EVEid") == null) {
+<%
+    /*if ( request.getAttribute("EVEid") == null) {
             pageContext.forward("index.jsp");
         }*/
         //int EVEid = Integer.parseInt((String)request.getAttribute("EVEid"));
@@ -32,6 +25,20 @@
         Pertence pertencetn = new Pertence();
         PertenceDO pertence = new PertenceDO();
         evento = eventotn.buscar(EVEid);
+%>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Editar evento</title>
+    </head>
+    <body BGCOLOR = #f2f2f2>
+        <center>
+            <h1> Edição de evento </h1>
+            <BR><BR>
+            <h2> Modificar o evento: <%= evento.getNome() %> </h2><BR><BR>
+        </center>
+    <font face="verdana">
+    <%
         if (request.getParameter("submit1") != null){
             if (request.getParameter("EVEnome") != null && !(request.getParameter("EVEnome").equals(""))) evento.setNome(request.getParameter("EVEnome"));
             if (request.getParameter("EVEdescricao") != null && !(request.getParameter("EVEdescricao").equals(""))) evento.setDescricao(request.getParameter("EVEdescricao"));
