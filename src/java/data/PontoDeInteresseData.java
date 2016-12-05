@@ -24,18 +24,20 @@ public class PontoDeInteresseData {
         ps.setString(3, PontoDeInteresse.getEndereço());
         ps.setString(4,PontoDeInteresse.getLink_para_maps());
         ps.setString(5, PontoDeInteresse.getPasta_de_imagens());
-        
-        
-        
-        
         int result = ps.executeUpdate();
+        
+        sql= "SELECT LAST_INSERT_ID();";
+        ps = con.prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+        rs.first();
+        PontoDeInteresse.setId(rs.getInt("LAST_INSERT_ID()"));
     }// incluir
 
     public void excluir(PontoDeInteresseDO  PontoDeInteresse, Transacao tr) throws Exception {
         Connection con = tr.obterConexao();
         String sql = "delete from agenda.POI where POI_id = ?";
         PreparedStatement ps = con.prepareStatement(sql);
-        ps.setInt(1, PontoDeInteresse.getPOI_id());
+        ps.setInt(1, PontoDeInteresse.getId());
         int result = ps.executeUpdate();
     } // excluir
 
@@ -47,7 +49,7 @@ public class PontoDeInteresseData {
         ResultSet rs = ps.executeQuery();
         rs.first();
         PontoDeInteresseDO PontoDeInteresse = new PontoDeInteresseDO();
-        PontoDeInteresse.setPOI_id(rs.getInt("POI_id"));
+        PontoDeInteresse.setId(rs.getInt("POI_id"));
         PontoDeInteresse.setNome(rs.getString("nome"));
         PontoDeInteresse.setDescrição(rs.getString("descrição"));
         PontoDeInteresse.setEndereço(rs.getString("endereço"));

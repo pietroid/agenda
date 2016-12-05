@@ -21,14 +21,14 @@ public class PontoDeInteresseDO {
     /**
      * @return the POI_id
      */
-    public int getPOI_id() {
+    public int getId() {
         return POI_id;
     }
 
     /**
      * @param POI_id the POI_id to set
      */
-    public void setPOI_id(int POI_id) {
+    public void setId(int POI_id) {
         this.POI_id = POI_id;
     }
 
