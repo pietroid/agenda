@@ -24,6 +24,8 @@ public class UsuarioDO {
     private String curso;
     private Date ingresso;
     private String pasta;
+    private String pergunta;
+    private String resposta;
     private boolean superUser;
 
     /**
@@ -193,8 +195,21 @@ public class UsuarioDO {
     public void setSuperUser(boolean superUser) {
         this.superUser = superUser;
     }
+    public void setResposta(String resposta){
+    this.resposta = resposta;
+    }
     
+    public String getResposta(){
+    return this.resposta;
+    }
     
+    public void setPergunta(String pergunta){
+    this.pergunta = pergunta;
+    }
+    
+    public String pergunta(){
+    return this.pergunta;
+    }
     
     
 }
