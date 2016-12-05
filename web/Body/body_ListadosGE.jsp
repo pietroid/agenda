@@ -37,7 +37,8 @@
 <center>
     <BR>
     <BR>
-    Deseja cadastrar um novo grupo de extensão?
+    Deseja cadastrar um novo grupo de extensão? 
+    <BR> <BR>
     
     
 <%
