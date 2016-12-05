@@ -14,17 +14,14 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%
-    /*if ( request.getAttribute("EVEid") == null) {
-            pageContext.forward("index.jsp");
-        }*/
-        //int EVEid = Integer.parseInt((String)request.getAttribute("EVEid"));
-        int EVEid = 5;
-        Evento eventotn = new Evento();
-        boolean updateevento = false;
-        EventoDO evento = new EventoDO();
-        Pertence pertencetn = new Pertence();
-        PertenceDO pertence = new PertenceDO();
-        evento = eventotn.buscar(EVEid);
+    if (request.getAttribute("evento") == null) {
+        pageContext.forward("Evento.jsp");
+    }
+    EventoDO evento = (EventoDO) session.getAttribute("evento");
+    Evento eventotn = new Evento();
+    boolean updateevento = false;
+    Pertence pertencetn = new Pertence();
+    PertenceDO pertence = new PertenceDO();
 %>
 <html>
     <head>
