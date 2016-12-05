@@ -69,6 +69,26 @@ public class PontoDeInteresseData {
      
      int result = ps.executeUpdate(); 
     } // atualizar
+    
+        public List<PontoDeInteresseDO> listarPontoDeInteresseId(int PontoDeInteresseId, Transacao tr) throws Exception {
+        Connection con = tr.obterConexao();
+        String sql = "select * from agenda.POI where POI_id = ?";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setInt(1, PontoDeInteresseId);
+        ResultSet rs = ps.executeQuery();
+        List<PontoDeInteresseDO> Items = new ArrayList<PontoDeInteresseDO>();
+        while (rs.next()) {
+            PontoDeInteresseDO i = new PontoDeInteresseDO();
+            i.setId (rs.getInt("POI_id"));
+            i.setNome (rs.getString("nome"));
+            i.setDescrição(rs.getString("descrição"));
+            i.setEndereço(rs.getString("endereço"));
+            i.setLink_para_maps(rs.getString("link_para_maps"));
+            i.setPasta_de_imagens(rs.getString("pasta_de_imagens"));
+            Items.add(i);
+        }
+        return Items;
+    }
      
     
 }
