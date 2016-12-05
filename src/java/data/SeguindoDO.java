@@ -9,7 +9,7 @@ package data;
  *
  * @author Danilo Polidoro
  */
-public class InscricaoDO {
+public class SeguindoDO {
     private int id;
     private int eveid;
     private int usuid;

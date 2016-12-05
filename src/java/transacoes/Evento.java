@@ -60,7 +60,6 @@ public class Evento {
 	} catch (Exception e) {
             tr.rollback();
             System.out.println("Erro ao buscar" + id);
-           
 	}
 	return null;
     } // buscar

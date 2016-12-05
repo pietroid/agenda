@@ -24,10 +24,16 @@ public class EventoData {
         ps.setTime(4,evento.getHoraInicial());
         ps.setTime(5,evento.getHoraFinal());
         ps.setDate(6, evento.getData());
-        ps.setInt(7, 0);
-        ps.setString(8, "sdas");
-        ps.setInt(9, 2);
+        ps.setInt(7, boolToInt(evento.getMacroEvento()));
+        ps.setString(8,"evento");
+        ps.setInt(9, evento.getAvaliação());
         int result = ps.executeUpdate();
+        
+        sql= "SELECT LAST_INSERT_ID();";
+        ps = con.prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+        rs.first();
+        evento.setId(rs.getInt("LAST_INSERT_ID()"));
     }// incluir
 
     public void excluir(EventoDO evento, Transacao tr) throws Exception {
@@ -45,7 +51,7 @@ public class EventoData {
      ps.setString(1, evento.getNome());
      ps.setString(2, evento.getDescricao());
      ps.setString(3, evento.getTipo());
-     ps.setString(4, evento.getMacroEvento());
+     ps.setInt(4, boolToInt(evento.getMacroEvento()));
      ps.setTime(5, evento.getHoraInicial());
      ps.setTime(6, evento.getHoraFinal());
      ps.setDate(7, evento.getData());
@@ -71,7 +77,6 @@ public class EventoData {
         evento.setHoraInicial(rs.getTime("EVEhorario_de_inicio"));
         evento.setHoraFinal(rs.getTime("EVEhorario_de_termino"));
         evento.setData(rs.getDate("EVEdata"));
-        evento.setMacroEvento(rs.getString("EVEmacro_evento"));
         evento.setPastaimagens(rs.getString("EVEpasta_de_imagens"));
         evento.setAvaliação(rs.getInt("EVEavaliacao"));
         return evento;
@@ -91,10 +96,17 @@ public class EventoData {
         evento.setHoraInicial(rs.getTime("EVEhorario_de_inicio"));
         evento.setHoraFinal(rs.getTime("EVEhorario_de_termino"));
         evento.setData(rs.getDate("EVEdata"));
-        evento.setMacroEvento(rs.getString("EVEmacro_evento"));
+        evento.setMacroEvento(rs.getInt("EVEmacro_evento")==1);
         evento.setPastaimagens(rs.getString("EVEpasta_de_imagens"));
         evento.setAvaliação(rs.getInt("EVEavaliacao"));
         return evento;
+    }
+    private int boolToInt(boolean value){
+        if(value){
+            return 1;
+        }else{
+            return 0;
+        }
     }
  
 }

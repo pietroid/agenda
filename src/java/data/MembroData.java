@@ -20,15 +20,20 @@ public class MembroData {
         ps.setInt(1, Membro.getGEid());
         ps.setInt(2, Membro.getUSUid());
         ps.setInt(3, Membro.getADM());
-     
         int result = ps.executeUpdate();
+        
+        sql= "SELECT LAST_INSERT_ID();";
+        ps = con.prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+        rs.first();
+        Membro.setId(rs.getInt("LAST_INSERT_ID()"));
     }// incluir
 
     public void excluir(MembroDO Membro, Transacao tr) throws Exception {
         Connection con = tr.obterConexao();
         String sql = "delete from agenda.Membro where MEMBERid = ?";
         PreparedStatement ps = con.prepareStatement(sql);
-        ps.setInt(1, Membro.getMEMBERid());
+        ps.setInt(1, Membro.getId());
         int result = ps.executeUpdate();
     } // excluir
 
@@ -50,7 +55,7 @@ public class MembroData {
         ResultSet rs = ps.executeQuery();
         rs.first();
         MembroDO Membro = new MembroDO();
-        Membro.setMEMBERid(rs.getInt("MEMBERid"));
+        Membro.setId(rs.getInt("MEMBERid"));
         Membro.setGEid(rs.getInt("GEid"));
         Membro.setUSUid(rs.getInt("USUid"));
         Membro.setADM(rs.getInt("ADM"));
@@ -63,11 +68,10 @@ public class MembroData {
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setInt(1, GEid);
         ResultSet rs = ps.executeQuery();
-        System.out.println("Query executada");
         List<MembroDO> Items = new ArrayList<MembroDO>();
         while (rs.next()) {
             MembroDO i = new MembroDO();
-            i.setMEMBERid (rs.getInt("MEMBERid"));
+            i.setId (rs.getInt("MEMBERid"));
             i.setGEid (rs.getInt("GEid"));
             i.setUSUid(rs.getInt("USUid"));
             i.setADM(rs.getInt("ADM"));
