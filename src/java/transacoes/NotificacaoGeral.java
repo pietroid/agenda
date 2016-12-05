@@ -84,6 +84,22 @@ public class NotificacaoGeral {
 	return null;
     } // buscar
 
+    public List<NotificacaoGeralDO> BuscaNotporUSId(int USId) throws Exception{
+        Transacao tr = new Transacao();
+	try{
+            tr.beginReadOnly();
+  	    NotificacaoGeralData a = new NotificacaoGeralData();
+	    List<NotificacaoGeralDO> Lista = a.pesquisarPorUSUid(USId, tr);
+            tr.commit();
+            return Lista;
+	} catch (Exception e){
+            tr.rollback();
+            System.out.println("Erro ao buscar" + USId);
+            e.printStackTrace();
+	}
+	return null;
+    }
+    
     private boolean isEmpty(String s) {
         if (null == s)
             return true;

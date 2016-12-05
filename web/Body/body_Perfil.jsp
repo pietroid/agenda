@@ -1,3 +1,5 @@
+<%@page import="data.NotificacaoGeralDO"%>
+<%@page import="transacoes.NotificacaoGeral"%>
 <%@page import="data.MembroDO"%>
 <%@page import="java.util.List"%>
 <%@page import="transacoes.Membro"%>
@@ -14,10 +16,16 @@
  if(session.getAttribute("Usuario")!= null)
  {
     UsuarioDO usuario = (UsuarioDO)session.getAttribute("Usuario");
-    int IDusuario = usuario.getId();
     String nome = usuario.getNome();
+    //Cria uma lista de acordo com o membro para ver se ele possui privilegios de adm de grupo de extensão
+    int IDusuario = usuario.getId();
     Membro lista = new Membro();
     List<MembroDO> ListaMembro = lista.buscarPorUSUid(IDusuario);
+    //Cria uma lista de notificacoes
+    NotificacaoGeral list = new NotificacaoGeral();
+    List<NotificacaoGeralDO> ListaNotificacao = list.BuscaNotporUSId(IDusuario);
+    
+    
 %>
 <h1><center> Perfil <center> </h1>
 
@@ -30,53 +38,41 @@
 
 
 <%
+    //Verifica se o usuário é lider de algum grupo de extensão
     int LiderGE=0;
     for (MembroDO membro:ListaMembro){
         if (membro.getADM()==1){
             LiderGE = 1;
         }
     }
-    if (LiderGE==0){
+    
+    //Notificacao para usuario ADM
+    if (LiderGE==1){
 %>
-<p><font size="3" face="verdana">Notificações:</p>
-<table align="center" border=3    cellpadding = 10 width=1000   >
-    <tr>
-        <th>Eventos Cancelados</th>
-    </tr>
-    <table align ="center" border =3 cellpadding =10  >
+    <p><font size="3" face="verdana">Notificações:</p>
+    <table align="cente" border=3    cellpadding = 10 width=1000   >
         <tr>
-            Notificação
+            <th>Eventos Cancelados</th>
+            <td>
+                <table>
+                    <%
+                        
+                    %>
+                    
+                </table>
+                
+            </td>
         </tr>
         <tr>
-            Notificação
+            <th>Eventos Próximos</th>
         </tr>
         <tr>
-            Notificação
+            <th>Conflito de Eventos</th>
+        </tr>
+        <tr>
+            <th>Novos Feedbacks</th>
         </tr>
     </table>
-    <tr>
-        <th>Eventos próximos</th>
-    </tr>
-</table>
-
-<%
-    }else if (LiderGE==1){
-%>
-<p><font size="3" face="verdana">Notificações:</p>
-<table align="cente" border=3    cellpadding = 10 width=1000   >
-    <tr>
-        <th>Eventos Cancelados</th>
-    </tr>
-    <tr>
-        <th>Eventos Próximos</th>
-    </tr>
-    <tr>
-        <th>Conflito de Eventos</th>
-    </tr>
-    <tr>
-        <th>Novos Feedbacks</th>
-    </tr>
-</table>
 <%
 }
 %>

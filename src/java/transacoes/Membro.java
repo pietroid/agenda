@@ -62,7 +62,7 @@ public class Membro {
             e.printStackTrace();
 	}
 	return null;
-    } // buscar
+    } // Cria uma lista da busca pelo ID do usuario
 
     private boolean isEmpty(String s) {
         if (null == s)
