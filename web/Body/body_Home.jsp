@@ -29,10 +29,11 @@
     SeguindoDO seguindo = new SeguindoDO();
     Seguindo seguindotn = new Seguindo();
     List<EventoDO> lista = seguindotn.pesquisarPorUSUid(usuario.getId());
-    for (EventoDO evento : lista){ %>
+    for (EventoDO evento : lista){ 
+        String nomeEven = evento.getNome(); 
+%>
     <tr>
-        <td> <%=evento.getNome() %> </td>
-        
+        <td> <%=nomeEven%> </td>
     </tr>
     
     <%}
