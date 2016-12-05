@@ -23,7 +23,7 @@
     %>
     <center>
     <form action = "body_CriarEvento.jsp" methd = "post">
-        Selecione se o evento Ã© macro ou micro: <BR><BR>
+        Selecione se o evento é macro ou micro: <BR><BR>
         <input type="radio" name="Eve" value="macro" checked> Macro<br>
         <input type="radio" name="Eve" value="micro"> Micro<br>
         <INPUT type="submit" name="submit" value= "Ok"><BR><BR>
@@ -38,32 +38,64 @@
             Pertence pertencetn = new Pertence();
             PertenceDO pertence = new PertenceDO();
             if (request.getParameter("submit").equals("Enviar micro")){
-                evento.setNome(request.getParameter("EVEnome"));
-                evento.setDescricao(request.getParameter("EVEdescricao"));
-                evento.setTipo(request.getParameter("EVEtipo"));
-               evento.setHoraInicial(new Time(Integer.valueOf(request.getParameter("EVEhoraI")), Integer.valueOf(request.getParameter("EVEminI")), 0));
-                evento.setHoraFinal(new Time(Integer.valueOf(request.getParameter("EVEhoraT")), Integer.valueOf(request.getParameter("EVEminT")), 0));
-                evento.setData(new Date(Integer.valueOf(request.getParameter("EVEdataD")), Integer.valueOf(request.getParameter("EVEdataM")), Integer.valueOf(request.getParameter("EVEdataY"))));
-                if (request.getParameter("EVEmacro_evento") != null){
-                     EventoDO macro = eventotn.buscarNome("EVEmacro_evento");
-                     evento.setMacroEvento(macro.getNome());
+                if (request.getParameter("EVEnome") != null && 
+                    request.getParameter("EVEdescricao") != null && 
+                    request.getParameter("EVEtipo") != null &&
+                    request.getParameter("EVEhoraI") != null && 
+                    request.getParameter("EVEminI") != null && 
+                    request.getParameter("EVEhoraT") != null && 
+                    request.getParameter("EVEminT") != null && 
+                    request.getParameter("EVEdataD") != null &&
+                    request.getParameter("EVEdataM") != null &&
+                    request.getParameter("EVEdataY") != null &&
+                    request.getParameter("EVEmacro_evento") != null)
+                {
+                    evento.setNome(request.getParameter("EVEnome"));
+                    evento.setDescricao(request.getParameter("EVEdescricao"));
+                    evento.setTipo(request.getParameter("EVEtipo"));
+                    evento.setHoraInicial(new Time(Integer.valueOf(request.getParameter("EVEhoraI")), Integer.valueOf(request.getParameter("EVEminI")), 0));
+                    evento.setHoraFinal(new Time(Integer.valueOf(request.getParameter("EVEhoraT")), Integer.valueOf(request.getParameter("EVEminT")), 0));
+                    evento.setData(new Date(Integer.valueOf(request.getParameter("EVEdataD")), Integer.valueOf(request.getParameter("EVEdataM")), Integer.valueOf(request.getParameter("EVEdataY"))));
+                    evento.setMacroEvento(1);
+                    boolean ok = eventotn.incluir(evento);
+                    if (ok == true && eventotn.buscarNome("EVEmacro_evento") != null){
+                        EventoDO macro = eventotn.buscarNome("EVEmacro_evento");
+                        pertence.setMicroId(eventotn.buscarNome(evento.getNome()).getId());
+                        pertence.setMacroId(macro.getId());
+                        boolean pertenceok = pertencetn.incluir(pertence);
+                    }
                 }
-                boolean ok = eventotn.incluir(evento);
-                if (ok == true){
-                    pertence.setMicroId(eventotn.buscarNome(evento.getNome()).getId());
-                    pertence.setMacroId(eventotn.buscarNome(evento.getMacroEvento()).getId());
-                    boolean pertenceok = pertencetn.incluir(pertence);
+                else{
+                %>
+                    
+                <center>
+                    Preencher todos os campos!
+                </center>
+                
+                <%
                 }
             }
             if (request.getParameter("submit").equals("Enviar macro")){
-                evento.setNome(request.getParameter("EVEnome"));
-                evento.setDescricao(request.getParameter("EVEdescricao"));
-                evento.setTipo(request.getParameter("EVEtipo"));
-                evento.setHoraInicial(new Time(Integer.valueOf(request.getParameter("EVEhoraI")), Integer.valueOf(request.getParameter("EVEminI")), 0));
-                evento.setHoraFinal(new Time(Integer.valueOf(request.getParameter("EVEhoraT")), Integer.valueOf(request.getParameter("EVEminT")), 0));
-                evento.setData(new Date(Integer.valueOf(request.getParameter("EVEdataD")), Integer.valueOf(request.getParameter("EVEdataM")), Integer.valueOf(request.getParameter("EVEdataY"))));
-                evento.setMacroEvento("");
-                boolean ok = eventotn.incluir(evento);
+                if (request.getParameter("EVEnome") != null && 
+                    request.getParameter("EVEdescricao") != null && 
+                    request.getParameter("EVEtipo") != null &&
+                    request.getParameter("EVEhoraI") != null && 
+                    request.getParameter("EVEminI") != null && 
+                    request.getParameter("EVEhoraT") != null && 
+                    request.getParameter("EVEminT") != null && 
+                    request.getParameter("EVEdataD") != null &&
+                    request.getParameter("EVEdataM") != null &&
+                    request.getParameter("EVEdataY") != null)
+                {
+                    evento.setNome(request.getParameter("EVEnome"));
+                    evento.setDescricao(request.getParameter("EVEdescricao"));
+                    evento.setTipo(request.getParameter("EVEtipo"));
+                    evento.setHoraInicial(new Time(Integer.valueOf(request.getParameter("EVEhoraI")), Integer.valueOf(request.getParameter("EVEminI")), 0));
+                    evento.setHoraFinal(new Time(Integer.valueOf(request.getParameter("EVEhoraT")), Integer.valueOf(request.getParameter("EVEminT")), 0));
+                    evento.setData(new Date(Integer.valueOf(request.getParameter("EVEdataD")), Integer.valueOf(request.getParameter("EVEdataM")), Integer.valueOf(request.getParameter("EVEdataY"))));
+                    evento.setMacroEvento(0);
+                    boolean ok = eventotn.incluir(evento);
+                }
             }
             if(action != null){
                 if(action.equals("micro")){
@@ -81,7 +113,7 @@
             Horário de término:
             <INPUT type="number" name="EVEhoraT" min = "0" max = "23" size = "2">:<INPUT type="number" name="EVEminT" min = "0" max = "59" size = "2"><BR>
             Data (dd/mm/yyyy):
-            <INPUT type="number" name="EVEdataD" min = "1" max = "31" size = "2">/<INPUT type="number" name="EVEdataM" min = "1" max = "12" size = "2">/<INPUT type="number" name="EVEdataY" min = "2016" max = "2050" size = "4"><BR><BR>
+            <INPUT type="number" name="EVEdataD" min = "1" max = "31" size = "2">/<INPUT type="number" name="EVEdataM" min = "1" max = "12" size = "2">/<INPUT type="number" name="EVEdataY" min = "2016" max = "2050" size = "4"><BR>
             Macro evento:
             <INPUT type="text" name="EVEmacro_evento"> <BR>
             <INPUT type="submit" name="submit" value="Enviar micro"><BR><BR>
