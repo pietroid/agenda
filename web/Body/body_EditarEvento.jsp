@@ -4,6 +4,7 @@
     Author     : Marcus;
 --%>
 
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.sql.Time"%>
 <%@page import="java.sql.Date"%>
 <%@ page import="transacoes.Evento" %>
@@ -20,6 +21,7 @@
     </head>
     <%
     if (request.getAttribute("evento") != null) {
+        SimpleDateFormat originalFormat = new SimpleDateFormat("yyyy-mm-dd");
         EventoDO evento = (EventoDO) session.getAttribute("evento");
         Evento eventotn = new Evento();
         boolean updateevento = false;
@@ -40,7 +42,7 @@
                 if (request.getParameter("EVEtipo") != null && !(request.getParameter("EVEtipo").equals(""))) evento.setTipo(request.getParameter("EVEtipo"));
                 if (request.getParameter("EVEhoraI") != null && request.getParameter("EVEminI") != null && !(request.getParameter("EVEhoraI").equals("")) && !(request.getParameter("EVEminI").equals(""))) evento.setHoraInicial(new Time(Integer.valueOf(request.getParameter("EVEhoraI")), Integer.valueOf(request.getParameter("EVEminI")), 0));
                 if (request.getParameter("EVEhoraT") != null && request.getParameter("EVEminT") != null && !(request.getParameter("EVEhoraT").equals("")) && !(request.getParameter("EVEminT").equals(""))) evento.setHoraFinal(new Time(Integer.valueOf(request.getParameter("EVEhoraT")), Integer.valueOf(request.getParameter("EVEminT")), 0));
-                if (request.getParameter("EVEdataD") != null && request.getParameter("EVEdataM") != null && request.getParameter("EVEdataY") != null && !(request.getParameter("EVEdataD").equals("")) && !(request.getParameter("EVEdataM").equals("")) && !(request.getParameter("EVEdataY").equals(""))) evento.setData(new Date(Integer.valueOf(request.getParameter("EVEdataD")), Integer.valueOf(request.getParameter("EVEdataM")), Integer.valueOf(request.getParameter("EVEdataY"))));
+                if (request.getParameter("EVEdataD") != null && request.getParameter("EVEdataM") != null && request.getParameter("EVEdataY") != null && !(request.getParameter("EVEdataD").equals("")) && !(request.getParameter("EVEdataM").equals("")) && !(request.getParameter("EVEdataY").equals(""))) evento.setData(new Date(Integer.valueOf(request.getParameter("EVEdataY")), Integer.valueOf(request.getParameter("EVEdataM")), Integer.valueOf(request.getParameter("EVEdataM"))));
                 if (request.getParameter("EVEmacro_evento") != null){
                     EventoDO macro2 = eventotn.buscarNome("EVEmacro_evento");
                     if (macro2 != null){
@@ -57,7 +59,7 @@
                 if (request.getParameter("EVEtipo") != null && !(request.getParameter("EVEtipo").equals(""))) evento.setTipo(request.getParameter("EVEtipo"));
                 if (request.getParameter("EVEhoraI") != null && request.getParameter("EVEminI") != null && !(request.getParameter("EVEhoraI").equals("")) && !(request.getParameter("EVEminI").equals(""))) evento.setHoraInicial(new Time(Integer.valueOf(request.getParameter("EVEhoraI")), Integer.valueOf(request.getParameter("EVEminI")), 0));
                 if (request.getParameter("EVEhoraT") != null && request.getParameter("EVEminT") != null && !(request.getParameter("EVEhoraT").equals("")) && !(request.getParameter("EVEminT").equals(""))) evento.setHoraFinal(new Time(Integer.valueOf(request.getParameter("EVEhoraT")), Integer.valueOf(request.getParameter("EVEminT")), 0));
-                if (request.getParameter("EVEdataD") != null && request.getParameter("EVEdataM") != null && request.getParameter("EVEdataY") != null && !(request.getParameter("EVEdataD").equals("")) && !(request.getParameter("EVEdataM").equals("")) && !(request.getParameter("EVEdataY").equals(""))) evento.setData(new Date(Integer.valueOf(request.getParameter("EVEdataD")), Integer.valueOf(request.getParameter("EVEdataM")), Integer.valueOf(request.getParameter("EVEdataY"))));
+                if (request.getParameter("EVEdataD") != null && request.getParameter("EVEdataM") != null && request.getParameter("EVEdataY") != null && !(request.getParameter("EVEdataD").equals("")) && !(request.getParameter("EVEdataM").equals("")) && !(request.getParameter("EVEdataY").equals(""))) evento.setData(new Date(Integer.valueOf(request.getParameter("EVEdataY")), Integer.valueOf(request.getParameter("EVEdataM")), Integer.valueOf(request.getParameter("EVEdataD"))));
                 updateevento = eventotn.atualizar(evento);
             }
             if (updateevento == true){
