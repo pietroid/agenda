@@ -21,6 +21,19 @@
     <body BGCOLOR = #f2f2f2>
         <font face="verdana">
         <% 
+            if (request.getParameter("submit") == null)
+            {
+            %>  
+            <center>
+                Deseja excluir o evento?
+                <FORM action = "ExcluirEvento.jsp" method = "post">
+                    <input type="radio" name="Eve" value="sim" checked> Sim<br>
+                    <input type="radio" name="Eve" value="nao"> Não<br>
+                    <INPUT type="submit" name="submit" value= "Excluir">
+                </form>
+            </center>
+            <%
+            }
             if (request.getParameter("submit") != null){
                 if (session.getAttribute("evento") != null) {
                     String action = request.getParameter("Eve");
@@ -29,6 +42,7 @@
                     EventoDO evento = (EventoDO) session.getAttribute("evento");
                     Evento eventotn = new Evento();
                     if(action.equals("sim")){
+                        System.out.println("3");
                         if (evento.getMacroEvento() == true){
                             List<Integer> microIds = pertencetn.buscarMicroPorMacro(evento);
                             for(int i = 0; i < microIds.size(); i++){
@@ -50,8 +64,8 @@
                     </center>
 
                 <%
-                }
-                if(action.equals("nao")){
+                    }
+                    if(action.equals("nao")){
                 %>
 
                     <center>
@@ -59,17 +73,9 @@
                     </center>
 
                 <%
+                    }
                 }
             }
         %>
-        <center>
-            Deseja excluir o evento?
-            <form>
-                <input type="radio" name="Eve" value="sim" checked> Sim<br>
-                <input type="radio" name="Eve" value="nao"> Não<br>
-                <INPUT type="submit" name="submit" value= "Excluir">   
-                <INPUT type="reset" name="reset" value= "Voltar">
-            </form>
-        </center>
     </body>
 </html>
