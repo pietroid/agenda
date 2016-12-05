@@ -9,13 +9,9 @@
 <%@page import="data.ComentarioDO"%>
 <%@page import="transacoes.Comentario"%>
 <%@page import="java.util.List"%>
+<%@ page import="java.util.Vector" %>
 
 <html>
-<%@ page import="transacoes.Usuario" %>
-<%@ page import="data.UsuarioDO" %>
-<%@ page import="data.ComentarioDO" %>
-<%@ page import="transacoes.Comentario"%>
-<%@ page import="java.util.Vector" %>
 <body BGCOLOR = #f2f2f2>
 <font face="verdana">
 <html>
@@ -32,32 +28,37 @@
     if (session.getAttribute("Usuario")!=null){
         //Verifica se enviou o comentário
         if (request.getParameter("submit") != null){
-            //UsuarioDO usuario = session.getAtribute("Usuario");
+            UsuarioDO usuario = (UsuarioDO) session.getAttribute("Usuario");
+            EventoDO evento = (EventoDO) session.getAttribute("EVEid");
             ComentarioDO c = new ComentarioDO();
             Comentario trc = new Comentario();
             c.setMensagem(request.getParameter("comentario"));
-            pageContext.forward("body_Evento.jsp");
+            c.setUsuId(usuario.getId());
+            //c.setEveId(evento.getId());
+            if (trc.incluir(c)){
+                pageContext.forward("body_PaineldeControle.jsp");
+            }
         }
         else{
     %>
-    Você precisa estar logado para escrever um comentário.
-    <%}
-        }
+        Digite seu comentário:
+        <form>
+	<textarea name="comentario" rows="10" cols="55" maxlength="1000"></textarea>
+        </center>
+        <INPUT type="submit" name="submit" value= "Enviar Comentário">   
+        <INPUT type="reset" name="reset" value= "Cancelar">
+	</form><BR>
+    <%
+        }    
+    }    
+    else{
+    %>
+    Você precisa estar logado para comentar!
+    <%
     }
     %>
     
-    Digite seu comentário:
-    <form>
-	<textarea rows="10" cols="55" maxlength="1000"></textarea>
-    </center>
-    <INPUT type="submit" name="comentario" value= "Enviar Comentário">   
-    <INPUT type="reset" name="cancelar" value= "Cancelar">
-	</form><BR>
+    
 </center>    
 </body>
 </html>
-<% 
-        
-    }
-%>
-}

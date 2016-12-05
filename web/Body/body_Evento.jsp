@@ -21,7 +21,7 @@
 <tr>
     <td width=10% height=200></td>
 </tr>
-<tr><th><a href="../body_CriarComentario.jsp" <%// request.setAttribute("evento",EventoDO);*/
+<tr><th><a href="../CriarComentario.jsp" <%
                    
                    %>target="_top">Comentar</a></th></tr>
 
