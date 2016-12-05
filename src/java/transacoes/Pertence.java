@@ -33,12 +33,60 @@ public class Pertence {
         return false;
     } // incluir
     
-    public List<Integer> pesquisarMicroPorMacro(EventoDO evento) throws Exception{
+    public boolean excluir(PertenceDO pertence) throws Exception{
+        Transacao tr = new Transacao();
+	try{
+            tr.begin();
+            PertenceData pertenceData = new PertenceData();
+            pertenceData.excluir(pertence, tr);
+            tr.commit();
+            return true;
+	} catch (Exception e) {
+            tr.rollback();
+            System.out.println("Erro ao atualizar" + pertence.getId());
+            e.printStackTrace();
+	}
+	return false;
+    }
+    
+    public boolean atualizar(PertenceDO pertence) throws Exception {
+        Transacao tr = new Transacao();
+	try{
+            // inserir validacoes de regras de negocio
+            tr.begin();
+                PertenceData pertenceData = new PertenceData();
+                pertenceData.atualizar(pertence, tr);
+            tr.commit();
+            return true;
+	} catch (Exception e) {
+            tr.rollback();
+            System.out.println("Erro ao atualizar" + pertence.getId());
+            e.printStackTrace();
+	}
+	return false;
+    }
+    
+    public PertenceDO buscar(int id) throws Exception{
         Transacao tr = new Transacao();
 	try{
             tr.beginReadOnly();
   	    PertenceData pertenceData = new PertenceData();
-	    List<Integer> i = pertenceData.pesquisarMicroPorMacro(evento, tr);
+	    PertenceDO i = pertenceData.buscar(id, tr);
+            tr.commit();
+            return i;
+	} catch (Exception e) {
+            tr.rollback();
+            System.out.println("Erro ao buscar" + id);
+	}
+	return null;
+    }
+    
+    public List<Integer> buscarMicroPorMacro(EventoDO evento) throws Exception{
+        Transacao tr = new Transacao();
+	try{
+            tr.beginReadOnly();
+  	    PertenceData pertenceData = new PertenceData();
+	    List<Integer> i = pertenceData.buscarMicroPorMacro(evento, tr);
             tr.commit();
             return i;
 	} catch (Exception e) {

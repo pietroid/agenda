@@ -12,15 +12,15 @@ import java.util.*;
  *
  * @author LUIS FELIPE
  */
-public class RequisicaoGE {
-    public boolean incluir (RequisicaoGEDO req) throws Exception{
+public class Seguindo {
+    public boolean incluir (SeguindoDO ins) throws Exception{
         
         Transacao tr = new Transacao();
         try {
             
             tr.begin();
-                RequisicaoGEData a = new RequisicaoGEData();
-                a.incluir(req, tr);
+                SeguindoData a = new SeguindoData();
+                a.incluir(ins, tr);
             tr.commit();
             return true;
        
@@ -32,17 +32,17 @@ public class RequisicaoGE {
         return false;
     } // incluir
     
-    public RequisicaoGEDO buscar(int userId) throws Exception{
+    public SeguindoDO buscar(int INSCid) throws Exception{
         Transacao tr = new Transacao();
 	try{
             tr.beginReadOnly();
-  	    RequisicaoGEData a = new RequisicaoGEData();
-	    RequisicaoGEDO i = a.buscar(userId, tr);
+  	    SeguindoData a = new SeguindoData();
+	    SeguindoDO i = a.buscar(INSCid, tr);
             tr.commit();
             return i;
 	} catch (Exception e) {
             tr.rollback();
-            System.out.println("Erro ao buscar" + userId);
+            System.out.println("Erro ao buscar" + INSCid);
             e.printStackTrace();
 	}
 	return null;

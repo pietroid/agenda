@@ -6,11 +6,15 @@
 
 <%@page import="data.EventoDO"%>
 <%@page import="data.UsuarioDO"%>
+<%@page import="data.ComentarioDO"%>
+<%@page import="transacoes.Comentario"%>
 <%@page import="java.util.List"%>
 
 <html>
 <%@ page import="transacoes.Usuario" %>
 <%@ page import="data.UsuarioDO" %>
+<%@ page import="data.ComentarioDO" %>
+<%@ page import="transacoes.Comentario"%>
 <%@ page import="java.util.Vector" %>
 <body BGCOLOR = #f2f2f2>
 <font face="verdana">
@@ -26,12 +30,13 @@
     <%
     //Verifica se o usuário está logado
     if (session.getAttribute("Usuario")!=null){
-        if (request.getParameter("submit") != null && request.getParameter("comentario") != null){
-            //ComentarioDO c;
-            //Comentario trc = new Comentario();
-            //c=trc.inserir(request.getParameter("login"));
-            //session.setAttribute("Comentario", comentario); //Falta criar um objeto comentario
-            //pageContext.forward("body_Evento.jsp");
+        //Verifica se enviou o comentário
+        if (request.getParameter("submit") != null){
+            //UsuarioDO usuario = session.getAtribute("Usuario");
+            ComentarioDO c = new ComentarioDO();
+            Comentario trc = new Comentario();
+            c.setMensagem(request.getParameter("comentario"));
+            pageContext.forward("body_Evento.jsp");
         }
         else{
     %>

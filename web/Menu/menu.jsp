@@ -1,4 +1,6 @@
-
+<%@ page import="transacoes.Usuario" %>
+<%@ page import="data.UsuarioDO" %>
+<%@ page import="java.util.Vector" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -41,10 +43,27 @@ li a:hover:not(.active) {
 <font face="verdana">    
 
 <ul>
-    <li><a class="active" href="/agenda/index.jsp">Home</a></li>
+  <li><a class="active" href="/agenda/index.jsp">Home</a></li>
   <li><a href="/agenda/ListadosGE.jsp">Grupos de Extensão</a></li>
   <li><a href="/agenda/Calendario.jsp">Calendário Geral</a></li>
+  
+  <%
+      UsuarioDO usuario = (UsuarioDO)session.getAttribute("Usuario");
+      
+      
+      if(usuario == null || usuario.isSuperUser()== false){
+  %>
+  
   <li><a href="/agenda/Perfil.jsp">Perfil</a></li>
+  <%
+      }else{ 
+  %>
+    <li><a href="/agenda/PaineldeControle.jsp">Painel de Controle</a></li>
+  <%
+  }
+  %>
+  
+  
   <li style="float:right"><a href="/agenda/LoginOut.jsp">Login/Out</a></li>
 </ul>
 
