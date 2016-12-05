@@ -22,6 +22,7 @@
 
 <%@include  file="Calendario/body_Calendario.jsp"%>
 
+
 <%    
    }else{ //HOME DESLOGADO
 
@@ -32,6 +33,7 @@
  para ver uma lista com todos os Grupos de Extensão</a></font></p> 
 
 <%@include  file="Calendario/body_Calendario.jsp"%>
+
 
 <%    
    }
