@@ -100,7 +100,7 @@
       
       date_localdate = formatter.parse(str_localdate);
       
-      %><%=date_localdate%> ---<%
+      %><%//=date_localdate%><%
       
       if( days[i][j] == 0 )
       {
