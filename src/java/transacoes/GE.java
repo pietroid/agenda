@@ -65,5 +65,20 @@ public class GE {
 	}
 	return false;
     }
-
+  public boolean excluir(GEDO GE) throws Exception {
+        Transacao tr = new Transacao();
+	try{
+            
+            tr.begin();
+                GEData GEData = new GEData();
+                GEData.excluir(GE, tr);
+            tr.commit();
+            return true;
+	} catch (Exception e) {
+            tr.rollback();
+            System.out.println("Erro ao excluir"+ GE.getId());
+            e.printStackTrace();
+	}
+	return false;
+    }
 }
