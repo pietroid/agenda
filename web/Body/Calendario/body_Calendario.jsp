@@ -1,4 +1,5 @@
 <%@ page import="calendar.Month,java.util.*,utils.*,java.io.*,java.sql.*" errorPage="error.jsp" %>
+<%@page import="java.text.*, java.lang.*"%>
 <%@ include file="calendarCommon.jsp" %>
 
 <html>
@@ -6,7 +7,7 @@
   <title>Calendario Geral</title>
     <style>
     table {
-        font-family: "Arial" sans-serif;
+        font-family: "Verdana";
         border-collapse: collapse;
         width: 70%;
     }
@@ -47,8 +48,6 @@
 <!-- REMOVER PAGE IMPORT? -->
 
 <body>
-
- <% int largura=60;%> <!-- SÓ USAR DE 50% PRA CIMA! -->
     
 <div>
 <table align="center" id="CalendarioGeral">
@@ -70,13 +69,39 @@
   </tr>
 <%
 {
+  //LEMBRAR QUE JANEIRO É O MÊS ZERO!!  
   Month aMonth = Month.getMonth( Integer.parseInt(currentMonthString), Integer.parseInt(currentYearString) );
+  DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy", Locale.ENGLISH);
+  
   int [][] days = aMonth.getDays();
+  String str_localdate = "00/00/0000";
+  int int_localday;
+  java.util.Date date_localdate;
+  
+  int int_actualMonth = currentMonthInt + 1;
+  String str_actualMonth = new Integer(int_actualMonth).toString();
+  
   for( int i=0; i<aMonth.getNumberOfWeeks(); i++ )
   {
     %><tr><%
     for( int j=0; j<7; j++ )
     {
+      int_localday = days[i][j];
+      
+      if (int_localday < 10 && int_localday !=0){
+          str_localdate = str_actualMonth + "/" + "0" + Integer.toString(int_localday) + "/" + currentYearString;
+      }
+      
+      else{
+          if(int_localday!=0){
+              str_localdate = str_actualMonth + "/" + Integer.toString(int_localday) + "/" + currentYearString;
+          }
+      }
+      
+      date_localdate = formatter.parse(str_localdate);
+      
+      %><%=date_localdate%> ---<%
+      
       if( days[i][j] == 0 )
       {
         %><td>&nbsp;</td><%
@@ -90,7 +115,11 @@
         }
         else
         {
-        %><td align = "center"><a href="/Agenda/Evento.jsp"><font size="4"><%=days[i][j]%></font></a></td><%
+        %><td align = "center">
+          <a href="/Agenda/Evento.jsp" <%request.setAttribute("t","");%>>
+          <font size="4"><%=days[i][j]%></font>
+          </a>
+        </td><%
         }
       }
     }
