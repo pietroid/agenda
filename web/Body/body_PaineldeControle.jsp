@@ -5,7 +5,8 @@
 <%@ page import="transacoes.Usuario" %>
 <%@ page import="data.UsuarioDO" %>
 <%@ page import="java.util.Vector" %>
-
+<%@ page import="transacoes.PontoDeInteresse" %>
+<%@ page import="data.PontoDeInteresseDO" %>
 
 <%
     if(session.getAttribute("Usuario")!= null)
@@ -16,6 +17,11 @@
 <h1><center> Painel de controle <center> </h1>
 
 <h2><font face="verdana">Olá,<%=nome%>  </font><h2>
+        
+        
+        
+        
+        
 <h2><font face="verdana"> Interesses </font><h2>
 <p><font size="2" face="verdana"><a href="body_GE.jsp">Clique aqui
  para ver uma lista com todos os Grupos do seu interesse</a></font></p> 
@@ -23,34 +29,24 @@
 <p><font size="2" face="verdana"><a href="body_AltPass.jsp">Clique aqui
  para alterar sua senha</a></font></p>
 
-<h2> Calendário </h2>
-<center>
-<table align="center" border=1 cellpadding=10 width=1000>
+
+    
+ <%
+    } PontoDeInteresse poitn = new PontoDeInteresse();
+    PontoDeInteresseDO poi = (PontoDeInteresseDO)request.getAttribute("POIDO");
+%>
+
+<table align="left" border=1 cellpadding=10 width=500>
 <tr>
-<th>Domingo <th>Segunda <th>Terça <th>Quarta <th>Quinta <th>Sexta <th>Sábado
-</tr>
-<tr>
-<td> <td> <td> <td> <td>1 <td>2 <td>3
-</tr>
-<tr>
-<td>4 <td>5 <td>6 <td>7 <td>8 <td>9 <td>10
-</tr>
-<tr>
-<td>11 <td>12 <td>13 <td>14 <td>15 <td>16 <td>17
-</tr>
-<tr>
-<td>18 <td>19 <td>20 <td>21 <td>22 <td>23 <td>24
-</tr>
-<tr>
-<td>25 <td>26 <td>27 <td>28 <td>29 <td>30 <td>
+  <td><a href="../agenda/Cadastro_POI.jsp"  target="_top"><font size="3" color="#ff0000">Cadastrar Ponto de Interesse</font></a></td>
+  <td><a href="../agenda/AlterarPOI.jsp"  target="_top"><font size="3" color="#ff0000">Alterar Ponto de Interesse</font></a></td>
+  <td><a href="../agenda/ExcluirPOI.jsp"  target="_top"><font size="3" color="#ff0000">Excluir Ponto de Interesse</font></a></td>
 </tr>
 </table>
-    
-<center>
-    
- <%      
-    }         
-%>
+
+<%@include  file="Calendario/body_Calendario.jsp"%>
+
+
 </font>
 </body>
 </html>
