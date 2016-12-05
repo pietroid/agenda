@@ -30,7 +30,13 @@
 
 
 <%
-    
+    int LiderGE=0;
+    for (MembroDO membro:ListaMembro){
+        if (membro.getADM()==1){
+            LiderGE = 1;
+        }
+    }
+    if (LiderGE==0){
 %>
 <p><font size="3" face="verdana">Notificações:</p>
 <table align="cente" border=3    cellpadding = 10 width=1000   >
@@ -42,7 +48,27 @@
     </tr>
 </table>
 
-
+<%
+    }else if (LiderGE==1){
+%>
+<p><font size="3" face="verdana">Notificações:</p>
+<table align="cente" border=3    cellpadding = 10 width=1000   >
+    <tr>
+        <th>Eventos Cancelados</th>
+    </tr>
+    <tr>
+        <th>Eventos Próximos</th>
+    </tr>
+    <tr>
+        <th>Conflito de Eventos</th>
+    </tr>
+    <tr>
+        <th>Novos Feedbacks</th>
+    </tr>
+</table>
+<%
+}
+%>
 
 <h2> Calendário </h2>
 <center>
