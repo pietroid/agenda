@@ -23,7 +23,7 @@
     %>
     <center>
     <form action = "body_CriarEvento.jsp" methd = "post">
-        Selecione se o evento é macro ou micro: <BR><BR>
+        Selecione se o evento Ã© macro ou micro: <BR><BR>
         <input type="radio" name="Eve" value="macro" checked> Macro<br>
         <input type="radio" name="Eve" value="micro"> Micro<br>
         <INPUT type="submit" name="submit" value= "Ok"><BR><BR>
