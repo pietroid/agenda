@@ -77,7 +77,7 @@
         <table align="center" border=1 cellpadding=10 width=1000>
             <th> Evento <th>Grupo de extensão
 <%  for(int i=0; i < lista.size(); i++){
-        EventoDO evento = lista_eventos.get(i);
+        EventoDO evento = lista_eventos.get(0);
         GEDO ge = lista_GE.get(i);
 %>
         <TR>
