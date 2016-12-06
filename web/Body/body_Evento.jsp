@@ -34,7 +34,7 @@
             </tfoot>
             <th>Comentários</th>
             <%
-                List<ComentarioDO> comentarios= comentariotn.buscarPorEVEid(evento.getId());
+                List<ComentarioDO> comentarios = comentariotn.buscarPorEVEid(evento.getId());
                 for(int i = 0; i < comentarios.size(); i++){
                     ComentarioDO comentario = comentarios.get(i);
                     String nome = usuariotn.buscarPorID(comentario.getUsuId()).getNome();
