@@ -72,7 +72,7 @@ if (request.getParameter("tipo")!= null) ge.setTipo(request.getParameter("tipo")
 
 update = GEtr.atualizar(ge);
 if (update){%><br> Mudanças efetuadas com sucesso!<%}
-else {%><br> Erro ao efeitar mudanças! <%}
+else {%><br> Erro ao efetuar mudanças! <%}
 
 }
 
