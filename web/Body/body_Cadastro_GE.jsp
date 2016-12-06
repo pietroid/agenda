@@ -13,7 +13,7 @@
 
 
     <% 
-if (request.getParameter("submit") == null){
+if (request.getParameter("submitcad") == null){
     %>
 <FORM action="CadastroGE.jsp" method="post">
     
@@ -33,7 +33,7 @@ if (request.getParameter("submit") == null){
     <INPUT type="text" name="face"><BR><BR>
     Descrição:<BR>
     <INPUT type="text" name="descricao"><BR><BR>
-    <INPUT type="submit" name="submit" value="Submit">
+    <INPUT type="submit" name="submitcad" value="Submit">
     <INPUT type="reset" name="reset" value="Reset">
 
 
