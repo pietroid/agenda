@@ -83,6 +83,22 @@ public class Comentario {
 	}
 	return null;
     } // buscar
+    
+    public List<ComentarioDO> buscarPorEVEid(int EVEid) throws Exception{
+        Transacao tr = new Transacao();
+	try{
+            tr.beginReadOnly();
+  	    ComentarioData comentarioData = new ComentarioData();
+	    List<ComentarioDO> i = comentarioData.buscarPorEVEid(EVEid, tr);
+            tr.commit();
+            return i;
+	} catch (Exception e) {
+            tr.rollback();
+            System.out.println("Erro ao buscar " + EVEid);
+           
+	}
+	return null;
+    }  
 
     private boolean isEmpty(String s) {
         if (null == s)

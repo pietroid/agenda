@@ -63,5 +63,22 @@ public class ComentarioData {
         comentario.setMensagem(rs.getString("mensagem"));
         return comentario;
     } // buscar
- 
+
+    public List<ComentarioDO> buscarPorEVEid(int EVEid, Transacao tr) throws Exception {
+        Connection con = tr.obterConexao();
+        String sql = "select * from comentario where eveid = ?";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setInt(1, EVEid);
+        ResultSet rs = ps.executeQuery();
+        List<ComentarioDO> comentarios = new ArrayList<ComentarioDO>();
+        while(rs.next()){
+            ComentarioDO comentario = new ComentarioDO();
+            comentario.setId(rs.getInt("id"));
+            comentario.setEveId(rs.getInt("eveid"));
+            comentario.setUsuId(rs.getInt("usuid"));
+            comentario.setMensagem(rs.getString("mensagem"));
+            comentarios.add(comentario);
+        }
+        return comentarios;
+    }
 }
