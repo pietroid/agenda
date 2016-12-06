@@ -68,7 +68,7 @@
                         if (notificacaoCanc.getClassificacao()==0){
                     %>
                     <tr>
-                        <%=messageNotificacao %>
+                        -><%=messageNotificacao %> <br>
                     </tr>
                     <%
                         }
@@ -90,7 +90,7 @@
                         if (notificacaoEVE.getClassificacao()==1){
                     %>
                     <tr>
-                        <%=messageNotificacao %>
+                        -><%=messageNotificacao %><br>
                     </tr>
                     <%
                         }
@@ -113,7 +113,7 @@
                         if (notificacaoConf.getClassificacao()==2){
                     %>
                     <tr>
-                        <%=messageNotificacao %>
+                        -><%=messageNotificacao %><br>
                     </tr>
                     <%
                         }
@@ -136,7 +136,7 @@
                         if (notificacaoFeed.getClassificacao()==3){
                     %>
                     <tr>
-                        <%=messageNotificacao %>
+                        -><%=messageNotificacao %><br>
                     </tr>
                     <%
                         }
