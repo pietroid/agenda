@@ -18,7 +18,7 @@
     UsuarioDO SUser = (UsuarioDO)session.getAttribute("Usuario");
     if (SUser.isSuperUser()){
         if (request.getParameter("submit").equals("Confirmar")){ //
-            GEDO GEexcluir = (GEDO)session.getAttribute("GEDOclicado");//
+            GEDO GEexcluir = new GEDO(); //(GEDO)session.getAttribute("GEDOclicado");//
             GE GEtn = new GE();
             GEtn.excluir(GEexcluir);
         }
