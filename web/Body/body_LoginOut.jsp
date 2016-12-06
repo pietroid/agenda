@@ -36,7 +36,7 @@ if (request.getParameter("submit") != null){
     }
 }
 %>
-<FORM action="LoginOut.jsp" method="post">
+<FORM action="index.jsp" method="post">
 Usuário:<BR><INPUT type="text" name="login" value= ""> <BR><BR>
 Senha:<BR><INPUT type="password" name="senha" value= ""><BR><BR>
 <INPUT type="submit" name="submit" value= "Login">   
