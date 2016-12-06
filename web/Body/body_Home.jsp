@@ -37,13 +37,13 @@
     lista = seguindotn.pesquisarPorUSUid(usuario.getId());
     if(lista != null){
         if (lista.size() !=0){ 
-           %><p>Você segue estes eventos:</p><br><%}
-        else{ %><p>Você não segue evento algum!</p><br><% }
-%>
-        <center>
-        <table align="center" border=1 cellpadding=10 width=1000>
+           %><p>Você segue estes eventos:</p><br>
+             <center>
+             <table align="center" border=1 cellpadding=10 width=1000>
             <th> Evento <th>Grupo de extensão
-<%            
+           <%}
+        else{ %><p>Você não segue evento algum!</p><br><% }
+            
         List<EventoDO> lista_eventos = new ArrayList<EventoDO>();
         List<GEDO> lista_GE = new ArrayList<GEDO>();
         for(int i=0; i < lista.size(); i++) {
@@ -72,11 +72,14 @@
 %>
         </table>
         </center>
-<p>Os seus próximos eventos nessa semana são:</p><br>
+<%if (lista.size() !=0){ %>
+    <p>Os seus próximos eventos nessa semana são:</p><br>
         <center>
         <table align="center" border=1 cellpadding=10 width=1000>
             <th> Evento <th>Grupo de extensão <th> Data
-<%  for(int i=0; i < lista.size(); i++){
+<%}else %><p>Você não segue evento algum!</p><br> <% 
+
+    for(int i=0; i < lista.size(); i++){
         EventoDO eventoParte = lista_eventos.get(i);
         GEDO ge = lista_GE.get(i);
         
