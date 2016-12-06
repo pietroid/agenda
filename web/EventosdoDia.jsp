@@ -19,7 +19,7 @@
     table {
         font-family: "Verdana";
         border-collapse: collapse;
-        width: 70%;
+        width: 90%;
     }
 
     td, th {
@@ -56,24 +56,26 @@
       <th>Avaliação</th>
   </tr>    
 
-<% String str_ClickedDate =(String)session.getAttribute("str_ClickedDate");
+<% String str_ClickedDate =request.getParameter("str_ClickedDate");
 
-//java.sql.Date date_ClickedDate = java.sql.Date.valueOf(str_ClickedDate);
+%><%= str_ClickedDate %>---<%
+
+java.sql.Date date_ClickedDate = java.sql.Date.valueOf(str_ClickedDate);
       
 
 Evento tre = new Evento();
-List<EventoDO> eventos_do_Dia=new ArrayList<EventoDO>(); // = tre.buscarData(date_ClickedDate);
-%><%= str_ClickedDate %>---<%
+List<EventoDO> eventos_do_Dia=new ArrayList<EventoDO>();
+eventos_do_Dia = tre.buscarData(date_ClickedDate);
 for (EventoDO evento_temp : eventos_do_Dia) { %>
 <tr>
-    <td>fff<%=evento_temp.getNome()%></td>
-    <td><%=evento_temp.getDescricao()%></td>
-    <td><%=evento_temp.getTipo()%></td>
-    <td><%=evento_temp.getMacroEvento()%></td>
-    <td><%=evento_temp.getHoraInicial()%></td>
-    <td><%=evento_temp.getHoraFinal()%></td>
-    <td><%=evento_temp.getData()%></td>
-    <td><%=evento_temp.getAvaliação()%></td>
+    <td align="center"><%=evento_temp.getNome()%></td>
+    <td align="center"><%=evento_temp.getDescricao()%></td>
+    <td align="center"><%=evento_temp.getTipo()%></td>
+    <td align="center"><%=evento_temp.getMacroEvento()%></td>
+    <td align="center"><%=evento_temp.getHoraInicial()%></td>
+    <td align="center"><%=evento_temp.getHoraFinal()%></td>
+    <td align="center"><%=evento_temp.getData()%></td>
+    <td align="center"><%=evento_temp.getAvaliação()%></td>
 </tr>    
 <%}%>
 </table>
