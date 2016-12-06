@@ -30,7 +30,7 @@
                     </form>
                     <%
                     int Novaava;
-                    Novaava = Integer.parseInt("avaliacao");
+                    Novaava = Integer.parseInt(request.getParameter("avaliacao"));
                     int numava;
                     numava = us.getNumeroava();
                     Novaava = Novaava + us.getAvaliação();
