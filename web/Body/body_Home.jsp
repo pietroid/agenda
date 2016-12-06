@@ -65,8 +65,8 @@
             String nomeGE = ge.getNome();
 %>
             <TR>
-                <TD> <center><a href="Evento.jsp" <% session.setAttribute("EventoDO", evento); %>><%=nomeEven%></a><center> </TD>
-                <TD><center><a href="GE.jsp" <% session.setAttribute("GEDO", ge); %>><%=nomeGE%></a><center> </TD>
+                <TD> <center><a href="Evento.jsp?evento=<%=nomeEven%>"><%=nomeEven%></a><center> </TD>
+                <TD><center><a href="GE.jsp?GE=<%=nomeGE%>" ><%=nomeGE%></a><center> </TD>
             </TR>
 <%      }
 %>
@@ -77,12 +77,14 @@
         <table align="center" border=1 cellpadding=10 width=1000>
             <th> Evento <th>Grupo de extensão
 <%  for(int i=0; i < lista.size(); i++){
+        EventoDO evento = lista_eventos.get(i);
+        GEDO ge = lista_GE.get(i);
 %>
         <TR>
-            <TD><center><a href="Evento.jsp" <% session.setAttribute("EventoDO", lista_eventos.get(i)); %>
-                                ><<%=lista_eventos.get(i).getNome()%></a><center> </TD>
-            <TD><center><a href="GE.jsp" <% session.setAttribute("GEDO", lista_GE.get(i)); %>
-                           ><%=lista_GE.get(i).getNome()%></a><center> </TD>
+            <TD><center><a href="Evento.jsp?evento = <%=evento.getNome()%>"
+                                ><<%=evento.getNome()%></a><center> </TD>
+            <TD><center><a href="GE.jsp?GE = "<%=ge.getNome()%>><%=ge.getNome()%></a></center> </TD>
+
         </TR>
 <%        
     }
