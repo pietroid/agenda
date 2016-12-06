@@ -43,6 +43,10 @@
                 pageContext.forward("index.jsp");
             }
         }
+        else if(request.getParameter("reset") != null){
+            pageContext.forward("Eventos.jsp");
+        }
+
         else{
     %>
         Digite seu comentário: id é <%=request.getParameter("evento")%>
