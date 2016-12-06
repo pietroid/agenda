@@ -1,10 +1,9 @@
 <%-- 
     Document   : body_EditarEvento
-    Created on : 03/12/2016, 17:16:39
+    Created on : 05/12/2016, 19:18:21
     Author     : Marcus;
 --%>
 
-<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.sql.Time"%>
 <%@page import="java.sql.Date"%>
 <%@ page import="transacoes.Evento" %>
@@ -21,7 +20,6 @@
     </head>
     <%
     if (request.getAttribute("evento") != null) {
-        SimpleDateFormat originalFormat = new SimpleDateFormat("yyyy-mm-dd");
         EventoDO evento = (EventoDO) session.getAttribute("evento");
         Evento eventotn = new Evento();
         boolean updateevento = false;
@@ -72,10 +70,10 @@
                 <%
             }
             boolean macro = evento.getMacroEvento();
-            if(macro){
+            if(!macro){
     %>
     <div align = "left|justify">
-        <form action = "body_EditarEvento.jsp" method = "post">
+        <form action = "EditarEvento.jsp" method = "post">
             Nome do Evento:
             <INPUT type="text" name="EVEnome" maxlength = "30"><BR>
             Descrição:
@@ -96,10 +94,10 @@
     </div>
     <% 
             }
-            if(!macro){
+            if(macro){
     %>
     <div align = "left|justify">
-        <form action = "body_EditarEvento.jsp" method = "post">
+        <form action = "EditarEvento.jsp" method = "post">
             Nome do Evento:
             <INPUT type="text" name="EVEnome" maxlength = "30"> <BR>
             Descrição:

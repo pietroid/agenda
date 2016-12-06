@@ -37,7 +37,15 @@ public class RealizaData {
         ps.setInt(1, realiza.getId());
         int result = ps.executeUpdate();
     } // excluir
-
+    
+    public void excluirPorEVEid(int EVEid, Transacao tr) throws Exception {
+        Connection con = tr.obterConexao();
+        String sql = "delete from agenda.realiza where EVEid = ?";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setInt(1, EVEid);
+        int result = ps.executeUpdate();
+    }
+    
     public void atualizar(RealizaDO realiza, Transacao tr) throws Exception {
         Connection con = tr.obterConexao();
         String sql = "update agenda.realiza set GEid = ?, EVEid = ? where REALid = ?";

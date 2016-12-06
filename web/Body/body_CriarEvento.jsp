@@ -1,7 +1,7 @@
 <%-- 
-    Document   : body_CriarEvento
-    Created on : 05/12/2016, 17:36:54
-    Author     : Marcus
+    Document   : CriarEvento
+    Created on : 05/12/2016, 19:15:54
+    Author     : Marcus;
 --%>
 
 <%@page import="java.sql.Time"%>
@@ -26,7 +26,7 @@
         if (request.getParameter("submit") == null){
     %>
     <center>
-    <form action = "CriarEvento.jsp" method = "post">
+    <form action = "CriarEvento.jsp" methd = "post">
         Selecione se o evento é macro ou micro: <BR><BR>
         <input type="radio" name="Eve" value="macro" checked> Macro<br>
         <input type="radio" name="Eve" value="micro"> Micro<br>
@@ -66,7 +66,7 @@
                     evento.setHoraInicial(new Time(Integer.valueOf(request.getParameter("EVEhoraI")), Integer.valueOf(request.getParameter("EVEminI")), 0));
                     evento.setHoraFinal(new Time(Integer.valueOf(request.getParameter("EVEhoraT")), Integer.valueOf(request.getParameter("EVEminT")), 0));
                     evento.setData(new Date(Integer.valueOf(request.getParameter("EVEdataY")) - 1900, Integer.valueOf(request.getParameter("EVEdataM")) - 1, Integer.valueOf(request.getParameter("EVEdataD"))));
-                    evento.setMacroEvento(true);
+                    evento.setMacroEvento(false);
                     ok = eventotn.incluir(evento);
                     if (ok == true){
                         if (ge != null){
@@ -104,7 +104,7 @@
                     evento.setHoraInicial(new Time(Integer.valueOf(request.getParameter("EVEhoraI")), Integer.valueOf(request.getParameter("EVEminI")), 0));
                     evento.setHoraFinal(new Time(Integer.valueOf(request.getParameter("EVEhoraT")), Integer.valueOf(request.getParameter("EVEminT")), 0));
                     evento.setData(new Date(Integer.valueOf(request.getParameter("EVEdataY")) - 1900, Integer.valueOf(request.getParameter("EVEdataM")) - 1, Integer.valueOf(request.getParameter("EVEdataD"))));
-                    evento.setMacroEvento(false);
+                    evento.setMacroEvento(true);
                     ok = eventotn.incluir(evento);
                     if (ok == true){
                         if (ge != null){
@@ -158,10 +158,12 @@
         </FORM>
         <BR><BR>
     </div>
+    
     <%  
             }
             if((action != null) && action.equals ("macro")){
     %>
+    
     <div align = "left|justify">
         <FORM action = "CriarEvento.jsp" method = "post">
             Nome do Evento:
@@ -180,9 +182,11 @@
         </FORM>
         <BR><BR>
     </div>
+    
     <%  
             }
         }
     %>
+    
     </body>
 </html>
