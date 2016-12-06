@@ -31,6 +31,9 @@ if (session.getAttribute("Usuario")==null){ %>
 <%}%>
 
     <BR>
+    
+    <p>Ah, e que nota voc� daria para o evento?</p>
+    
     <BR>
     <form>
   <input type="radio" name="nota" value="Muito bom!" > Muito bom!
