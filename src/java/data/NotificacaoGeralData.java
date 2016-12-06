@@ -61,4 +61,21 @@ public class NotificacaoGeralData {
         return notificacaoGeral;
     } // buscar
  
+    public List<NotificacaoGeralDO> pesquisarPorUSUid(int USUid,Transacao tr) throws Exception{
+        Connection con = tr.obterConexao();
+        String sql = "select * from agenda.Usuario where USUid = ?";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setInt(1, USUid);
+        ResultSet rs = ps.executeQuery();
+        List<NotificacaoGeralDO> Items = new ArrayList<NotificacaoGeralDO>();
+        while (rs.next()){
+            NotificacaoGeralDO i = new NotificacaoGeralDO();
+            i.setId (rs.getInt("id"));
+            i.setUsuId (rs.getInt("USERalvoid"));
+            i.setMensagem (rs.getString("mensagem"));
+            i.setClassificacao (rs.getString("classificacao"));
+            i.setEVEassociado (rs.getInt("EVEassociado"));
+        }
+        return Items;
+    }//pesquisa notificações por Usuario
 }
