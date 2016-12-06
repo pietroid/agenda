@@ -51,7 +51,7 @@ GE getn = new GE();
         %>
         <BR>
             Você precisar Logar antes
-            <FORM action="LoginOut.jsp" method="post">
+            <FORM action="body_LoginOut.jsp" method="post">
             <INPUT type="submit" name="submit2" value="Logar">    
         <%    
         }
