@@ -70,7 +70,7 @@ li a:hover:not(.active) {
   else{
     %>
 
-<li style="float:right"><a href="/agenda/LogOut.jsp">Logout</a></li>  
+<li style="float:right"><a href="/agenda/Logout.jsp">Logout</a></li>  
 
     <%
         }
