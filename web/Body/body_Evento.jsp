@@ -11,7 +11,7 @@
 <%@ page import="transacoes.Usuario" %>
 <%@ page import="java.util.Vector" %>
 
-<%
+<% Integer.parseInt("1");
     if (request.getParameter("evento") != null){
         Comentario comentariotn = new Comentario();
         Evento eventotn = new Evento();
