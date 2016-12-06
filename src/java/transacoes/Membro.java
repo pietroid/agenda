@@ -48,12 +48,12 @@ public class Membro {
 	return null;
     } // buscar
     
-    public MembroDO buscarPorUSUid(int USUid) throws Exception{
+    public boolean isADM(int GEid, int USUid) throws Exception{
         Transacao tr = new Transacao();
 	try{
             tr.beginReadOnly();
   	    MembroData a = new MembroData();
-	    MembroDO i = a.buscarPorUSUid(USUid, tr);
+	    boolean i = a.isADM(GEid, USUid, tr);
             tr.commit();
             return i;
 	} catch (Exception e) {
@@ -61,7 +61,7 @@ public class Membro {
             System.out.println("Erro ao buscar" + USUid);
             e.printStackTrace();
 	}
-	return null;
+	return false;
     }
     
     private boolean isEmpty(String s) {
