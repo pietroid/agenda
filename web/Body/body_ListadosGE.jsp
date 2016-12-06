@@ -59,7 +59,5 @@ GE getn = new GE();
             }
             %>
         </center>
- 
-
     </body>
 </html>

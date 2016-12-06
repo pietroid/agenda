@@ -13,7 +13,7 @@
 <html>
     <body BGCOLOR = #f2f2f2>
         <font face="verdana">
-        <h1><center>Nome do Evento</center></h1>
+        <h1><center><%= evento.getNome() %></center></h1>
         <BR><BR>
         <table align="left" border=1 cellpadding=10 width=500>
             <tfoot>
