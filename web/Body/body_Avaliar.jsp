@@ -22,15 +22,15 @@
                         %>
                     <form>
                     Nota:<BR>
-                    <INPUT TYPE="RADIO" NAME="EVEavaliacao" VALUE="1" checked> opção1
-                    <INPUT TYPE="RADIO" NAME="EVEavaliacao" VALUE="2"> opção2
-                    <INPUT TYPE="RADIO" NAME="EVEavaliacao" VALUE="3"> opção3
-                    <INPUT TYPE="RADIO" NAME="EVEavaliacao" VALUE="4"> opção4
-                    <INPUT TYPE="RADIO" NAME="EVEavaliacao" VALUE="5"> opção5
+                    <INPUT TYPE="RADIO" NAME="avaliacao" VALUE="1" checked> opção1
+                    <INPUT TYPE="RADIO" NAME="avaliacao" VALUE="2"> opção2
+                    <INPUT TYPE="RADIO" NAME="avaliacao" VALUE="3"> opção3
+                    <INPUT TYPE="RADIO" NAME="avaliacao" VALUE="4"> opção4
+                    <INPUT TYPE="RADIO" NAME="avaliacao" VALUE="5"> opção5
                     </form>
                     <%
                     int Novaava;
-                    Novaava = Integer.parseInt("EVEavaliacao");
+                    Novaava = Integer.parseInt("avaliacao");
                     int numava;
                     numava = us.getNumeroava();
                     Novaava = Novaava + us.getAvaliação();
