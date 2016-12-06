@@ -20,7 +20,8 @@
     GE GEtr = new GE();
     String Idge = request.getParameter("GEDO");
     GEDO ge =GEtr.buscar(Integer.parseInt(Idge));
-      
+    boolean update = false;
+    
     if (request.getParameter("submit")== null) {%>
 <FORM action="AlterarInfoGE.jsp" method="post">
 Nome:<BR><INPUT type="text" maxlenght="140" name="nome" value="<%=ge.getNome() %>" ><BR><BR>
@@ -36,7 +37,7 @@ Tipo:<BR><INPUT type="text" name="tipo" value= "<%=ge.getTipo() %>"><BR><BR>
 <INPUT type="reset" name="reset" value= "Reset">
 <input type="hidden" name="GEDO" value="<%=request.getParameter("GEDO")%>">
 </FORM>
-<%} else if(request.getParameter("submit")!=null ) { 
+<%} else if(request.getParameter("submit")!=null) { 
  
 if (request.getParameter("nome")!= null) ge.setNome(request.getParameter("nome"));
 if (request.getParameter("descrição")!= null) ge.setDescricao(request.getParameter("descrição"));
@@ -69,11 +70,11 @@ if (request.getParameter("imagem")!= null) ge.setImagem(request.getParameter("im
 if (request.getParameter("tel")!= null) ge.setTel(request.getParameter("tel"));
 if (request.getParameter("tipo")!= null) ge.setTipo(request.getParameter("tipo"));
 
-}
+update = GEtr.atualizar(ge);
+if (update){%><br> Mudanças efetuadas com sucesso!<%}
+else {%><br> Erro ao efeitar mudanças! <%}
 
-boolean update = GEtr.atualizar(ge);
-if (update){%> Mudanças efetuadas com sucesso!<%}
-    else {%> Erro ao efeitar mudanças! <%}
+}
 
  %>
 </center>
