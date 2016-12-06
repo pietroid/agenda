@@ -117,6 +117,23 @@
     }
     else pageContext.forward("index.jsp");
     %>
+    <% 
+        if(session.getAttribute("Usuario")!= null){
+            UsuarioDO SUser = (UsuarioDO)session.getAttribute("Usuario");
+            if (SUser.isSuperUser()){
+                %>
+                <FORM action="ExcluirGrupo.jsp" method="post">
+                <INPUT type="submit" name="Excluir" value="Excluir Grupo">
+                <INPUT type="hidden" name="<%=idGEexclusao%>" value="ge.getId()">
+                </FORM>
+        
+        <%
+        
+    }    
+        }
+    
+    
+    %> 
     </body>
 </html>
 
