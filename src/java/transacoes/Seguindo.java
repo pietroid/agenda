@@ -48,12 +48,12 @@ public class Seguindo {
 	return null;
     } // buscar
 
-    public List<EventoDO> pesquisarPorUSUid(int USUid) throws Exception{
+    public List<SeguindoDO> pesquisarPorUSUid(int USUid) throws Exception{
         Transacao tr = new Transacao();
 	try{
             tr.beginReadOnly();
-  	    EventoData EventoData = new EventoData();
-	    List<EventoDO> i = EventoData.pesquisarPorEVEid(USUid, tr);
+  	    SeguindoData SeguindoData = new SeguindoData();
+	    List<SeguindoDO> i = SeguindoData.pesquisarPorUSUid(USUid, tr);
             tr.commit();
             return i;
 	} catch (Exception e) {

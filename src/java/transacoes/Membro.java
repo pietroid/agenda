@@ -64,6 +64,22 @@ public class Membro {
 	return null;
     } // Cria uma lista da busca pelo ID do usuario
 
+    public boolean isADM(int GEid, int USUid) throws Exception{
+        Transacao tr = new Transacao();
+	try{
+            tr.beginReadOnly();
+  	    MembroData a = new MembroData();
+	    boolean i = a.isADM(GEid, USUid, tr);
+            tr.commit();
+            return i;
+	} catch (Exception e) {
+            tr.rollback();
+            System.out.println("Erro ao buscar" + USUid);
+            e.printStackTrace();
+	}
+	return false;
+    }
+    
     private boolean isEmpty(String s) {
         if (null == s)
             return true;
