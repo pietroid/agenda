@@ -65,7 +65,8 @@
             String nomeGE = ge.getNome();
 %>
             <TR>
-                <TD> <%=nomeEven%> </TD> <TD><%=nomeGE%></TD>
+                <TD> <center><a href="Evento.jsp" <% session.setAttribute("EventoDO", evento); %>><%=nomeEven%></a><center> </TD>
+                <TD><center><a href="GE.jsp" <% session.setAttribute("GEDO", ge); %>><%=nomeGE%></a><center> </TD>
             </TR>
 <%      }
 %>
@@ -78,7 +79,10 @@
 <%  for(int i=0; i < lista.size(); i++){
 %>
         <TR>
-            <TD> <%=lista_eventos.get(i).getNome()%> </TD> <TD><%=lista_GE.get(i).getNome()%></TD>
+            <TD><center><a href="Evento.jsp" <% session.setAttribute("EventoDO", lista_eventos.get(i)); %>
+                                ><<%=lista_eventos.get(i).getNome()%></a><center> </TD>
+            <TD><center><a href="GE.jsp" <% session.setAttribute("GEDO", lista_GE.get(i)); %>
+                           ><%=lista_GE.get(i).getNome()%></a><center> </TD>
         </TR>
 <%        
     }
