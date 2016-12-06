@@ -11,7 +11,8 @@
         UsuarioDO us = new UsuarioDO();
         us = (UsuarioDO)session.getAttribute("Usuario");
         
-        %>
+        
+        if(request.getParameter("submit")==null){%>
 <FORM action="htto://www.google.com.br/formtest" method="post">
     Senha Atual:<BR><INPUT type="password" name="senhaAtual" value= ""> <BR><BR><BR>
 Nova Senha<BR><INPUT type="password" name="novaSenha" value= ""> <BR><BR>
