@@ -41,8 +41,8 @@
             boolean ok = false;
             Evento eventotn = new Evento();
             EventoDO evento = new EventoDO();
-            GEDO ge = (GEDO)session.getAttribute("GEDO");
             GE getn = new GE();
+            GEDO ge = getn.buscarNome(request.getParameter("GE"));
             RealizaDO realiza = new RealizaDO();
             Realiza realizatn = new Realiza();
             Pertence pertencetn = new Pertence();
