@@ -32,6 +32,7 @@
             ComentarioDO c = new ComentarioDO();
             Comentario trc = new Comentario();
             c.setMensagem(request.getParameter("comentario"));
+            %><%=request.getParameter("comentario")%><%
             Evento eventotn = new Evento();
             int EVEid = eventotn.buscarNome(request.getParameter("evento")).getId();
             UsuarioDO usuario = (UsuarioDO) session.getAttribute("Usuario");
@@ -39,17 +40,18 @@
             c.setUsuId(USUid);
             c.setEveId(EVEid);
             if (trc.incluir(c)){
-                pageContext.forward("PaineldeControle.jsp");
+                pageContext.forward("index.jsp");
             }
         }
         else{
     %>
-        Digite seu comentário:
+        Digite seu comentário: id é <%=request.getParameter("evento")%>
         <form>
 	<textarea name="comentario" rows="10" cols="55" maxlength="1000"></textarea>
         </center>
         <INPUT type="submit" name="submit" value= "Enviar Comentário">   
         <INPUT type="reset" name="reset" value= "Cancelar">
+        <INPUT type="hidden" name="evento" value="<%=request.getParameter("evento")%>">
 	</form><BR>
     <%
         }    

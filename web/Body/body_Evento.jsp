@@ -30,7 +30,7 @@
             
         <table align="center" border=1 cellpadding=10 width=500>
             <tfoot>
-                <tr><th><a href="CriarComentario.jsp" target="_top">Comentar</a></th></tr>
+                <tr><th><a href="CriarComentario.jsp?evento=<%=evento.getId() %>" target="_top">Comentar</a></th></tr>
             </tfoot>
             <th>Comentários</th>
             <%
