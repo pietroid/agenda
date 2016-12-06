@@ -33,6 +33,8 @@
     List<SeguindoDO> lista = new ArrayList<SeguindoDO>();
     lista = seguindotn.pesquisarPorUSUid(usuario.getId());
     if(lista != null){
+        if (lista.size() !=0) %><p>Você segue estes eventos:</p><br><%;
+        else %><p>Você não segue evento algum!</p><br><% ;
         for(int i=0; i < lista.size(); i++) {
             SeguindoDO seguido = lista.get(i);
             int EVEid = seguido.getEveId();
@@ -44,12 +46,16 @@
         </TR>
 
 <%      }
+%>
+<p>Os seus próximos eventos são:</p><br>
+<%  
     }
     else{
 %>
-Você não segue evento algum!
+<p>Você não segue evento algum!</p><br>
 <%
     }  
+<%  
 %>
 
 
@@ -62,12 +68,11 @@ Você não segue evento algum!
 <p><font size="2" face="verdana"><a href="/Agenda/ListadosGE.jsp" target="_top">Clique aqui
  para ver uma lista com todos os Grupos de Extensão</a></font></p> 
 
-<%@include  file="Calendario/body_Calendario.jsp"%>
-
-
 <%    
    }
 %>
+<%@include  file="Calendario/body_Calendario.jsp"%>
+
 </font>
 </body>
 </html>

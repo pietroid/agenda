@@ -73,7 +73,6 @@ public class SeguindoData {
             i.setId (rs.getInt("INSCid"));
             i.setUsuId (rs.getInt("USUid"));
             i.setEveId (rs.getInt("EVEid"));
-            
             Items.add(i);
         }
         return Items;
