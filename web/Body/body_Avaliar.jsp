@@ -35,9 +35,12 @@
                     int Novaava;
                     Novaava = Integer.parseInt("EVEavaliacao");
                     int numava;
-                    numava = getNumeroava();
-                    us.setAvaliação(Integer.parseInt("EVEavaliacao"));
-                    
+                    numava = us.getNumeroava();
+                    Novaava = Novaava + us.getAvaliação();
+                    numava = numava + 1;
+                    int Media;
+                    Media = Novaava/numava;
+                    us.setAvaliação(Media);
                             %>
     </body>
 </html>
