@@ -74,12 +74,28 @@
             
         <img src ="PastadeImagens/GrupodeExtensao1/Grupodeextensao1-imagem1.PNG" align="right" width = 250 height =" 300" >
 
-        <BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR>
+        <BR><BR><BR><BR><BR><BR><BR><BR><BR>
 
-        <BR><BR>
+        <BR>
+        
+        <!-------------------------------------------------------------------------------------------------->
+<!----------------------------- REDIRECIONA PARA FEEDBACK------------------------------------------->
+
+<p align="center"> <b>O que você achou do evento? </b></p> <BR>
+<FORM action="/agenda/Feedback.jsp" method="post">  
+    <center><INPUT type="submit" name="deixar_feedback" value="Deixe seu feedback" ></center> <BR>
+</form>
+<!---------------------------FIM DO REDICERIONADOR PARA FEEDBACK.JSP-------------------------------->
+<!-------------------------------------------------------------------------------------------------->
+        
+        <BR>
+        
 
         <p align="right"><a href="Calendário.jsp" target="_top">Clique aqui para voltar ao calendário</a></p>
-        <BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR>
+        <BR><BR><BR><BR>
+        
+        
+        
         <% 
         if (usuario.getNome() != null){
             RealizaDO realiza = realizatn.buscarPorEVE(evento.getId());
@@ -96,7 +112,10 @@
             }
         }
         %>
-        <a href="Avaliar.jsp?id=<%= evento.getId()%>">Avalie</a>
+        <p align="center"> <b>Avalie o evento </b></p> <BR>
+<FORM action="/agenda/Avaliar.jsp" method="post">  
+    <center><INPUT type="submit" name="deixar_feedback" value="Avaliar" ></center> <BR>
+</form>
     <%
     }
     else pageContext.forward("index.jsp");

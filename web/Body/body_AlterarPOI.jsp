@@ -12,13 +12,19 @@
 <%@ page import="transacoes.PontoDeInteresse" %>
 <%@ page import="data.PontoDeInteresseDO" %>
 <%@ page import="java.util.Vector" %>
+<%@page import="java.lang.Integer"%>
+
 
 
 <center>
-<% 
-    PontoDeInteresseDO PontoDeInteresse = new PontoDeInteresseDO();
-    PontoDeInteresse PontoDeInteressetr = new PontoDeInteresse();
-    if (request.getParameter("submit")== null) {%>
+<%  
+    if(request.getParameter("PontoDeInteresse") != null){
+        
+        PontoDeInteresseDO PontoDeInteresse = new PontoDeInteresseDO();
+        PontoDeInteresse PontoDeInteressetr = new PontoDeInteresse();
+        PontoDeInteresse = PontoDeInteressetr.buscarnome(request.getParameter("PontoDeInteresse"));
+
+        if (request.getParameter("submit")== null) {%>
 <FORM action="AlterarPOI.jsp" method="post">
 Nome:<BR><INPUT type="text" maxlenght="140" name="nome" value="" ><BR><BR>
 Descrição:<BR><INPUT type="text" maxlength="140" name="descrição" value= ""> <BR><BR>
@@ -41,6 +47,9 @@ if (request.getParameter("pasta_de_imagens")!= null) PontoDeInteresse.setPasta_d
 boolean update = PontoDeInteressetr.atualizar(PontoDeInteresse);
 
  %>
+ <% }else pageContext.forward("ListaPOI.jsp");     
+    
+%>
 </center>
 </body>
 </html>
