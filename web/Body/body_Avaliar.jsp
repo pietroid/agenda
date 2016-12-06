@@ -31,13 +31,13 @@
                     <INPUT TYPE="RADIO" NAME="EVEavaliacao" VALUE="4"> opção4
                     <INPUT TYPE="RADIO" NAME="EVEavaliacao" VALUE="5"> opção5
                     </form>
-                    Comentário:<BR>
-                    <form>
-                    <textarea name="EVEcomentario" rows="10" cols="55" maxlength="1000"></textarea>
-                    </center>
-                    <INPUT type="submit" name="submit" value= "Enviar Avaliação">   
-                    <INPUT type="reset" name="reset" value= "Cancelar">
-                    </form><BR>  
+                    <%
+                    int Novaava;
+                    Novaava = Integer.parseInt("EVEavaliacao");
+                    int numava;
+                    numava = getNumeroava();
+                    us.setAvaliação(Integer.parseInt("EVEavaliacao"));
                     
+                            %>
     </body>
 </html>
