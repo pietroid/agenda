@@ -6,9 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="data.EventoDO"%>
-<%@page import="data.UsuarioDO"%>
-<%@page import="data.ComentarioDO"%>
-<%@page import="transacoes.Comentario"%>
+<%@page import="transacoes.Evento"%>
 <%@page import="java.util.List"%>
 <%@ page import="java.util.*" %>
 <%@ page import="java.util.Vector" %>
@@ -19,6 +17,9 @@
         <h1><center>Avaliar<center></h1>
                 <BR>
                 <center>  
+                    <% EventoDO us=new EventoDO();
+                        Evento tr=new Evento();
+                        %>
                     <form>
                     Nota:<BR>
                     <INPUT TYPE="RADIO" NAME="EVEavaliacao" VALUE="1" checked> opção1
