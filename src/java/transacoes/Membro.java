@@ -48,6 +48,22 @@ public class Membro {
 	return null;
     } // buscar
     
+    public List<MembroDO> buscarPorUSUid(int MEMBERid) throws Exception{
+        Transacao tr = new Transacao();
+	try{
+            tr.beginReadOnly();
+  	    MembroData a = new MembroData();
+	    List<MembroDO> Lista = a.pesquisarPorUSUid(MEMBERid, tr);
+            tr.commit();
+            return Lista;
+	} catch (Exception e) {
+            tr.rollback();
+            System.out.println("Erro ao buscar" + MEMBERid);
+            e.printStackTrace();
+	}
+	return null;
+    } // Cria uma lista da busca pelo ID do usuario
+
     public boolean isADM(int GEid, int USUid) throws Exception{
         Transacao tr = new Transacao();
 	try{
