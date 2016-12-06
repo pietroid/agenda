@@ -24,9 +24,8 @@ GE getn = new GE();
                        GEDO ge = ges.get(i);
                 %>    
                 <tr>
-                <td width=10% height=150 ><center><iframe src="../PastadeImagens/GrupodeExtensao1/Grupodeextensao1-imagem1.PNG" 
-                                                          scrolling= no width=120 height=150 ></iframe></center>
-                          <td><center><a href="GE.jsp?GE=<%= ge.getNome()%>"><%= ge.getNome() %></a><center>
+                    <td width=10% height=150 ><center><iframe src="../PastadeImagens/GrupodeExtensao1/Grupodeextensao1-imagem1.PNG" scrolling= no width=120 height=150 ></iframe></center>
+                    <td><center><a href="GE.jsp?GE=<%= ge.getNome()%>"><%= ge.getNome() %></a></center>
                 </tr>
 
                 <%
