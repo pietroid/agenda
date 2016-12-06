@@ -19,12 +19,12 @@
         <title>Editar evento</title>
     </head>
     <%
-    if (request.getAttribute("evento") != null) {
-        EventoDO evento = (EventoDO) session.getAttribute("evento");
         Evento eventotn = new Evento();
-        boolean updateevento = false;
-        Pertence pertencetn = new Pertence();
-        PertenceDO pertence = new PertenceDO();
+        if (request.getParameter("evento") != null) {
+            EventoDO evento = eventotn.buscarNome(request.getParameter("evento"));
+            boolean updateevento = false;
+            Pertence pertencetn = new Pertence();
+            PertenceDO pertence = new PertenceDO();
     %>
     <body BGCOLOR = #f2f2f2>
         <center>
@@ -42,7 +42,7 @@
                 if (request.getParameter("EVEhoraT") != null && request.getParameter("EVEminT") != null && !(request.getParameter("EVEhoraT").equals("")) && !(request.getParameter("EVEminT").equals(""))) evento.setHoraFinal(new Time(Integer.valueOf(request.getParameter("EVEhoraT")), Integer.valueOf(request.getParameter("EVEminT")), 0));
                 if (request.getParameter("EVEdataD") != null && request.getParameter("EVEdataM") != null && request.getParameter("EVEdataY") != null && !(request.getParameter("EVEdataD").equals("")) && !(request.getParameter("EVEdataM").equals("")) && !(request.getParameter("EVEdataY").equals(""))) evento.setData(new Date(Integer.valueOf(request.getParameter("EVEdataY")) - 1900, Integer.valueOf(request.getParameter("EVEdataM")) - 1, Integer.valueOf(request.getParameter("EVEdataM"))));
                 if (request.getParameter("EVEmacro_evento") != null){
-                    EventoDO macro2 = eventotn.buscarNome("EVEmacro_evento");
+                    EventoDO macro2 = eventotn.buscarNome(request.getParameter("EVEmacro_evento"));
                     if (macro2 != null){
                         pertence = pertencetn.buscar(evento.getId());
                         pertence.setMacroId(macro2.getId());
@@ -73,7 +73,7 @@
             if(!macro){
     %>
     <div align = "left|justify">
-        <form action = "EditarEvento.jsp" method = "post">
+        <form action = "EditarEvento.jsp?evento=<%= evento.getNome() %>" method = "post">
             Nome do Evento:
             <INPUT type="text" name="EVEnome" maxlength = "30"><BR>
             Descrição:
@@ -88,7 +88,7 @@
             <INPUT type="number" name="EVEdataD" min = "1" max = "31" size = "2">/<INPUT type="number" name="EVEdataM" min = "1" max = "12" size = "2">/<INPUT type="number" name="EVEdataY" min = "2016" max = "2050" size = "4"><BR>
             Macro evento:
             <INPUT type="text" name="EVEmacro_evento"> <BR>
-            <INPUT type="submit" name="submit1" value="Submit">
+            <INPUT type="submit" name="submit1" value="Alterar">
         </FORM>
         <BR><BR>
     </div>
@@ -97,7 +97,7 @@
             if(macro){
     %>
     <div align = "left|justify">
-        <form action = "EditarEvento.jsp" method = "post">
+        <form action = "EditarEvento.jsp?evento=<%= evento.getNome() %>" method = "post">
             Nome do Evento:
             <INPUT type="text" name="EVEnome" maxlength = "30"> <BR>
             Descrição:
@@ -110,7 +110,7 @@
             <INPUT type="number" name="EVEhoraT" min = "0" max = "23" size = "2">:<INPUT type="number" name="EVEminT" min = "0" max = "59" size = "2"><BR>
             Data (dd/mm/yyyy):
             <INPUT type="number" name="EVEdataD" min = "1" max = "31" size = "2">/<INPUT type="number" name="EVEdataM" min = "1" max = "12" size = "2">/<INPUT type="number" name="EVEdataY" min = "2016" max = "2050" size = "4"><BR>
-            <INPUT type="submit" name="submit2" value="Submit">
+            <INPUT type="submit" name="submit2" value="Alterar">
         </FORM>
         <BR><BR>
     </div>

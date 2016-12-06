@@ -15,23 +15,23 @@
   
   <FORM action="Cadastro.jsp" method="post" id="usrform">
       Username <br>
-    <input type="text" name="username"\><br><br>
+    <input type="text" name="username"/><br><br>
     Senha <br>
-    <input type="password" name="senha"\><br><br>
+    <input type="password" name="senha"/><br><br>
     Repetir senha <br>
-    <input type="password" name="senha_rep"\><br><br>
+    <input type="password" name="senha_rep"/><br><br>
     Nome Completo <br>
-    <input type="text" name="nome"\><br><br>
+    <input type="text" name="nome"/><br><br>
     E-mail <br>
-    <input type="email" name="email"\><br><br>
+    <input type="email" name="email"/><br><br>
     Curso atual <br>
-    <input type="text" name="curso"\><br><br>
+    <input type="text" name="curso"/><br><br>
     Ano de ingresso <br>
-    <input type="text" name="ano"\><br><br>
+    <input type="text" name="ano"/><br><br>
     Pergunta de segurança <br>
-    <input type="text" name="pergunta"\><br><br>
+    <input type="text" name="pergunta"/><br><br>
     Resposta <br>
-    <input type="text" name="resposta"\><br><br>
+    <input type="text" name="resposta"/><br><br>
     Breve descrição:
  </FORM>
  <textarea rows="4" cols="50" name="bio" form="usrform">
