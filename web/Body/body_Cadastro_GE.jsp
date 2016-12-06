@@ -1,3 +1,6 @@
+<%@page import="data.UsuarioDO"%>
+<%@page import="data.MembroDO"%>
+<%@page import="transacoes.Membro"%>
 <%@page import="data.GEData"%>
 <%@page import="java.lang.Integer"%>
 <%@page import="transacoes.GE"%>
@@ -54,7 +57,10 @@ if (request.getParameter("submit") != null){
         <%
            GE novo = new GE();
            novo.incluir(grupo);
-        
+           MembroDO membro = new MembroDO ();
+           membro.setId(((UsuarioDO)session.getAttribute("usuario")).getId());
+           Membro tr = new Membro ();
+           tr.incluir (membro);
     }catch(Exception e){
     %>
         É necessário digitar um número para o ano <BR> 

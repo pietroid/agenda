@@ -43,7 +43,7 @@ GE getn = new GE();
             {
 
                 %>
-                <FORM action="Cadastro_GE.jsp" method="post">
+                <FORM action="CadastroGE.jsp" method="post">
                 <INPUT type="submit" name="submit3" value="Cadastrar"> 
                 </form>
             <%    
@@ -59,8 +59,7 @@ GE getn = new GE();
             }
             %>
         </center>
-            <FORM action="CadastroGE.jsp" method="post">
-            <INPUT type="submit" name="submit3" value="Cadastrar">    
+ 
 
     </body>
 </html>
