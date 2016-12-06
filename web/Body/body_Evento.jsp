@@ -83,7 +83,7 @@
 
 <p align="center"> <b>O que você achou do evento? </b></p> <BR>
 <FORM action="/agenda/Feedback.jsp" method="post">  
-    <center><INPUT type="submit" name="deixar_feedback" value="Deixe sua avaliação" ></center> <BR>
+    <center><INPUT type="submit" name="deixar_feedback" value="Deixe seu feedback" ></center> <BR>
 </form>
 <!---------------------------FIM DO REDICERIONADOR PARA FEEDBACK.JSP-------------------------------->
 <!-------------------------------------------------------------------------------------------------->
@@ -112,7 +112,10 @@
             }
         }
         %>
-        <a href="Avaliar.jsp?id=<%= evento.getId()%>">Avalie</a>
+        <p align="center"> <b>Avalie o evento </b></p> <BR>
+<FORM action="/agenda/Avaliar.jsp" method="post">  
+    <center><INPUT type="submit" name="deixar_feedback" value="Avaliar" ></center> <BR>
+</form>
     <%
     }
     else pageContext.forward("index.jsp");
