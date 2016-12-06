@@ -73,7 +73,7 @@
         %>
                 <table align="left" border=1 cellpadding=10 width=500>
                     <th> 
-                         <center> <a href="/agenda/AlterarInfoGE.jsp" target="_top"> Alterar Informações </a> </center> 
+                         <center> <a href="/agenda/AlterarInfoGE.jsp?GEDO=<%=ge.getId()%>" target="_top"> Alterar Informações </a> </center> 
                     </th>
                 </table>
         <%
@@ -117,6 +117,24 @@
     }
     else pageContext.forward("index.jsp");
     %>
+    <% 
+        if(session.getAttribute("Usuario")!= null){
+            UsuarioDO SUser = (UsuarioDO)session.getAttribute("Usuario");
+            if (SUser.isSuperUser()){
+                int idGEexclusao = 0;
+                %>
+                <FORM action="ExcluirGrupo.jsp" method="post">
+                <INPUT type="submit" name="Excluir" value="Excluir Grupo">
+                <INPUT type="hidden" name="<%=idGEexclusao%>" value="ge.getId()">
+                </FORM>
+        
+        <%
+        
+    }    
+        }
+    
+    
+    %> 
     </body>
 </html>
 

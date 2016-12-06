@@ -6,12 +6,11 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="data.EventoDO"%>
-<%@page import="data.UsuarioDO"%>
-<%@page import="data.ComentarioDO"%>
-<%@page import="transacoes.Comentario"%>
+<%@page import="transacoes.Evento"%>
 <%@page import="java.util.List"%>
 <%@ page import="java.util.*" %>
 <%@ page import="java.util.Vector" %>
+<%@page import="java.util.List"%>
 <!DOCTYPE html>
 <html>
     <body BGCOLOR = #f2f2f2>
@@ -19,25 +18,11 @@
         <h1><center>Avaliar<center></h1>
                 <BR>
                 <center>  
-                    
-    <%
-    //Verifica se o usuário está logado
-    if (session.getAttribute("Usuario")!=null){
-        //Verifica se enviou o comentário
-        if (request.getParameter("submit") != null){
-            UsuarioDO usuario = (UsuarioDO) session.getAttribute("Usuario");
-            EventoDO evento = (EventoDO) session.getAttribute("EVEid");
-            ComentarioDO c = new ComentarioDO();
-            Comentario trc = new Comentario();
-            c.setMensagem(request.getParameter("comentario"));
-            c.setUsuId(usuario.getId());
-            //c.setEveId(evento.getId());
-            if (trc.incluir(c)){
-                pageContext.forward("PaineldeControle.jsp");
-            }
-        }
-        else{
-    %>
+                    <%
+                EventoDO us=new EventoDO();
+                Evento tr=new Evento();
+                us=tr.buscar(Integer.parseInt(request.getParameter("id")));
+%>
                     <form>
                     Nota:<BR>
                     <INPUT TYPE="RADIO" NAME="EVEavaliacao" VALUE="1" checked> opção1
