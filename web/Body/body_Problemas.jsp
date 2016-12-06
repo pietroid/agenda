@@ -25,21 +25,21 @@ Usuario  ustn = new Usuario();
 
         <center>
             <table align="center" border=1 cellpadding=10 width=1000>
-                <th>Usuário <th>Problema<th>Data</th>
+                <th>Usuário <th>Problema<th>Data</th>Excluir Notificação
     
                 <%   
                     List<ProblemaDO> ges = getn.buscarTodos();
                     for(int i = 0; i < ges.size(); i++){
                        ProblemaDO ge = ges.get(i);
-                       
                        int USid = ge.getUserId();
                        UsuarioDO us = ustn.buscarPorID(USid);
                        
                 %>    
                 <tr>
-                    <td><center><a href="Usuario.jsp?Usuario=<%= us.getNome()%>"><%= us.getNome() %></a></center>
+                    <td><center><a href="Usuario.jsp?Usuario=<%= us.getId()%>"><%= us.getNome() %></a></center>
                     <td><center> <%= ge.getMensagem()%></center>
                     <td><center> <%= ge.getData()%></center>
+                    <td><center><a href="ExcluirProblema.jsp?ExcluirProblema=<%= ge.getId()%>"><%= ge.getId() %></a></center>
                 </tr>
 
                 <%
