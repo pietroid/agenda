@@ -61,6 +61,6 @@ GE getn = new GE();
         </center>
             <FORM action="CadastroGE.jsp" method="post">
             <INPUT type="submit" name="submit3" value="Cadastrar">    
-
+            </form>
     </body>
 </html>
