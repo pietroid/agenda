@@ -16,7 +16,7 @@
 <html>
     <body BGCOLOR = #f2f2f2>
         <font face="verdana">
-        <h1><center>Nome do Grupo</center></h1>
+        <h1><center><%= ge.getNome() %></center></h1>
         <BR><BR>
 
         <p align="left"><a href="/agenda/Calendario.jsp" target="_top">Voltar ao calendário</a></p>
