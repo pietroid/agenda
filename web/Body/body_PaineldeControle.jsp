@@ -43,15 +43,6 @@
 </table>
  <BR><BR><BR><BR>
 <table align="left" border=1 cellpadding=10 width=500>
-<th colspan="2">Grupos de Extensão</th>
-<tr>
-  <td><a href="/agenda/AlterarInfoGE.jsp"  target="_top"><font size="3" >Alterar Grupo de extensão</font></a></td>
-  <td><a href="/agenda/ExcluirGrupo.jsp"  target="_top"><font size="3" >Excluir Grupo de extensão</font></a></td>
-</tr>
-</table>
-
- <BR><BR><BR><BR>
-<table align="left" border=1 cellpadding=10 width=500>
 <th colspan="2">Pontos de Interesse</th>    
  <BR><th <p><font size="2" face="verdana"><a href="/agenda/body_GE.jsp">Clique aqui
  para ver uma lista com todos os Pontos de Interesse</a></font></p> </th>    
