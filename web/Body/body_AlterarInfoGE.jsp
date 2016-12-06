@@ -23,15 +23,15 @@
       
     if (request.getParameter("submit")== null) {%>
 <FORM action="AlterarInfoGE.jsp" method="post">
-Nome:<BR><INPUT type="text" maxlenght="140" name="nome" value="" ><BR><BR>
-Descrição:<BR><INPUT type="text" maxlength="140" name="descrição" value= ""> <BR><BR>
-E-mail:<BR><INPUT type="text" name="email" value= ""><BR><BR>
-Ano:<BR><INPUT type="int" name="ano" value= ""><BR><BR>
-Site:<BR><INPUT type="text" name="site" value= ""><BR><BR>
-Facebook:<BR><INPUT type="text" name="face" value= ""><BR><BR>
-Imagem:<BR><INPUT type="text" name="imagem" value= ""><BR><BR>
-Telefone:<BR><INPUT type="text" name="tel" value= ""><BR><BR>
-Tipo:<BR><INPUT type="text" name="tipo" value= ""><BR><BR>
+Nome:<BR><INPUT type="text" maxlenght="140" name="nome" value="<%=ge.getNome() %>" ><BR><BR>
+Descrição:<BR><INPUT type="text" maxlength="140" name="descrição" value= "<%=ge.getDescricao() %>"> <BR><BR>
+E-mail:<BR><INPUT type="text" name="email" value= "<%=ge.getEmail() %>" ><BR><BR>
+Ano:<BR><INPUT type="int" name="ano" value= "<%=ge.getAno() %>"><BR><BR>
+Site:<BR><INPUT type="text" name="site" value= "<%=ge.getSite() %>"><BR><BR>
+Facebook:<BR><INPUT type="text" name="face" value= "<%=ge.getFace() %>"><BR><BR>
+Imagem:<BR><INPUT type="text" name="imagem" value= "<%=ge.getImagem() %> "><BR><BR>
+Telefone:<BR><INPUT type="text" name="tel" value= "<%=ge.getTel() %>"><BR><BR>
+Tipo:<BR><INPUT type="text" name="tipo" value= "<%=ge.getTipo() %>"><BR><BR>
 <INPUT type="submit" name="submit" value= "Salvar Mudanças">   
 <INPUT type="reset" name="reset" value= "Reset">
 <input type="hidden" name="GEDO" value="<%=request.getParameter("GEDO")%>">
@@ -47,18 +47,19 @@ if (request.getParameter("ano")!= null){
     }catch(Exception e){
         %>
 <FORM action="AlterarInfoGE.jsp" method="post">
-Nome:<BR><INPUT type="text" maxlenght="140" name="nome" value="" ><BR><BR>
-Descrição:<BR><INPUT type="text" maxlength="140" name="descrição" value= ""> <BR><BR>
-E-mail:<BR><INPUT type="text" name="email" value= ""><BR><BR>
-Ano:<BR><INPUT type="int" name="ano" value= ""><BR><BR>
-Site:<BR><INPUT type="text" name="site" value= ""><BR><BR>
-Facebook:<BR><INPUT type="text" name="face" value= ""><BR><BR>
-Imagem:<BR><INPUT type="text" name="imagem" value= ""><BR><BR>
-Telefone:<BR><INPUT type="text" name="tel" value= ""><BR><BR>
-Tipo:<BR><INPUT type="text" name="tipo" value= ""><BR><BR>
+Nome:<BR><INPUT type="text" maxlenght="140" name="nome" value="<%=ge.getNome() %>" ><BR><BR>
+Descrição:<BR><INPUT type="text" maxlength="140" name="descrição" value= "<%=ge.getDescricao() %>"> <BR><BR>
+E-mail:<BR><INPUT type="text" name="email" value= "<%=ge.getEmail() %>" ><BR><BR>
+Ano:<BR><INPUT type="int" name="ano" value= "<%=ge.getAno() %>"><BR><BR>
+Site:<BR><INPUT type="text" name="site" value= "<%=ge.getSite() %>"><BR><BR>
+Facebook:<BR><INPUT type="text" name="face" value= "<%=ge.getFace() %>"><BR><BR>
+Imagem:<BR><INPUT type="text" name="imagem" value= "<%=ge.getImagem() %> "><BR><BR>
+Telefone:<BR><INPUT type="text" name="tel" value= "<%=ge.getTel() %>"><BR><BR>
+Tipo:<BR><INPUT type="text" name="tipo" value= "<%=ge.getTipo() %>"><BR><BR>
 <INPUT type="submit" name="submit" value= "Salvar Mudanças">   
 <INPUT type="reset" name="reset" value= "Reset">
 <input type="hidden" name="GEDO" value="<%=request.getParameter("GEDO")%>">
+</FORM>
     <%
     }
 }
