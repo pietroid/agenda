@@ -69,7 +69,19 @@ public class RealizaData {
         realiza.setEVEid(rs.getInt("EVEid"));
         return realiza;
     } // buscar
-    
+    public RealizaDO buscarPorEVE(int EVEid, Transacao tr) throws Exception {
+        Connection con = tr.obterConexao();
+        String sql = "select * from agenda.realiza where EVEid = ?";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setInt(1, EVEid);
+        ResultSet rs = ps.executeQuery();
+        rs.first();
+        RealizaDO realiza = new RealizaDO();
+        realiza.setId(rs.getInt("REALid"));
+        realiza.setGEid(rs.getInt("GEid"));
+        realiza.setEVEid(rs.getInt("EVEid"));
+        return realiza;
+    }
     public List<RealizaDO> pesquisarPorGEid(int GEid, Transacao tr) throws Exception {
         Connection con = tr.obterConexao();
         String sql = "select * from agenda.realiza where GEid = ?";

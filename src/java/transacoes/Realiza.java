@@ -82,6 +82,22 @@ public class Realiza {
 	return null;
     } // buscar
 
+    public RealizaDO buscarPorEVE(int EVEid) throws Exception{
+        Transacao tr = new Transacao();
+	try{
+            tr.beginReadOnly();
+  	    RealizaData realizaData = new RealizaData();
+	    RealizaDO i = realizaData.buscarPorEVE(EVEid, tr);
+            tr.commit();
+            return i;
+	} catch (Exception e) {
+            tr.rollback();
+            System.out.println("Erro ao buscar" + EVEid);
+            e.printStackTrace();
+	}
+	return null;
+    }
+    
     public List<RealizaDO> pesquisar(int GEid) {
         if (isEmpty(String.valueOf(GEid)))
         return null;

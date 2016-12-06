@@ -1,4 +1,3 @@
-
 <html>
 <body BGCOLOR = #f2f2f2>
 <font face="verdana">
@@ -11,6 +10,10 @@
 <%@ page import="data.SeguindoDO" %>
 <%@ page import="transacoes.Evento" %>
 <%@ page import="data.EventoDO" %>
+<%@ page import="transacoes.Realiza" %>
+<%@ page import= "data.GEDO"%>
+<%@ page import= "transacoes.GE"%>
+<%@ page import= "data.RealizaDO"%>
 
 <%
     if(session.getAttribute("Usuario")!= null) //HOME LOGADO
@@ -33,20 +36,34 @@
     List<SeguindoDO> lista = new ArrayList<SeguindoDO>();
     lista = seguindotn.pesquisarPorUSUid(usuario.getId());
     if(lista != null){
-        if (lista.size() !=0) %><p>Você segue estes eventos:</p><br><%;
-        else %><p>Você não segue evento algum!</p><br><% ;
+        if (lista.size() !=0){ 
+           %><p>Você segue estes eventos:</p><br><%}
+        else{ %><p>Você não segue evento algum!</p><br><% }
+%>
+        <center>
+        <table align="center" border=1 cellpadding=10 width=1000>
+            <th> Evento <th>Grupo de extensão
+<%            
         for(int i=0; i < lista.size(); i++) {
             SeguindoDO seguido = lista.get(i);
             int EVEid = seguido.getEveId();
-            Evento evento = new Evento();
-            String nomeEven = evento.buscar(EVEid).getNome();
+            
+            Evento eventotn = new Evento();
+            EventoDO evento = eventotn.buscar(EVEid);
+            String nomeEven = evento.getNome();
+            
+            Realiza realizatn = new Realiza();
+            RealizaDO realiza = realizatn.buscarPorEVE(EVEid);            
+            int GEid = realiza.getGEid();
+            
 %>
-        <TR>
-            <TD> <%=nomeEven%> </TD>
-        </TR>
-
+            <TR>
+                <TD> <%=nomeEven%> </TD> <TD><2></TD>
+            </TR>
 <%      }
 %>
+        </table>
+        </center>
 <p>Os seus próximos eventos são:</p><br>
 <%  
     }
@@ -71,6 +88,7 @@
 <%    
    }
 %>
+<p>Calendário</p>
 <%@include  file="Calendario/body_Calendario.jsp"%>
 
 </font>
