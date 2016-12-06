@@ -18,7 +18,7 @@
     UsuarioDO usuario = (UsuarioDO)session.getAttribute("Usuario");
     String nome = usuario.getNome();
     
-    /*alyson*/
+    /*---ALYSON---*/
     
     //Cria uma lista de acordo com o membro para ver se ele possui privilegios de adm de grupo de extensão
     int IDusuario = usuario.getId();
@@ -29,7 +29,7 @@
     NotificacaoGeral list = new NotificacaoGeral();
     List<NotificacaoGeralDO> ListaNotificacao = list.BuscaNotporUSId(IDusuario);
     String messageNotificacao;
-    
+    /*---ALYSON---*/
 %>
 <h1><center> Perfil <center> </h1>
 
@@ -51,7 +51,7 @@
             LiderGE = 1;
         }
     }
-    
+    /*-----ALYSON--------*/
     //Notificacao para usuario ADM
 %>
     <p><font size="3" face="verdana">Notificações:</p>
