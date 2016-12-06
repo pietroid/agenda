@@ -67,7 +67,7 @@ public class PertenceData {
     
     public void atualizar(PertenceDO pertence, Transacao tr) throws Exception {
         Connection con = tr.obterConexao();
-        String sql = "update evento set macroEventoId=?, microEventoId = ? where id=?";
+        String sql = "update pertence set macroEventoId=?, microEventoId = ? where id=?";
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setInt(1, pertence.getMacroId());
         ps.setInt(2, pertence.getMicroId());
