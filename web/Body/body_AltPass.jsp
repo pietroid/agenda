@@ -40,7 +40,7 @@ Repita a Nova Senha<BR><INPUT type="password" name="repNovaSenha" value= ""> <BR
         }else{
 %><p>Senha atual incorreta! Você precisa digitar a senha atual para mudá-la.</p><%
         };
-        
+        }    
         %>
 
 <center>
