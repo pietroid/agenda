@@ -23,7 +23,7 @@
         Realiza realizatn = new Realiza();
         boolean isadm = false;
         boolean superuser = false;
-        GEDO ge = getn.buscarNome(request.getParameter("GE"));
+        GEDO ge = getn.buscarNome(request.getParameter("GE")); //
         if (usuario.getNome() != null){
             superuser = usuario.isSuperUser();
             isadm = membrotn.isADM(ge.getId(), usuario.getId());
