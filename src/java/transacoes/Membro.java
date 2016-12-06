@@ -47,7 +47,23 @@ public class Membro {
 	}
 	return null;
     } // buscar
-
+    
+    public MembroDO buscarPorUSUid(int USUid) throws Exception{
+        Transacao tr = new Transacao();
+	try{
+            tr.beginReadOnly();
+  	    MembroData a = new MembroData();
+	    MembroDO i = a.buscarPorUSUid(USUid, tr);
+            tr.commit();
+            return i;
+	} catch (Exception e) {
+            tr.rollback();
+            System.out.println("Erro ao buscar" + USUid);
+            e.printStackTrace();
+	}
+	return null;
+    }
+    
     private boolean isEmpty(String s) {
         if (null == s)
             return true;
