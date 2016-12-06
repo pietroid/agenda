@@ -10,8 +10,12 @@
 <%@ page import="data.PertenceDO" %>
 <%@ page import="transacoes.Comentario" %>
 <%@ page import="data.ComentarioDO" %>
+<%@ page import="transacoes.Usuario" %>
+<%@ page import="data.UsuarioDO" %>
 <%@ page import="transacoes.Realiza" %>
 <%@ page import="data.RealizaDO" %>
+<%@ page import="transacoes.Membro" %>
+<%@ page import="data.MembroDO" %>
 <%@ page import="java.util.*" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -23,11 +27,22 @@
     <body BGCOLOR = #f2f2f2>
         <font face="verdana">
         <% 
-            Evento eventotn = new Evento();
-            if (request.getParameter("evento") != null){
-                EventoDO evento = eventotn.buscarNome(request.getParameter("evento"));
-                if (evento != null){
-                    if (request.getParameter("submit") == null){
+            UsuarioDO usuario = new UsuarioDO();
+            if (session.getAttribute("Usuario") != null){
+                usuario = (UsuarioDO) session.getAttribute("Usuario");
+            }
+            if (usuario.getNome() != null){
+                Membro membrotn = new Membro();
+                Usuario usuariotn = new Usuario();
+                Evento eventotn = new Evento();
+                if (request.getParameter("evento") != null){
+                    EventoDO evento = eventotn.buscarNome(request.getParameter("evento"));
+                    Realiza realizatn = new Realiza();
+                    RealizaDO realiza = realizatn.buscarPorEVE(evento.getId());
+                    boolean isadm = membrotn.isADM(realiza.getGEid(), usuario.getId());
+                    if (usuario.isSuperUser() == true || isadm == true){
+                        if (evento != null){
+                            if (request.getParameter("submit") == null){
                     %>  
                         <center>
                             Deseja excluir o evento: <%= evento.getNome() %>?
@@ -38,38 +53,37 @@
                             </form>
                         </center>
                     <%
-                    }
-                    else{
-                        String action = request.getParameter("Eve");
-                        Pertence pertencetn = new Pertence();
-                        Comentario comentariotn = new Comentario();
-                        Realiza realizatn = new Realiza();
-                        if(action.equals("sim")){
-                            if (evento.getMacroEvento() == true){
-                                List<Integer> microIds = pertencetn.buscarMicroPorMacro(evento);
-                                for(int i = 0; i < microIds.size(); i++){
-                                    realizatn.excluirPorEVEid(microIds.get(i));
-                                    eventotn.excluir(eventotn.buscar(microIds.get(i)));
-                                }
-                                pertencetn.excluirPorMacro(evento.getId());
-                                realizatn.excluirPorEVEid(evento.getId());
-                                comentariotn.excluirPorEVEid(evento.getId());
-                                eventotn.excluir(evento);
                             }
                             else{
-                                pertencetn.excluirPorMicro(evento.getId());
-                                comentariotn.excluirPorEVEid(evento.getId());
-                                realizatn.excluirPorEVEid(evento.getId());
-                                eventotn.excluir(evento);
-                            }
+                                String action = request.getParameter("Eve");
+                                Pertence pertencetn = new Pertence();
+                                Comentario comentariotn = new Comentario();
+                                if(action.equals("sim")){
+                                    if (evento.getMacroEvento() == true){
+                                        List<Integer> microIds = pertencetn.buscarMicroPorMacro(evento);
+                                        for(int i = 0; i < microIds.size(); i++){
+                                            realizatn.excluirPorEVEid(microIds.get(i));
+                                            eventotn.excluir(eventotn.buscar(microIds.get(i)));
+                                        }
+                                        pertencetn.excluirPorMacro(evento.getId());
+                                        realizatn.excluirPorEVEid(evento.getId());
+                                        comentariotn.excluirPorEVEid(evento.getId());
+                                        eventotn.excluir(evento);
+                                    }
+                                    else{
+                                        pertencetn.excluirPorMicro(evento.getId());
+                                        comentariotn.excluirPorEVEid(evento.getId());
+                                        realizatn.excluirPorEVEid(evento.getId());
+                                        eventotn.excluir(evento);
+                                    }
                     %>
                             <center>
                                 Evento excluído. <BR>
                             </center>
 
                     <%
-                        }
-                        if(action.equals("nao")){
+                                }
+                                if(action.equals("nao")){
                     %>
 
                             <center>
@@ -77,10 +91,15 @@
                             </center>
 
                     <%
+                                }
+                            }   
                         }
-                    }   
+                    }
+                    else pageContext.forward("index.jsp");
                 }
+                else pageContext.forward("index.jsp");
             }
+            else pageContext.forward("index.jsp");
         %>
     </body>
 </html>
