@@ -28,7 +28,6 @@
                 if (session.getAttribute("Usuario")!=null){
                     UsuarioDO usuario = (UsuarioDO)session.getAttribute("Usuario");
                     Integer usuarioid = usuario.getId();
-                    String email = usuario.getEmail();
                     problema.setUserId(usuarioid);
                 }
                 problema.setMensagem(action);
