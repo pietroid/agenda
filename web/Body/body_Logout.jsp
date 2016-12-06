@@ -17,7 +17,7 @@
 
 
 <%
-UsuarioDO user=(UsuarioDO)session.getAttribute("Usuário");
+UsuarioDO user=(UsuarioDO)session.getAttribute("Usuario");
 if(user !=null){
     session.setAttribute("Usuario", null);
     }
