@@ -11,7 +11,7 @@
     GE getn = new GE();
     Evento eventotn = new Evento();
     Realiza realizatn = new Realiza();
-    GEDO ge = (GEDO)session.getAttribute("GEDO");
+    GEDO ge = getn.buscarNome(request.getParameter("GE"));
 %>
 <html>
     <body BGCOLOR = #f2f2f2>
@@ -73,7 +73,7 @@
                     EventoDO evento = eventos.get(i);
                 %>
             <tr>
-                <td><center><a href="Evento.jsp" <% session.setAttribute("EventoDO", evento); %>><%= evento.getNome() %></a><center>
+                <td><center><a href="Evento.jsp?evento=<%= evento.getNome() %>"><%= evento.getNome() %></a><center>
             </tr>
             <%
                 }
@@ -84,7 +84,7 @@
 
 <table align="center" border=1 cellpadding=10 width=500>
 <tr>
-  <td><a href="CriarEvento.jsp" <% session.setAttribute("GEDO", ge); %> target="_top"><font size="5" color="#ff0000">Criar evento</font></a></td>
+  <td><a href="CriarEvento.jsp?ge=<%= ge.getNome() %>" target="_top"><font size="5" color="#ff0000">Criar evento</font></a></td>
 </tr>
 </table>
 
