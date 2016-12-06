@@ -43,7 +43,39 @@ public class Pertence {
             return true;
 	} catch (Exception e) {
             tr.rollback();
-            System.out.println("Erro ao atualizar" + pertence.getId());
+            System.out.println("Erro ao excluir " + pertence.getId());
+            e.printStackTrace();
+	}
+	return false;
+    }
+    
+    public boolean excluirPorMacro(int macroId) throws Exception{
+        Transacao tr = new Transacao();
+	try{
+            tr.begin();
+            PertenceData pertenceData = new PertenceData();
+            pertenceData.excluirPorMacro(macroId, tr);
+            tr.commit();
+            return true;
+	} catch (Exception e) {
+            tr.rollback();
+            System.out.println("Erro ao atualizar o evento com macroId = " + macroId);
+            e.printStackTrace();
+	}
+	return false;
+    }
+    
+    public boolean excluirPorMicro(int microId) throws Exception{
+        Transacao tr = new Transacao();
+	try{
+            tr.begin();
+            PertenceData pertenceData = new PertenceData();
+            pertenceData.excluirPorMicro(microId, tr);
+            tr.commit();
+            return true;
+	} catch (Exception e) {
+            tr.rollback();
+            System.out.println("Erro ao excluir o evento com microId = " + microId);
             e.printStackTrace();
 	}
 	return false;
@@ -60,7 +92,7 @@ public class Pertence {
             return true;
 	} catch (Exception e) {
             tr.rollback();
-            System.out.println("Erro ao atualizar" + pertence.getId());
+            System.out.println("Erro ao atualizar " + pertence.getId());
             e.printStackTrace();
 	}
 	return false;
@@ -76,7 +108,7 @@ public class Pertence {
             return i;
 	} catch (Exception e) {
             tr.rollback();
-            System.out.println("Erro ao buscar" + id);
+            System.out.println("Erro ao buscar " + id);
 	}
 	return null;
     }
@@ -91,7 +123,7 @@ public class Pertence {
             return i;
 	} catch (Exception e) {
             tr.rollback();
-            System.out.println("Erro ao buscar" + evento.getId());
+            System.out.println("Erro ao buscar " + evento.getId());
             e.printStackTrace();
 	}
 	return null;

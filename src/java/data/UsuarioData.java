@@ -56,6 +56,15 @@ public class UsuarioData {
   
         return usuario;
     }
+    public void excluir(UsuarioDO usuario, Transacao tr) throws Exception {
+        String username = usuario.getUsername();
+        Connection con = tr.obterConexao();
+        String sql = "delete * from agenda.Usuario where Username = ?";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setString(1, username);
+        ResultSet rs = ps.executeQuery();
+        rs.first();
+    };
     private int boolToInt(boolean value){
         if(value){
             return 1;
@@ -69,14 +78,13 @@ public class UsuarioData {
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setInt(1, id);
         ResultSet rs = ps.executeQuery();
-        UsuarioDO usuario = null;
         rs.first();
-        usuario = new UsuarioDO();    
+        UsuarioDO usuario = new UsuarioDO();    
         usuario.setUsername(rs.getString("Username"));
         usuario.setSenha(rs.getString("Senha"));
         usuario.setId(rs.getInt("USUid"));
         usuario.setNome(rs.getString("USnome"));
-        usuario.setEmail(rs.getString("E-mail"));
+        usuario.setEmail(rs.getString("Email"));
         usuario.setBio(rs.getString("USbio"));
         usuario.setImagem(rs.getString("USimagem"));
         usuario.setData(rs.getDate("USdata"));
@@ -86,7 +94,6 @@ public class UsuarioData {
         usuario.setSuperUser(rs.getInt("USuperuser")==1);
         usuario.setPergunta(rs.getString("USpergunta"));
         usuario.setResposta(rs.getString("USresposta"));
-  
         return usuario;
     }    
     
