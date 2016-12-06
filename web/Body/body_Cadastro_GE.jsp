@@ -58,7 +58,9 @@ if (request.getParameter("submit") != null){
            GE novo = new GE();
            novo.incluir(grupo);
            MembroDO membro = new MembroDO ();
-           membro.setId(((UsuarioDO)session.getAttribute("usuario")).getId());
+           membro.setUSUid(((UsuarioDO)session.getAttribute("usuario")).getId());
+           membro.setGEid(grupo.getId());
+           membro.setADM(1);
            Membro tr = new Membro ();
            tr.incluir (membro);
     }catch(Exception e){
