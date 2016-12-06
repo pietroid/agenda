@@ -6,7 +6,9 @@
 
 <html>
 <head>
-<title>George</title>
+
+
+    <title>Poli Agenda</title>
 </head>
 <%@include file="Título/Título.jsp" %>
 <%@include  file="Menu/menu.jsp"%>

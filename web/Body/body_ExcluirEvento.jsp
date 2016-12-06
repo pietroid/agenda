@@ -19,7 +19,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Excluir evento</title>
-    </head>
+</head>
     <body BGCOLOR = #f2f2f2>
         <font face="verdana">
         <% 

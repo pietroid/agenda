@@ -41,6 +41,8 @@
     }
     
     </style>
+
+    <title>Poli Agenda</title>
 </head>
 
 <!-- REMOVER IDS! -->
