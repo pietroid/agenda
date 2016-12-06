@@ -121,17 +121,20 @@
         if(session.getAttribute("Usuario")!= null){
             UsuarioDO SUser = (UsuarioDO)session.getAttribute("Usuario");
             if (SUser.isSuperUser()){
-                int idGEexclusao = 0;
+                GE GEtn = new GE();
+                GEDO ge = new GEDO();
+                ge = GEtn.buscarNome(request.getParameter("GE"));
+                //int idGEexclusao = ge.getId();
                 %>
                 <FORM action="ExcluirGrupo.jsp" method="post">
                 <INPUT type="submit" name="Excluir" value="Excluir Grupo">
-                <INPUT type="hidden" name="<%=idGEexclusao%>" value="ge.getId()">
+                <INPUT type="hidden" name="idGEexclusao" value="<%=ge.getId()%>">
                 </FORM>
         
         <%
         
-    }    
-        }
+        }    
+    }
     
     
     %> 

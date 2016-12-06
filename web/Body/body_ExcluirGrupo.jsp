@@ -1,4 +1,3 @@
-<%@page import="java.lang.Integer.parseInt(String)"%>
 <%@page import="data.UsuarioDO"%>
 <%@page import="java.util.List"%>
 <html>
@@ -18,22 +17,23 @@
 <% 
     UsuarioDO SUser = (UsuarioDO)session.getAttribute("Usuario");
     if (SUser.isSuperUser()){
-        if (request.getParameter("ConfExclusao")!=null){ //
+        if (request.getParameter("ConfExclusao")!=null){ 
             %>
-        O grupo foi excluido!    
+            O grupo foi excluido!    
             <%
             GEDO GEexcluir = new GEDO();
             int id = Integer.parseInt(request.getParameter("idGEexclusao"));
             GE GEtn = new GE();
-            GEtn.buscar(id);
+            GEexcluir = GEtn.buscar(id);
             GEtn.excluir(GEexcluir);
         }
         else{
         %>
-            <FORM action="body_ExcluirGrupo.jsp" method="post">
+            <FORM action="ExcluirGrupo.jsp" method="post">
                 Deseja confirmar a exclusão do Grupo de extensão?<br><br>
             <INPUT type="submit" name="ConfExclusao" value= "Confirmar">   
-            <INPUT type="reset" name="" value= "Cancelar">
+            <INPUT type="reset" name="resetexclusao" value= "Cancelar">
+            <INPUT type="hidden" name="idGEexclusao" value="<%=request.getParameter("idGEexclusao")%>">
             </FORM>
         <%
         }
