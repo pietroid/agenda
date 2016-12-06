@@ -73,7 +73,7 @@ public class NotificacaoGeralData {
             i.setId (rs.getInt("id"));
             i.setUsuId (rs.getInt("USERalvoid"));
             i.setMensagem (rs.getString("mensagem"));
-            i.setClassificacao (rs.getString("classificacao"));
+            i.setClassificacao (rs.getInt("classificacao"));
             i.setEVEassociado (rs.getInt("EVEassociado"));
         }
         return Items;
