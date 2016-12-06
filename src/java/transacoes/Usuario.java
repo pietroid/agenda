@@ -26,6 +26,24 @@ public class Usuario {
         }
         return false;
     } // incluir
+    public boolean excluir (UsuarioDO usuario) throws Exception{
+        
+        Transacao tr = new Transacao();
+        try {
+            
+            tr.begin();
+                UsuarioData usuarioData = new UsuarioData();
+                usuarioData.excluir(usuario, tr);
+            tr.commit();
+            return true;
+       
+        } catch(Exception e) {
+            tr.rollback();
+            System.out.println("Erro ao excluir ");
+            e.printStackTrace();
+        }
+        return false;
+    } // incluir
     public boolean verificar(UsuarioDO usuario) throws Exception{
         //Regras de negocio
         if(usuario == null || usuario.getUsername() == null){

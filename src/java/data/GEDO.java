@@ -18,6 +18,7 @@ public class GEDO {
     private String imagem;
     private String tel;
     private String tipo;
+    private int autorizado;
 
     /**
      * @return the id
@@ -158,6 +159,20 @@ public class GEDO {
      */
     public void setTipo(String tipo) {
         this.tipo = tipo;
+    }
+
+    /**
+     * @return the autorizado
+     */
+    public int getAutorizado() {
+        return autorizado;
+    }
+
+    /**
+     * @param autorizado the autorizado to set
+     */
+    public void setAutorizado(int autorizado) {
+        this.autorizado = autorizado;
     }
 
 
