@@ -4,14 +4,15 @@
     Author     : netto
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <body>
-        <h1>Hello World!</h1>
-    </body>
-</html>
+<body BGCOLOR = #f2f2f2>
+<font face="verdana">
+<html>
+<body BGCOLOR = #f2f2f2>
+<font face="verdana">
+<h1><center>O que você achou deste evento?</center></h1>
+    <body BGCOLOR = #f2f2f2>
+    <font face="verdana">
+    <BR>
+    <center>
