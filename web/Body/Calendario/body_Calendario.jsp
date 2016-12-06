@@ -140,8 +140,7 @@
 </body>
 </html>
 
-<%!
-    
+<%! 
     String str_localdate(int i2, int j2, int days[][], String currentYearString, String str_actualMonth){
     String str="1900-01-01";
     int localday = days[i2][j2];
