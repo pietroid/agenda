@@ -115,6 +115,8 @@
         <p align="center"> <b>Avalie o evento </b></p> <BR>
 <FORM action="/agenda/Avaliar.jsp" method="post">  
     <center><INPUT type="submit" name="deixar_feedback" value="Avaliar" ></center> <BR>
+    <input type =" hidden" name =" id" value = <%=evento.getId()%>>
+           
 </form>
     <%
     }
