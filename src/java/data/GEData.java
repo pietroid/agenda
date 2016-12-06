@@ -63,6 +63,7 @@ public class GEData {
         GE.setImagem(rs.getString("GEpasta_de_imagens"));
         GE.setTel(rs.getString("GEtel"));
         GE.setTipo(rs.getString("GEtipo"));
+        GE.setAutorizado(rs.getInt("GEautorizado"));
         return GE;
     } // buscar
     

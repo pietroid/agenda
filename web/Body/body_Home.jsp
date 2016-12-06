@@ -44,31 +44,51 @@
         <table align="center" border=1 cellpadding=10 width=1000>
             <th> Evento <th>Grupo de extensão
 <%            
+        List<EventoDO> lista_eventos = new ArrayList<EventoDO>();
+        List<GEDO> lista_GE = new ArrayList<GEDO>();
         for(int i=0; i < lista.size(); i++) {
             SeguindoDO seguido = lista.get(i);
             int EVEid = seguido.getEveId();
             
             Evento eventotn = new Evento();
             EventoDO evento = eventotn.buscar(EVEid);
+            lista_eventos.add(evento);
             String nomeEven = evento.getNome();
             
             Realiza realizatn = new Realiza();
             RealizaDO realiza = realizatn.buscarPorEVE(EVEid);            
             int GEid = realiza.getGEid();
             
+            GE getn = new GE();
+            GEDO ge = getn.buscar(GEid);
+            lista_GE.add(ge);
+            String nomeGE = ge.getNome();
 %>
             <TR>
-                <TD> <%=nomeEven%> </TD> <TD><2></TD>
+                <TD> <%=nomeEven%> </TD> <TD><%=nomeGE%></TD>
             </TR>
 <%      }
 %>
         </table>
         </center>
-<p>Os seus próximos eventos são:</p><br>
-<%  
+<p>Os seus próximos eventos nessa semana são:</p><br>
+        <center>
+        <table align="center" border=1 cellpadding=10 width=1000>
+            <th> Evento <th>Grupo de extensão
+<%  for(int i=0; i < lista.size(); i++){
+%>
+        <TR>
+            <TD> <%=lista_eventos.get(i).getNome()%> </TD> <TD><%=lista_GE.get(i).getNome()%></TD>
+        </TR>
+<%        
     }
+%>
+        </table>
+        </center><br>    
+<%    }
     else{
 %>
+
 <p>Você não segue evento algum!</p><br>
 <%
     }  
@@ -81,7 +101,7 @@
 
  %>
  <h1><center> Home </center> </h1>
- <h2><font face="verdana"> Grupos de extensão </font><h2>
+ <h2><font face="verdana"> Grupos de extensão (PARA TESTAR HOME ESPECIFICA LOGAR COM: alex sen)</font><h2>
 <p><font size="2" face="verdana"><a href="/Agenda/ListadosGE.jsp" target="_top">Clique aqui
  para ver uma lista com todos os Grupos de Extensão</a></font></p> 
 
