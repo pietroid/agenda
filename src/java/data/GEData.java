@@ -63,25 +63,46 @@ public class GEData {
         GE.setImagem(rs.getString("GEpasta_de_imagens"));
         GE.setTel(rs.getString("GEtel"));
         GE.setTipo(rs.getString("GEtipo"));
+        GE.setAutorizado(rs.getInt("GEautorizado"));
         return GE;
     } // buscar
     
+    public GEDO buscarNome(String nome, Transacao tr) throws Exception {
+        Connection con = tr.obterConexao();
+        String sql = "select * from agenda.grupodeextensao where GEnome = ?";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setString(1, nome);
+        ResultSet rs = ps.executeQuery();
+        GEDO GE = new GEDO();
+        rs.first();
+        GE.setId(rs.getInt("GEid"));
+        GE.setNome(rs.getString("GEnome"));
+        GE.setDescricao(rs.getString("GEdescricao"));
+        GE.setAno(rs.getInt("GEano_de_inicio"));
+        GE.setSite(rs.getString("GEsite"));
+        GE.setFace(rs.getString("GEpagina_do_fb"));
+        GE.setEmail(rs.getString("GEemail"));
+        GE.setImagem(rs.getString("GEpasta_de_imagens"));
+        GE.setTel(rs.getString("GEtel"));
+        GE.setTipo(rs.getString("GEtipo"));
+        return GE;
+    }
+    
      public void atualizar(GEDO GE, Transacao tr) throws Exception {
-     Connection con = tr.obterConexao();
-     String sql = "update agenda.grupodeextensao set GEnome=?, GEdescricao=?,GEano_de_inicio=?,GEsite=?,GEpagina_do_fb=?,GEemail=?,GEpasta_de_imagens=?,GEtel=?,GEtipo=? where GEid=?";
-     PreparedStatement ps = con.prepareStatement(sql);
-     ps.setString(1, GE.getNome());
-     ps.setString(2, GE.getDescricao());
-     ps.setInt(3, GE.getAno());
-     ps.setString(4, GE.getSite());
-     ps.setString(5, GE.getFace());
-     ps.setString(6, GE.getEmail());
-     ps.setString(7, GE.getImagem());
-     ps.setString(8, GE.getTel());
-     ps.setString(9, GE.getTipo());
-     ps.setInt(10, GE.getId());
-     
-     int result = ps.executeUpdate(); 
+        Connection con = tr.obterConexao();
+        String sql = "update agenda.grupodeextensao set GEnome=?, GEdescricao=?,GEano_de_inicio=?,GEsite=?,GEpagina_do_fb=?,GEemail=?,GEpasta_de_imagens=?,GEtel=?,GEtipo=? where GEid=?";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setString(1, GE.getNome());
+        ps.setString(2, GE.getDescricao());
+        ps.setInt(3, GE.getAno());
+        ps.setString(4, GE.getSite());
+        ps.setString(5, GE.getFace());
+        ps.setString(6, GE.getEmail());
+        ps.setString(7, GE.getImagem());
+        ps.setString(8, GE.getTel());
+        ps.setString(9, GE.getTipo());
+        ps.setInt(10, GE.getId());
+        int result = ps.executeUpdate(); 
     } // atualizar
      
      

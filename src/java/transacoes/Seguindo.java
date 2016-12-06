@@ -48,6 +48,21 @@ public class Seguindo {
 	return null;
     } // buscar
 
+    public List<SeguindoDO> pesquisarPorUSUid(int USUid) throws Exception{
+        Transacao tr = new Transacao();
+	try{
+            tr.beginReadOnly();
+  	    SeguindoData SeguindoData = new SeguindoData();
+	    List<SeguindoDO> i = SeguindoData.pesquisarPorUSUid(USUid, tr);
+            tr.commit();
+            return i;
+	} catch (Exception e) {
+            tr.rollback();
+            System.out.println("Erro ao listar ");  
+	}
+	return null;
+    }
+    
     private boolean isEmpty(String s) {
         if (null == s)
             return true;
