@@ -55,7 +55,7 @@
 <p>Você não segue evento algum!</p><br>
 <%
     }  
-<%  
+
 %>
 
 
