@@ -49,7 +49,7 @@ if (request.getParameter("tipo")!= null) GE.setTipo(request.getParameter("tipo")
 }
 
 boolean update = GEtr.atualizar(GE);
-}
+
  %>
 </center>
 </body>

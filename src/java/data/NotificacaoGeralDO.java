@@ -12,7 +12,10 @@ package data;
 public class NotificacaoGeralDO {
     private int id;
     private int usuid;
+    private int EVEassociado;
     private String mensagem;
+    private String classificacao;
+    
 
     
     /**
@@ -57,8 +60,29 @@ public class NotificacaoGeralDO {
     public void setMensagem(String mensagem) {
         this.mensagem = mensagem;
     }
-
     
-    
-    
+    /*
+    retona o EVEassociado
+    */
+    public int getEVEassociado(){
+        return EVEassociado;
+    }
+    /**
+    *@param eventoAssociado the EVEassociado to set 
+    */
+    public void setEVEassociado(int eventoAssociado){
+        this.EVEassociado = eventoAssociado;
+    }
+    /**
+     * @return classificacao 
+     */
+    public String getClassificacao(){
+        return classificacao; 
+    } 
+    /**
+     * @param classificacao the classificacao to set 
+     */
+    public void setClassificacao(String classificacao){
+        this.classificacao = classificacao;
+    }
 }
