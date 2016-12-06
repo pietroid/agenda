@@ -77,6 +77,7 @@ public class ComentarioData {
             comentario.setEveId(rs.getInt("eveid"));
             comentario.setUsuId(rs.getInt("usuid"));
             comentario.setMensagem(rs.getString("mensagem"));
+            comentarios.add(comentario);
         }
         return comentarios;
     }
