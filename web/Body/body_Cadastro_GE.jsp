@@ -12,7 +12,7 @@
     <% 
 if (request.getParameter("submit") == null){
     %>
-<FORM action="body_Cadastro_GE.jsp" method="post">
+<FORM action="Cadastro_GE.jsp" method="post">
     
     Nome grupo:<BR>
     <INPUT type="text" name="nome"><BR><BR>
@@ -61,7 +61,7 @@ if (request.getParameter("submit") != null){
     %>
         É necessário digitar um número para o ano <BR> 
         
-    <FORM action="body_Cadastro_GE.jsp" method="post">           
+    <FORM action="Cadastro_GE.jsp" method="post">           
     Nome grupo:<BR>
     <INPUT type="text" name="nome" value="<%=request.getParameter("nome")%>"><BR><BR>
     Tipo/finalidade:<BR>
