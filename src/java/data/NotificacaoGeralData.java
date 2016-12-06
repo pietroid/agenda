@@ -63,7 +63,7 @@ public class NotificacaoGeralData {
  
     public List<NotificacaoGeralDO> pesquisarPorUSUid(int USUid,Transacao tr) throws Exception{
         Connection con = tr.obterConexao();
-        String sql = "select * from agenda.Usuario where USUid = ?";
+        String sql = "select * from agenda.notificacaoGeral where USERalvoid = ?";
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setInt(1, USUid);
         ResultSet rs = ps.executeQuery();
@@ -75,6 +75,7 @@ public class NotificacaoGeralData {
             i.setMensagem (rs.getString("mensagem"));
             i.setClassificacao (rs.getInt("classificacao"));
             i.setEVEassociado (rs.getInt("EVEassociado"));
+            Items.add(i);
         }
         return Items;
     }//pesquisa notificações por Usuario

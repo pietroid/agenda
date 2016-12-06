@@ -103,8 +103,7 @@
         
         <tr>
             <th>Conflito de Eventos</th>
-        </tr>
-        <td>
+            <td>
             <table>
             <%
               for (NotificacaoGeralDO notificacaoConf:ListaNotificacao){
@@ -123,10 +122,11 @@
                 </table>
                 
         </td>
+        </tr>
+        
         <tr>
             <th>Novos Feedbacks</th>
-        </tr>
-        <td>
+            <td>
             <table>
             <%
               for (NotificacaoGeralDO notificacaoFeed:ListaNotificacao){
@@ -144,9 +144,11 @@
                     %>
             </table>   
         </td>
+        </tr>
+        
     </table>
 <%
-/*------------ALYSO----------N----------*/
+/*---------------ALYSON--------------*/
 %>
 
 <h2> Calendário </h2>
