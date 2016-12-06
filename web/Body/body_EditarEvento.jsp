@@ -23,7 +23,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Editar evento</title>
-</head>
+    </head>
     <%
         UsuarioDO usuario = new UsuarioDO();
         if (session.getAttribute("Usuario") != null){

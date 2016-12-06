@@ -6,9 +6,7 @@
 
 <html>
 <head>
-
-
-    <title>Poli Agenda</title>
+<title>George</title>
 </head>
 <iframe src="Título\título.jpg" width="1350" height="150"></iframe>
 <iframe src="Menu\menu.jsp" width="1350" height="66"></iframe>

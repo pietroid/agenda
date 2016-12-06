@@ -3,10 +3,8 @@
 <!DOCTYPE html>
 <html>
     <head>
-        
-    
-    <title>Poli Agenda</title>
-</head>
+        <title>George</title>
+    </head>
     <body>
         <h1>Hello World!</h1>
     </body>

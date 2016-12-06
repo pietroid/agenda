@@ -1,14 +1,6 @@
-
 <%@ page import="transacoes.Usuario" %>
 <%@ page import="data.UsuarioDO" %>
 <%@ page import="java.util.Vector" %>
-<%@ page import="transacoes.Membro" %>
-<%@ page import="data.MembroDO" %>
-<%@ page import="transacoes.Membro" %>
-<%@ page import="java.util.*" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -48,53 +40,41 @@ li a:hover:not(.active) {
 </style>
 </head>
 <body>
-    <font face="verdana">
-    <ul>
-      <li><a class="active" href="/agenda/index.jsp">Home</a></li>
-      <li><a href="/agenda/ListadosGE.jsp">Grupos de Extensão</a></li>
-      <li><a href="/agenda/Calendario.jsp">Calendário Geral</a></li>
+<font face="verdana">    
+
+<ul>
+  <li><a class="active" href="/agenda/index.jsp">Home</a></li>
+  <li><a href="/agenda/ListadosGE.jsp">Grupos de Extens�o</a></li>
+  <li><a href="/agenda/Calendario.jsp">Calend�rio Geral</a></li>
   
   <%
-        UsuarioDO usr= (UsuarioDO)session.getAttribute("Usuario");
-        int usrID = usr.getId();
-        Membro tr = new Membro();
-        boolean admin = false;
-        boolean superuser;
-        
-        //Relacoes de Membro para os quais o usuario é ADM 
-        List<MembroDO> lm = tr.AdminedGroups(usrID);
-        
-        if(lm != null){
-            admin = true;
-        }
-        
-        superuser = usr.isSuperUser();
-        
-        //USUÁRIO GENÉRICO
-        if(usr == null){
-           %><li style="float:right"><a href="Perfil.jsp">Criar Perfil</a></li><%
-           %><li style="float:right"><a href="/agenda/LoginOut.jsp">Login</a></li><%  
-        }
-
-        //USUÁRIO COMUM
-        else if (!admin){
-           %><li style="float:right"><a href="Perfil.jsp">Perfil Pessoal</a></li><%
-           %><li style="float:right"><a href="/agenda/LoginOut.jsp">Logout</a></li><%             
-        }
-
-        //USUÁRIO ADMIN
-        else if (admin){
-           %><li style="float:right"><a href="Perfil.jsp">Perfil Pessoal e GEs</a></li><%
-           %><li style="float:right"><a href="/agenda/LoginOut.jsp">Logout</a></li><%
-        }
-
-        //USUÁRIO SUPERUSER
-        else if (superuser){
-           %><li style="float:right"><a href="PaineldeControle.jsp">Painel de Controle</a></li><%
-           %><li style="float:right"><a href="/agenda/LoginOut.jsp">Logout</a></li><%      
-        }
+      UsuarioDO usr_menu= (UsuarioDO)session.getAttribute("Usuario");
+      
+      
+      if(usr_menu == null || usr_menu.isSuperUser()== false){
   %>
   
+  <li><a href="Perfil.jsp">Perfil</a></li>
+  <%
+      }
+    else{ 
+  %>
+    <li><a href="PaineldeControle.jsp">Painel de Controle</a></li>
+  <%
+  }
+    if(usr_menu == null){
+  %>
+  <li style="float:right"><a href="/agenda/LoginOut.jsp">Login</a></li>
+  <%
+  }
+  else{
+    %>
+
+<li style="float:right"><a href="/agenda/Logout.jsp">Logout</a></li>  
+
+    <%
+        }
+    %>
 </ul>
 </body>
 </html>

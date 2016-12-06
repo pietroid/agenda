@@ -73,7 +73,7 @@
         %>
                 <table align="left" border=1 cellpadding=10 width=500>
                     <th> 
-                         <center> <a href="/agenda/AlterarInfoGE.jsp?GEDO=<%=ge.getId()%>" target="_top"> Alterar Informações </a> </center> 
+                         <center> <a href="/agenda/AlterarInfoGE.jsp" target="_top"> Alterar Informações </a> </center> 
                     </th>
                 </table>
         <%
@@ -121,20 +121,17 @@
         if(session.getAttribute("Usuario")!= null){
             UsuarioDO SUser = (UsuarioDO)session.getAttribute("Usuario");
             if (SUser.isSuperUser()){
-                GE GEtn = new GE();
-                GEDO ge = new GEDO();
-                ge = GEtn.buscarNome(request.getParameter("GE"));
-                //int idGEexclusao = ge.getId();
+                int idGEexclusao = 0;
                 %>
                 <FORM action="ExcluirGrupo.jsp" method="post">
                 <INPUT type="submit" name="Excluir" value="Excluir Grupo">
-                <INPUT type="hidden" name="idGEexclusao" value="<%=ge.getId()%>">
+                <INPUT type="hidden" name="<%=idGEexclusao%>" value="ge.getId()">
                 </FORM>
         
         <%
         
-        }    
-    }
+    }    
+        }
     
     
     %> 
