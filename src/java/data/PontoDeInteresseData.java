@@ -72,7 +72,7 @@ public class PontoDeInteresseData {
     
         public List<PontoDeInteresseDO> ListarPOI(Transacao tr) throws Exception {
         Connection con = tr.obterConexao();
-        String sql = "select * from agenda.POI where POI_id = ?";
+        String sql = "select * from POI";
         PreparedStatement ps = con.prepareStatement(sql);
         ResultSet rs = ps.executeQuery();
         List<PontoDeInteresseDO> Items = new ArrayList<PontoDeInteresseDO>();
@@ -88,6 +88,7 @@ public class PontoDeInteresseData {
         }
         return Items;
     }
+        
      
     
 }
