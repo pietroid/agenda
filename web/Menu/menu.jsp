@@ -56,16 +56,25 @@ li a:hover:not(.active) {
   
   <li><a href="Perfil.jsp">Perfil</a></li>
   <%
-      }else{ 
+      }
+    else{ 
   %>
     <li><a href="PaineldeControle.jsp">Painel de Controle</a></li>
   <%
   }
+    if(usr_menu == null){
   %>
-  
-  
-  <li style="float:right"><a href="/agenda/LoginOut.jsp">Login/Out</a></li>
-</ul>
+  <li style="float:right"><a href="/agenda/LoginOut.jsp">Login</a></li>
+  <%
+  }
+  else{
+    %>
 
+<li style="float:right"><a href="/agenda/LogOut.jsp">Logout</a></li>  
+
+    <%
+        }
+    %>
+</ul>
 </body>
 </html>

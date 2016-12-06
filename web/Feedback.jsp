@@ -1,7 +1,7 @@
 <%-- 
-    Document   : Logout
-    Created on : 03/12/2016, 16:38:29
-    Author     : Pedro
+    Document   : Feedback
+    Created on : Dec 6, 2016, 3:21:40 PM
+    Author     : netto
 --%>
 
 <html>
@@ -10,6 +10,6 @@
 </head>
 <%@include file="Título/Título.jsp" %>
 <%@include  file="Menu/menu.jsp"%>
-<%@include  file="Body/body_LogOut.jsp"%>
+<%@include  file="Body/body_GE.jsp"%>
 <%@include  file="Footer/footer.jsp"%>
 </html>

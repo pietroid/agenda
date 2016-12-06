@@ -78,6 +78,20 @@ public class MembroData {
         return Membro;
     }
     
+    public boolean isADM(int GEid, int USUid, Transacao tr) throws Exception {
+        Connection con = tr.obterConexao();
+        String sql = "select * from agenda.Membro where GEid = ? and USUid = ?";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setInt(1, GEid);
+        ps.setInt(2, USUid);
+        ResultSet rs = ps.executeQuery();
+        rs.first();
+        if (rs.getInt("ADM") == 1){
+            return true;
+        }
+        return false;
+    }
+    
     public List<MembroDO> pesquisarPorGEid(int GEid, Transacao tr) throws Exception {
         Connection con = tr.obterConexao();
         String sql = "select * from agenda.Membro where GEid = ?";
@@ -96,5 +110,22 @@ public class MembroData {
         return Items;
     } // pesquisar por GEid
     
+    public List<MembroDO> pesquisarPorUSUid(int USUid, Transacao tr) throws Exception {
+        Connection con = tr.obterConexao();
+        String sql = "select * from agenda.Membro where USUid = ?";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setInt(1, USUid);
+        ResultSet rs = ps.executeQuery();
+        List<MembroDO> Items = new ArrayList<MembroDO>();
+        while (rs.next()) {
+            MembroDO i = new MembroDO();
+            i.setId (rs.getInt("MEMBERid"));
+            i.setGEid (rs.getInt("GEid"));
+            i.setUSUid(rs.getInt("USUid"));
+            i.setADM(rs.getInt("ADM"));
+            Items.add(i);
+        }
+        return Items;
+    }//pesquisar por USUid
     
 }

@@ -17,7 +17,8 @@ GE getn = new GE();
 
         <center>
             <table align="center" border=1 cellpadding=10 width=1000>
-                <th>Imagem <th>Grupo de extensão</th>
+                <th>Imagem </th>
+                <th>Grupo de extensão</th>
                 <%   
                     List<GEDO> ges = getn.buscarTodos();
                     for(int i = 0; i < ges.size(); i++){
