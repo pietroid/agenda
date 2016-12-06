@@ -38,16 +38,24 @@ public class ComentarioData {
         int result = ps.executeUpdate();
     } // excluir
 
-  public void atualizar(ComentarioDO comentario, Transacao tr) throws Exception {
-     Connection con = tr.obterConexao();
-     String sql = "update comentario set EVEid=?, USUid=?, mensagem=? where id=?";
-     PreparedStatement ps = con.prepareStatement(sql);
-     ps.setInt(1, comentario.getEveId());
-     ps.setInt(2, comentario.getUsuId());
-     ps.setString(3,comentario.getMensagem());
-     ps.setInt(4, comentario.getId());
-     int result = ps.executeUpdate(); 
-    } // atualizar
+    public void excluirPorEVEid(int EVEid, Transacao tr) throws Exception {
+        Connection con = tr.obterConexao();
+        String sql = "delete from comentario where eveid = ?";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setInt(1, EVEid);
+        int result = ps.executeUpdate();
+    }
+    
+    public void atualizar(ComentarioDO comentario, Transacao tr) throws Exception {
+       Connection con = tr.obterConexao();
+       String sql = "update comentario set EVEid=?, USUid=?, mensagem=? where id=?";
+       PreparedStatement ps = con.prepareStatement(sql);
+       ps.setInt(1, comentario.getEveId());
+       ps.setInt(2, comentario.getUsuId());
+       ps.setString(3,comentario.getMensagem());
+       ps.setInt(4, comentario.getId());
+       int result = ps.executeUpdate(); 
+      } // atualizar
 
     public ComentarioDO buscar(int id, Transacao tr) throws Exception {
         Connection con = tr.obterConexao();
