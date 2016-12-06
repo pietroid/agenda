@@ -63,6 +63,21 @@ public class MembroData {
         return Membro;
     } // buscar
     
+    public MembroDO buscarPorUSUid(int USUid, Transacao tr) throws Exception {
+        Connection con = tr.obterConexao();
+        String sql = "select * from agenda.Membro where USUid = ?";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setInt(1, USUid);
+        ResultSet rs = ps.executeQuery();
+        rs.first();
+        MembroDO Membro = new MembroDO();
+        Membro.setId(rs.getInt("MEMBERid"));
+        Membro.setGEid(rs.getInt("GEid"));
+        Membro.setUSUid(rs.getInt("USUid"));
+        Membro.setADM(rs.getInt("ADM"));
+        return Membro;
+    }
+    
     public List<MembroDO> pesquisarPorGEid(int GEid, Transacao tr) throws Exception {
         Connection con = tr.obterConexao();
         String sql = "select * from agenda.Membro where GEid = ?";
