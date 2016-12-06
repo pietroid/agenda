@@ -121,6 +121,7 @@
         if(session.getAttribute("Usuario")!= null){
             UsuarioDO SUser = (UsuarioDO)session.getAttribute("Usuario");
             if (SUser.isSuperUser()){
+                int idGEexclusao = 0;
                 %>
                 <FORM action="ExcluirGrupo.jsp" method="post">
                 <INPUT type="submit" name="Excluir" value="Excluir Grupo">
