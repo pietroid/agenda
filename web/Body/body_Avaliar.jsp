@@ -19,6 +19,7 @@
                 <center>  
                     <% EventoDO us=new EventoDO();
                         Evento tr=new Evento();
+                        us = tr.buscar(Integer.parseInt(request.getParameter("id")));
                         %>
                     <form>
                     Nota:<BR>
@@ -38,6 +39,7 @@
                     int Media;
                     Media = Novaava/numava;
                     us.setAvaliação(Media);
+                    tr.atualizar(us);
                             %>
     </body>
 </html>
