@@ -8,6 +8,7 @@
 <%@page import="data.UsuarioDO"%>
 <%@page import="data.ComentarioDO"%>
 <%@page import="transacoes.Comentario"%>
+<%@page import="transacoes.Evento"%>
 <%@page import="java.util.List"%>
 <%@ page import="java.util.Vector" %>
 
@@ -28,16 +29,15 @@
     if (session.getAttribute("Usuario")!=null){
         //Verifica se enviou o comentário
         if (request.getParameter("submit") != null){
-            int usuarioid = 0;
-            int eventoid = 0;
             ComentarioDO c = new ComentarioDO();
             Comentario trc = new Comentario();
             c.setMensagem(request.getParameter("comentario"));
-            %>
-            <a href="Evento.jsp?USUid=<%=usuarioid%>&EVEid=<%=eventoid%>"></a>
-            <%
-            c.setUsuId(usuarioid);
-            c.setEveId(eventoid);
+            Evento eventotn = new Evento();
+            int EVEid = eventotn.buscarNome(request.getParameter("evento")).getId();
+            UsuarioDO usuario = (UsuarioDO) session.getAttribute("Usuario");
+            int USUid = usuario.getId();
+            c.setUsuId(USUid);
+            c.setEveId(EVEid);
             if (trc.incluir(c)){
                 pageContext.forward("PaineldeControle.jsp");
             }
