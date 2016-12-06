@@ -13,8 +13,14 @@
 
     <head>
        <%
-       session.setAttribute("Usuario", null);    
+       if((UsuarioDO)session.getAttribute("Usuario")!=null){
+       session.setAttribute("Usuario", null);
+       %>
        
+       
+       
+       <%
+       }
        pageContext.forward("body_LoginOut.jsp");
        %>
     </head>
