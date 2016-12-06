@@ -8,6 +8,8 @@
 <%@ page import="data.EventoDO" %>
 <%@ page import="transacoes.Pertence" %>
 <%@ page import="data.PertenceDO" %>
+<%@ page import="transacoes.Comentario" %>
+<%@ page import="data.ComentarioDO" %>
 <%@ page import="transacoes.Realiza" %>
 <%@ page import="data.RealizaDO" %>
 <%@ page import="java.util.*" %>
@@ -40,6 +42,7 @@
                     else{
                         String action = request.getParameter("Eve");
                         Pertence pertencetn = new Pertence();
+                        Comentario comentariotn = new Comentario();
                         Realiza realizatn = new Realiza();
                         if(action.equals("sim")){
                             if (evento.getMacroEvento() == true){
@@ -50,10 +53,12 @@
                                 }
                                 pertencetn.excluirPorMacro(evento.getId());
                                 realizatn.excluirPorEVEid(evento.getId());
+                                comentariotn.excluirPorEVEid(evento.getId());
                                 eventotn.excluir(evento);
                             }
                             else{
                                 pertencetn.excluirPorMicro(evento.getId());
+                                comentariotn.excluirPorEVEid(evento.getId());
                                 realizatn.excluirPorEVEid(evento.getId());
                                 eventotn.excluir(evento);
                             }
