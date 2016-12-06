@@ -43,12 +43,28 @@ public class GE {
             return i;
 	} catch (Exception e) {
             tr.rollback();
-            System.out.println("Erro ao buscar" + id);
+            System.out.println("Erro ao buscar " + id);
             e.printStackTrace();
 	}
 	return null;
     } // buscar
 
+    public GEDO buscarNome(String nome) throws Exception{
+        Transacao tr = new Transacao();
+	try{
+            tr.beginReadOnly();
+  	    GEData GEData = new GEData();
+	    GEDO i = GEData.buscarNome(nome, tr);
+            tr.commit();
+            return i;
+	} catch (Exception e) {
+            tr.rollback();
+            System.out.println("Erro ao buscar " + nome);
+            e.printStackTrace();
+	}
+	return null;
+    } 
+    
   public boolean atualizar(GEDO GE) throws Exception {
         Transacao tr = new Transacao();
 	try{
