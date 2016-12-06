@@ -6,12 +6,28 @@
 <%@ page import="data.EventoDO" %>
 <%@ page import="transacoes.Realiza" %>
 <%@ page import="data.RealizaDO" %>
+<%@ page import="transacoes.Usuario" %>
+<%@ page import="data.UsuarioDO" %>
+<%@ page import="transacoes.Membro" %>
+<%@ page import="data.MembroDO" %>
 
 <%
-    GE getn = new GE();
-    Evento eventotn = new Evento();
-    Realiza realizatn = new Realiza();
-    GEDO ge = getn.buscarNome(request.getParameter("GE"));
+    if (request.getParameter("GE") != null){
+        UsuarioDO usuario = new UsuarioDO();
+        if (session.getAttribute("Usuario") != null){
+           usuario = (UsuarioDO) session.getAttribute("Usuario");
+        }
+        GE getn = new GE();
+        Evento eventotn = new Evento();
+        Membro membrotn = new Membro();
+        Realiza realizatn = new Realiza();
+        boolean isadm = false;
+        boolean superuser = false;
+        GEDO ge = getn.buscarNome(request.getParameter("GE"));
+        if (usuario.getNome() != null){
+            superuser = usuario.isSuperUser();
+            isadm = membrotn.isADM(ge.getId(), usuario.getId());
+        }
 %>
 <html>
     <body BGCOLOR = #f2f2f2>
@@ -52,42 +68,55 @@
             </tr>
         </table>
         <BR><BR><BR><BR><BR><BR><BR><BR>
-        <table align="left" border=1 cellpadding=10 width=500>
-            <th> 
-                 <center> <a href="/agenda/AlterarInfoGE.jsp" target="_top"> Alterar Informações </a> </center> 
-            </th>
-        </table>
+        <%
+        if (isadm == true || superuser == true){
+        %>
+                <table align="left" border=1 cellpadding=10 width=500>
+                    <th> 
+                         <center> <a href="/agenda/AlterarInfoGE.jsp" target="_top"> Alterar Informações </a> </center> 
+                    </th>
+                </table>
+        <%
+        }
+        %>
         <BR><BR><BR><BR><BR>
         <table align="left" border=1 cellpadding=10 width=500>
             <th colspan="2">Lista de eventos</th>
             <%
-                List<RealizaDO> realizas = realizatn.pesquisar(ge.getId());
-                List<EventoDO> eventos = new ArrayList<EventoDO>();
-                for(int i = 0; i < realizas.size(); i++){
-                    eventos.add(eventotn.buscar(realizas.get(i).getEVEid()));
-                }
-                int j;
-                if (eventos.size() > 5) j = 5;
-                else j = eventos.size();
-                for (int i = 0; i < j; i++){
-                    EventoDO evento = eventos.get(i);
+        List<RealizaDO> realizas = realizatn.pesquisar(ge.getId());
+        List<EventoDO> eventos = new ArrayList<EventoDO>();
+        for(int i = 0; i < realizas.size(); i++){
+            eventos.add(eventotn.buscar(realizas.get(i).getEVEid()));
+        }
+        int j;
+        if (eventos.size() > 5) j = 5;
+        else j = eventos.size();
+        for (int i = 0; i < j; i++){
+            EventoDO evento = eventos.get(i);
                 %>
             <tr>
                 <td><center><a href="Evento.jsp?evento=<%= evento.getNome() %>"><%= evento.getNome() %></a><center>
             </tr>
             <%
-                }
-            %>
+        }
+        %>
         </table>
 
         <BR><BR><BR><BR><BR>
 
-<table align="center" border=1 cellpadding=10 width=500>
-<tr>
-  <td><a href="CriarEvento.jsp?GE=<%= ge.getNome() %>" target="_top"><font size="5" color="#ff0000">Criar evento</font></a></td>
-</tr>
-</table>
-
-</body>
+        <%
+        if(isadm == true || superuser == true){
+        %>
+            <table align="center" border=1 cellpadding=10 width=500>
+                <tr>
+                    <td><a href="CriarEvento.jsp?GE=<%= ge.getNome() %>" target="_top"><font size="5" color="#ff0000">Criar evento</font></a></td>
+                </tr>
+            </table>
+    <%      
+        }
+    }
+    else pageContext.forward("index.jsp");
+    %>
+    </body>
 </html>
 
