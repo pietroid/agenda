@@ -78,6 +78,20 @@ public class MembroData {
         return Membro;
     }
     
+    public boolean isADM(int GEid, int USUid, Transacao tr) throws Exception {
+        Connection con = tr.obterConexao();
+        String sql = "select * from agenda.Membro where GEid = ? and USUid = ?";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setInt(1, GEid);
+        ps.setInt(2, USUid);
+        ResultSet rs = ps.executeQuery();
+        rs.first();
+        if (rs.getInt("ADM") == 1){
+            return true;
+        }
+        return false;
+    }
+    
     public List<MembroDO> pesquisarPorGEid(int GEid, Transacao tr) throws Exception {
         Connection con = tr.obterConexao();
         String sql = "select * from agenda.Membro where GEid = ?";
