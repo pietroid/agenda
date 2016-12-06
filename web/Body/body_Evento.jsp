@@ -84,7 +84,7 @@
         if (usuario.getNome() != null){
             RealizaDO realiza = realizatn.buscarPorEVE(evento.getId());
             boolean isadm = membrotn.isADM(realiza.getGEid(), usuario.getId());
-            if (usuario.isSuperUser() == true || isadm){
+            if (usuario.isSuperUser() == true || isadm == true){
                 %>
                     <table align="left" border=1 cellpadding=10 width=500>
                         <tr>
