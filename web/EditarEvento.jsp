@@ -8,8 +8,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-
-    <title>Poli Agenda</title>
+<title>Poli AGEnda</title>
 </head>
 <%@include file="Título/Título.jsp" %>
 <%@include  file="Menu/menu.jsp"%>

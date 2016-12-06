@@ -51,7 +51,7 @@ li a:hover:not(.active) {
     <font face="verdana">
     <ul>
       <li><a class="active" href="/agenda/index.jsp">Home</a></li>
-      <li><a href="/agenda/ListadosGE.jsp">Grupos de Extensão</a></li>
+      <li><a href="/agenda/ListadosGE.jsp">Grupos de ExtensÃ£o</a></li>
       <li><a href="/agenda/Calendario.jsp">Calendário Geral</a></li>
   
   <%
@@ -61,7 +61,7 @@ li a:hover:not(.active) {
         boolean admin = false;
         boolean superuser;
         
-        //Relacoes de Membro para os quais o usuario é ADM 
+        //Relacoes de Membro para os quais o usuario Ã© ADM 
         List<MembroDO> lm = tr.AdminedGroups(usrID);
         
         if(lm != null){
@@ -70,25 +70,25 @@ li a:hover:not(.active) {
         
         superuser = usr.isSuperUser();
         
-        //USUÁRIO GENÉRICO
+        //USUÃRIO GENÃRICO
         if(usr == null){
            %><li style="float:right"><a href="Perfil.jsp">Criar Perfil</a></li><%
            %><li style="float:right"><a href="/agenda/LoginOut.jsp">Login</a></li><%  
         }
 
-        //USUÁRIO COMUM
+        //USUÃRIO COMUM
         else if (!admin){
            %><li style="float:right"><a href="Perfil.jsp">Perfil Pessoal</a></li><%
            %><li style="float:right"><a href="/agenda/LoginOut.jsp">Logout</a></li><%             
         }
 
-        //USUÁRIO ADMIN
+        //USUÃRIO ADMIN
         else if (admin){
            %><li style="float:right"><a href="Perfil.jsp">Perfil Pessoal e GEs</a></li><%
            %><li style="float:right"><a href="/agenda/LoginOut.jsp">Logout</a></li><%
         }
 
-        //USUÁRIO SUPERUSER
+        //USUÃRIO SUPERUSER
         else if (superuser){
            %><li style="float:right"><a href="PaineldeControle.jsp">Painel de Controle</a></li><%
            %><li style="float:right"><a href="/agenda/LoginOut.jsp">Logout</a></li><%      

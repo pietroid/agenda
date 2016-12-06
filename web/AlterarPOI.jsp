@@ -8,9 +8,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-
-
-    <title>Poli Agenda</title>
+<title>George</title>
 </head>
 <iframe src="Título\título.jpg" width="1350" height="150"></iframe><BR>
 <%@include file="Menu\menu.jsp" %> <BR>

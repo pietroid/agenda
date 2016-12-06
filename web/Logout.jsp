@@ -1,9 +1,15 @@
+<%-- 
+    Document   : Logout
+    Created on : 03/12/2016, 16:38:29
+    Author     : Pedro
+--%>
+
 <html>
 <head>
 <title>George</title>
 </head>
 <%@include file="Título/Título.jsp" %>
 <%@include  file="Menu/menu.jsp"%>
-<%@include  file="Body/body_Usuario.jsp"%>
+<%@include  file="Body/body_Logout.jsp"%>
 <%@include  file="Footer/footer.jsp"%>
 </html>
