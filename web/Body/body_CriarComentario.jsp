@@ -28,13 +28,16 @@
     if (session.getAttribute("Usuario")!=null){
         //Verifica se enviou o comentário
         if (request.getParameter("submit") != null){
-            UsuarioDO usuario = (UsuarioDO) session.getAttribute("Usuario");
-            EventoDO evento = (EventoDO) session.getAttribute("EVEid");
+            int usuarioid = 0;
+            int eventoid = 0;
             ComentarioDO c = new ComentarioDO();
             Comentario trc = new Comentario();
             c.setMensagem(request.getParameter("comentario"));
-            c.setUsuId(usuario.getId());
-            //c.setEveId(evento.getId());
+            %>
+            <a href="Evento.jsp?USUid=<%=usuarioid%>&EVEid=<%=eventoid%>"></a>
+            <%
+            c.setUsuId(usuarioid);
+            c.setEveId(eventoid);
             if (trc.incluir(c)){
                 pageContext.forward("PaineldeControle.jsp");
             }
