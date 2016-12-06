@@ -23,6 +23,7 @@ public class EventoDO {
     private Date data;
     private String pastaimagens;
     private int avaliação;
+    private int numeroava;
 
     /**
      * @return the id
@@ -162,6 +163,12 @@ public class EventoDO {
      */
     public void setAvaliação(int avaliação) {
         this.avaliação = avaliação;
+    }
+     /**
+     * @return the numeroava
+     */
+    public int getNumeroava() {
+        return numeroava;
     }
     
     
