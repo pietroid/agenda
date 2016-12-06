@@ -1,4 +1,5 @@
 <html>
+    
 <%@page import="transacoes.Usuario"%>
 <%@page import="data.UsuarioDO"%>
 <body BGCOLOR = #f2f2f2>
@@ -6,14 +7,17 @@
 <h1> <center> Alterar Senha <center> </h1>
 <BR>
 <center>
-
+    
+    
     <%
+        
+        
         UsuarioDO us = new UsuarioDO();
         us = (UsuarioDO)session.getAttribute("Usuario");
-        
+        System.out.println("parte 1 ok");
         
         if(request.getParameter("submit")==null){%>
-<FORM action="htto://www.google.com.br/formtest" method="post">
+<FORM action="body_altpass.jsp" method="post">
     Senha Atual:<BR><INPUT type="password" name="senhaAtual" value= ""> <BR><BR><BR>
 Nova Senha<BR><INPUT type="password" name="novaSenha" value= ""> <BR><BR>
 Repita a Nova Senha<BR><INPUT type="password" name="repNovaSenha" value= ""> <BR><BR>
@@ -28,7 +32,7 @@ Repita a Nova Senha<BR><INPUT type="password" name="repNovaSenha" value= ""> <BR
             if (nova1.equals(nova2)){
                 us.setSenha(nova1);
                 %>
-                <p> Senha mudada com sucesso!</p>
+                <p> Senha alterada com sucesso!</p>
                 <%
             } else{
                 %><p>Novas senha e sua verificação não batem! Digite uma nova senha e confirme.</p><%
