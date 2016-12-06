@@ -14,7 +14,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-
+<title>George</title>
     <style>
     table {
         font-family: "Verdana";
@@ -39,8 +39,6 @@
         color: white;
     }
     </style>
-
-    <title>Poli Agenda</title>
 </head>
 <iframe src="Título\título.jpg" width="1350" height="150" frameBorder="0" scrolling="no"></iframe>
 <%@include  file="Menu/menu.jsp"%>

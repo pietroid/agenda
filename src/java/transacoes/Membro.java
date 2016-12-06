@@ -87,22 +87,4 @@ public class Membro {
             return true;
         return false;
     }
-    
-    //Retorna uma Lista de Relacoes de Membro para os quais o Usuario é ADM 
-    public List<MembroDO> AdminedGroups(int usrID) throws Exception{
-        Transacao tr = new Transacao();
-	try{
-            tr.beginReadOnly();
-  	    MembroData md = new MembroData();
-	    List<MembroDO> i;
-            i = md.AdminedGroups(usrID, tr);
-            tr.commit();
-            return i;
-	} catch (Exception e) {
-            tr.rollback();
-            System.out.println("Erro ao buscar " + usrID);
-	}
-	return null;    
-    }
-
 }
