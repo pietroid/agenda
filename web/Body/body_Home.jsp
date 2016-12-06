@@ -75,15 +75,16 @@
 <p>Os seus próximos eventos nessa semana são:</p><br>
         <center>
         <table align="center" border=1 cellpadding=10 width=1000>
-            <th> Evento <th>Grupo de extensão
+            <th> Evento <th>Grupo de extensão <th> Data
 <%  for(int i=0; i < lista.size(); i++){
-        EventoDO evento = lista_eventos.get(0);
+        EventoDO eventoParte = lista_eventos.get(i);
         GEDO ge = lista_GE.get(i);
+        
 %>
         <TR>
-            <TD><center><a href="Evento.jsp?evento = <%=evento.getNome()%>"
-                                ><<%=evento.getNome()%></a><center> </TD>
+            <TD><center><a href="Evento.jsp?evento = "<%=eventoParte.getNome()%>><%=eventoParte.getNome()%></a></center> </TD>
             <TD><center><a href="GE.jsp?GE = "<%=ge.getNome()%>><%=ge.getNome()%></a></center> </TD>
+            <TD><center><%=eventoParte.getData()%></center> </TD>
 
         </TR>
 <%        
