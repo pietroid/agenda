@@ -29,7 +29,7 @@
 <p><font size="2" face="verdana"><a href="AltPass.jsp">Clique aqui
  para alterar sua senha</a></font></p>
 <p><font size="2" face="verdana"><a href="body_excluirMembro.jsp">Clique aqui
- para remover sua conta/a></font></p>
+ para remover sua conta</a></font></p>
 
 
     
