@@ -63,21 +63,21 @@ if (request.getParameter("submit") != null){
         
     <FORM action="body_Cadastro_GE.jsp" method="post">           
     Nome grupo:<BR>
-    <INPUT type="text" name="nome"><BR><BR>
+    <INPUT type="text" name="nome" value="<%=request.getParameter("nome")%>"><BR><BR>
     Tipo/finalidade:<BR>
-    <INPUT type="text" name="tipo"><BR><BR>
+    <INPUT type="text" name="tipo" value="<%=request.getParameter("tipo")%>"><BR><BR>
     Site do grupo:<BR>
-    <INPUT type="text" name="site"><BR><BR>
+    <INPUT type="text" name="site" value="<%=request.getParameter("site")%>"><BR><BR>
     Ano de criação:<BR>
     <INPUT type="text" name="ano"><BR><BR>
     e-mail para contato (do grupo):<BR>
-    <INPUT type="text" name="email"><BR><BR>
+    <INPUT type="text" name="email" value="<%=request.getParameter("email")%>"><BR><BR>
     Telefone para contato (do grupo):<BR>
-    <INPUT type="text" name="tel"><BR><BR>
+    <INPUT type="text" name="tel" value="<%=request.getParameter("tel")%>"><BR><BR>
     Facebook do grupo:<BR>
-    <INPUT type="text" name="email"><BR><BR>
+    <INPUT type="text" name="email" value="<%=request.getParameter("email")%>"><BR><BR>
     Descrição:<BR>
-    <INPUT type="text" name="descricao"><BR><BR>
+    <INPUT type="text" name="descricao" value="<%=request.getParameter("descricao")%>"><BR><BR>
     Local do grupo (dentro da POLI)<BR>
     <INPUT type="text" name="local"><BR><BR>
     <INPUT type="submit" name="submit" value="Submit">
