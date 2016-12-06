@@ -12,6 +12,11 @@
 <BR>
 <center>
 
+<FORM action="Recsenha.jsp" method="post" align = "left">
+UserName:<INPUT type="text" name="username"  > 
+<br>
+<INPUT type="submit" name="submit" value= "Continuar">   
+<INPUT type="reset" name="reset" value= "Reset">
 
 <%  UsuarioDO usuario = new UsuarioDO();
     Usuario u = new Usuario();
@@ -29,31 +34,23 @@ if (request.getParameter("submit") != null){
     Não há usuários com esse nome
     <BR>
     <FORM action="body_Recsenha.jsp" method="post" align = "left">
-UserName:<INPUT type="text" name="username" > 
-<br>
-<INPUT type="submit" name="submit" value= "Continuar">   
-<INPUT type="reset" name="reset" value= "Reset">
-<%
-    }
+    UserName:<INPUT type="text" name="username" > 
+    <br>
+    <INPUT type="submit" name="submit" value= "Continuar">   
+    <INPUT type="reset" name="reset" value= "Reset">
+    <%
+        }
     %>
-<FORM action="body_Recsenha.jsp" method="post" align = "left">
-    Pergunta: <%= pergunta%> <BR> 
+    <FORM action="body_Recsenha.jsp" method="post" align = "left">
+    Pergunta: <%= pergunta%>
+    <BR> 
     Resposta: <INPUT type="text" name="resposta"> 
-<br>
-<INPUT type="submit" name="submit1" value= "Continuar">   
-<INPUT type="reset" name="reset" value= "Reset">
+    <br>
+    <INPUT type="submit" name="submit1" value= "Continuar">   
+    <INPUT type="reset" name="reset" value= "Reset">
 <%  
 }
-else{
-%>
-<FORM action="Recsenha.jsp" method="post" align = "left">
-UserName:<INPUT type="text" name="username"  > 
-<br>
-<INPUT type="submit" name="submit" value= "Continuar">   
-<INPUT type="reset" name="reset" value= "Reset">
-<%
-}    
-
+   
 if(request.getParameter("submit1")!= null){
        UsuarioDO user=(UsuarioDO)session.getAttribute("recup");
        String resposta = user.getResposta();

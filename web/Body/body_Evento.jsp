@@ -111,6 +111,9 @@
                 <%
             }
         }
+        %>
+        <a href="Avaliar.jsp?id=<%= evento.getId()%>">Avalie</a>
+    <%
     }
     else pageContext.forward("index.jsp");
         %>    
