@@ -56,6 +56,15 @@ public class UsuarioData {
   
         return usuario;
     }
+    public void excluir(UsuarioDO usuario, Transacao tr) throws Exception {
+        String username = usuario.getUsername();
+        Connection con = tr.obterConexao();
+        String sql = "delete * from agenda.Usuario where Username = ?";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setString(1, username);
+        ResultSet rs = ps.executeQuery();
+        rs.first();
+    };
     private int boolToInt(boolean value){
         if(value){
             return 1;

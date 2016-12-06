@@ -35,7 +35,23 @@ public class PertenceData {
         ps.setInt(1, pertence.getId());
         int result = ps.executeUpdate();
     } // excluir
-
+    
+    public void excluirPorMacro(int macroId, Transacao tr) throws Exception {
+        Connection con = tr.obterConexao();
+            String sql = "delete from pertence where macroEventoId = ?";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setInt(1, macroId);
+        int result = ps.executeUpdate();
+    }
+    
+    public void excluirPorMicro(int microId, Transacao tr) throws Exception {
+        Connection con = tr.obterConexao();
+            String sql = "delete from pertence where microEventoId = ?";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setInt(1, microId);
+        int result = ps.executeUpdate();
+    }
+    
     public List<Integer> buscarMicroPorMacro(EventoDO macroEvento, Transacao tr) throws Exception {
         Connection con = tr.obterConexao();
         String sql = "select * from pertence where macroEventoId = ?";
@@ -70,8 +86,5 @@ public class PertenceData {
         pertence.setMacroId(rs.getInt("macroEventoId"));
         pertence.setMicroId(rs.getInt("microEventoId"));
         return pertence;
-    }
-    
-    
-    
+    } 
 }
