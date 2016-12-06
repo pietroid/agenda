@@ -13,25 +13,25 @@
             
       if(request.getParameter("submit")==null){%>
   
-  <FORM action="body_Cadastro.jsp" method="post" id="usrform">
+  <FORM action="Cadastro.jsp" method="post" id="usrform">
       Username <br>
-    <input type="text" name="username"\><br><br>
+    <input type="text" name="username"/><br><br>
     Senha <br>
-    <input type="password" name="senha"\><br><br>
+    <input type="password" name="senha"/><br><br>
     Repetir senha <br>
-    <input type="password" name="senha_rep"\><br><br>
+    <input type="password" name="senha_rep"/><br><br>
     Nome Completo <br>
-    <input type="text" name="nome"\><br><br>
+    <input type="text" name="nome"/><br><br>
     E-mail <br>
-    <input type="email" name="email"\><br><br>
+    <input type="email" name="email"/><br><br>
     Curso atual <br>
-    <input type="text" name="curso"\><br><br>
+    <input type="text" name="curso"/><br><br>
     Ano de ingresso <br>
-    <input type="text" name="ano"\><br><br>
+    <input type="text" name="ano"/><br><br>
     Pergunta de segurança <br>
-    <input type="text" name="pergunta"\><br><br>
+    <input type="text" name="pergunta"/><br><br>
     Resposta <br>
-    <input type="text" name="resposta"\><br><br>
+    <input type="text" name="resposta"/><br><br>
     Breve descrição:
  </FORM>
  <textarea rows="4" cols="50" name="bio" form="usrform">
@@ -40,7 +40,7 @@
   <% }else if(request.getParameter("submit").equals("Cadastrar")){
         if(request.getParameter("username").equals("") || request.getParameter("senha").equals("") || request.getParameter("senha_rep").equals("") || request.getParameter("email").equals("") || request.getParameter("nome").equals("")|| request.getParameter("pergunta").equals("")|| request.getParameter("resposta").equals("")){
         %>
-  <FORM action="body_Cadastro.jsp" method="post" id="usrform">
+  <FORM action="Cadastro.jsp" method="post" id="usrform">
       Username <br>
       <input type="text" name="username" value="<%=request.getParameter("username")%>"><%if(request.getParameter("username").equals("")){%><b style="color:red">*</b><%}%></input>  <br><br>
     Senha <br>
@@ -68,7 +68,7 @@
         }else if(!request.getParameter("senha").equals(request.getParameter("senha_rep"))){
             %>
             <b style="color:red">As senhas não são iguais</b> <br><br>
-  <FORM action="body_Cadastro.jsp" method="post" id="usrform">
+  <FORM action="Cadastro.jsp" method="post" id="usrform">
       Username <br>
       <input type="text" name="username" value="<%=request.getParameter("username")%>"><br><br>
     Senha <br>

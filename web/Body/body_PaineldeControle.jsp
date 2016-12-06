@@ -26,8 +26,10 @@
 <p><font size="2" face="verdana"><a href="body_GE.jsp">Clique aqui
  para ver uma lista com todos os Grupos do seu interesse</a></font></p> 
 
-<p><font size="2" face="verdana"><a href="body_AltPass.jsp">Clique aqui
+<p><font size="2" face="verdana"><a href="AltPass.jsp">Clique aqui
  para alterar sua senha</a></font></p>
+<p><font size="2" face="verdana"><a href="body_excluirMembro.jsp">Clique aqui
+ para remover sua conta/a></font></p>
 
 
     

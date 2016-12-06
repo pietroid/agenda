@@ -1,5 +1,5 @@
 <%-- 
-    Document   : body_CriarComentario
+    Document   : CriarComentario
     Created on : 04/12/2016, 13:10:09
     Author     : LUIS FELIPE
 --%>
@@ -36,7 +36,7 @@
             c.setUsuId(usuario.getId());
             //c.setEveId(evento.getId());
             if (trc.incluir(c)){
-                pageContext.forward("body_PaineldeControle.jsp");
+                pageContext.forward("PaineldeControle.jsp");
             }
         }
         else{

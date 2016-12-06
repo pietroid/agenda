@@ -17,10 +17,10 @@
 
 <h2><font face="verdana">Olá,<%=nome%>  </font><h2>
 <h2><font face="verdana"> Interesses </font><h2>
-<p><font size="2" face="verdana"><a href="body_GE.jsp">Clique aqui
+<p><font size="2" face="verdana"><a href="GE.jsp">Clique aqui
  para ver uma lista com todos os Grupos do seu interesse</a></font></p> 
 
-<p><font size="2" face="verdana"><a href="body_AltPass.jsp">Clique aqui
+<p><font size="2" face="verdana"><a href="AltPass.jsp">Clique aqui
  para alterar sua senha</a></font></p>
 
 <h2> Calendário </h2>
@@ -55,7 +55,7 @@
  
  <h1><center> Você ainda não tem um Perfil.<center> </h1>
  <h2><center>      Deseja se cadastrar?    <center> </h2>
-<center>  <BR><a href="../Cadastro_POI.jsp" target="_top">Quero me Cadastrar</a><center>
+<center>  <BR><a href="Cadastro.jsp" target="_top">Quero me Cadastrar</a><center>
  <%      
 
     }

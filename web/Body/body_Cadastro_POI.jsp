@@ -1,5 +1,5 @@
 <%-- 
-    Document   : body_Cadastro_POI
+    Document   : Cadastro_POI
     Created on : 05/12/2016, 12:37:02
     Author     : Lucas Freitas
 --%>
@@ -13,7 +13,7 @@
 <font face="verdana">
 <h1><center>Cadastro Ponto de Interesse<center></h1>
 <BR>
-<FORM action="body_Cadastro_POI.jsp" method="post">
+<FORM action="Cadastro_POI.jsp" method="post">
     
     Nome do ponto de interesse:<BR>
     <INPUT type="text" name="nome"><BR><BR>

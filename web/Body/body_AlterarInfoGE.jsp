@@ -21,7 +21,7 @@
     GE GEtr = new GE();
     
     if (request.getParameter("submit")== null) {%>
-<FORM action="body_AlterarInfoGE.jsp" method="post">
+<FORM action="AlterarInfoGE.jsp" method="post">
 Nome:<BR><INPUT type="text" maxlenght="140" name="nome" value="" ><BR><BR>
 Descrição:<BR><INPUT type="text" maxlength="140" name="descrição" value= ""> <BR><BR>
 E-mail:<BR><INPUT type="text" name="email" value= ""><BR><BR>

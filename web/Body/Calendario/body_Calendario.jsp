@@ -68,15 +68,14 @@
       <th width="15%"><font size="4">Sábado</font></th>
   </tr>
 <%
-{
   //LEMBRAR QUE JANEIRO É O MÊS ZERO!!  
   Month aMonth = Month.getMonth( Integer.parseInt(currentMonthString), Integer.parseInt(currentYearString) );
-  DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy", Locale.ENGLISH);
+  //DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy", Locale.ENGLISH);
   
   int [][] days = aMonth.getDays();
-  String str_localdate = "00/00/0000";
+  //String str_localdate = "1900-01-01";
   int int_localday;
-  java.util.Date date_localdate;
+  java.sql.Date date_localdate;
   
   int int_actualMonth = currentMonthInt + 1;
   String str_actualMonth = new Integer(int_actualMonth).toString();
@@ -86,22 +85,8 @@
     %><tr><%
     for( int j=0; j<7; j++ )
     {
-      int_localday = days[i][j];
-      
-      if (int_localday < 10 && int_localday !=0){
-          str_localdate = str_actualMonth + "/" + "0" + Integer.toString(int_localday) + "/" + currentYearString;
-      }
-      
-      else{
-          if(int_localday!=0){
-              str_localdate = str_actualMonth + "/" + Integer.toString(int_localday) + "/" + currentYearString;
-          }
-      }
-      
-      date_localdate = formatter.parse(str_localdate);
-      
-      %><%//=date_localdate%><%
-      
+
+      %><%
       if( days[i][j] == 0 )
       {
         %><td>&nbsp;</td><%
@@ -111,12 +96,12 @@
         // Destaca o Dia de HOJE
         if( currentDayInt == days[i][j] && currentMonthInt == aMonth.getMonth() && currentYearInt == aMonth.getYear() )
         {
-        %><td align = "center"><a href="/Agenda/Evento.jsp"><font size="5"><b><%=days[i][j]%></b></font></a></td><%
+        %><td align = "center"><a href="/agenda/EventosdoDia.jsp" <%session.setAttribute("str_ClickedDate","str_localdate");%>><font size="5"><b><%=days[i][j]%></b></font></a></td><%
         }
         else
         {
         %><td align = "center">
-          <a href="/Agenda/Evento.jsp" <%request.setAttribute("t","");%>>
+          <a href="/agenda/EventosdoDia.jsp" <%session.setAttribute("str_ClickedDate", str_localdate(i,j,days, currentYearString, currentMonthString));%>>
           <font size="4"><%=days[i][j]%></font>
           </a>
         </td><%
@@ -126,7 +111,6 @@
     %>
     </tr>
   <%}
-}
 %>
 </table>
 
@@ -156,4 +140,18 @@
 </body>
 </html>
 
+<%!
+    
+    String str_localdate(int i2, int j2, int days[][], String currentYearString, String str_actualMonth){
+    String str="1900-01-01";
+    int localday = days[i2][j2];
+      
+      if (localday < 10 && localday !=0){
+          str = currentYearString + "-" + str_actualMonth + "-" + "0" + Integer.toString(localday) ;
+      } else if(localday!=0){
+              str = currentYearString + "-" + str_actualMonth + "-" + Integer.toString(localday);
+          }    
+    return str;
+}
+%>
 
