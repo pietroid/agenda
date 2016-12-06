@@ -4,7 +4,6 @@
     Author     : netto
 --%>
 
-
 <html>
 <body BGCOLOR = #f2f2f2>
 <font face="verdana">
@@ -16,7 +15,7 @@
         
       <% //Verifica se o usuário está logado
          //avisa para ele que ele deve se logar para comentar
-    if (session.getAttribute("Usuario")!=null){ %>
+    if (session.getAttribute("Usuario")==null){ %>
     <p>Faça seu login para avaliar o evento!</p>
     <%}%>
     
