@@ -43,7 +43,7 @@ GE getn = new GE();
         {
 
             %>
-            <FORM action="body_Cadastro_GE.jsp" method="post">
+            <FORM action="CadastroGE.jsp" method="post">
             <INPUT type="submit" name="submit3" value="Cadastrar">    
         <%    
         }else{ //HOME DESLOGADO
@@ -51,7 +51,7 @@ GE getn = new GE();
         %>
         <BR>
             Você precisar Logar antes
-            <FORM action="body_LoginOut.jsp" method="post">
+            <FORM action="LoginOut.jsp" method="post">
             <INPUT type="submit" name="submit2" value="Logar">    
         <%    
         }
