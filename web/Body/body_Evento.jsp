@@ -62,6 +62,8 @@
             ComentarioDO comentario = comentarios.get(i);
             String nome = usuariotn.buscarPorID(comentario.getUsuId()).getNome();
             %>
+            
+            
                 <tr>
                     <td width=10% height=50> <%= nome %>: <%= comentario.getMensagem() %></td>
                 </tr>
