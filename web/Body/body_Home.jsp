@@ -9,6 +9,8 @@
 <%@ page import="java.util.Vector" %>
 <%@ page import="transacoes.Seguindo" %>
 <%@ page import="data.SeguindoDO" %>
+<%@ page import="transacoes.Evento" %>
+<%@ page import="data.EventoDO" %>
 
 <%
     if(session.getAttribute("Usuario")!= null) //HOME LOGADO
@@ -28,16 +30,26 @@
 <%
     SeguindoDO seguindo = new SeguindoDO();
     Seguindo seguindotn = new Seguindo();
-    List<EventoDO> lista = seguindotn.pesquisarPorUSUid(usuario.getId());
-    for (EventoDO evento : lista){ 
-        String nomeEven = evento.getNome(); 
+    List<SeguindoDO> lista = new ArrayList<SeguindoDO>();
+    lista = seguindotn.pesquisarPorUSUid(usuario.getId());
+    if(lista != null){
+        for(int i=0; i < lista.size(); i++) {
+            SeguindoDO seguido = lista.get(i);
+            int EVEid = seguido.getEveId();
+            Evento evento = new Evento();
+            String nomeEven = evento.buscar(EVEid).getNome();
 %>
-    <tr>
-        <td> <%=nomeEven%> </td>
-    </tr>
-    
-    <%}
+        <TR>
+            <TD> <%=nomeEven%> </TD>
+        </TR>
 
+<%      }
+    }
+    else{
+%>
+Você não segue evento algum!
+<%
+    }  
 %>
 
 
