@@ -37,7 +37,15 @@ public class RealizaData {
         ps.setInt(1, realiza.getId());
         int result = ps.executeUpdate();
     } // excluir
-
+    
+    public void excluirPorEVEid(int EVEid, Transacao tr) throws Exception {
+        Connection con = tr.obterConexao();
+        String sql = "delete from agenda.realiza where EVEid = ?";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setInt(1, EVEid);
+        int result = ps.executeUpdate();
+    }
+    
     public void atualizar(RealizaDO realiza, Transacao tr) throws Exception {
         Connection con = tr.obterConexao();
         String sql = "update agenda.realiza set GEid = ?, EVEid = ? where REALid = ?";
@@ -61,7 +69,19 @@ public class RealizaData {
         realiza.setEVEid(rs.getInt("EVEid"));
         return realiza;
     } // buscar
-    
+    public RealizaDO buscarPorEVE(int EVEid, Transacao tr) throws Exception {
+        Connection con = tr.obterConexao();
+        String sql = "select * from agenda.realiza where EVEid = ?";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setInt(1, EVEid);
+        ResultSet rs = ps.executeQuery();
+        rs.first();
+        RealizaDO realiza = new RealizaDO();
+        realiza.setId(rs.getInt("REALid"));
+        realiza.setGEid(rs.getInt("GEid"));
+        realiza.setEVEid(rs.getInt("EVEid"));
+        return realiza;
+    }
     public List<RealizaDO> pesquisarPorGEid(int GEid, Transacao tr) throws Exception {
         Connection con = tr.obterConexao();
         String sql = "select * from agenda.realiza where GEid = ?";

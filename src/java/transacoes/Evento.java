@@ -81,7 +81,7 @@ public class Evento {
 	return null;
     }
     
-    public List<EventoDO> pesquisarPorEVEid(int EVEid) throws Exception{
+/*    public List<EventoDO> pesquisarPorEVEid(int EVEid) throws Exception{
         Transacao tr = new Transacao();
 	try{
             tr.beginReadOnly();
@@ -94,7 +94,7 @@ public class Evento {
             System.out.println("Erro ao listar ");  
 	}
 	return null;
-    }
+    }*/
     public List<EventoDO> buscarData(java.sql.Date data) throws Exception{
         Transacao tr = new Transacao();
 	try{

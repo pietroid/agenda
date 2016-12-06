@@ -31,7 +31,8 @@ public class Comentario {
         }
         return false;
     } // incluir
-    public boolean excluir (ComentarioDO com) throws Exception{
+    
+    public boolean excluir(ComentarioDO com) throws Exception{
         
         Transacao tr = new Transacao();
         try {
@@ -42,6 +43,22 @@ public class Comentario {
             tr.commit();
             return true;
        
+        } catch(Exception e) {
+            tr.rollback();
+            System.out.println("Erro ao excluir");
+            e.printStackTrace();
+        }
+        return false;
+    }
+    
+    public boolean excluirPorEVEid(int EVEid) throws Exception{
+        Transacao tr = new Transacao();
+        try {
+            tr.begin();
+                ComentarioData a = new ComentarioData();
+                a.excluirPorEVEid(EVEid, tr);
+            tr.commit();
+            return true;
         } catch(Exception e) {
             tr.rollback();
             System.out.println("Erro ao excluir");
@@ -83,6 +100,22 @@ public class Comentario {
 	}
 	return null;
     } // buscar
+    
+    public List<ComentarioDO> buscarPorEVEid(int EVEid) throws Exception{
+        Transacao tr = new Transacao();
+	try{
+            tr.beginReadOnly();
+  	    ComentarioData comentarioData = new ComentarioData();
+	    List<ComentarioDO> i = comentarioData.buscarPorEVEid(EVEid, tr);
+            tr.commit();
+            return i;
+	} catch (Exception e) {
+            tr.rollback();
+            System.out.println("Erro ao buscar " + EVEid);
+           
+	}
+	return null;
+    }  
 
     private boolean isEmpty(String s) {
         if (null == s)
