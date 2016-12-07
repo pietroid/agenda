@@ -33,7 +33,7 @@
     %>
                 <h1><center>Você segue os seguintes grupos:</center></h1>
                 <table align="center" border=1 cellpadding=10 width=1000>
-                    <th>Preferencias</th>
+                    <th colspan="3">Preferencias</th>
     <%
                 for (int i = 0; i < listaPreferencia.size(); i++) {
                     GEDO GE = new GEDO();
@@ -41,7 +41,7 @@
                     GE = GEtn.buscar(listaPreferencia.get(i).getGEid());
     %>
                         <tr>
-                            <td>
+                            <td colspan="3">
                                 <center><%=GE.getNome()%></center>
                             </td>
                         </tr>
@@ -71,6 +71,9 @@
                     </table>
     <%
             }
+        else if (request.getParameter("nome").equals("Adicionar")) {
+            
+        }   
         else {
     %>
             <h1><center>Você não segue nenhum grupo de extensão!</center></h1>
