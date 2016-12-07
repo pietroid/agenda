@@ -48,11 +48,6 @@
                     Evento Avaliado
                     <%
                     }
-else{
-%>
-erro
-<%
-}
                             %>
     </body>
 </html>
