@@ -1,20 +1,66 @@
+
+<%@page import="data.GEDO"%>
 <%@page import="data.NotificacaoGeralDO"%>
 <%@page import="transacoes.NotificacaoGeral"%>
 <%@page import="data.MembroDO"%>
 <%@page import="java.util.List"%>
 <%@page import="transacoes.Membro"%>
-<html>
-<body BGCOLOR = #f2f2f2>
-<font face="verdana">
-
+<%@page import="transacoes.GE"%>
 <%@ page import="transacoes.Usuario" %>
 <%@ page import="data.UsuarioDO" %>
 <%@ page import="java.util.Vector" %>
 
+<html>
+    <head>
+        <style>
+    table {
+        font-family: "Verdana";
+        border-collapse: collapse;
+        width: 50%;
+    }
+    td, th {
+        height: 50px;
+        border: 1px solid #ddd;
+        padding: 8px;
+        background-color: #ffffff;
+    }
+    tr:nth-child(even){background-color: #f2f2f2;}
+    th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: center;
+        background-color: #4CAF50;
+        color: white;
+    }
+    
+    </style>
+    </head>    
+<body BGCOLOR = #f2f2f2>
+<font face="verdana">
+
 
 <%
- if(session.getAttribute("Usuario")!= null)
- {
+    /*----------ALYSON-----------*/
+    //Rotina para excluir notificacao
+    int exclude;
+    exclude=0;
+    int IDToExclude;
+    IDToExclude = 0;
+    if (request.getParameter("Excluir")!=null){
+        exclude = Integer.parseInt(request.getParameter("Excluir"));
+    }
+    if (request.getParameter("NotId")!=null){
+        IDToExclude = Integer.parseInt(request.getParameter("NotId"));
+    }
+    NotificacaoGeral NotToExclude = new NotificacaoGeral();
+    if ((exclude==1)&&(IDToExclude>0)){
+        NotToExclude.excluir(IDToExclude);
+        IDToExclude = 0;
+        exclude = 0; 
+    } 
+    /*------------ALYSON-------*/
+    
+ if(session.getAttribute("Usuario")!= null){
     UsuarioDO usuario = (UsuarioDO)session.getAttribute("Usuario");
     String nome = usuario.getNome();
     
@@ -30,17 +76,48 @@
     List<NotificacaoGeralDO> ListaNotificacao = list.BuscaNotporUSId(IDusuario);
     String messageNotificacao;
     /*---ALYSON---*/
-%>
-<h1><center> Perfil <center> </h1>
-
-<h2><font face="verdana">Olá,<%=nome%>  </font><h2>
-<h2><font face="verdana"> Interesses </font><h2>
+    
+    %><h1><center> Perfil <center> </h1>
+                <h1><font face="verdana" size="4">Olá,<%=nome%></font></h1>
+        <%
+    
+    /*----RAFAS2ALYSON---*/
+        
+    //Verifica se o usuário é Admin de algum grupo de extensão
+    boolean AdminGE = false;
+    
+    Membro mtr = new Membro();
+    GE gtr = new GE();
+    GEDO ge = new GEDO();
+    
+    //Relacoes de Membro para os quais o usuario é ADM 
+    List<MembroDO> lmadm = mtr.AdminedGroups(usuario.getId());
+    
+%><h2><font face="verdana" size="4"> - Seus Grupos de Extensão </font><h2><%
+    
+    if(lmadm.isEmpty()){
+         %><font face="verdana" size="3">Você não administra nenhum grupo de extensão!</font><%
+     }
+    else{
+    %>
+    <table>
+    <tr>
+      <%//<th>Seus Grupos de Extensão</th>%>
+    <%for (MembroDO membro_temp : lmadm) {%>
+    <tr>
+        <% ge = gtr.buscar(membro_temp.getGEid()); %>
+        <td align="center"><font face="verdana" size="3"><a href="GE.jsp"><%=ge.getNome()%></a></font></td>
+    </tr>
+    </table>
+    <%}
+    }%>
+    
+    <h2><font face="verdana" size="4"> - Interesses </font><h2>
 <%// adicionado link para preferencia%>
-<p><font size="2" face="verdana"><a href="Preferencia.jsp">Clique aqui
- para ver uma lista com todos os Grupos do seu interesse</a></font></p> 
-
-<p><font size="2" face="verdana"><a href="AltPass.jsp">Clique aqui
- para alterar sua senha</a></font></p>
+<p><font size="2" face="verdana"><a href="Preferencia.jsp">Lista dos Grupos de Extensão de seu interesse</a></font></p> 
+<h2><font face="verdana" size="4"> - Conta </font><h2>
+<p><font size="2" face="verdana"><a href="AltPass.jsp">Alterar sua senha</a></font></p>
+<p><font size="2" face="verdana" ><a href="ExcluirMembro.jsp">Excluir sua conta</a></font></p>
 
 
 <%/*-----ALYSON--------*/
@@ -52,10 +129,10 @@
             LiderGE = 1;
         }
     }
-    /*-----ALYSON--------*/
+    
     //Notificacao para usuario ADM
 %>
-    <p><font size="3" face="verdana">Notificações:</p>
+<h2><font size="4" face="verdana"> - Notificações:</font><h2>
     <table align="cente" border=3    cellpadding = 10 width=1000   >
         <tr>
             <th>Eventos Cancelados</th>
@@ -69,7 +146,7 @@
                         if (notificacaoCanc.getClassificacao()==0){
                     %>
                     <tr>
-                        -><%=messageNotificacao %> <br>
+                        -><%=messageNotificacao %> <a href = "Perfil.jsp?NotId=<%=notificacaoCanc.getId()%>&Excluir=1">[X]Excluir!</a> <br>
                     </tr>
                     <%
                         }
@@ -91,7 +168,7 @@
                         if (notificacaoEVE.getClassificacao()==1){
                     %>
                     <tr>
-                        -><%=messageNotificacao %><br>
+                        -><%=messageNotificacao %> <a href = "Perfil.jsp?NotId=<%=notificacaoEVE.getId()%>&Excluir=1">[X]Excluir!</a><br>
                     </tr>
                     <%
                         }
@@ -101,7 +178,7 @@
                 
             </td>
         </tr>
-        
+        <%if (LiderGE == 1){ %>
         <tr>
             <th>Conflito de Eventos</th>
             <td>
@@ -114,7 +191,7 @@
                         if (notificacaoConf.getClassificacao()==2){
                     %>
                     <tr>
-                        -><%=messageNotificacao %><br>
+                        -><%=messageNotificacao %> <a href = "Perfil.jsp?NotId=<%=notificacaoConf.getId()%>&Excluir=1">[X]Excluir!</a><br>
                     </tr>
                     <%
                         }
@@ -137,7 +214,7 @@
                         if (notificacaoFeed.getClassificacao()==3){
                     %>
                     <tr>
-                        -><%=messageNotificacao %><br>
+                        -><%=messageNotificacao %> <a href = "Perfil.jsp?NotId=<%=notificacaoFeed.getId()%>&Excluir=1">[X]Excluir!</a><br>
                     </tr>
                     <%
                         }
@@ -146,7 +223,8 @@
             </table>   
         </td>
         </tr>
-        
+        <%}
+        %>
     </table>
 <%
 /*---------------ALYSON--------------*/
@@ -176,9 +254,14 @@
 </table>
     
 <center>
+<p><font size="2" face="verdana"><a href="body_excluirMembro.jsp">Clique aqui
+ para remover sua conta</a></font></p>
+
+<%@include  file="Calendario/body_Calendario.jsp"%>
     
-<%    
-   }else{
+<%
+   } 
+   else{
 
  %>
  

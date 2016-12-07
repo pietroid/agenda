@@ -65,7 +65,7 @@ li a:hover:not(.active) {
         superUser_menu=usr.isSuperUser();
         
         //USU?RIO COMUM
-        if (!admin){
+        if (!admin && !superUser_menu){
            %><li style="float:right"><a href="Perfil.jsp">Perfil Pessoal</a></li><%
            %><li style="float:right"><a href="/agenda/LogOut.jsp">Logout</a></li><%             
         }

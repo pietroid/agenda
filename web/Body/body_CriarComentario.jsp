@@ -20,19 +20,8 @@
 <font face="verdana">
 <h1><center><%=request.getParameter("comentario")%></center></h1>
     <body BGCOLOR = #f2f2f2>
-    <font face="verdana">
-    <BR>
-    <center>
-    
-    <%
-    //Verifica se o usuário está logado
-    if (session.getAttribute("Usuario")!=null){
-        //Verifica se enviou o comentário
-        if (request.getParameter("submit") != null && request.getParameter("comentario").equals("")==false){
-            ComentarioDO c = new ComentarioDO();
-            Comentario trc = new Comentario();
-            c.setMensagem(request.getParameter("comentario"));
-            %><%=request.getParameter("comentario")%><%
+        <font face="verdana">
+        <%
             Evento eventotn = new Evento();
             int EVEid = eventotn.buscarNome(request.getParameter("evento")).getId();
             UsuarioDO usuario = (UsuarioDO) session.getAttribute("Usuario");
@@ -42,30 +31,7 @@
             if (trc.incluir(c)){
                 pageContext.forward("index.jsp");
             }
-        }
-        else if (request.getParameter("submit") != null && request.getParameter("comentario").equals("")==true)
-            pageContext.forward("index.jsp");
-        else{
-    %>
-        Digite seu comentário:
-        <form>
-	<textarea name="comentario" rows="10" cols="55" maxlength="1000"></textarea>
-        </center>
-        <INPUT type="submit" name="submit" value= "Enviar Comentário">   
-        <INPUT type="reset" name="reset" value= "Reset">
-        <INPUT type="hidden" name="evento" value="<%=request.getParameter("evento")%>">
-	</form><BR>
-    <%
-        }    
-    }    
-    else{
-    %>
-    Você precisa estar logado para comentar!
-    <%
-    }
-    %>
-    
-    
-</center>    
-</body>
+            else pageContext.forward("index.jsp");
+            %> 
+    </body>
 </html>

@@ -4,7 +4,18 @@
     Author     : Pedro
 --%>
 
+<%@page import="data.GEDO"%>
+<%@page import="java.util.List"%>
+<%@ page import="transacoes.GE" %>
+<%@page import="data.GEData"%>
 
+<%
+ 
+    
+GE ge= new GE();
+int id =Integer.parseInt(request.getParameter("idGE"));
+ge.buscar(id);
+%>
 
     <head>
   <title>Calendario Geral</title>
@@ -44,6 +55,13 @@
     }
     
     </style>
+    
+    
+    <%
+       
+        
+        
+    %>
 </head>
     <br>
      <table align="center" border=3 cellpadding=10 width=100>
@@ -51,13 +69,13 @@
        Imagens
   </th>
   <tr>
-    <td><img src ="PastadeImagens/GrupodeExtensao1/Grupodeextensao1-imagem1.PNG" align="right" width = 250 height =" 300" >
+    <td><img src ="/agenda/PastadeImagens/caneca.png" align="right" width = 250 height =" 300" >
 </td>
-    <td><img src ="PastadeImagens/GrupodeExtensao1/Grupodeextensao1-imagem1.PNG" align="right" width = 250 height =" 300" >
+    <td><img src ="/agenda/PastadeImagens/livro.png" align="right" width = 250 height =" 300" >
 </td>
-<td><img src ="PastadeImagens/GrupodeExtensao1/Grupodeextensao1-imagem1.PNG" align="right" width = 250 height =" 300" >
+<td><img src ="/agenda/PastadeImagens/social.png" align="right" width = 250 height =" 300" >
 </td>
-<td><img src ="PastadeImagens/GrupodeExtensao1/Grupodeextensao1-imagem1.PNG" align="right" width = 250 height =" 300" >
+<td><img src ="/agenda/PastadeImagens/capacete.png" align="right" width = 250 height =" 300" >
 </td>
   </tr>
   
@@ -77,3 +95,4 @@
   </tfoot>
      
 </table>
+     

@@ -11,7 +11,7 @@
 <%@ page import="transacoes.Usuario" %>
 <%@ page import="java.util.Vector" %>
 
-<% Integer.parseInt("1");
+<% 
     if (request.getParameter("evento") != null){
         Comentario comentariotn = new Comentario();
         Evento eventotn = new Evento();
@@ -19,7 +19,7 @@
         Realiza realizatn = new Realiza();
         Membro membrotn = new Membro();
         UsuarioDO usuario = new UsuarioDO();
-        EventoDO evento = eventotn.buscarNome(request.getParameter("evento"));
+        EventoDO evento = eventotn.buscar(Integer.parseInt(request.getParameter("evento")));
         if (session.getAttribute("Usuario") != null){
             usuario = (UsuarioDO) session.getAttribute("Usuario");
         }
@@ -65,7 +65,17 @@
             
             <%if(comentario.getMensagem().equals("")==false){%>
                 <tr>
-                    <td width=10% height=50> <%= nome %>: <%= comentario.getMensagem() %></td>
+                    <td width=10% height=50> <%= nome %>: <%= comentario.getMensagem() %>
+                        <%
+                            if (usuario.getNome() != null){
+                                if (usuario.isSuperUser() == true || nome == usuario.getNome()){
+                                    %>
+                                    <a href="ExcluirComentario.jsp?comentario=<%= comentario.getId() %>" target="_top"><font size="2" color="#ff0000">Excluir comentário</font></a>
+                                    <%
+                                }
+                            }
+                        %>
+                    </td>
                 </tr>
                 <%
             }
@@ -85,6 +95,7 @@
 <p align="center"> <b>O que você achou do evento? </b></p> <BR>
 <FORM action="/agenda/Feedback.jsp" method="post">  
     <center><INPUT type="submit" name="deixar_feedback" value="Deixe seu feedback" ></center> <BR>
+    <input type="hidden" name="id_eve" value="<%=evento.getId()%>">
 </form>
 <!---------------------------FIM DO REDICERIONADOR PARA FEEDBACK.JSP-------------------------------->
 <!-------------------------------------------------------------------------------------------------->
@@ -120,7 +131,7 @@
 </form>
     <%
     }
-    else pageContext.forward("index.jsp");
+    //else pageContext.forward("index.jsp");
         %>    
     </body>
 </html>
