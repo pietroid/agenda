@@ -68,7 +68,7 @@
         <BR>
         <table align="right" border=1 cellpadding=10 width=200>
             <tfoot>
-                <tr><th><a href="" target="_top">Aguardando aprovação</a></th></tr>
+                <tr><th><a href="SolicitarAdesao.jsp" target="_top">Solicitar adesão</a></th></tr>
             </tfoot>
         </table>
         <BR><BR><BR><BR>
@@ -79,7 +79,7 @@
         <BR>
         <table align="right" border=1 cellpadding=10 width=200>
             <tfoot>
-                <tr><th><a href="SolicitarAdesao.jsp" target="_top">Solicitar adesão</a></th></tr>
+                <tr><th><a href="" target="_top">Aguardando aprovação</a></th></tr>
             </tfoot>
         </table>
         <BR><BR><BR><BR>

@@ -1,6 +1,6 @@
 <%@page import="java.util.List"%>
-<%@ page import="transacoes.GE" %>
-<%@ page import="data.GEDO" %>
+<%@page import="transacoes.GE" %>
+<%@page import="data.GEDO" %>
 <%
 GE getn = new GE();
 %>
