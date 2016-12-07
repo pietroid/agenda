@@ -1,3 +1,4 @@
+
 <%@page import="data.NotificacaoGeralDO"%>
 <%@page import="transacoes.NotificacaoGeral"%>
 <%@page import="data.MembroDO"%>
@@ -45,7 +46,7 @@
 
 <%/*-----ALYSON--------*/
     
-    //Verifica se o usuário é lider de algum grupo de extensão
+    //Verifica se o usuário é Admin de algum grupo de extensão
     int LiderGE=0;
     for (MembroDO membro:ListaMembro){
         if (membro.getADM()==1){
