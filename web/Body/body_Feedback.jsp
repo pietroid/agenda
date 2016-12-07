@@ -27,20 +27,21 @@
     <p>Faça seu login para avaliar o evento!</p>
 <%}
 
-else{
-    if(request.getParameter("submit") != null){
+else if(session.getAttribute("Usuario")!=null){
+    if(request.getParameter("Enviar") != null){
         UsuarioDO usuario = (UsuarioDO) session.getAttribute("Usuario"); //User ID
         EventoDO evento = (EventoDO) session.getAttribute("EVEid"); // Event ID
         FeedbackDO m = new FeedbackDO();
         Feedback mtn = new Feedback();
         m.setMensagem(request.getParameter("message"));
         m.setUsuId(usuario.getId());
+        m.setEveId(evento.getId());
         m.setRating(Integer.parseInt(request.getParameter("nota")));
         if (mtn.incluir(m)){
             pageContext.forward("PaineldeControle.jsp");
         }
-    }%>
-
+    }
+    else {%>
 
     <textarea name="message" rows="6" cols="50" maxlength="500" >
     Digite aqui o que você achou, se gostou ou não. Sua opinião é muito importante!
@@ -58,13 +59,10 @@ else{
   <input type="radio" name="nota" value="3" > Mais ou menos
   <input type="radio" name="nota" value="2" > Ruim
   <input type="radio" name="nota" value="1" > Muito ruim!
-  <center><INPUT type="submit" name="Enviar_Feedback" value="Enviar" ></center> <BR>
+  <center><INPUT type="submit" name="Enviar_Feedback" value="Enviar"  ></center> <BR>
   </form>
-    
     <%}%>
-   
-    
-    
+<%}%>
     </font>
     </body>
     </html>
