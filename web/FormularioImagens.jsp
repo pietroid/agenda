@@ -1,15 +1,15 @@
 <%-- 
-    Document   : Senha
-    Created on : 06/12/2016, 21:43:47
+    Document   : FormularioImagens
+    Created on : 06/12/2016, 23:04:22
     Author     : Pedro
 --%>
 
 <html>
 <head>
-<title>Poli Agenda</title>
+<title>George</title>
 </head>
 <%@include file="Título/Título.jsp" %>
 <%@include  file="Menu/menu.jsp"%>
-<%@include  file="Body/body_Senha.jsp"%>
+<%@include  file="Body/body_FormularioImagens.jsp"%>
 <%@include  file="Footer/footer.jsp"%>
 </html>

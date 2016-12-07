@@ -11,7 +11,11 @@
 <%@ page import="transacoes.Membro" %>
 <%@ page import="data.MembroDO" %>
 
-<%
+
+<html>
+    <body BGCOLOR = #f2f2f2>
+        <font face="verdana">
+        <%
     if (request.getParameter("GE") != null){
         UsuarioDO usuario = new UsuarioDO();
         if (session.getAttribute("Usuario") != null){
@@ -23,15 +27,12 @@
         Realiza realizatn = new Realiza();
         boolean isadm = false;
         boolean superuser = false;
-        GEDO ge = getn.buscarNome(request.getParameter("GE")); //
-        if (usuario.getNome() != null){
+        GEDO ge = getn.buscar(Integer.parseInt(request.getParameter("GE"))); //
+        if (usuario != null){
             superuser = usuario.isSuperUser();
             isadm = membrotn.isADM(ge.getId(), usuario.getId());
         }
 %>
-<html>
-    <body BGCOLOR = #f2f2f2>
-        <font face="verdana">
         <h1><center><%= ge.getNome() %></center></h1>
         <BR><BR>
 
@@ -46,14 +47,13 @@
         </table>
 <%  UsuarioDO solicitar = new UsuarioDO();
     solicitar = (UsuarioDO)session.getAttribute("Usuario");
-    if(session.getAttribute("Usuario")!= null){
+    if(solicitar!= null){
         Membro GEsolicitar = new Membro();
         int a = ge.getId();
         boolean igual = false;
         List<MembroDO> Lista = GEsolicitar.buscarPorUSUid(solicitar.getId());
         if (Lista != null){
-            for(int i = 0; i < Lista.size(); i++){
-                MembroDO b = Lista.get(i);
+            for(MembroDO b : Lista){
                 if (a == b.getGEid()){
                     igual = true;
                 }
@@ -123,7 +123,7 @@
             EventoDO evento = eventos.get(i);
                 %>
             <tr>
-                <td><center><a href="Evento.jsp?evento=<%= evento.getNome() %>"><%= evento.getNome() %></a><center>
+                <td><center><a href="Evento.jsp?evento=<%= evento.getId() %>"><%= evento.getNome() %></a><center>
             </tr>
             <%
         }
@@ -143,7 +143,7 @@
     <%      
         }
     }
-    else pageContext.forward("index.jsp");
+else{ pageContext.forward("index.jsp");}
     %>
     <% 
         if(session.getAttribute("Usuario")!= null){
