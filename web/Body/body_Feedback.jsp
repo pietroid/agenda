@@ -5,6 +5,13 @@
 --%>
 
 
+<%@page import="data.MembroDO"%>
+<%@page import="java.util.List"%>
+<%@page import="transacoes.Membro"%>
+<%@page import="transacoes.Realiza"%>
+<%@page import="data.RealizaDO"%>
+<%@page import="transacoes.NotificacaoGeral"%>
+<%@page import="data.NotificacaoGeralDO"%>
 <%@page import="transacoes.Evento"%>
 <%@page import="transacoes.Feedback"%>
 <%@page import="data.UsuarioDO"%>
@@ -39,10 +46,35 @@ if(request.getParameter("submit") != null){
         m.setUsuId(usuario.getId()); //atribui User ID
         m.setEveId(EveId); //Atribui Event ID
         m.setRating(Integer.parseInt(request.getParameter("nota"))); //Atribui rating
-        if (mtn.incluir(m)){
+        /*-------------ALYSON-----------*/
+        /*Pegando caracteristicas do evento*/
+        Evento event = new Evento();
+        EventoDO evento = event.buscar(EveId);
+        /*mensagem*/
+        String message = "Você tem um novo Feedback relacionado ao evento ";
+        /*Criacao do objeto de notificacao geral*/
+        NotificacaoGeralDO FeedbackNote = new NotificacaoGeralDO();
+        NotificacaoGeral Note = new NotificacaoGeral();
+        /*Pegando os usuarios alvo*/
+        Realiza eventRealized = new Realiza(); 
+        RealizaDO realizacao = eventRealized.buscarPorEVE(EveId);
+        int grupoExtensao = realizacao.getGEid();
+        
+        Membro member = new Membro(); 
+        List<MembroDO> ListaMembros = member.buscarPorGEidADM(grupoExtensao);
+        
+        for (MembroDO UsuADM: ListaMembros){
+        /*Definindo os atributos da notificacao*/
+        FeedbackNote.setUsuId(UsuADM.getUSUid());
+        FeedbackNote.setEVEassociado(EveId);
+        FeedbackNote.setMensagem(message+evento.getNome());
+        FeedbackNote.setClassificacao(2);
+        if ((mtn.incluir(m))&&(Note.incluir(FeedbackNote))){
             pageContext.forward("PaineldeControle.jsp");
         }
     }
+    }
+        /*------------ALYSON-------------*/
     else {%>
 
     <textarea name="message" rows="6" cols="50" maxlength="500" form="fdb">
