@@ -83,6 +83,7 @@
   int firstday = 1;
   int lastday = 0;
   int int_actualMonth = currentMonthInt + 1;
+  int eventos_max = 0;
   String str_actualMonth = new Integer(int_actualMonth).toString();
   String str_lastday = "";
   String str_firstday = "";
@@ -133,16 +134,14 @@
     }
   
     for(int k=0; k<40; k++){ // Printa eventos[k]
-        %><%=eventos[k]%> - <%
+        if(eventos[k]>eventos_max){
+            eventos_max = eventos[k];
+        }
     }
-
     
-    
-    Color RGBColor = Color.getHSBColor(0.12f, 0.57f, 1f);
-
-    String hexColor = "#"+Integer.toHexString(RGBColor.getRGB()).substring(2);
-
-    %><%=hexColor%><%
+    float br;
+    Color RGBColor;
+    String hexColor;
   
   for(int i=0; i<aMonth.getNumberOfWeeks(); i++ )
   {
@@ -163,7 +162,12 @@
       }
       else
       {
-        //if(eventos[localday] == 0){}
+        br = 1/((float)(100/eventos_max)*(float)(eventos[localday]));//100 aqui é o espectro!
+
+        RGBColor = Color.getHSBColor(0.12f, 0.57f, br);
+
+        hexColor = "#"+Integer.toHexString(RGBColor.getRGB()).substring(2);  
+
         // Destaca o Dia de HOJE
         if( currentDayInt == days[i][j] && currentMonthInt == aMonth.getMonth() && currentYearInt == aMonth.getYear() )
         {
@@ -171,7 +175,7 @@
         }
         else
         {
-        %><td align = "center" bgcolor="rgb(0, 0, 0)">
+        %><td align = "center" bgcolor=<%=hexColor%>>
           <a href="/agenda/EventosdoDia.jsp?str_ClickedDate=<%=str_localdate%>"<font size="4"><%=days[i][j]%></font></a>
         </td><%
         }

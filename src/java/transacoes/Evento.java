@@ -111,6 +111,22 @@ public class Evento {
 	return null;
     }    
     
+    public List<EventoDO> buscarMes(java.sql.Date data1, java.sql.Date data2) throws Exception{
+        Transacao tr = new Transacao();
+	try{
+            tr.beginReadOnly();
+  	    EventoData EventoData = new EventoData();
+	    List<EventoDO> i = EventoData.buscarMes(data1, data2, tr);
+            tr.commit();
+            return i;
+	} catch (Exception e) {
+            tr.rollback();
+            System.out.println("Erro ao buscar datas do mês");
+           
+	}
+	return null;
+    }       
+    
     public boolean excluir(EventoDO evento) throws Exception{
         Transacao tr = new Transacao();
 	try{
