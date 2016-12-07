@@ -19,7 +19,7 @@
         if (request.getParameter("submit") == null){
         %>
         <form action='Reportar.jsp' method ='post'>
-            Descreva o problema (este texto será enviado à nossa equipe): <BR><BR>
+            <center>Descreva o problema (este texto será enviado à nossa equipe):</center> <BR>
             <input type="text" name="report"><br><br>
             <INPUT type="submit" name="submit" value="Submit">
         </form>
@@ -40,6 +40,7 @@
                 Problema prob = new Problema();
                 if (prob.incluir(problema)){ %>
                 <h2><center>Report enviado com sucesso!</center></h2>
-                <% } %>
+                <% }
+            }%>
     </body>
 </html>
