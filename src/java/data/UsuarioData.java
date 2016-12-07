@@ -81,13 +81,13 @@ public class UsuarioData {
         return usuario;
     }
     public void excluir(UsuarioDO usuario, Transacao tr) throws Exception {
-        String username = usuario.getUsername();
+        int usuID = usuario.getId();
         Connection con = tr.obterConexao();
-        String sql = "delete * from agenda.Usuario where Username = ?";
+        String sql = "delete from agenda.Usuario where USUid = ?";
         PreparedStatement ps = con.prepareStatement(sql);
-        ps.setString(1, username);
-        ResultSet rs = ps.executeQuery();
-        rs.first();
+        ps.setInt(1, usuID);
+        int result = ps.executeUpdate();
+        
     };
     private int boolToInt(boolean value){
         if(value){

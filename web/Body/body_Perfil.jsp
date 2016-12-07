@@ -41,6 +41,8 @@
 
 <p><font size="2" face="verdana"><a href="AltPass.jsp">Clique aqui
  para alterar sua senha</a></font></p>
+<p><font size="2" face="verdana" ><a href="ExcluirMembro.jsp">Clique aqui
+ para excluir sua conta</a></font></p>
 
 
 <%/*-----ALYSON--------*/
