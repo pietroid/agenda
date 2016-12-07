@@ -126,7 +126,7 @@ public class GEData {
             i.setImagem(rs.getString("GEpasta_de_imagens"));            
             i.setTel(rs.getString("GEtel"));              
             i.setTipo(rs.getString("GEtipo")); 
-            i.setAutorizado(rs.getInt("GEautorizado"));
+            i.setAutorizado(rs.getInt("autorizado"));
             Items.add(i);
         }
         return Items;
