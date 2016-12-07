@@ -63,11 +63,12 @@
             String nome = usuariotn.buscarPorID(comentario.getUsuId()).getNome();
             %>
             
-            
+            <%if(comentario.getMensagem()!=null){%>
                 <tr>
                     <td width=10% height=50> <%= nome %>: <%= comentario.getMensagem() %></td>
                 </tr>
                 <%
+            }
         }
                 %>
         </table>

@@ -65,7 +65,7 @@
             }
         }
     
-    if(relacaomembro==0){
+    if(relacaomembro == 0){
 %>
         <BR>
         <table align="right" border=1 cellpadding=10 width=200>
@@ -76,7 +76,7 @@
         <BR><BR><BR><BR>
 <%
     }
-    if(relacaomembro==1){
+    if(relacaomembro == 1){
 %>
         <BR>
         <table align="right" border=1 cellpadding=10 width=200>
@@ -86,9 +86,7 @@
         </table>
         <BR><BR><BR><BR>
         <%
-    }
-}
-
+}}
 %>        
         
         <table align="right" border=1 cellpadding=10 width=200>

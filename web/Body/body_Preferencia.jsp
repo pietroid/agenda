@@ -24,23 +24,24 @@
     </head>
     <%
         if (request.getParameter("nome") == null) {
-            UsuarioDO usuario = (UsuarioDO)session.getAttribute("UsuarioDO");
+            UsuarioDO usuario = (UsuarioDO)session.getAttribute("Usuario");
+           // UsuarioDO usuario = new UsuarioDO();
             List<PreferenciaDO> listaPreferencia = new ArrayList<PreferenciaDO>();
             Preferencia preferenciatn = new Preferencia();
             listaPreferencia = preferenciatn.pesquisarPorUser(usuario);
             if (listaPreferencia != null && listaPreferencia.size() != 0) {
     %>
                 <h1><center>Você segue os seguintes grupos:</center></h1>
+                <table align="center" border=1 cellpadding=10 width=1000>
+                    <th colspan="3">Preferencias</th>
     <%
                 for (int i = 0; i < listaPreferencia.size(); i++) {
                     GEDO GE = new GEDO();
                     GE GEtn = new GE();
                     GE = GEtn.buscar(listaPreferencia.get(i).getGEid());
     %>
-                    <table align="center" border=1 cellpadding=10 width=1000>
-                        <th>Preferencias</th>
                         <tr>
-                            <td>
+                            <td colspan="3">
                                 <center><%=GE.getNome()%></center>
                             </td>
                         </tr>
@@ -54,16 +55,12 @@
                                         Adicionar preferência</a>
                                 </center>
                             </td>
-                        </tr>
-                        <tr>
                             <td>
                                 <center>
                                     <a href="Preferencia.jsp?nome=Editar">
                                         Editar preferência</a>
                                 </center>
                             </td>
-                        </tr>
-                        <tr>
                             <td>
                                 <center>
                                     <a href="Preferencia.jsp?nome=Excluir">
@@ -74,6 +71,9 @@
                     </table>
     <%
             }
+        else if (request.getParameter("nome").equals("Adicionar")) {
+            
+        }   
         else {
     %>
             <h1><center>Você não segue nenhum grupo de extensão!</center></h1>
@@ -89,6 +89,22 @@
     <%
         }
     }
+    else if (request.getParameter("nome") == "Adicionar"){
+        
+    %>
+    <%
+    }    
+    else if (request.getParameter("nome") == "Editar"){
+
+    %>
+            
+    <%
+    }    
+    else if (request.getParameter("nome") == "Excluir"){
+
     %>
     
+<% 
+    }
+%>
 </html>
