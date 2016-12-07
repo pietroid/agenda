@@ -40,6 +40,7 @@
   <% }else if(request.getParameter("submit").equals("Cadastrar")){
         if(request.getParameter("username").equals("") || request.getParameter("senha").equals("") || request.getParameter("senha_rep").equals("") || request.getParameter("email").equals("") || request.getParameter("nome").equals("")|| request.getParameter("pergunta").equals("")|| request.getParameter("resposta").equals("")){
         %>
+        <b style="color:red">Preencha os campos obrigatórios</b> <br><br>
   <FORM action="Cadastro.jsp" method="post" id="usrform">
       Username <br>
       <input type="text" name="username" value="<%=request.getParameter("username")%>"><%if(request.getParameter("username").equals("")){%><b style="color:red">*</b><%}%></input>  <br><br>
@@ -93,28 +94,85 @@
   <input type="submit" name="submit" value="Cadastrar"  form="usrform"/>
   <%
         }else{
-            UsuarioDO usuario=new UsuarioDO();
-            usuario.setUsername(request.getParameter("username"));
-            usuario.setNome(request.getParameter("nome"));
-            usuario.setSenha(request.getParameter("senha"));
-            usuario.setEmail(request.getParameter("email"));
-            usuario.setCurso(request.getParameter("curso"));
-            if(!request.getParameter("ano").equals("")){ 
-                Date dt=Date.valueOf(request.getParameter("ano")+"-01-01");
-                usuario.setIngresso(dt);
-            }
-            usuario.setPergunta(request.getParameter("pergunta"));
-            usuario.setResposta(request.getParameter("resposta"));
-            usuario.setBio(request.getParameter("bio"));
-            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            LocalDate localDate = LocalDate.now();
-            usuario.setData(Date.valueOf(dtf.format(localDate)));
-            Usuario usdat=new Usuario();
-            if(usdat.incluir(usuario)){
+            UsuarioDO userteste;
+            Usuario finduser=new Usuario();
+            userteste=finduser.buscarPorUsername(request.getParameter("username"));
+            if(userteste!=null){
+                %><b style="color:red">Usuário já existente</b> <br><br>
+  <FORM action="Cadastro.jsp" method="post" id="usrform">
+      Username <br>
+      <input type="text" name="username" value="<%=request.getParameter("username")%>"><br><br>
+    Senha <br>
+    <input type="password" name="senha" value="<%=request.getParameter("senha")%>"><br><br>
+    Repetir senha <br>
+    <input type="password" name="senha_rep" value="<%=request.getParameter("senha_rep")%>"><br><br>
+    Nome Completo <br>
+    <input type="text" name="nome" value="<%=request.getParameter("nome")%>">  <br><br>
+    E-mail <br>
+    <input type="email" name="email" value="<%=request.getParameter("email")%>"><br><br>
+    Curso atual <br>
+    <input type="text" name="curso" value="<%=request.getParameter("curso")%>"/><br><br>
+     Ano de ingresso <br>
+     <input type="text" name="ano" value="<%=request.getParameter("ano")%>"/><br><br>
+    Pergunta de segurança <br>
+     <input type="text" name="pergunta" value="<%=request.getParameter("pergunta")%>"><br><br>
+     Resposta <br>
+      <input type="text" name="resposta" value="<%=request.getParameter("resposta")%>"><br><br>
+      Breve descrição:
+ </FORM>
+    <textarea rows="4" cols="50" name="bio" form="usrform"><%=request.getParameter("bio")%></textarea><br><br>
+  <input type="submit" name="submit" value="Cadastrar"  form="usrform"/><%
+            }else{
+                UsuarioDO usuario=new UsuarioDO();
+                usuario.setUsername(request.getParameter("username"));
+                usuario.setNome(request.getParameter("nome"));
+                usuario.setSenha(request.getParameter("senha"));
+                usuario.setEmail(request.getParameter("email"));
+                usuario.setCurso(request.getParameter("curso"));
+                if(!request.getParameter("ano").equals("")){ 
+                    try{
+                         Date dt=Date.valueOf(request.getParameter("ano")+"-01-01");
+                        usuario.setIngresso(dt);
+                    }catch(Exception e){
+                        %><b style="color:red">Preencha o ano corretamente</b> <br><br>
+  <FORM action="Cadastro.jsp" method="post" id="usrform">
+      Username <br>
+      <input type="text" name="username" value="<%=request.getParameter("username")%>"><br><br>
+    Senha <br>
+    <input type="password" name="senha" value="<%=request.getParameter("senha")%>"><br><br>
+    Repetir senha <br>
+    <input type="password" name="senha_rep" value="<%=request.getParameter("senha_rep")%>"><br><br>
+    Nome Completo <br>
+    <input type="text" name="nome" value="<%=request.getParameter("nome")%>">  <br><br>
+    E-mail <br>
+    <input type="email" name="email" value="<%=request.getParameter("email")%>"><br><br>
+    Curso atual <br>
+    <input type="text" name="curso" value="<%=request.getParameter("curso")%>"/><br><br>
+     Ano de ingresso <br>
+     <input type="text" name="ano" value="<%=request.getParameter("ano")%>"/><br><br>
+    Pergunta de segurança <br>
+     <input type="text" name="pergunta" value="<%=request.getParameter("pergunta")%>"><br><br>
+     Resposta <br>
+      <input type="text" name="resposta" value="<%=request.getParameter("resposta")%>"><br><br>
+      Breve descrição:
+ </FORM>
+    <textarea rows="4" cols="50" name="bio" form="usrform"><%=request.getParameter("bio")%></textarea><br><br>
+  <input type="submit" name="submit" value="Cadastrar"  form="usrform"/><%
+                    }
+                }
+                usuario.setPergunta(request.getParameter("pergunta"));
+                usuario.setResposta(request.getParameter("resposta"));
+                usuario.setBio(request.getParameter("bio"));
+                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                LocalDate localDate = LocalDate.now();
+                usuario.setData(Date.valueOf(dtf.format(localDate)));
+                Usuario usdat=new Usuario();
+                if(usdat.incluir(usuario)){
                 %> <font face="verdana">
 <h2><center>Cadastro bem sucedido!<center></h2> 
             <BR><a href="LoginOut.jsp" target="_top">Fazer login</a><%
             }
+        }
         }
 }
   %>
