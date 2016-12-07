@@ -37,7 +37,7 @@
                                  <FORM action = "ExcluirComentario.jsp?comentario=<%= comentario.getId() %>" method = "post">
                                      <input type="radio" name="acao" value="sim" checked> Sim<br>
                                      <input type="radio" name="acao" value="nao"> Não<br>
-                                     <INPUT type="submit" name="submit" value= "Excluir">
+                                     <INPUT type="submit" name="submit" value= "Enviar">
                                  </form>
                              </center>
                              <%
