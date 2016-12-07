@@ -116,7 +116,7 @@ public class GEData {
         List<GEDO> Items = new ArrayList<GEDO>();
         while (rs.next()) {
             GEDO i = new GEDO();
-           i.setId (rs.getInt("GEid"));
+            i.setId (rs.getInt("GEid"));
             i.setNome (rs.getString("GEnome"));
             i.setDescricao(rs.getString("GEdescricao"));
             i.setAno(rs.getInt("GEano_de_inicio"));

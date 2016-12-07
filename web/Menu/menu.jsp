@@ -56,7 +56,7 @@ li a:hover:not(.active) {
         int usrID = usr.getId();
         Membro tr = new Membro();
         
-        //Relacoes de Membro para os quais o usuario Ã© ADM 
+        //Relacoes de Membro para os quais o usuario é ADM 
         List<MembroDO> lm = tr.AdminedGroups(usrID);
         
         if(!lm.isEmpty()){
@@ -64,7 +64,7 @@ li a:hover:not(.active) {
         }
         superuser=usr.isSuperUser();
         
-        //USUÃRIO COMUM
+        //USUÁRIO COMUM
         if (!admin){
            %><li style="float:right"><a href="Perfil.jsp">Perfil Pessoal</a></li><%
            %><li style="float:right"><a href="/agenda/LogOut.jsp">Logout</a></li><%             
