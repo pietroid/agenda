@@ -37,7 +37,7 @@ if (request.getParameter("submit") != null){
 
     else{
     %>
-    Não há usuários com esse nome
+    Não há usuários com esse nome ou, resposta errada
     <BR>
     <FORM action="Recsenha.jsp" method="post" align = "left">
     UserName:<INPUT type="text" name="username" > 
