@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>George</title>
+        <title>Poli Agenda</title>
     </head>
     <body>
         <h1>Hello World!</h1>

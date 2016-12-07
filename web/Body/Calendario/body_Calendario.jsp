@@ -11,18 +11,14 @@
         border-collapse: collapse;
         width: 70%;
     }
-
     td, th {
         height: 70px;
         border: 1px solid #ddd;
         padding: 8px;
         background-color: #ffffff;
     }
-
     tr:nth-child(even){background-color: #f2f2f2;}
-
     #CalendarioGeral td:hover {background-color: #ddd;}
-
     th {
         padding-top: 12px;
         padding-bottom: 12px;
@@ -41,6 +37,8 @@
     }
     
     </style>
+
+    <title>Poli Agenda</title>
 </head>
 
 <!-- REMOVER IDS! -->
@@ -92,7 +90,6 @@
       } else if(localday!=0){
               str_localdate = currentYearString + "-" + str_actualMonth + "-" + Integer.toString(localday);
           }            
-
       %><%
       if( days[i][j] == 0 )
       {
