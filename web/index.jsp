@@ -1,9 +1,9 @@
 <html>
 <head>
-<title>Poli AGEnda</title>
+<title>Poli Agenda</title>
 </head>
 <%@include file="Título/Título.jsp" %>
 <%@include  file="Menu/menu.jsp"%>
-<%@include  file="Body/body_Home.jsp"%>
+<%@include  file="Body/body_Home.jsp"%><br><br>
 <%@include  file="Footer/footer.jsp"%>
 </html>

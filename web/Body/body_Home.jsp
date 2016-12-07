@@ -77,7 +77,7 @@
         <center>
         <table align="center" border=1 cellpadding=10 width=1000>
             <th> Evento <th>Grupo de extensão <th> Data
-<%}else %><p>Você não segue evento algum!</p><br> <% 
+<%}else %><p>Você não tem eventos essa semana!</p><br> <% 
 
     for(int i=0; i < lista.size(); i++){
         EventoDO eventoParte = lista_eventos.get(i);
@@ -110,15 +110,15 @@
    }else{ //HOME DESLOGADO
 
  %>
- <h1><center> Home </center> </h1>
- <h2><font face="verdana"> Grupos de extensão (PARA TESTAR HOME ESPECIFICA LOGAR COM: alex sen)</font><h2>
+ <h1><center> Home  (PARA TESTAR HOME ESPECIFICA LOGAR COM: alex sen)</center> </h1>
+ <h2><font face="verdana"> Grupos de extensão</font><h2>
 <p><font size="2" face="verdana"><a href="/Agenda/ListadosGE.jsp" target="_top">Clique aqui
  para ver uma lista com todos os Grupos de Extensão</a></font></p> 
 
 <%    
    }
 %>
-<p>Calendário</p>
+<p></p>
 <%@include  file="Calendario/body_Calendario.jsp"%>
 
 </font>
