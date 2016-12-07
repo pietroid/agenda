@@ -33,7 +33,7 @@
     %>
                 <h1><center>Você segue os seguintes grupos:</center></h1>
                 <table align="center" border=1 cellpadding=10 width=1000>
-                    <th colspan="3">Preferencias</th>
+                    <th colspan="2">Grupos seguidos</th>
     <%
                 for (int i = 0; i < listaPreferencia.size(); i++) {
                     GEDO GE = new GEDO();
@@ -41,7 +41,7 @@
                     GE = GEtn.buscar(listaPreferencia.get(i).getGEid());
     %>
                         <tr>
-                            <td colspan="3">
+                            <td colspan="2">
                                 <center><%=GE.getNome()%></center>
                             </td>
                         </tr>
@@ -52,19 +52,13 @@
                             <td>
                                 <center>
                                     <a href="Preferencia.jsp?nome=Adicionar">
-                                        Adicionar preferência</a>
-                                </center>
-                            </td>
-                            <td>
-                                <center>
-                                    <a href="Preferencia.jsp?nome=Editar">
-                                        Editar preferência</a>
+                                        Seguir um grupo</a>
                                 </center>
                             </td>
                             <td>
                                 <center>
                                     <a href="Preferencia.jsp?nome=Excluir">
-                                        Excluir preferência</a>
+                                        Deixar de seguir um grupo</a>
                                 </center>
                             </td>
                         </tr>
@@ -78,7 +72,7 @@
                 <tr>
                     <td>
                         <a href="Preferencia.jsp?nome=Adicionar" align="center">
-                            Adicionar preferência
+                            Seguir um grupo
                         </a>
                     </td>
                 </tr>
@@ -146,15 +140,6 @@
             <input type="submit" value="Excluir"></form>
     
 <% 
-    }
-    else if(request.getParameter("submit") != null){
-        %>oi <%= request.getParameter("grupo")%><%
-        int GEid = Integer.parseInt(request.getParameter("grupo"));
-        Preferencia preferenciatn = new Preferencia();
-        boolean update = preferenciatn.excluirid(GEid);
-        if (update){ %>Exclusão feita com sucesso!<%};
-        if(!update) { %>Houve uma falha na exclusão <% };
-
     }
 %>
 </html>
