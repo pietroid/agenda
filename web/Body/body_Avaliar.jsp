@@ -21,7 +21,7 @@
                         Evento tr=new Evento();
                         us = tr.buscar(Integer.parseInt(request.getParameter("id")));
                         %>
-                        <form action = "body_Avaliar" method="post"> 
+                        <form action = "Avaliar" method="post"> 
                     Nota:<BR>
                     <INPUT TYPE="RADIO" NAME="avaliacao" VALUE="1" checked> opção1
                     <INPUT TYPE="RADIO" NAME="avaliacao" VALUE="2"> opção2
