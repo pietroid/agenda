@@ -35,7 +35,7 @@
     <INPUT type="submit" name="submit" value="Submit">
     <INPUT type="reset" name="reset" value="Reset">
   </FORM>
-<BR><BR><a href="../EsqueceuSenha.jsp" target=" _top">Esqueceu sua senha?</a>
+<BR><BR><a href="agenda/EsqueceuSenha.jsp" target=" _top">Esqueceu sua senha?</a>
 </center>
 </body>
 </html>

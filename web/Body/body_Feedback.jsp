@@ -26,7 +26,7 @@
  if(session.getAttribute("Usuario")==null){ %>
     <p>Faça seu login para avaliar o evento!</p>
 <%}
-    
+
 else{
     if(request.getParameter("submit") != null){
         UsuarioDO usuario = (UsuarioDO) session.getAttribute("Usuario"); //User ID
@@ -45,8 +45,8 @@ else{
     <textarea name="message" rows="6" cols="50" maxlength="500" >
     Digite aqui o que você achou, se gostou ou não. Sua opinião é muito importante!
     </textarea>
-
-
+    
+    
     <BR>
     
     <p>Ah, e que nota você daria para o evento?</p>

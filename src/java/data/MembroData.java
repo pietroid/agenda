@@ -127,5 +127,21 @@ public class MembroData {
         }
         return Items;
     }//pesquisar por USUid
-    
+    public List<MembroDO> AdminedGroups(int usrID, Transacao tr) throws Exception {
+        Connection con = tr.obterConexao();
+        String sql = "select * from agenda.Membro where USUid = ? and ADM = 1";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setInt(1, usrID);
+        ResultSet rs = ps.executeQuery();
+        List<MembroDO> Items = new ArrayList<MembroDO>();
+        while (rs.next()) {
+            MembroDO i = new MembroDO();
+            i.setId (rs.getInt("MEMBERid"));
+            i.setGEid (rs.getInt("GEid"));
+            i.setUSUid(rs.getInt("USUid"));
+            i.setADM(rs.getInt("ADM"));
+            Items.add(i);
+        }
+        return Items;
+    }        
 }

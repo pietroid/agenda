@@ -37,13 +37,13 @@
     lista = seguindotn.pesquisarPorUSUid(usuario.getId());
     if(lista != null){
         if (lista.size() !=0){ 
-           %><p>Você segue estes eventos:</p><br><%}
-        else{ %><p>Você não segue evento algum!</p><br><% }
-%>
-        <center>
-        <table align="center" border=1 cellpadding=10 width=1000>
+           %><p>Você segue estes eventos:</p><br>
+             <center>
+             <table align="center" border=1 cellpadding=10 width=1000>
             <th> Evento <th>Grupo de extensão
-<%            
+           <%}
+        else{ %><p>Você não segue evento algum!</p><br><% }
+            
         List<EventoDO> lista_eventos = new ArrayList<EventoDO>();
         List<GEDO> lista_GE = new ArrayList<GEDO>();
         for(int i=0; i < lista.size(); i++) {
@@ -65,24 +65,30 @@
             String nomeGE = ge.getNome();
 %>
             <TR>
-                <TD> <center><a href="Evento.jsp" <% session.setAttribute("EventoDO", evento); %>><%=nomeEven%></a><center> </TD>
-                <TD><center><a href="GE.jsp" <% session.setAttribute("GEDO", ge); %>><%=nomeGE%></a><center> </TD>
+                <TD> <center><a href="Evento.jsp?evento=<%=nomeEven%>"><%=nomeEven%></a><center> </TD>
+                <TD><center><a href="GE.jsp?GE=<%=nomeGE%>" ><%=nomeGE%></a><center> </TD>
             </TR>
 <%      }
 %>
         </table>
         </center>
-<p>Os seus próximos eventos nessa semana são:</p><br>
+<%if (lista.size() !=0){ %>
+    <p>Os seus próximos eventos nessa semana são:</p><br>
         <center>
         <table align="center" border=1 cellpadding=10 width=1000>
-            <th> Evento <th>Grupo de extensão
-<%  for(int i=0; i < lista.size(); i++){
+            <th> Evento <th>Grupo de extensão <th> Data
+<%}else %><p>Você não tem eventos essa semana!</p><br> <% 
+
+    for(int i=0; i < lista.size(); i++){
+        EventoDO eventoParte = lista_eventos.get(i);
+        GEDO ge = lista_GE.get(i);
+        
 %>
         <TR>
-            <TD><center><a href="Evento.jsp" <% session.setAttribute("EventoDO", lista_eventos.get(i)); %>
-                                ><<%=lista_eventos.get(i).getNome()%></a><center> </TD>
-            <TD><center><a href="GE.jsp" <% session.setAttribute("GEDO", lista_GE.get(i)); %>
-                           ><%=lista_GE.get(i).getNome()%></a><center> </TD>
+            <TD><center><a href="Evento.jsp?evento = "<%=eventoParte.getNome()%>><%=eventoParte.getNome()%></a></center> </TD>
+            <TD><center><a href="GE.jsp?GE = "<%=ge.getNome()%>><%=ge.getNome()%></a></center> </TD>
+            <TD><center><%=eventoParte.getData()%></center> </TD>
+
         </TR>
 <%        
     }
