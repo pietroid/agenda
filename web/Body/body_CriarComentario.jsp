@@ -18,7 +18,7 @@
 <html>
 <body BGCOLOR = #f2f2f2>
 <font face="verdana">
-<h1><center>Nome do Evento</center></h1>
+<h1><center><%=request.getParameter("evento")%></center></h1>
     <body BGCOLOR = #f2f2f2>
     <font face="verdana">
     <BR>
@@ -28,11 +28,11 @@
     //Verifica se o usuário está logado
     if (session.getAttribute("Usuario")!=null){
         //Verifica se enviou o comentário
-        if (request.getParameter("submit") != null){
+        if (request.getParameter("submit") != null && !(request.getParameter("comentario").equals(""))){
             ComentarioDO c = new ComentarioDO();
             Comentario trc = new Comentario();
             c.setMensagem(request.getParameter("comentario"));
-            %><%=request.getParameter("comentario")%><%
+            %><%=request.getParameter("comentario")%><%           
             Evento eventotn = new Evento();
             int EVEid = eventotn.buscarNome(request.getParameter("evento")).getId();
             UsuarioDO usuario = (UsuarioDO) session.getAttribute("Usuario");
@@ -43,20 +43,22 @@
                 pageContext.forward("index.jsp");
             }
         }
-        else if(request.getParameter("reset") != null){
-            pageContext.forward("Eventos.jsp");
+        else if (request.getParameter("submit") != null && request.getParameter("comentario").equals("")){
+            pageContext.forward("index.jsp");
+        }
+        else if(request.getParameter("cancel") != null){
+            pageContext.forward("index.jsp");
         }
 
         else{
     %>
-        Digite seu comentário: id é <%=request.getParameter("evento")%>
-        <form>
+    <form action="CriarComentario.jsp?evento=<=%evento.getNome()%>">
 	<textarea name="comentario" rows="10" cols="55" maxlength="1000"></textarea>
         </center>
         <INPUT type="submit" name="submit" value= "Enviar Comentário">   
-        <INPUT type="reset" name="reset" value= "Cancelar">
+        <INPUT type="submit" name="cancel" value= "Cancelar">
+	</form>
         <INPUT type="hidden" name="evento" value="<%=request.getParameter("evento")%>">
-	</form><BR>
     <%
         }    
     }    
