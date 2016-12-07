@@ -50,6 +50,8 @@ public class MembroData {
         int result = ps.executeUpdate();
     } // atualizar
 
+    
+    
     public MembroDO buscar(int MEMBERid, Transacao tr) throws Exception {
         Connection con = tr.obterConexao();
         String sql = "select * from agenda.Membro where MEMBERid = ?";
@@ -97,6 +99,7 @@ public class MembroData {
             i.setGEid (rs.getInt("GEid"));
             i.setUSUid(rs.getInt("USUid"));
             i.setADM(rs.getInt("ADM"));
+            i.setADM(rs.getInt("Aprovado"));
             Items.add(i);
         }
         return Items;
