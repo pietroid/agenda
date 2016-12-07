@@ -38,6 +38,7 @@
 else if(session.getAttribute("Usuario")!=null){
     
 if(request.getParameter("submit") != null){
+
         int FeedbackOK=0;
         UsuarioDO usuario = (UsuarioDO) session.getAttribute("Usuario"); //User ID
         int EveId=Integer.parseInt(request.getParameter("id_eve"));
@@ -56,6 +57,7 @@ if(request.getParameter("submit") != null){
 
         /*-------------ALYSON-----------*/
         int NotificacaoOK=0; 
+
         /*Pegando caracteristicas do evento*/
         Evento event = new Evento();
         EventoDO evento = event.buscar(EveId);
