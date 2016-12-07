@@ -25,7 +25,7 @@ Usuario  ustn = new Usuario();
 
         <center>
             <table align="center" border=1 cellpadding=10 width=1000>
-                <th>Nome do GE<th>Descrição<th>Tipo<th>Aceitar Solicitação</th>
+                <th>Nome do GE<th>Descrição<th>Tipo<th>Aceitar Solicitação<th>Rejeitar Solicitação</th>
     
                 <%   
 
