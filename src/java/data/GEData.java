@@ -102,8 +102,8 @@ public class GEData {
         ps.setString(7, GE.getImagem());
         ps.setString(8, GE.getTel());
         ps.setString(9, GE.getTipo());
-        ps.setInt(10, GE.getId());
-        ps.setInt(11, GE.getAutorizado());
+        ps.setInt(10, GE.getAutorizado());        
+        ps.setInt(11, GE.getId());
         int result = ps.executeUpdate(); 
     } // atualizar
      

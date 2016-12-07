@@ -38,7 +38,8 @@ Usuario  ustn = new Usuario();
                     <td><center><%=ge.getNome()%></center>                                
                     <td><center><%=ge.getDescricao()%></center> 
                     <td><center><%=ge.getTipo()%></center>            
-                    <td><center><a href="GEAceito.jsp?EXP=<%= ge.getId()%>">ACEITAR</a></center>
+                    <td><center><a href="GEAceito.jsp?ACE=<%= ge.getId()%>">ACEITAR</a></center>
+                    <td><center><a href="GEAceito.jsp?REJ=<%= ge.getId()%>">REJEITAR</a></center>
                 </tr>
 
                 <%

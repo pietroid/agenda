@@ -1,9 +1,3 @@
-<%-- 
-    Document   : body_GEAceito
-    Created on : 07/12/2016, 11:18:23
-    Author     : Alexandre
---%>
-
 <%@ page import="transacoes.GE"%>
 <%@ page import="data.GEDO"%>
 <%@ page import="java.util.Vector"%>
@@ -23,30 +17,44 @@
    // Usuario tru = new Usuario();
   //  usuario=tru.buscarPorUsername(request.getParameter("login"));
     if (request.getParameter("SIM")== null){
-        pageContext.forward("Problemas.jsp");
-    }else {
-        
-        
+        pageContext.forward("AceitarGE.jsp");
+    }else if(request.getParameter("REJ")==null){
         
             GEDO GEaceitar = new GEDO();
-            int GEid = Integer.parseInt(request.getParameter("EXP"));
+            int GEid2 = Integer.parseInt(request.getParameter("ACE"));
             GE GEtn = new GE();
-            GEaceitar = GEtn.buscar(GEid);
+            GEaceitar = GEtn.buscar(GEid2);
             GEaceitar.setAutorizado(1);
             GEtn.atualizar(GEaceitar);    
         
-        pageContext.forward("GEokay.jsp");
+            pageContext.forward("GEokay.jsp");    
+    }else if(request.getParameter("ACE")==null){
+            
+            GEDO GErejeitar = new GEDO();
+            int GEid2 = Integer.parseInt(request.getParameter("REJ"));
+            GE GEtn = new GE();
+            GErejeitar = GEtn.buscar(GEid2);
+            GEtn.excluir(GErejeitar);
+            GEtn.atualizar(GErejeitar);    
+        
+            pageContext.forward("SolicitaçãoExcluidaGE.jsp"); 
     }
-}
-%>     
+            
+            
+            
+}  if(request.getParameter("ACE")!=null){
+%>   
         <h1><center>Tem certeza que deseja adicionar esse Grupo de Extensão?</center></h1>   
+        <%}else{
+    %> <h1><center>Tem certeza que deseja rejeitar essa Solicitação?</center></h1>
+        
         <BR>
         <center>
        
         <FORM action="GEAceito.jsp" method="post">            
         <INPUT type="submit" name="SIM" value= "SIM">   
         <INPUT type="submit" name="NAO" value= "NÃO">
-        <input type="hidden" name="EXP" value="<%=request.getParameter("EXP")%>" >
+        <input type="hidden" name="ACE" value="<%=request.getParameter("ACE")%>" >
         </center>
         
         
