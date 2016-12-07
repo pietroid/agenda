@@ -35,10 +35,10 @@
         color: white;
     }
        
-    {
+    /*{
         border: 0px;
         height: 50px;
-    }
+    }*/
     
     </style>
     <body BGCOLOR = #f2f2f2>
@@ -63,8 +63,14 @@
 %>
         <h1><center><%= ge.getNome() %></center></h1>
         <BR><BR>
-        <table align="center" border=1 cellpadding=10 width=200>   
-            <center><img src ="/agenda/PastadeImagens/GrupodeExtensao1/Grupodeextensao1-imagem1.PNG" width = 200 height = 200></center>
+        <table align="center" border=1 cellpadding=10 width=200>
+            <%
+                String imagem = "/agenda/PastadeImagens/padrao/logo.PNG";
+                if (ge.getImagem() != null){
+                    imagem = "/agenda/PastadeImagens/" + ge.getImagem();
+                }
+            %>
+            <center><img src ="<%= imagem %>" width = 200 height = 200></center>
         </table>
         <BR><BR>
         <table align="center" border=1 cellpadding=10 width=200>
