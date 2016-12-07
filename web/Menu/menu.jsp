@@ -1,3 +1,4 @@
+
 <%@ page import="transacoes.Usuario" %>
 <%@ page import="data.UsuarioDO" %>
 <%@ page import="java.util.Vector" %>
@@ -5,7 +6,6 @@
 <%@ page import="data.MembroDO" %>
 <%@ page import="transacoes.Membro" %>
 <%@ page import="java.util.*" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 
 <!DOCTYPE html>
@@ -45,8 +45,8 @@ li a:hover:not(.active) {
     <font face="verdana">
     <ul>
       <li><a class="active" href="/agenda/index.jsp">Home</a></li>
-      <li><a href="/agenda/ListadosGE.jsp">Grupos de Extensão</a></li>
-      <li><a href="/agenda/Calendario.jsp">Calendário Geral</a></li>
+      <li><a href="/agenda/ListadosGE.jsp">Grupos de Extens�o</a></li>
+      <li><a href="/agenda/Calendario.jsp">Calend�rio Geral</a></li>
   
   <%
       boolean admin = false;
@@ -59,12 +59,10 @@ li a:hover:not(.active) {
         //Relacoes de Membro para os quais o usuario é ADM 
         List<MembroDO> lm = tr.AdminedGroups(usrID);
         
-        if(lm != null){
+        if(!lm.isEmpty()){
             admin = true;
         }
         superuser=usr.isSuperUser();
-        
-        
         
         //USUÁRIO COMUM
         if (!admin){
