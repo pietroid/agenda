@@ -18,7 +18,7 @@
 <% 
     UsuarioDO SUser = (UsuarioDO)session.getAttribute("Usuario");
     if (SUser.isSuperUser()){
-        if (request.getParameter("ConfExclusao")!=null){ //
+        if (request.getParameter("ConfExclusao")!=null){ 
             %>
         O grupo foi excluido!    
             <%

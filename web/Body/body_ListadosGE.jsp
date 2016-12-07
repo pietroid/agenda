@@ -23,13 +23,15 @@ GE getn = new GE();
                     List<GEDO> ges = getn.buscarTodos();
                     for(int i = 0; i < ges.size(); i++){
                        GEDO ge = ges.get(i);
-                %>    
+                       if(ge.getAutorizado() == 1) {
+                %>     
                 <tr>
-                    <td width=10% height=150 ><center><iframe src="../PastadeImagens/GrupodeExtensao1/Grupodeextensao1-imagem1.PNG" scrolling= no width=120 height=150 ></iframe></center>
+                    <td width=10% height=150 ><center><iframe src="agenda/PastadeImagens/GrupodeExtensao1/Grupodeextensao1-imagem1.PNG" scrolling= no width=120 height=150 ></iframe></center>
                     <td><center><a href="GE.jsp?GE=<%= ge.getNome()%>"><%= ge.getNome() %></a></center>
                 </tr>
 
                 <%
+                    }
                 }
                 %>
             </table>

@@ -15,9 +15,8 @@
 <font face="verdana">
 <h1><center>Solicitar Adesão</center></h1>
 <BR><BR>
-<% RequisicaoMembroDO user= (RequisicaoMembroDO)session.getAttribute("Usuario");
+<%  RequisicaoMembroDO user= (RequisicaoMembroDO)session.getAttribute("Usuario");
     RequisicaoMembro RMtr = new RequisicaoMembro();
-    
     boolean RegIn = RMtr.incluir(user);
     
         if (RegIn){ %> A sua solicitação foi feita com sucesso!  <%}

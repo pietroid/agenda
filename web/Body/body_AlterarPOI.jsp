@@ -12,23 +12,34 @@
 <%@ page import="transacoes.PontoDeInteresse" %>
 <%@ page import="data.PontoDeInteresseDO" %>
 <%@ page import="java.util.Vector" %>
+<%@ page import="java.lang.Integer"%>
+
 
 
 <center>
-<% 
-    PontoDeInteresseDO PontoDeInteresse = new PontoDeInteresseDO();
-    PontoDeInteresse PontoDeInteressetr = new PontoDeInteresse();
-    if (request.getParameter("submit")== null) {%>
+<%  
+    if(request.getParameter("PontoDeInteresse") != null){
+        
+        PontoDeInteresseDO PontoDeInteresse = new PontoDeInteresseDO();
+        PontoDeInteresse PontoDeInteressetr = new PontoDeInteresse();
+        PontoDeInteresse = PontoDeInteressetr.buscarnome(request.getParameter("PontoDeInteresse"));
+        
+         %>
 <FORM action="AlterarPOI.jsp" method="post">
-Nome:<BR><INPUT type="text" maxlenght="140" name="nome" value="" ><BR><BR>
-Descrição:<BR><INPUT type="text" maxlength="140" name="descrição" value= ""> <BR><BR>
-Endereço:<BR><INPUT type="text" name="endereço" value= ""><BR><BR>
-Link Para Google Maps:<BR><INPUT type="text" name="link_para_maps" value= ""><BR><BR>
-Pasta De Imagens:<BR><INPUT type="text" name="pasta_de_imagens" value= ""><BR><BR>
+    Nome do ponto de interesse:<BR>
+    <INPUT type="text" name="nome"><BR><BR>
+    Descrição:<BR>
+    <INPUT type="text" name="descrição"><BR><BR>
+    Endereço:<BR>
+    <INPUT type="text" name="endereço"><BR><BR>
+    Link para Google Maps:<BR>
+    <INPUT type="text" name="link_para_maps"><BR><BR>
+    Pasta de Imagens:<BR>
+    <INPUT type="text" name="pasta_de_imagens"><BR><BR>
 <INPUT type="submit" name="submit" value= "Salvar Mudanças">   
 <INPUT type="reset" name="reset" value= "Reset">
 </FORM>
-<%} else if(request.getParameter("submit")=="Salvar Mudanças" ) { 
+<%if(request.getParameter("submit")=="Salvar Mudanças" ) { 
  
 if (request.getParameter("nome")!= null) PontoDeInteresse.setNome(request.getParameter("nome"));
 if (request.getParameter("descrição")!= null) PontoDeInteresse.setDescrição(request.getParameter("descrição"));
@@ -41,6 +52,9 @@ if (request.getParameter("pasta_de_imagens")!= null) PontoDeInteresse.setPasta_d
 boolean update = PontoDeInteressetr.atualizar(PontoDeInteresse);
 
  %>
+ <% }else pageContext.forward("ListaPOI.jsp");     
+    
+%>
 </center>
 </body>
 </html>

@@ -8,7 +8,7 @@
 <html>
 <body BGCOLOR = #f2f2f2>
 <font face="verdana">
-<h1> <center> Alterar Informações do Grupo de Extensão <center> </h1>
+<h1> <center> Alterar Informações do Grupo de Extensão </center> </h1>
 <BR>
 <%@ page import="transacoes.GE" %>
 <%@ page import="data.GEDO" %>

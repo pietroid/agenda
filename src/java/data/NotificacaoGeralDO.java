@@ -14,7 +14,7 @@ public class NotificacaoGeralDO {
     private int usuid;
     private int EVEassociado;
     private String mensagem;
-    private String classificacao;
+    private int classificacao;
     
 
     
@@ -76,13 +76,13 @@ public class NotificacaoGeralDO {
     /**
      * @return classificacao 
      */
-    public String getClassificacao(){
+    public int getClassificacao(){
         return classificacao; 
     } 
     /**
      * @param classificacao the classificacao to set 
      */
-    public void setClassificacao(String classificacao){
+    public void setClassificacao(int classificacao){
         this.classificacao = classificacao;
     }
 }
