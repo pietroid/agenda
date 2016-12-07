@@ -63,6 +63,7 @@ if(request.getParameter("submit") != null){
         EventoDO evento = event.buscar(EveId);
         
         /*mensagem*/
+        String nomeEvento = evento.getNome();
         String message = "Você tem um novo Feedback relacionado ao evento ";
         /*Criacao do objeto de notificacao geral*/
         NotificacaoGeralDO FeedbackNote = new NotificacaoGeralDO();
@@ -80,7 +81,7 @@ if(request.getParameter("submit") != null){
             /*Definindo os atributos da notificacao*/
             FeedbackNote.setUsuId(UsuADM.getUSUid());
             FeedbackNote.setEVEassociado(EveId);
-            FeedbackNote.setMensagem(message+evento.getNome());
+            FeedbackNote.setMensagem(message+nomeEvento);
             FeedbackNote.setClassificacao(2);
             if (Note.incluir(FeedbackNote)){
                 NotificacaoOK=1;

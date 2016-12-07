@@ -98,9 +98,10 @@ public class MembroData {
     
     public List<MembroDO> pesquisarPorGEidADM(int GEid, Transacao tr) throws Exception {
         Connection con = tr.obterConexao();
-        String sql = "select * from agenda.Membro where GEid = ? and ADM = 1";
+        String sql = "select * from agenda.Membro where GEid = ? and ADM = ?";
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setInt(1, GEid);
+        ps.setInt(2,1);
         ResultSet rs = ps.executeQuery();
         List<MembroDO> Items = new ArrayList<MembroDO>();
         while (rs.next()) {
