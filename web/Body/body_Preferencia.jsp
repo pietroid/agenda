@@ -86,6 +86,22 @@
     <%
         }
     }
+    else if (request.getParameter("nome") == "Adicionar"){
+        
+    %>
+    <%
+    }    
+    else if (request.getParameter("nome") == "Editar"){
+
+    %>
+            
+    <%
+    }    
+    else if (request.getParameter("nome") == "Excluir"){
+
     %>
     
+<% 
+    }
+%>
 </html>
