@@ -1,9 +1,3 @@
-<%-- 
-    Document   : AprovarMembro
-    Created on : 07/12/2016, 00:41:38
-    Author     : Kenji
---%>
-
 <html>
 <head>
 <title>Poli Agenda</title>

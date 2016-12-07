@@ -14,6 +14,8 @@
 <body BGCOLOR = #f2f2f2>
 <font face="verdana">
 
+<td><a href="/agenda/AprovarMembro.jsp"  target="_top"><font size="3" color="#ff0000">Aprovações Pendentes</font></a></td>
+
 
 <%
     /*----------ALYSON-----------*/

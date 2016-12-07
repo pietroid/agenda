@@ -99,7 +99,7 @@ public class MembroData {
             i.setGEid (rs.getInt("GEid"));
             i.setUSUid(rs.getInt("USUid"));
             i.setADM(rs.getInt("ADM"));
-            i.setADM(rs.getInt("Aprovado"));
+            i.setAprovado(rs.getInt("Aprovado"));
             Items.add(i);
         }
         return Items;

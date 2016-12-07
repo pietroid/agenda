@@ -43,7 +43,7 @@
   <td><a href="/agenda/Cadastro_POI.jsp"  target="_top"><font size="3" color="#ff0000">Cadastrar Ponto de Interesse</font></a></td>
   <td><a href="/agenda/AlterarPOI.jsp"  target="_top"><font size="3" color="#ff0000">Alterar Ponto de Interesse</font></a></td>
   <td><a href="/agenda/ExcluirPOI.jsp"  target="_top"><font size="3" color="#ff0000">Excluir Ponto de Interesse</font></a></td>
-  <td><a href="/agenda/AprovarMembro.jsp"  target="_top"><font size="3" color="#ff0000">Aprovações Pendentes</font></a></td>
+  
 </tr>
 </table>
 
