@@ -14,17 +14,18 @@
 <!DOCTYPE html>
 <html>
     <body>
-        <h1><center>Reportar problema></center></h1>
+        <h1><center>Reportar problema</center></h1>
         <%
         if (request.getParameter("submit") == null){
         %>
+        <center>
         <form action='Reportar.jsp' method ='post'>
-            <center>Descreva o problema (este texto será enviado à nossa equipe):</center> <BR>
+            Descreva o problema (este texto será enviado à nossa equipe): <BR>
             <input type="text" name="report"><br><br>
             <INPUT type="submit" name="submit" value="Submit">
         </form>
             
-        <% } else{
+        <% } else {
                 String action = request.getParameter("report");
                 ProblemaDO problema = new ProblemaDO();
                 if (session.getAttribute("Usuario")!=null){
@@ -33,14 +34,15 @@
                     problema.setUserId(usuarioid);
                 }
                 problema.setMensagem(action);
-                if(!request.getParameter("ano").equals("")){ 
+                if (!request.getParameter("ano").equals("")){ 
                     Date dt = Date.valueOf(request.getParameter("ano")+"-01-01");
                     problema.setData(dt);
                 }
                 Problema prob = new Problema();
                 if (prob.incluir(problema)){ %>
-                <h2><center>Report enviado com sucesso!</center></h2>
+                <h2>Report enviado com sucesso!</h2>
                 <% }
             } %>
+        </center>
     </body>
 </html>
