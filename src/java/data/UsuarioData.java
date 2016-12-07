@@ -30,6 +30,30 @@ public class UsuarioData {
         rs.first();
         usuario.setId(rs.getInt("LAST_INSERT_ID()"));
     }
+    
+      public void atualizar(UsuarioDO usuario, Transacao tr) throws Exception {
+     Connection con = tr.obterConexao();
+     String sql = "update agenda.Usuario set Username=?, Senha=?, USnome=?, Email=?, USbio=?, USimagem=?, USdata=?, UScurso=?, USingresso=?, USpasta=?, USuperuser=?,USpergunta=?,USresposta=?  where USUid=?";
+     PreparedStatement ps = con.prepareStatement(sql);
+     ps.setString(1, usuario.getUsername());
+        ps.setString(2, usuario.getSenha());
+        ps.setString(3, usuario.getNome());
+        ps.setString(4, usuario.getEmail());
+        ps.setString(5, usuario.getBio());
+        ps.setString(6, usuario.getImagem());
+        ps.setDate(7, usuario.getData());
+        ps.setString(8, usuario.getCurso());
+        ps.setDate(9, usuario.getIngresso());
+        ps.setString(10,usuario.getPasta());
+        ps.setInt(11, boolToInt(usuario.isSuperUser()));
+        ps.setString(12, usuario.getPergunta());
+        ps.setString(13, usuario.getResposta());
+        ps.setInt(14, usuario.getId());
+     
+     int result = ps.executeUpdate(); 
+    } // atualizar
+      
+      
     public UsuarioDO buscar(String username, Transacao tr) throws Exception {
         Connection con = tr.obterConexao();
         String sql = "select * from agenda.Usuario where Username = ?";
