@@ -14,6 +14,8 @@ public class MembroDO {
     private int GEid;
     private int USUid;
     private int ADM;
+    private int Aprovado;
+    
 
     /**
      * @return the MEMBERid
@@ -69,5 +71,15 @@ public class MembroDO {
      */
     public void setADM(int ADM) {
         this.ADM = ADM;
+    }
+    
+    
+    public int getAprovado() {
+        return Aprovado;
+    }
+
+ 
+    public void setAprovado(int MembroAprovado) {
+        this.Aprovado = MembroAprovado;
     }
 }

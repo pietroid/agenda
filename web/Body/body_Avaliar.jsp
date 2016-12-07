@@ -14,7 +14,7 @@
 <html>
     <body BGCOLOR = #f2f2f2>
         <font face="verdana">
-        <h1><center>Avaliar<center></h1>
+        <h1><center>Avaliar</center></h1>
                 <BR>
                 <center>  
                     <% EventoDO us=new EventoDO();

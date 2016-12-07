@@ -91,7 +91,7 @@
         <BR>
         
 
-        <p align="right"><a href="Calendário.jsp" target="_top">Clique aqui para voltar ao calendário</a></p>
+        <p align="right"><a href="Calendario.jsp" target="_top">Clique aqui para voltar ao calendário</a></p>
         <BR><BR><BR><BR>
         
         
