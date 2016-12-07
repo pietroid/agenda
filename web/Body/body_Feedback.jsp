@@ -5,6 +5,7 @@
 --%>
 
 
+<%@page import="transacoes.Evento"%>
 <%@page import="transacoes.Feedback"%>
 <%@page import="data.UsuarioDO"%>
 <%@page import="data.EventoDO"%>
@@ -28,22 +29,23 @@
 <%}
 
 else if(session.getAttribute("Usuario")!=null){
-    if(request.getParameter("Enviar") != null){
+    
+if(request.getParameter("submit") != null){
         UsuarioDO usuario = (UsuarioDO) session.getAttribute("Usuario"); //User ID
-        EventoDO evento = (EventoDO) session.getAttribute("EVEid"); // Event ID
+        int EveId=Integer.parseInt(request.getParameter("id_eve"));
         FeedbackDO m = new FeedbackDO();
         Feedback mtn = new Feedback();
-        m.setMensagem(request.getParameter("message"));
-        m.setUsuId(usuario.getId());
-        m.setEveId(evento.getId());
-        m.setRating(Integer.parseInt(request.getParameter("nota")));
+        m.setMensagem(request.getParameter("message")); //Atribui mensagem
+        m.setUsuId(usuario.getId()); //atribui User ID
+        m.setEveId(EveId); //Atribui Event ID
+        m.setRating(Integer.parseInt(request.getParameter("nota"))); //Atribui rating
         if (mtn.incluir(m)){
             pageContext.forward("PaineldeControle.jsp");
         }
     }
     else {%>
 
-    <textarea name="message" rows="6" cols="50" maxlength="500" >
+    <textarea name="message" rows="6" cols="50" maxlength="500" form="fdb">
     Digite aqui o que você achou, se gostou ou não. Sua opinião é muito importante!
     </textarea>
     
@@ -53,13 +55,14 @@ else if(session.getAttribute("Usuario")!=null){
     <p>Ah, e que nota você daria para o evento?</p>
     
     <BR>
-    <form>
+    <form action="Feedback.jsp" method="post" id="fdb">
   <input type="radio" name="nota" value="5" > Muito bom!
   <input type="radio" name="nota" value="4" > Bom
   <input type="radio" name="nota" value="3" > Mais ou menos
   <input type="radio" name="nota" value="2" > Ruim
   <input type="radio" name="nota" value="1" > Muito ruim!
-  <center><INPUT type="submit" name="Enviar_Feedback" value="Enviar"  ></center> <BR>
+  <center><INPUT type="submit" name="submit" value="Enviar"  ></center> 
+  <input type="hidden" name="id_eve" value="<%=request.getParameter("id_eve")%>">
   </form>
     <%}%>
 <%}%>
