@@ -70,7 +70,7 @@
                             if (usuario.getNome() != null){
                                 if (usuario.isSuperUser() == true || nome == usuario.getNome()){
                                     %>
-                                    <a href="ExcluirComentario.jsp?comentario=<%= comentario.getId() %>" target="_top"><font size="5" color="#ff0000">Excluir comentário</font></a></td>
+                                    <a href="ExcluirComentario.jsp?comentario=<%= comentario.getId() %>" target="_top"><font size="2" color="#ff0000">Excluir comentário</font></a>
                                     <%
                                 }
                             }
