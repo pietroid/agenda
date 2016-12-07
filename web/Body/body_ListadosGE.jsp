@@ -27,7 +27,7 @@ GE getn = new GE();
                 %>     
                 <tr>
                     <td width=10% height=150 ><center><iframe src="agenda/PastadeImagens/GrupodeExtensao1/Grupodeextensao1-imagem1.PNG" scrolling= no width=120 height=150 ></iframe></center>
-                    <td><center><a href="GE.jsp?GE=<%= ge.getNome()%>"><%= ge.getNome() %></a></center>
+                    <td><center><a href="GE.jsp?GE=<%= ge.getId()%>"><%= ge.getNome() %></a></center>
                 </tr>
 
                 <%
