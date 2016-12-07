@@ -16,7 +16,7 @@ public class EventoData {
     
     public void incluir(EventoDO evento, Transacao tr) throws Exception {
         Connection con = tr.obterConexao();
-        String sql = "insert into evento (EVEnome,EVEdescricao,EVEtipo,EVEhorario_de_inicio,EVEhorario_de_termino,EVEdata,EVEmacro_evento,EVEpasta_de_imagens,EVEavaliacao) values (?,?,?,?,?,?,?,?,?)";
+        String sql = "insert into evento (EVEnome,EVEdescricao,EVEtipo,EVEhorario_de_inicio,EVEhorario_de_termino,EVEdata,EVEmacro_evento,EVEpasta_de_imagens,EVEavaliacao,EVEAtivo) values (?,?,?,?,?,?,?,?,?,?)";
         PreparedStatement ps = con.prepareStatement(sql);   
         ps.setString(1, evento.getNome());
         ps.setString(2, evento.getDescricao());
@@ -27,6 +27,7 @@ public class EventoData {
         ps.setInt(7, boolToInt(evento.getMacroEvento()));
         ps.setString(8,"evento");
         ps.setInt(9, evento.getAvaliação());
+        ps.setInt(10,evento.getAtivo());
         //int result = ps.executeUpdate();
         
         sql= "SELECT LAST_INSERT_ID();";
@@ -46,7 +47,7 @@ public class EventoData {
 
   public void atualizar(EventoDO evento, Transacao tr) throws Exception {
      Connection con = tr.obterConexao();
-     String sql = "update evento set EVEnome=?, EVEdescricao=?, EVEtipo=?, EVEmacro_evento=?, EVEhorario_de_inicio=?, EVEhorario_de_termino=?, EVEdata=?, EVEpasta_de_imagens=?, EVEavaliacao=?, EVEconflito=?  where EVEid=?";
+     String sql = "update evento set EVEnome=?, EVEdescricao=?, EVEtipo=?, EVEmacro_evento=?, EVEhorario_de_inicio=?, EVEhorario_de_termino=?, EVEdata=?, EVEpasta_de_imagens=?, EVEavaliacao=?, EVEconflito=?, EVEAtivo=?  where EVEid=?";
      PreparedStatement ps = con.prepareStatement(sql);
      ps.setString(1, evento.getNome());
      ps.setString(2, evento.getDescricao());
@@ -57,8 +58,9 @@ public class EventoData {
      ps.setDate(7, evento.getData());
      ps.setString(8, evento.getPastaimagens());
      ps.setInt(9, evento.getAvaliação());
-     ps.setInt(11, boolToInt(evento.isConflito()));
-     ps.setInt(10, evento.getId());
+     ps.setInt(10, boolToInt(evento.isConflito()));
+     ps.setInt(12, evento.getId());
+     ps.setInt(11, evento.getAtivo());
      int result = ps.executeUpdate(); 
     } // atualizar
 
@@ -80,6 +82,7 @@ public class EventoData {
         evento.setPastaimagens(rs.getString("EVEpasta_de_imagens"));
         evento.setAvaliação(rs.getInt("EVEavaliacao"));
         evento.setConflito(rs.getInt("EVEconflito")==1);
+        evento.setAtivo(rs.getInt("EVEAtivo"));
         return evento;
     } // buscar
     
@@ -102,6 +105,7 @@ public class EventoData {
         evento.setPastaimagens(rs.getString("EVEpasta_de_imagens"));
         evento.setAvaliação(rs.getInt("EVEavaliacao"));
         evento.setConflito(rs.getInt("EVEconflito")==1);
+        evento.setAtivo(rs.getInt("EVEAtivo"));
         return evento;
     }
     
@@ -125,6 +129,7 @@ public class EventoData {
             evento.setPastaimagens(rs.getString("EVEpasta_de_imagens"));
             evento.setAvaliação(rs.getInt("EVEavaliacao"));
             evento.setConflito(rs.getInt("EVEconflito")==1);
+            evento.setAtivo(rs.getInt("EVEAtivo"));
             Items.add(evento);
         }
         return Items;
@@ -150,6 +155,8 @@ public class EventoData {
             evento.setMacroEvento(rs.getInt("EVEmacro_evento")==1);
             evento.setPastaimagens(rs.getString("EVEpasta_de_imagens"));
             evento.setAvaliação(rs.getInt("EVEavaliacao"));
+            evento.setConflito(rs.getInt("EVEconflito")==1);
+            evento.setAtivo(rs.getInt("EVEAtivo"));
             Items.add(evento);
         }
         return Items;
@@ -173,6 +180,8 @@ public class EventoData {
             evento.setMacroEvento(rs.getInt("EVEmacro_evento")==1);
             evento.setPastaimagens(rs.getString("EVEpasta_de_imagens"));
             evento.setAvaliação(rs.getInt("EVEavaliacao"));
+            evento.setConflito(rs.getInt("EVEconflito")==1);
+            evento.setAtivo(rs.getInt("EVEAtivo"));
             Items.add(evento);
         }
         return Items;
@@ -196,6 +205,7 @@ public class EventoData {
             evento.setPastaimagens(rs.getString("EVEpasta_de_imagens"));
             evento.setAvaliação(rs.getInt("EVEavaliacao"));
             evento.setConflito(rs.getInt("EVEconflito")==1);
+            evento.setAtivo(rs.getInt("EVEAtivo"));
             Items.add(evento);
         }
         return Items;

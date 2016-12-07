@@ -25,6 +25,7 @@ public class EventoDO {
     private int avaliação;
     private int numeroava;
     private boolean conflito;
+    private int ativo;
 
     /**
      * @return the id
@@ -186,6 +187,11 @@ public class EventoDO {
         this.conflito = conflito;
     }
     
+    public int getAtivo(){
+        return ativo;
+    }
     
-    
+    public void setAtivo(int ativo){
+        this.ativo = ativo;
+    }
 }
