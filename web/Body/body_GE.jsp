@@ -50,17 +50,20 @@
     if(solicitar!= null){
         Membro GEsolicitar = new Membro();
         int a = ge.getId();
-        boolean igual = false;
+        int relacaomembro = 0;
         List<MembroDO> Lista = GEsolicitar.buscarPorUSUid(solicitar.getId());
         if (Lista != null){
             for(MembroDO b : Lista){
                 if (a == b.getGEid()){
-                    igual = true;
+                    relacaomembro = 1;
+                    if (b.getAprovado()==1){
+                        relacaomembro = 2;
+                    }
                 }
             }
         }
     
-    if(igual==false){
+    if(relacaomembro==0){
 %>
         <BR>
         <table align="right" border=1 cellpadding=10 width=200>
@@ -71,6 +74,17 @@
         <BR><BR><BR><BR>
 <%
     }
+    if(relacaomembro==1){
+%>
+        <BR>
+        <table align="right" border=1 cellpadding=10 width=200>
+            <tfoot>
+                <tr><th><a href="" target="_top">Aguardando aprovação</a></th></tr>
+            </tfoot>
+        </table>
+        <BR><BR><BR><BR>
+        <%
+}
 }
 
 %>        
