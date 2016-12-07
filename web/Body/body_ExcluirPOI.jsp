@@ -43,9 +43,7 @@
                                 Acontece Acontecetr = new Acontece();
                                 QG QGtr = new QG();
                                 PontoDeInteressetr.excluir(PontoDeInteresse);
-                                QGtr.excluir(PontoDeInteresse);
-                                Acontecetr.excluir(PontoDeInteresse); %>
-                                Ponto de interesse excluído! <BR>
+                            %>    Ponto de interesse excluído! <BR>
                             <% } 
                         }
                     } 
