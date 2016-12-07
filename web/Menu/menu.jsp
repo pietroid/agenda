@@ -1,3 +1,4 @@
+
 <%@ page import="transacoes.Usuario" %>
 <%@ page import="data.UsuarioDO" %>
 <%@ page import="java.util.Vector" %>
@@ -5,7 +6,6 @@
 <%@ page import="data.MembroDO" %>
 <%@ page import="transacoes.Membro" %>
 <%@ page import="java.util.*" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 
 <!DOCTYPE html>
@@ -45,8 +45,8 @@ li a:hover:not(.active) {
     <font face="verdana">
     <ul>
       <li><a class="active" href="/agenda/index.jsp">Home</a></li>
-      <li><a href="/agenda/ListadosGE.jsp">Grupos de Extens√£o</a></li>
-      <li><a href="/agenda/Calendario.jsp">Calend√°rio Geral</a></li>
+      <li><a href="/agenda/ListadosGE.jsp">Grupos de Extens„o</a></li>
+      <li><a href="/agenda/Calendario.jsp">Calend·rio Geral</a></li>
   
   <%
       boolean admin = false;
@@ -56,17 +56,15 @@ li a:hover:not(.active) {
         int usrID = usr.getId();
         Membro tr = new Membro();
         
-        //Relacoes de Membro para os quais o usuario √© ADM 
+        //Relacoes de Membro para os quais o usuario È ADM 
         List<MembroDO> lm = tr.AdminedGroups(usrID);
         
-        if(lm != null){
+        if(!lm.isEmpty()){
             admin = true;
         }
         superuser=usr.isSuperUser();
         
-        
-        
-        //USU√ÅRIO COMUM
+        //USU¡RIO COMUM
         if (!admin){
            %><li style="float:right"><a href="Perfil.jsp">Perfil Pessoal</a></li><%
            %><li style="float:right"><a href="/agenda/LogOut.jsp">Logout</a></li><%             
