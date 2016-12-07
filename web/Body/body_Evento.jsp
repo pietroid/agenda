@@ -11,7 +11,7 @@
 <%@ page import="transacoes.Usuario" %>
 <%@ page import="java.util.Vector" %>
 
-<% Integer.parseInt("1");
+<% 
     if (request.getParameter("evento") != null){
         Comentario comentariotn = new Comentario();
         Evento eventotn = new Evento();
@@ -19,7 +19,7 @@
         Realiza realizatn = new Realiza();
         Membro membrotn = new Membro();
         UsuarioDO usuario = new UsuarioDO();
-        EventoDO evento = eventotn.buscarNome(request.getParameter("evento"));
+        EventoDO evento = eventotn.buscar(Integer.parseInt(request.getParameter("evento")));
         if (session.getAttribute("Usuario") != null){
             usuario = (UsuarioDO) session.getAttribute("Usuario");
         }
