@@ -13,7 +13,11 @@
 <font face="verdana">
 <h1><center>Cadastro Ponto de Interesse<center></h1>
 <BR>
-<FORM action="Cadastro_POI.jsp" method="post">
+<center></center>
+<%PontoDeInteresseDO p1=new PontoDeInteresseDO();
+            
+      if(request.getParameter("submit")==null){%>
+<FORM action="Cadastro_POI.jsp" method="post" id="usrform">
     
     Nome do ponto de interesse:<BR>
     <INPUT type="text" name="nome"><BR><BR>
@@ -29,10 +33,10 @@
     
     
     
-    <INPUT type="submit" name="submit" value="Submit">
+    <INPUT type="submit" name="submit" value="Submit" form="usrform">
     
-    <% 
-if (request.getParameter("submit") != null){
+    <% }else
+if (request.getParameter("submit").equals("Submit")){
     PontoDeInteresseDO ponto = new PontoDeInteresseDO();
     ponto.setNome(request.getParameter("nome"));
     ponto.setDescrição(request.getParameter("descrição"));
