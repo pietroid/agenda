@@ -29,7 +29,7 @@
                     <INPUT TYPE="RADIO" NAME="avaliacao" VALUE=4> opção4
                     <INPUT TYPE="RADIO" NAME="avaliacao" VALUE=5> opção5
                     <INPUT type="submit" name="Submit" value="avaliar">
-                    <INPUT type =" hidden" name =" id" value = <%=request.getParameter("id")%>>
+                    <INPUT type ="hidden" name ="id" value = "<%=request.getParameter("id")%>">
                     </form>
                         
                     <%
