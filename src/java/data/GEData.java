@@ -130,5 +130,31 @@ public class GEData {
             Items.add(i);
         }
         return Items;
-    }    
+    }
+    
+    public List<GEDO> buscarTodosEmEspera(Transacao tr) throws Exception {
+        Connection con = tr.obterConexao();
+        String sql = "select * from grupodeextensao where autorizado = 0";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+        List<GEDO> Items = new ArrayList<GEDO>();
+        while (rs.next()) {
+            GEDO i = new GEDO();
+            i.setId (rs.getInt("GEid"));
+            i.setNome (rs.getString("GEnome"));
+            i.setDescricao(rs.getString("GEdescricao"));
+            i.setAno(rs.getInt("GEano_de_inicio"));
+            i.setSite (rs.getString("GEsite"));
+            i.setFace (rs.getString("GEpagina_do_fb"));
+            i.setEmail(rs.getString("GEemail"));
+            i.setImagem(rs.getString("GEpasta_de_imagens"));            
+            i.setTel(rs.getString("GEtel"));              
+            i.setTipo(rs.getString("GEtipo")); 
+            i.setAutorizado(rs.getInt("autorizado"));
+            Items.add(i);
+        }
+        return Items;
+    }        
+    
+    
 }

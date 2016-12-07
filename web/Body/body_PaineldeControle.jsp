@@ -70,7 +70,7 @@
 <th colspan="2">Notificações</th>
 <tr>
   <td><a href="/agenda/Problemas.jsp"  target="_top"><font size="3" >Problemas do Sistema</font></a></td>
-  <td><a href="/agenda/Solicitações.jsp"  target="_top"><font size="3">Solicitações</font></a></td>
+  <td><a href="/agenda/AceitarGE.jsp"  target="_top"><font size="3">Solicitações</font></a></td>
 </tr>
 </table>
  <BR><BR><BR><BR>
