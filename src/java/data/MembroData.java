@@ -15,11 +15,12 @@ import utils.Transacao;
 public class MembroData {
     public void incluir(MembroDO Membro, Transacao tr) throws Exception {
         Connection con = tr.obterConexao();
-        String sql = "insert into agenda.Membro (GEid, USUid, ADM) values (?,?,?)";
+        String sql = "insert into agenda.Membro (GEid, USUid, ADM, MembroAprovado) values (?,?,?,?)";
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setInt(1, Membro.getGEid());
         ps.setInt(2, Membro.getUSUid());
         ps.setInt(3, Membro.getADM());
+        ps.setInt(4, Membro.getAprovado());
         int result = ps.executeUpdate();
         
         sql= "SELECT LAST_INSERT_ID();";
@@ -45,6 +46,7 @@ public class MembroData {
         ps.setInt(2, Membro.getUSUid());
         ps.setInt(3, Membro.getADM());
         ps.setInt(4, Membro.getId());
+        ps.setInt(5, Membro.getAprovado());
         int result = ps.executeUpdate();
     } // atualizar
 
@@ -60,6 +62,7 @@ public class MembroData {
         Membro.setGEid(rs.getInt("GEid"));
         Membro.setUSUid(rs.getInt("USUid"));
         Membro.setADM(rs.getInt("ADM"));
+        Membro.setAprovado(rs.getInt("MembroAprovado"));
         return Membro;
     } // buscar
     
@@ -75,6 +78,7 @@ public class MembroData {
         Membro.setGEid(rs.getInt("GEid"));
         Membro.setUSUid(rs.getInt("USUid"));
         Membro.setADM(rs.getInt("ADM"));
+        Membro.setAprovado(rs.getInt("MembroAprovado"));
         return Membro;
     }
     
@@ -125,6 +129,7 @@ public class MembroData {
             i.setGEid (rs.getInt("GEid"));
             i.setUSUid(rs.getInt("USUid"));
             i.setADM(rs.getInt("ADM"));
+            i.setAprovado(rs.getInt("MembroAprovado"));
             Items.add(i);
         }
         return Items;
@@ -143,6 +148,7 @@ public class MembroData {
             i.setGEid (rs.getInt("GEid"));
             i.setUSUid(rs.getInt("USUid"));
             i.setADM(rs.getInt("ADM"));
+            i.setAprovado(rs.getInt("MembroAprovado"));
             Items.add(i);
         }
         return Items;
@@ -160,6 +166,7 @@ public class MembroData {
             i.setGEid (rs.getInt("GEid"));
             i.setUSUid(rs.getInt("USUid"));
             i.setADM(rs.getInt("ADM"));
+            i.setAprovado(rs.getInt("MembroAprovado"));
             Items.add(i);
         }
         return Items;

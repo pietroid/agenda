@@ -13,8 +13,8 @@ public class PontoDeInteresseDO {
     
     private int id;
     private String nome;
-    private String descrição;
-    private String endereço;
+    private String descricao;
+    private String endereco;
     private String link_para_maps;
     private String pasta_de_imagens;
 
@@ -49,29 +49,29 @@ public class PontoDeInteresseDO {
     /**
      * @return the descrição
      */
-    public String getDescrição() {
-        return descrição;
+    public String getDescricao() {
+        return descricao;
     }
 
     /**
-     * @param descrição the descrição to set
+     * @param descricao the descrição to set
      */
-    public void setDescrição(String descrição) {
-        this.descrição = descrição;
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
     /**
      * @return the endereço
      */
-    public String getEndereço() {
-        return endereço;
+    public String getEndereco() {
+        return endereco;
     }
 
     /**
-     * @param endereço the endereço to set
+     * @param endereco the endereço to set
      */
-    public void setEndereço(String endereço) {
-        this.endereço = endereço;
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
     }
 
     /**

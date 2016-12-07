@@ -50,37 +50,37 @@ li a:hover:not(.active) {
   
   <%
       boolean admin = false;
-      boolean superuser;
+      boolean superUser_menu;
       UsuarioDO usr= (UsuarioDO)session.getAttribute("Usuario");
       if(usr!=null){
         int usrID = usr.getId();
         Membro tr = new Membro();
         
-        //Relacoes de Membro para os quais o usuario Ã© ADM 
+        //Relacoes de Membro para os quais o usuario ? ADM 
         List<MembroDO> lm = tr.AdminedGroups(usrID);
         
         if(!lm.isEmpty()){
             admin = true;
         }
-        superuser=usr.isSuperUser();
+        superUser_menu=usr.isSuperUser();
         
-        //USUÃRIO COMUM
+        //USU?RIO COMUM
         if (!admin){
            %><li style="float:right"><a href="Perfil.jsp">Perfil Pessoal</a></li><%
            %><li style="float:right"><a href="/agenda/LogOut.jsp">Logout</a></li><%             
         }
-        //USUÃRIO ADMIN
+        //USUÁRIO ADMIN
         else if (admin){
            %><li style="float:right"><a href="Perfil.jsp">Perfil Pessoal e GEs</a></li><%
            %><li style="float:right"><a href="/agenda/LogOut.jsp">Logout</a></li><%
         }
-        //USUÃRIO SUPERUSER
-        else if (superuser){
+        //USUÁRIO SUPERUSER
+        else if (superUser_menu){
            %><li style="float:right"><a href="PaineldeControle.jsp">Painel de Controle</a></li><%
            %><li style="float:right"><a href="/agenda/LogOut.jsp">Logout</a></li><%      
         }
     }
-        //USUÃRIO NÃƒO LOGADO
+        //USUÁRIO NÃO LOGADO
         else{
          %><li style="float:right"><a href="/agenda/Cadastro.jsp">Cadastrar</a></li><%
          %><li style="float:right"><a href="/agenda/LoginOut.jsp">Login</a></li><%  

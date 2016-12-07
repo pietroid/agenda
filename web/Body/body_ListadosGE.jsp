@@ -1,9 +1,7 @@
 <%@page import="java.util.List"%>
 <%@ page import="transacoes.GE" %>
 <%@ page import="data.GEDO" %>
-<%
-GE getn = new GE();
-%>
+
 <html>
     <body BGCOLOR = #f2f2f2>
         <font face="verdana">
@@ -14,7 +12,9 @@ GE getn = new GE();
             Para não deixar a tabela feia, talvez seja bom verificar no programa em java se a imagem é 
             menor ou igual a a um tamanho (eu usei 120X150 pixels) ou mesmo pedir pro usuário fazer isso.
         </p>
-
+<%
+GE getn = new GE();
+%>
         <center>
             <table align="center" border=1 cellpadding=10 width=1000>
                 <th>Imagem </th>
@@ -27,7 +27,7 @@ GE getn = new GE();
                 %>     
                 <tr>
                     <td width=10% height=150 ><center><iframe src="agenda/PastadeImagens/GrupodeExtensao1/Grupodeextensao1-imagem1.PNG" scrolling= no width=120 height=150 ></iframe></center>
-                    <td><center><a href="GE.jsp?GE=<%= ge.getNome()%>"><%= ge.getNome() %></a></center>
+                    <td><center><a href="GE.jsp?GE=<%= ge.getId()%>"><%= ge.getNome() %></a></center>
                 </tr>
 
                 <%
