@@ -27,13 +27,8 @@
         Realiza realizatn = new Realiza();
         boolean isadm = false;
         boolean superuser = false;
-<<<<<<< HEAD
-        GEDO ge = getn.buscarNome(request.getParameter("GE"));
-        if (usuario.getNome() != null){
-=======
         GEDO ge = getn.buscar(Integer.parseInt(request.getParameter("GE"))); //
         if (usuario != null){
->>>>>>> origin/master
             superuser = usuario.isSuperUser();
             isadm = membrotn.isADM(ge.getId(), usuario.getId());
         }
@@ -55,20 +50,17 @@
     if(solicitar!= null){
         Membro GEsolicitar = new Membro();
         int a = ge.getId();
-        int relacaomembro = 0;
+        boolean igual = false;
         List<MembroDO> Lista = GEsolicitar.buscarPorUSUid(solicitar.getId());
         if (Lista != null){
             for(MembroDO b : Lista){
                 if (a == b.getGEid()){
-                    relacaomembro = 1;
-                    if (b.getAprovado()==1){
-                        relacaomembro = 2;
-                    }
+                    igual = true;
                 }
             }
         }
     
-    if(relacaomembro==0){
+    if(igual==false){
 %>
         <BR>
         <table align="right" border=1 cellpadding=10 width=200>
@@ -79,17 +71,6 @@
         <BR><BR><BR><BR>
 <%
     }
-    if(relacaomembro==1){
-%>
-        <BR>
-        <table align="right" border=1 cellpadding=10 width=200>
-            <tfoot>
-                <tr><th><a href="" target="_top">Aguardando aprovação</a></th></tr>
-            </tfoot>
-        </table>
-        <BR><BR><BR><BR>
-        <%
-}
 }
 
 %>        
