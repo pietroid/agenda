@@ -4,7 +4,8 @@
 <%@page import="data.UsuarioDO"%>
 <body BGCOLOR = #f2f2f2>
 <font face="verdana">
-<h1> <center> Alterar Senha </center> </h1>
+<h1> <center> Alterar Dados </center> </h1>
+
 <BR>
     
     
@@ -16,7 +17,12 @@
         
         if(request.getParameter("submit")==null){%>
 <FORM action="body_AltPass.jsp" method="post" id = "changePassForm">
-Senha Atual:<BR><INPUT type="password" name="senhaAtual" value= ""> <BR><BR><BR>
+Nome:<BR><INPUT type="text" name="nome" value= "<% out.write(us.getNome()); %>"> <BR>
+E-mail:<BR><INPUT type="text" name="email" value= "<% out.write(us.getEmail()); %>"> <BR>
+Curso:<BR><INPUT type="text" name="curso" value= "<% out.write(us.getCurso()); %>"> <BR>
+<BR><BR><BR>
+<p>Preencha apenas caso deseje mudar a senha.</p>
+Senha Atual:<BR><INPUT type="password" name="senhaAtual" value= ""> <BR><BR>
 Nova Senha<BR><INPUT type="password" name="novaSenha" value= ""> <BR><BR>
 Repita a Nova Senha<BR><INPUT type="password" name="repNovaSenha" value= ""> <BR><BR>
 </FORM>
@@ -25,10 +31,27 @@ Repita a Nova Senha<BR><INPUT type="password" name="repNovaSenha" value= ""> <BR
     <%
         } else if (request.getParameter("submit").equals("Submit")){
         
+        
 
         String atual = request.getParameter("senhaAtual");
         String nova1 = request.getParameter("novaSenha");
         String nova2 = request.getParameter("repNovaSenha");
+        String nome = request.getParameter("nome");
+        String email = request.getParameter("email");
+        String curso = request.getParameter("curso");
+
+        us.setNome(nome);
+        us.setCurso(curso);
+        us.setEmail(email);
+        tr.atualizar(us);
+%>
+                <p> Informações básicas alteradas com sucesso!</p>
+                <%
+        if (atual.equals("") && nova1.equals("") && nova2.equals("")){
+        //caso não queira mudar a senha
+
+} else {
+
         
         if (us.getSenha().equals(atual)){
             if (nova1.equals(nova2)){
@@ -38,11 +61,11 @@ Repita a Nova Senha<BR><INPUT type="password" name="repNovaSenha" value= ""> <BR
                 <p> Senha alterada com sucesso!</p>
                 <%
             } else{
-                %><p>Novas senha e sua verificação não batem! Digite uma nova senha e confirme.</p><%
+                %><p>Senha não alterada: Novas senha e sua verificação não batem! Digite uma nova senha e confirme.</p><%
             }
         }else{
-%><p>Senha atual incorreta! Você precisa digitar a senha atual para mudá-la.</p><%
-        }}
+%><p>Senha não alterada: Senha atual incorreta! Você precisa digitar a senha atual para mudá-la.</p><%
+        }}}
 
         
         %>
