@@ -91,4 +91,24 @@ public class Problema {
             return true;
         return false;
     }
+    
+    public List<ProblemaDO> buscarTodos() throws Exception{
+        Transacao tr = new Transacao();
+	try{
+            tr.beginReadOnly();
+  	    ProblemaData ProblemaData = new ProblemaData();
+	    List<ProblemaDO> i = ProblemaData.buscarTodos(tr);
+            tr.commit();
+            return i;
+	} catch (Exception e) {
+            tr.rollback();
+            System.out.println("Erro");
+            e.printStackTrace();
+	}
+	return null;
+    } // buscar    
+    
+    
+    
+    
 }

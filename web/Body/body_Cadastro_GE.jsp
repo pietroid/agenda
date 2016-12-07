@@ -54,6 +54,7 @@ if (request.getParameter("submit") != null){
     grupo.setTel(request.getParameter("tel"));
     grupo.setDescricao(request.getParameter("descricao"));
     grupo.setFace(request.getParameter("face"));
+    grupo.setImagem("/agenda/PastadeImagens/caneca.png");
     try{
         grupo.setAno(Integer.parseInt(request.getParameter("ano"))); 
            GE novo = new GE();
@@ -62,6 +63,7 @@ if (request.getParameter("submit") != null){
            membro.setUSUid(((UsuarioDO)session.getAttribute("Usuario")).getId());
            membro.setGEid(grupo.getId());
            membro.setADM(1);
+           membro.setAprovado(1);
            Membro tr = new Membro ();
            tr.incluir (membro);
            int idGE = 0;
@@ -71,7 +73,7 @@ if (request.getParameter("submit") != null){
             Agora escolha uma imagem para seu grupo! <BR>
                 <FORM action="FormularioImagens.jsp" method="post">
                 <INPUT type="submit" name="submitIma" value="Escolher Imagem">
-                <INPUT type="hidden" name="<%=idGE%>" value="novo.getId()">
+                <INPUT type="hidden" name="idGE" value="<%=grupo.getId()%>">
                 </form>            
             
         <%
