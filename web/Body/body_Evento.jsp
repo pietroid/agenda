@@ -131,7 +131,7 @@
 </form>
     <%
     }
-    else pageContext.forward("index.jsp");
+    //else pageContext.forward("index.jsp");
         %>    
     </body>
 </html>
