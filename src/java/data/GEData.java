@@ -85,12 +85,13 @@ public class GEData {
         GE.setImagem(rs.getString("GEpasta_de_imagens"));
         GE.setTel(rs.getString("GEtel"));
         GE.setTipo(rs.getString("GEtipo"));
+        GE.setTipo(rs.getString("GEautorizado"));
         return GE;
     }
     
      public void atualizar(GEDO GE, Transacao tr) throws Exception {
         Connection con = tr.obterConexao();
-        String sql = "update agenda.grupodeextensao set GEnome=?, GEdescricao=?,GEano_de_inicio=?,GEsite=?,GEpagina_do_fb=?,GEemail=?,GEpasta_de_imagens=?,GEtel=?,GEtipo=? where GEid=?";
+        String sql = "update agenda.grupodeextensao set GEnome=?, GEdescricao=?,GEano_de_inicio=?,GEsite=?,GEpagina_do_fb=?,GEemail=?,GEpasta_de_imagens=?,GEtel=?,GEtipo=?, GEAutorizado=? where GEid=?";
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setString(1, GE.getNome());
         ps.setString(2, GE.getDescricao());
@@ -102,6 +103,7 @@ public class GEData {
         ps.setString(8, GE.getTel());
         ps.setString(9, GE.getTipo());
         ps.setInt(10, GE.getId());
+        ps.setInt(11, GE.getAutorizado());
         int result = ps.executeUpdate(); 
     } // atualizar
      
@@ -123,7 +125,8 @@ public class GEData {
             i.setEmail(rs.getString("GEemail"));
             i.setImagem(rs.getString("GEpasta_de_imagens"));            
             i.setTel(rs.getString("GEtel"));              
-            i.setTipo(rs.getString("GEtipo"));               
+            i.setTipo(rs.getString("GEtipo")); 
+            i.setAutorizado(rs.getInt("GEautorizado"));
             Items.add(i);
         }
         return Items;

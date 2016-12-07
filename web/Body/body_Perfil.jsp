@@ -17,6 +17,9 @@
  {
     UsuarioDO usuario = (UsuarioDO)session.getAttribute("Usuario");
     String nome = usuario.getNome();
+    
+    /*---ALYSON---*/
+    
     //Cria uma lista de acordo com o membro para ver se ele possui privilegios de adm de grupo de extensão
     int IDusuario = usuario.getId();
     Membro lista = new Membro();
@@ -25,8 +28,8 @@
     //Cria uma lista de notificacoes
     NotificacaoGeral list = new NotificacaoGeral();
     List<NotificacaoGeralDO> ListaNotificacao = list.BuscaNotporUSId(IDusuario);
-    
-    
+    String messageNotificacao;
+    /*---ALYSON---*/
 %>
 <h1><center> Perfil <center> </h1>
 
@@ -39,7 +42,8 @@
  para alterar sua senha</a></font></p>
 
 
-<%
+<%/*-----ALYSON--------*/
+    
     //Verifica se o usuário é lider de algum grupo de extensão
     int LiderGE=0;
     for (MembroDO membro:ListaMembro){
@@ -47,38 +51,104 @@
             LiderGE = 1;
         }
     }
-    
+    /*-----ALYSON--------*/
     //Notificacao para usuario ADM
 %>
     <p><font size="3" face="verdana">Notificações:</p>
     <table align="cente" border=3    cellpadding = 10 width=1000   >
         <tr>
-            <%
-              //  for (NotificacaoGeralDO notificacao:ListaNotificacao)
-            %>
             <th>Eventos Cancelados</th>
             <td>
                 <table>
+            <%
+              for (NotificacaoGeralDO notificacaoCanc:ListaNotificacao){
+                  messageNotificacao = notificacaoCanc.getMensagem() ;
+            %>
                     <%
-                        
+                        if (notificacaoCanc.getClassificacao()==0){
                     %>
-                    
+                    <tr>
+                        -><%=messageNotificacao %> <br>
+                    </tr>
+                    <%
+                        }
+                    }
+                    %>
                 </table>
                 
             </td>
         </tr>
         <tr>
             <th>Eventos Próximos</th>
+            <td>
+            <table>
+            <%
+              for (NotificacaoGeralDO notificacaoEVE:ListaNotificacao){
+                  messageNotificacao = notificacaoEVE.getMensagem() ;
+            %>
+                    <%
+                        if (notificacaoEVE.getClassificacao()==1){
+                    %>
+                    <tr>
+                        -><%=messageNotificacao %><br>
+                    </tr>
+                    <%
+                        }
+                    }
+                    %>
+                </table>
+                
+            </td>
         </tr>
+        
         <tr>
             <th>Conflito de Eventos</th>
+            <td>
+            <table>
+            <%
+              for (NotificacaoGeralDO notificacaoConf:ListaNotificacao){
+                  messageNotificacao = notificacaoConf.getMensagem() ;
+            %>
+                    <%
+                        if (notificacaoConf.getClassificacao()==2){
+                    %>
+                    <tr>
+                        -><%=messageNotificacao %><br>
+                    </tr>
+                    <%
+                        }
+                }
+                    %>
+                </table>
+                
+        </td>
         </tr>
+        
         <tr>
             <th>Novos Feedbacks</th>
+            <td>
+            <table>
+            <%
+              for (NotificacaoGeralDO notificacaoFeed:ListaNotificacao){
+                  messageNotificacao = notificacaoFeed.getMensagem() ;
+            %>
+                    <%
+                        if (notificacaoFeed.getClassificacao()==3){
+                    %>
+                    <tr>
+                        -><%=messageNotificacao %><br>
+                    </tr>
+                    <%
+                        }
+                }
+                    %>
+            </table>   
+        </td>
         </tr>
+        
     </table>
 <%
-
+/*---------------ALYSON--------------*/
 %>
 
 <h2> Calendário </h2>
