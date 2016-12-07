@@ -36,8 +36,6 @@
     } 
     /*------------ALYSON-------*/
     
- if(session.getAttribute("Usuario")!= null)
- {
  if(session.getAttribute("Usuario")!= null){
     UsuarioDO usuario = (UsuarioDO)session.getAttribute("Usuario");
     String nome = usuario.getNome();
@@ -78,7 +76,6 @@
      }
     else{
     %>
-    Caí no Else!
     <table align="center">
     <tr>
       <th>Grupos de Extensão</th>
