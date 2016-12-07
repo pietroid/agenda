@@ -34,7 +34,7 @@ PontoDeInteresse getn = new PontoDeInteresse();
 <tr>
             
             <td><center><a href="AlterarPOI.jsp?PontoDeInteresse=<%= li.getId()%>"><%= li.getNome() %></a></center>
-            <td><center><%= li.getDescrição() %></center>
+            <td><center><%= li.getDescricao() %></center>
 </tr>
 <%
    }
