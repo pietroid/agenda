@@ -56,8 +56,10 @@
             for(MembroDO b : Lista){
                 if (a == b.getGEid()){
                     relacaomembro = 1;
+                    out.println(b.getAprovado());
                     if (b.getAprovado()==1){
                         relacaomembro = 2;
+                        out.println("olar");
                     }
                 }
             }
