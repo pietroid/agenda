@@ -41,6 +41,6 @@
                 if (prob.incluir(problema)){ %>
                 <h2><center>Report enviado com sucesso!</center></h2>
                 <% }
-            }%>
+            } %>
     </body>
 </html>
