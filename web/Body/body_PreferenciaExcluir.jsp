@@ -15,7 +15,6 @@
 
 <%
 
-request.getParameter("grupo");
         int GEid = Integer.parseInt(request.getParameter("grupo"));
         Preferencia preferenciatn = new Preferencia();
         boolean update = preferenciatn.excluirid(GEid);
