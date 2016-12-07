@@ -77,7 +77,7 @@
         <center>
         <table align="center" border=1 cellpadding=10 width=1000>
             <th> Evento <th>Grupo de extensão <th> Data
-<%}else %><p>Você não segue evento algum!</p><br> <% 
+<%}else %><p>Você não tem eventos essa semana!</p><br> <% 
 
     for(int i=0; i < lista.size(); i++){
         EventoDO eventoParte = lista_eventos.get(i);
