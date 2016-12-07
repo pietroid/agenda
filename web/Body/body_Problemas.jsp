@@ -25,7 +25,7 @@ Usuario  ustn = new Usuario();
 
         <center>
             <table align="center" border=1 cellpadding=10 width=1000>
-                <th>Usuário <th>Problema<th>Data</th>Excluir Notificação
+                <th>Usuário <th>Problema<th>Data<th>Excluir Notificação</th>
     
                 <%   
                     List<ProblemaDO> ges = getn.buscarTodos();
@@ -39,7 +39,8 @@ Usuario  ustn = new Usuario();
                     <td><center><a href="Usuario.jsp?Usuario=<%= us.getId()%>"><%= us.getNome() %></a></center>
                     <td><center> <%= ge.getMensagem()%></center>
                     <td><center> <%= ge.getData()%></center>
-                    <td><center><a href="ExcluirProblema.jsp?ExcluirProblema=<%= ge.getId()%>"><%= ge.getId() %></a></center>
+                    <td><center><a href="ExcluirProblema.jsp?EXP=<%= ge.getId()%>">EXCLUIR</a></center>
+                    
                 </tr>
 
                 <%

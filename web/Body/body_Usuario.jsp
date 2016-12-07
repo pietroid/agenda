@@ -11,11 +11,14 @@
 
 <%  
     
-    UsuarioDO usuario = (UsuarioDO)session.getAttribute("Usuario");
+
    
     
     UsuarioDO usuarioREQ;
     Usuario tru = new Usuario();
+    
+    
+
     int id = Integer.parseInt(request.getParameter("Usuario"));
     usuarioREQ=tru.buscarPorID(id);
     String username = usuarioREQ.getUsername();

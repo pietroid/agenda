@@ -8,10 +8,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>George</title>
+<title>Poli AGEnda</title>
 </head>
 <iframe src="Título\título.jpg" width="1350" height="150"></iframe><BR>
 <%@include file="Menu\menu.jsp" %> <BR>
-<%@include file="Body\body_AlterarPOI.jsp"%><BR>
+<%@include file="Body\body_ExcluirProblema.jsp"%><BR>
 <iframe src="Footer\footer.jsp" width="1350" height="200">
 </html>

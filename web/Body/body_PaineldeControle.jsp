@@ -7,6 +7,38 @@
 <%@ page import="java.util.Vector" %>
 
 
+<head>
+  <title>Painel de controle</title>
+    <style>
+    table {
+        font-family: "Verdana";
+        border-collapse: collapse;
+        width: 70%;
+    }
+
+    td, th {
+        height: 40px;
+        border: 1px solid #ddd;
+        padding: 8px;
+        background-color: #ffffff;
+    }
+
+    tr:nth-child(even){background-color: #f2f2f2;}
+
+
+    th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: center;
+        background-color: #4CAF50;
+        color: white;
+    }
+    
+
+    
+    </style>
+</head>
+
 <%
     if(session.getAttribute("Usuario")!= null)
     {
