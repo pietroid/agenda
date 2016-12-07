@@ -102,4 +102,19 @@ public class Membro {
             return true;
         return false;
     }
+    public List<MembroDO> buscarPorGEidADM(int GEid) throws Exception{
+        Transacao tr = new Transacao();
+	try{
+            tr.beginReadOnly();
+  	    MembroData a = new MembroData();
+	    List<MembroDO> Lista = a.pesquisarPorGEidADM(GEid, tr);
+            tr.commit();
+            return Lista;
+	} catch (Exception e) {
+            tr.rollback();
+            System.out.println("Erro ao buscar" + GEid);
+            e.printStackTrace();
+	}
+	return null;
+    }
 }

@@ -1,3 +1,6 @@
+<%@page import="data.EventoDO"%>
+<%@page import="transacoes.Evento"%>
+<%@page import="java.awt.Color"%>
 <%@ page import="calendar.Month,java.util.*,utils.*,java.io.*,java.sql.*" errorPage="error.jsp" %>
 <%@page import="java.text.*, java.lang.*"%>
 <%@ include file="calendarCommon.jsp" %>
@@ -15,7 +18,6 @@
         height: 70px;
         border: 1px solid #ddd;
         padding: 8px;
-        background-color: #ffffff;
     }
     tr:nth-child(even){background-color: #f2f2f2;}
     #CalendarioGeral td:hover {background-color: #ddd;}
@@ -75,10 +77,73 @@
   int int_localday;
   java.sql.Date date_localdate;
   int localday = 0;
+  int tempday = 0;
+  int tempday2 = 0;
+  int last_day_prev = 0;
+  int firstday = 1;
+  int lastday = 0;
   int int_actualMonth = currentMonthInt + 1;
+  int eventos_max = 0;
   String str_actualMonth = new Integer(int_actualMonth).toString();
+  String str_lastday = "";
+  String str_firstday = "";
+  java.sql.Date date_tempday;
   
-  for( int i=0; i<aMonth.getNumberOfWeeks(); i++ )
+  
+  //CALCULA O PRIMEIRO E ÚLTIMOS DIAS DO MÊS -----------------
+    for( int i=3; i<aMonth.getNumberOfWeeks()+1; i++ ){
+         for( int j=0; j<7; j++ ){
+             last_day_prev = tempday;
+             tempday = days[i][j];
+             if(lastday==0 && tempday==0){lastday = last_day_prev;}
+         }
+    }
+  
+    str_firstday = currentYearString + "-" + str_actualMonth + "-" + "0" + Integer.toString(firstday);
+    java.sql.Date date_FirstDay = java.sql.Date.valueOf(str_firstday);
+    str_lastday = currentYearString + "-" + str_actualMonth + "-" + Integer.toString(lastday);
+    java.sql.Date date_LastDay = java.sql.Date.valueOf(str_lastday);
+    
+  //---------------------------------------------------------
+  
+  //BUSCA EVENTOS DO MÊS ATUAL
+  
+    Evento tre = new Evento();
+    List<EventoDO> eventos_do_Mes=new ArrayList<EventoDO>();
+    eventos_do_Mes = tre.buscarMes(date_FirstDay, date_LastDay);
+    
+  //---------------------------------------------------------
+  
+  //CONSTROI TABELA EVENTOS
+  
+    int[] eventos = new int[40]; // Começamos a usar a partir do Dia 1
+    
+    for(int k=0; k<40; k++){ // Inicializa eventos com zeros
+        eventos[k] = 0;
+    }
+
+    if(!eventos_do_Mes.isEmpty()){
+        for (EventoDO evento_temp : eventos_do_Mes) {
+
+            date_tempday = evento_temp.getData();
+            tempday2 = date_tempday.getDate();
+
+            eventos[tempday2]++;
+
+        }  
+    }
+  
+    for(int k=0; k<40; k++){ // Printa eventos[k]
+        if(eventos[k]>eventos_max){
+            eventos_max = eventos[k];
+        }
+    }
+    
+    float br;
+    Color RGBColor;
+    String hexColor;
+  
+  for(int i=0; i<aMonth.getNumberOfWeeks(); i++ )
   {
     %><tr><%
     for( int j=0; j<7; j++ )
@@ -97,14 +162,20 @@
       }
       else
       {
+        br = 1/((float)(100/eventos_max)*(float)(eventos[localday]));//100 aqui é o espectro!
+
+        RGBColor = Color.getHSBColor(0.12f, 0.57f, br);
+
+        hexColor = "#"+Integer.toHexString(RGBColor.getRGB()).substring(2);  
+
         // Destaca o Dia de HOJE
         if( currentDayInt == days[i][j] && currentMonthInt == aMonth.getMonth() && currentYearInt == aMonth.getYear() )
         {
-        %><td align = "center"><a href="/agenda/EventosdoDia.jsp?str_ClickedDate=<%=str_localdate%>" <font size="5"><b><%=days[i][j]%></b></font></a></td><%
+        %><td  align = "center"><a href="/agenda/EventosdoDia.jsp?str_ClickedDate=<%=str_localdate%>" <font size="5"><b><%=days[i][j]%></b></font></a></td><%
         }
         else
         {
-        %><td align = "center">
+        %><td align = "center" bgcolor=<%=hexColor%>>
           <a href="/agenda/EventosdoDia.jsp?str_ClickedDate=<%=str_localdate%>"<font size="4"><%=days[i][j]%></font></a>
         </td><%
         }
