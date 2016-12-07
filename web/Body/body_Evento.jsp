@@ -25,6 +25,8 @@
         EventoDO evento = eventotn.buscar(Integer.parseInt(request.getParameter("evento")));
         if (session.getAttribute("Usuario") != null){
             usuario = (UsuarioDO) session.getAttribute("Usuario");
+            
+            /*------ALYSON-------*/
         }
 %>
 <html>
