@@ -106,7 +106,7 @@
     <%for (MembroDO membro_temp : lmadm) {%>
     <tr>
         <% ge = gtr.buscar(membro_temp.getGEid()); %>
-        <td align="center"><font face="verdana" size="3"><a href="GE.jsp"><%=ge.getNome()%></a></font></td>
+        <td align="center"><font face="verdana" size="3"><a href="GE.jsp?GE=<%= ge.getId()%>"><%=ge.getNome()%></a></font></td>
     </tr>
     </table>
     <%}
@@ -116,7 +116,7 @@
 <%// adicionado link para preferencia%>
 <p><font size="2" face="verdana"><a href="Preferencia.jsp">Lista dos Grupos de Extensão de seu interesse</a></font></p> 
 <h2><font face="verdana" size="4"> - Conta </font><h2>
-<p><font size="2" face="verdana"><a href="AltPass.jsp">Alterar sua senha</a></font></p>
+<p><font size="2" face="verdana"><a href="AltPass.jsp">Alterar informações da conta</a></font></p>
 <p><font size="2" face="verdana" ><a href="ExcluirMembro.jsp">Excluir sua conta</a></font></p>
 
 

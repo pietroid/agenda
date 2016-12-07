@@ -13,6 +13,34 @@
 
 
 <html>
+    <style>
+    table {
+        font-family: "Verdana";
+        border-collapse: collapse;
+        width: 70%;
+    }
+    td, th {
+        height: 70px;
+        border: 1px solid #ddd;
+        padding: 8px;
+        background-color: #ffffff;
+    }
+    tr:nth-child(even){background-color: #f2f2f2;}
+    td:hover {background-color: #ddd;}
+    th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: center;
+        background-color: #4CAF50;
+        color: white;
+    }
+       
+    /*{
+        border: 0px;
+        height: 50px;
+    }*/
+    
+    </style>
     <body BGCOLOR = #f2f2f2>
         <font face="verdana">
         <%
@@ -35,16 +63,29 @@
 %>
         <h1><center><%= ge.getNome() %></center></h1>
         <BR><BR>
-
-        <p align="left"><a href="/agenda/Calendario.jsp" target="_top">Voltar ao calendário</a></p>
+        <table align="center" border=1 cellpadding=10 width=200>
+            <%
+                String imagem = "/agenda/PastadeImagens/padrao/logo.PNG";
+                if (ge.getImagem() != null){
+                    imagem = "/agenda/PastadeImagens/" + ge.getImagem();
+                }
+            %>
+            <center><img src ="<%= imagem %>" width = 200 height = 200></center>
+        </table>
         <BR><BR>
-
-        <table align="left" border=1 cellpadding=10 width=500>
+        <table align="center" border=1 cellpadding=10 width=200>
+            <tfoot>
+            <center><td><th><a href="Fotos.jsp" target="_top">Mais Fotos</a></th></td></center>
+            </tfoot>
+         </table>
+            <br><br>
+        <table align="center" border=1 cellpadding=10 width=500>
             <th>Descrição do grupo</th>
             <tr>
                 <td width=10% height=150> <%= ge.getDescricao() %> </td>
             </tr>
         </table>
+        <br><br>
 <%  if(session.getAttribute("Usuario")!= null){
         UsuarioDO solicitar = new UsuarioDO();
         solicitar = (UsuarioDO)session.getAttribute("Usuario");
@@ -56,10 +97,8 @@
             for(MembroDO b : Lista){
                 if (a == b.getGEid()){
                     relacaomembro = 1;
-                    out.println(b.getAprovado());
                     if (b.getAprovado()==1){
                         relacaomembro = 2;
-                        out.println("olar");
                     }
                 }
             }
@@ -73,33 +112,25 @@
                 <tr><th><a href="SolicitarAdesao.jsp" target="_top">Solicitar adesão</a></th></tr>
             </tfoot>
         </table>
-        <BR><BR><BR><BR>
+        <BR><BR>
 <%
     }
     if(relacaomembro == 1){
 %>
         <BR>
-        <table align="right" border=1 cellpadding=10 width=200>
+        <table align="center" border=1 cellpadding=10 width=200>
             <tfoot>
                 <tr><th><a href="" target="_top">Aguardando aprovação</a></th></tr>
             </tfoot>
         </table>
-        <BR><BR><BR><BR>
+        <BR><BR>
         <%
     }   
 }
 %>        
         
-        <table align="right" border=1 cellpadding=10 width=200>
-            <tfoot>
-                <tr><th><a href="Fotos.jsp" target="_top">Mais Fotos</a></th></tr>
-            </tfoot>
-            <td width=200 height=200>
-                <img src ="/agenda/PastadeImagens/GrupodeExtensao1/Grupodeextensao1-imagem1.PNG" width = 100% height=100%>
-            </td>
-        </table>
-        <BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR>
-        <table align="left" border=1 cellpadding=10 width=500>
+ 
+        <table align="center" border=1 cellpadding=10 width=500>
             <th colspan="2">Informações do grupo</th>
             <tr>
                 <td><b>E-mail</b></td>
@@ -110,11 +141,11 @@
                 <td> <%= ge.getTel()%></td>
             </tr>
         </table>
-        <BR><BR><BR><BR><BR><BR><BR><BR>
+        <BR><BR>
         <%
         if (isadm == true || superuser == true){
         %>
-                <table align="left" border=1 cellpadding=10 width=500>
+                <table align="center" border=1 cellpadding=10 width=500>
                     <th> 
                          <center> <a href="/agenda/AlterarInfoGE.jsp" target="_top"> Alterar Informações </a> </center> 
                     </th>
@@ -122,8 +153,8 @@
         <%
         }
         %>
-        <BR><BR><BR><BR><BR>
-        <table align="left" border=1 cellpadding=10 width=500>
+        <BR><BR>
+        <table align="center" border=1 cellpadding=10 width=500>
             <th colspan="2">Lista de eventos</th>
             <%
         List<RealizaDO> realizas = realizatn.pesquisar(ge.getId());
@@ -145,14 +176,14 @@
         %>
         </table>
 
-        <BR><BR><BR><BR><BR>
+        <BR><BR>
 
         <%
         if(isadm == true || superuser == true){
         %>
             <table align="center" border=1 cellpadding=10 width=500>
                 <tr>
-                    <td><a href="CriarEvento.jsp?GE=<%= ge.getNome() %>" target="_top"><font size="5" color="#ff0000">Criar evento</font></a></td>
+                    <td><center><a href="CriarEvento.jsp?GE=<%= ge.getNome() %>" target="_top"><font size="5" color="#ff0000">Criar evento</font></a></center></td>
                 </tr>
             </table>
     <%      

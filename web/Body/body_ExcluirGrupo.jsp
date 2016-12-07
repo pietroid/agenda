@@ -33,7 +33,6 @@
             <FORM action="body_ExcluirGrupo.jsp" method="post">
                 Deseja confirmar a exclusão do Grupo de extensão?<br><br>
             <INPUT type="submit" name="ConfExclusao" value= "Confirmar">   
-            <INPUT type="reset" name="" value= "Cancelar">
             </FORM>
         <%
         }

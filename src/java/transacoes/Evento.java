@@ -111,6 +111,21 @@ public class Evento {
 	return null;
     }    
     
+    public List<EventoDO> retornaTodosEventos() throws Exception {
+        Transacao tr = new Transacao();
+	try{
+            tr.beginReadOnly();
+  	    EventoData EventoData = new EventoData();
+	    List<EventoDO> i = EventoData.retornaTodosEventos(tr);
+            tr.commit();
+            return i;
+	} catch (Exception e) {
+            tr.rollback();
+            System.out.println("Erro ao retornar os eventos ");      
+	}
+	return null;
+    }
+    
     public boolean excluir(EventoDO evento) throws Exception{
         Transacao tr = new Transacao();
 	try{

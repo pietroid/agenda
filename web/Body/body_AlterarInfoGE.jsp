@@ -14,7 +14,6 @@
 <%@ page import="data.GEDO" %>
 <%@ page import="java.util.Vector" %>
 
-
 <center>
 <%
     GE GEtr = new GE();
@@ -22,7 +21,8 @@
     GEDO ge =GEtr.buscar(Integer.parseInt(Idge));
     boolean update = false;
     
-    if (request.getParameter("submit")== null) {%>
+    if (request.getParameter("submit")== null) {
+%>
 <FORM action="AlterarInfoGE.jsp" method="post">
 Nome:<BR><INPUT type="text" maxlenght="140" name="nome" value="<%=ge.getNome() %>" ><BR><BR>
 Descrição:<BR><INPUT type="text" maxlength="140" name="descrição" value= "<%=ge.getDescricao() %>"> <BR><BR>
@@ -33,15 +33,47 @@ Facebook:<BR><INPUT type="text" name="face" value= "<%=ge.getFace() %>"><BR><BR>
 Imagem:<BR><INPUT type="text" name="imagem" value= "<%=ge.getImagem() %> "><BR><BR>
 Telefone:<BR><INPUT type="text" name="tel" value= "<%=ge.getTel() %>"><BR><BR>
 Tipo:<BR><INPUT type="text" name="tipo" value= "<%=ge.getTipo() %>"><BR><BR>
-<INPUT type="submit" name="submit" value= "Salvar Mudanças">   
+    <br>
+     <table align="center" border=3 cellpadding=10 width=100>
+  <th colspan =" 4"  align = "center">
+       Imagens
+  </th>
+  
+  <tr>
+    <td><img src ="/agenda/PastadeImagens/caneca.png" align="right" width = 250 height =" 300" >
+</td>
+    <td><img src ="/agenda/PastadeImagens/livro.png" align="right" width = 250 height =" 300" >
+</td>
+<td><img src ="/agenda/PastadeImagens/social.png" align="right" width = 250 height =" 300" >
+</td>
+<td><img src ="/agenda/PastadeImagens/capacete.png" align="right" width = 250 height =" 300" >
+</td>
+  </tr>
+  
+  <tr>
+      <td><input type="radio" name="foto" value="imagem1" >Imagem 1</td>
+      <td><input type="radio" name="foto" value="imagem2" >Imagem 2</td>
+      <td><input type="radio" name="foto" value="imagem3" >Imagem 3</td>
+      <td><input type="radio" name="foto" value="imagem4" >Imagem 4</td>
+  </tr>
+  <tfoot width="50">
+      <td colspan="4" align=" center" >
+ <INPUT type="submit" name="submit" value= "Salvar Mudanças">   
 <INPUT type="reset" name="reset" value= "Reset">
 <input type="hidden" name="GEDO" value="<%=request.getParameter("GEDO")%>">
+          
+      </td>
+  </tfoot>
+     
+</table>
+
 </FORM>
 <%} else if(request.getParameter("submit")!=null) { 
  
 if (request.getParameter("nome")!= null) ge.setNome(request.getParameter("nome"));
 if (request.getParameter("descrição")!= null) ge.setDescricao(request.getParameter("descrição"));
 if (request.getParameter("email")!= null) ge.setEmail(request.getParameter("email"));
+if (request.getParameter("foto")!= null) ge.setImagem(request.getParameter("foto"));
 if (request.getParameter("ano")!= null){
     try{
         ge.setAno(Integer.parseInt(request.getParameter("ano")));
@@ -57,9 +89,40 @@ Facebook:<BR><INPUT type="text" name="face" value= "<%=ge.getFace() %>"><BR><BR>
 Imagem:<BR><INPUT type="text" name="imagem" value= "<%=ge.getImagem() %> "><BR><BR>
 Telefone:<BR><INPUT type="text" name="tel" value= "<%=ge.getTel() %>"><BR><BR>
 Tipo:<BR><INPUT type="text" name="tipo" value= "<%=ge.getTipo() %>"><BR><BR>
-<INPUT type="submit" name="submit" value= "Salvar Mudanças">   
+    <br>
+     <table align="center" border=3 cellpadding=10 width=100>
+  <th colspan =" 4"  align = "center">
+       Imagens
+  </th>
+  
+  <tr>
+    <td><img src ="/agenda/PastadeImagens/caneca.png" align="right" width = 250 height =" 300" >
+</td>
+    <td><img src ="/agenda/PastadeImagens/livro.png" align="right" width = 250 height =" 300" >
+</td>
+<td><img src ="/agenda/PastadeImagens/social.png" align="right" width = 250 height =" 300" >
+</td>
+<td><img src ="/agenda/PastadeImagens/capacete.png" align="right" width = 250 height =" 300" >
+</td>
+  </tr>
+  
+  <tr>
+      <td><input type="radio" name="foto" value="imagem1" >Imagem 1</td>
+      <td><input type="radio" name="foto" value="imagem2" >Imagem 2</td>
+      <td><input type="radio" name="foto" value="imagem3" >Imagem 3</td>
+      <td><input type="radio" name="foto" value="imagem4" >Imagem 4</td>
+  </tr>
+  <tfoot width="50">
+      <td colspan="4" align=" center" >
+ <INPUT type="submit" name="submit" value= "Salvar Mudanças">   
 <INPUT type="reset" name="reset" value= "Reset">
 <input type="hidden" name="GEDO" value="<%=request.getParameter("GEDO")%>">
+          
+      </td>
+  </tfoot>
+     
+</table>
+
 </FORM>
     <%
     }
@@ -69,6 +132,7 @@ if (request.getParameter("face")!= null) ge.setFace(request.getParameter("face")
 if (request.getParameter("imagem")!= null) ge.setImagem(request.getParameter("imagem"));
 if (request.getParameter("tel")!= null) ge.setTel(request.getParameter("tel"));
 if (request.getParameter("tipo")!= null) ge.setTipo(request.getParameter("tipo"));
+if (request.getParameter("foto")!= null) ge.setImagem(request.getParameter("foto"));
 
 update = GEtr.atualizar(ge);
 if (update){%><br> Mudanças efetuadas com sucesso!<%}
