@@ -7,6 +7,8 @@
 <%@page import="java.util.List"%>
 <%@ page import="transacoes.PontoDeInteresse" %>
 <%@ page import="data.PontoDeInteresseDO" %>
+<%@page import="java.lang.Integer"%>
+
 <%
 PontoDeInteresse getn = new PontoDeInteresse();
 %>
@@ -32,7 +34,7 @@ PontoDeInteresse getn = new PontoDeInteresse();
 <tr>
             
             <td><center><a href="PontoDeInteresse.jsp?PontoDeInteresse=<%= li.getNome()%>"><%= li.getNome() %></a></center>
-            <td><center><a href="PontoDeInteresse.jsp?PontoDeInteresse=<%= li.getDescrição()%>"><%= li.getDescrição() %></a></center>
+            <td><center><%= li.getDescrição() %></center>
 </tr>
 <%
    }

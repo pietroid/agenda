@@ -29,7 +29,7 @@
 <p><font size="2" face="verdana"><a href="AltPass.jsp">Clique aqui
  para alterar sua senha</a></font></p>
 <p><font size="2" face="verdana"><a href="body_excluirMembro.jsp">Clique aqui
- para remover sua conta/a></font></p>
+ para remover sua conta</a></font></p>
 
 
     
@@ -40,9 +40,9 @@
 
 <table align="left" border=1 cellpadding=10 width=500>
 <tr>
-  <td><a href="../Cadastro_POI.jsp"  target="_top"><font size="3" color="#ff0000">Cadastrar Ponto de Interesse</font></a></td>
-  <td><a href="../AlterarPOI.jsp"  target="_top"><font size="3" color="#ff0000">Alterar Ponto de Interesse</font></a></td>
-  <td><a href="../ExcluirPOI.jsp"  target="_top"><font size="3" color="#ff0000">Excluir Ponto de Interesse</font></a></td>
+  <td><a href="/agenda/Cadastro_POI.jsp"  target="_top"><font size="3" color="#ff0000">Cadastrar Ponto de Interesse</font></a></td>
+  <td><a href="/agenda/AlterarPOI.jsp"  target="_top"><font size="3" color="#ff0000">Alterar Ponto de Interesse</font></a></td>
+  <td><a href="/agenda/ExcluirPOI.jsp"  target="_top"><font size="3" color="#ff0000">Excluir Ponto de Interesse</font></a></td>
 </tr>
 </table>
 
