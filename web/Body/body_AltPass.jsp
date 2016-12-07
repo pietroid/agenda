@@ -4,26 +4,24 @@
 <%@page import="data.UsuarioDO"%>
 <body BGCOLOR = #f2f2f2>
 <font face="verdana">
-<h1> <center> Alterar Senha <center> </h1>
+<h1> <center> Alterar Senha </center> </h1>
 <BR>
-<center>
     
     
-    <%
-        
-        
+    <%    
         UsuarioDO us = new UsuarioDO();
         us = (UsuarioDO)session.getAttribute("Usuario");
         System.out.println("parte 1 ok");
         
         if(request.getParameter("submit")==null){%>
 <FORM action="body_altpass.jsp" method="post">
-    Senha Atual:<BR><INPUT type="password" name="senhaAtual" value= ""> <BR><BR><BR>
+Senha Atual:<BR><INPUT type="password" name="senhaAtual" value= ""> <BR><BR><BR>
 Nova Senha<BR><INPUT type="password" name="novaSenha" value= ""> <BR><BR>
 Repita a Nova Senha<BR><INPUT type="password" name="repNovaSenha" value= ""> <BR><BR>
 <INPUT type="submit" name="submit" value= "Submit">   
 <INPUT type="reset" name="reset" value= "Reset">
 </FORM>
+<center>
     <%
         String atual = request.getParameter("senhaAtual");
         String nova1 = request.getParameter("novaSenha");
@@ -43,6 +41,6 @@ Repita a Nova Senha<BR><INPUT type="password" name="repNovaSenha" value= ""> <BR
         
         %>
 
-<center>
+</center>
 </body>
 </html>

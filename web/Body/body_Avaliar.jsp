@@ -14,22 +14,22 @@
 <html>
     <body BGCOLOR = #f2f2f2>
         <font face="verdana">
-        <h1><center>Avaliar<center></h1>
+        <h1><center>Avaliar</center></h1>
                 <BR>
                 <center>  
                     <% EventoDO us=new EventoDO();
                         Evento tr=new Evento();
                         us = tr.buscar(Integer.parseInt(request.getParameter("id")));
                         %>
-                        <form action = "body_Avaliar" method="post"> 
+                        <form action = "Avaliar.jsp" method="post"> 
                     Nota:<BR>
-                    <INPUT TYPE="RADIO" NAME="avaliacao" VALUE=1 checked> opção1
-                    <INPUT TYPE="RADIO" NAME="avaliacao" VALUE=2> opção2
-                    <INPUT TYPE="RADIO" NAME="avaliacao" VALUE=3> opção3
-                    <INPUT TYPE="RADIO" NAME="avaliacao" VALUE=4> opção4
-                    <INPUT TYPE="RADIO" NAME="avaliacao" VALUE=5> opção5
+                    <INPUT TYPE="RADIO" NAME="avaliacao" VALUE="1" checked> opção1
+                    <INPUT TYPE="RADIO" NAME="avaliacao" VALUE="2"> opção2
+                    <INPUT TYPE="RADIO" NAME="avaliacao" VALUE="3"> opção3
+                    <INPUT TYPE="RADIO" NAME="avaliacao" VALUE="4"> opção4
+                    <INPUT TYPE="RADIO" NAME="avaliacao" VALUE="5"> opção5
                     <INPUT type="submit" name="Submit" value="avaliar">
-                    <INPUT type =" hidden" name =" id" value = <%=request.getParameter("id")%>>
+                    <INPUT type ="hidden" name ="id" value = "<%=request.getParameter("id")%>">
                     </form>
                         
                     <%
