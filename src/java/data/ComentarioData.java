@@ -16,7 +16,7 @@ public class ComentarioData {
     
     public void incluir(ComentarioDO comentario, Transacao tr) throws Exception {
         Connection con = tr.obterConexao();
-        String sql = "insert into comentario (EVEid,USUid,mensagem) values (?,?,?)";
+        String sql = "insert into comentario (eveid,usuid,mensagem) values (?,?,?)";
         PreparedStatement ps = con.prepareStatement(sql);      
         ps.setInt(1, comentario.getEveId());
         ps.setInt(2, comentario.getUsuId());
@@ -48,7 +48,7 @@ public class ComentarioData {
     
     public void atualizar(ComentarioDO comentario, Transacao tr) throws Exception {
        Connection con = tr.obterConexao();
-       String sql = "update comentario set EVEid=?, USUid=?, mensagem=? where id=?";
+       String sql = "update comentario set eveid=?, usuid=?, mensagem=? where id=?";
        PreparedStatement ps = con.prepareStatement(sql);
        ps.setInt(1, comentario.getEveId());
        ps.setInt(2, comentario.getUsuId());
@@ -66,8 +66,8 @@ public class ComentarioData {
         rs.first();
         ComentarioDO comentario = new ComentarioDO();
         comentario.setId(rs.getInt("id"));
-        comentario.setEveId(rs.getInt("EVEid"));
-        comentario.setUsuId(rs.getInt("USUid"));
+        comentario.setEveId(rs.getInt("eveid"));
+        comentario.setUsuId(rs.getInt("usuid"));
         comentario.setMensagem(rs.getString("mensagem"));
         return comentario;
     } // buscar
