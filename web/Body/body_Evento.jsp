@@ -65,7 +65,7 @@
             
             <%if(comentario.getMensagem().equals("")==false){%>
                 <tr>
-                    <td width=10% height=50> <a href="Usuario.jsp?usuario=<%= comentario.getUsuId() %>" target ="_top"><%= nome %></a> : <%= comentario.getMensagem() %>
+                    <td width=10% height=50> <a href="Usuario.jsp?Usuario=<%= comentario.getUsuId() %>" target ="_top"><%= nome %></a> : <%= comentario.getMensagem() %>
                         <%
                             if (usuario.getNome() != null){
                                 if (usuario.isSuperUser() == true || nome.equals(usuario.getNome())){
