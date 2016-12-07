@@ -123,7 +123,7 @@
                 
             </td>
         </tr>
-        
+        <%if (LiderGE == 1){ %>
         <tr>
             <th>Conflito de Eventos</th>
             <td>
@@ -168,7 +168,8 @@
             </table>   
         </td>
         </tr>
-        
+        <%}
+        %>
     </table>
 <%
 /*---------------ALYSON--------------*/
