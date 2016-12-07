@@ -1,7 +1,7 @@
 <%-- 
     Document   : body_ExcluirPOI
     Created on : Dec 6, 2016, 10:57:18 PM
-    Author     : audiz_000
+    Author     : Michael
 --%>
 <%@page import="transacoes.QG"%>
 <%@page import="transacoes.Acontece"%>
