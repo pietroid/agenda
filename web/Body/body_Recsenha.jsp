@@ -21,23 +21,11 @@
 if (request.getParameter("submit") != null){
     usuario = u.buscarPorUsername(request.getParameter("username"));
     
-    if(usuario != null){
+    if(usuario != null && request.getParameter("submit1")==null){
     session.setAttribute("recup", usuario);
     pergunta = usuario.getPergunta();
-    }
-    else{
     %>
-    Não há usuários com esse nome
-    <BR>
-    <FORM action="body_Recsenha.jsp" method="post" align = "left">
-    UserName:<INPUT type="text" name="username" > 
-    <br>
-    <INPUT type="submit" name="submit" value= "Continuar">   
-    <INPUT type="reset" name="reset" value= "Reset">
-    <%
-        }
-    %>
-    <FORM action="body_Recsenha.jsp" method="post" align = "left">
+    <FORM action="Senha.jsp" method="post" align = "left">
     Pergunta: <%= pergunta%>
     <BR> 
     Resposta: <INPUT type="text" name="resposta"> 
@@ -68,7 +56,31 @@ if(request.getParameter("submit1")!= null){
             Resposta errada
             <%}
     }
+
+    else{
+    %>
+    Não há usuários com esse nome
+    <BR>
+    <FORM action="Recsenha.jsp" method="post" align = "left">
+    UserName:<INPUT type="text" name="username" > 
+    <br>
+    <INPUT type="submit" name="submit" value= "Continuar">   
+    <INPUT type="reset" name="reset" value= "Reset">
+    <%
+        }
+}
+if(request.getParameter("submit")== null){
+%>  
+  <BR>
+    <FORM action="Recsenha.jsp" method="post" align = "left">
+    UserName:<INPUT type="text" name="username" > 
+    <br>
+    <INPUT type="submit" name="submit" value= "Continuar">   
+    <INPUT type="reset" name="reset" value= "Reset">  
+    <%
+    }
+
 %>
-<center>
+</center>
 </body>
 </html>
