@@ -1,5 +1,5 @@
-<%@page  import="java.util.ArrayList"%>
-<%@page  import="java.util.List"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
 <%@ page import="transacoes.GE" %>
 <%@ page import="data.GEDO" %>
 <%@ page import="transacoes.Evento" %>
@@ -70,7 +70,7 @@
         <BR>
         <table align="right" border=1 cellpadding=10 width=200>
             <tfoot>
-                <tr><th><a href="SolicitarAdesao.jsp" target="_top">Solicitar adesão</a></th></tr>
+                <tr><th><a href="SolicitarAdesao.jsp?GEDO=<%=ge.getId()%>" target="_top">Solicitar adesão</a></th></tr>
             </tfoot>
         </table>
         <BR><BR><BR><BR>
@@ -116,7 +116,7 @@
         %>
                 <table align="left" border=1 cellpadding=10 width=500>
                     <th> 
-                         <center> <a href="/agenda/AlterarInfoGE.jsp" target="_top"> Alterar Informações </a> </center> 
+                         <center> <a href="/agenda/AlterarInfoGE.jsp?GEDO=<%=ge.getId()%>" target="_top"> Alterar Informações </a> </center> 
                     </th>
                 </table>
         <%
