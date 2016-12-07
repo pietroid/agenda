@@ -30,10 +30,10 @@
         
             GEDO GEaceitar = new GEDO();
             int GEid = Integer.parseInt(request.getParameter("EXP"));
-            Sol
             GE GEtn = new GE();
             GEaceitar = GEtn.buscar(GEid);
-            GEtn.incluir(GEaceitar);    
+            GEaceitar.setAutorizado(1);
+            GEtn.atualizar(GEaceitar);    
         
         pageContext.forward("GEokay.jsp");
     }
