@@ -50,11 +50,11 @@
                     } 
                 }
                 else { %>
-                                <center>Você não tem permissão para isso.</center> <BR>
+                    <center>Você não tem permissão para isso.</center> <BR>
                 <% }
             }
             else { %>
-                                <center>Você não está logado.</center> <BR>
+                <center>Você não está logado.</center> <BR>
             <% } %>                
     </body>
 </html>
