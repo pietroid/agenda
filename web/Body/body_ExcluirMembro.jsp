@@ -32,7 +32,7 @@ Digite sua senha:<BR><INPUT type="password" name="senhaAtual" value= ""> <BR><BR
 %><p>Sua conta foi removida.</p><%
         }else{
 %><p>Senha atual incorreta! Você precisa digitar a senha atual excluir sua conta.</p><%
-        }}}
+        }}
 
         
         %>
