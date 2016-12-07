@@ -81,11 +81,11 @@ public class UsuarioData {
         return usuario;
     }
     public void excluir(UsuarioDO usuario, Transacao tr) throws Exception {
-        String username = usuario.getUsername();
+        int id = usuario.getId();
         Connection con = tr.obterConexao();
-        String sql = "delete * from agenda.Usuario where Username = ?";
+        String sql = "delete * from agenda.Usuario where USUid = ?";
         PreparedStatement ps = con.prepareStatement(sql);
-        ps.setString(1, username);
+        ps.setInt(1, id);
         ResultSet rs = ps.executeQuery();
         rs.first();
     };
