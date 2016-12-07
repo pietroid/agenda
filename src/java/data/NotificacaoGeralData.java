@@ -16,10 +16,12 @@ public class NotificacaoGeralData {
     
     public void incluir(NotificacaoGeralDO notificacaoGeral, Transacao tr) throws Exception {
         Connection con = tr.obterConexao();
-        String sql = "insert into notificacaoGeral (USERalvoid,mensagem) values (?,?)";
+        String sql = "insert into notificacaoGeral (USERalvoid,mensagem,classificacao,EVEassociado) values (?,?,?,?)";
         PreparedStatement ps = con.prepareStatement(sql);  
         ps.setInt(1, notificacaoGeral.getUsuId());
         ps.setString(2,notificacaoGeral.getMensagem());
+        ps.setInt(3, notificacaoGeral.getClassificacao());
+        ps.setInt(4,notificacaoGeral.getEVEassociado());
         int result = ps.executeUpdate();
         
         sql= "SELECT LAST_INSERT_ID();";
