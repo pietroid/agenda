@@ -1,7 +1,7 @@
 <%-- 
     Document   : body_Reportar
     Created on : Dec 5, 2016, 3:49:32 PM
-    Author     : audiz_000
+    Author     : Michael
 --%>
 <%@page import="transacoes.Problema"%>
 <%@page import="java.time.LocalDate"%>
@@ -9,7 +9,7 @@
 <%@page import="java.sql.Date"%>
 <%@page import="data.ProblemaDO"%>
 <%@page import="data.UsuarioDO"%>
-<%@ page import="java.util.*" %>
+<%@page import="java.util.*" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
