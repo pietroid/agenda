@@ -86,7 +86,8 @@
         </table>
         <BR><BR><BR><BR>
         <%
-}}
+    }   
+}
 %>        
         
         <table align="right" border=1 cellpadding=10 width=200>
