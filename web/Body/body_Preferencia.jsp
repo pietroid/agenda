@@ -25,6 +25,7 @@
     <%
         if (request.getParameter("nome") == null) {
             UsuarioDO usuario = (UsuarioDO)session.getAttribute("Usuario");
+           // UsuarioDO usuario = new UsuarioDO();
             List<PreferenciaDO> listaPreferencia = new ArrayList<PreferenciaDO>();
             Preferencia preferenciatn = new Preferencia();
             listaPreferencia = preferenciatn.pesquisarPorUser(usuario);
