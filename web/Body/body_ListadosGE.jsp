@@ -24,9 +24,14 @@ GE getn = new GE();
                     for(int i = 0; i < ges.size(); i++){
                        GEDO ge = ges.get(i);
                        if(ge.getAutorizado() == 1) {
+                           String imagem = "/agenda/PastadeImagens/padrao/logo.PNG";
+                           if (ge.getImagem() != null){
+                               imagem = "/agenda/PastadeImagens/" + ge.getImagem();
+                           }
+                           System.out.println(imagem);
                 %>     
                 <tr>
-                    <td width=10% height=150 ><center><iframe src="agenda/PastadeImagens/GrupodeExtensao1/Grupodeextensao1-imagem1.PNG" scrolling= no width=120 height=150 ></iframe></center>
+                    <td width=10% height=150 ><center><iframe src=<%= imagem %> scrolling= no width=120 height=150 ></iframe></center>
                     <td><center><a href="GE.jsp?GE=<%= ge.getId()%>"><%= ge.getNome() %></a></center>
                 </tr>
 
