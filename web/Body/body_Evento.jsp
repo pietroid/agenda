@@ -50,7 +50,7 @@
         if (usuario.getNome() != null){
             %>
                     <tfoot>
-                        <tr><th><a href="CriarComentario.jsp?evento=<%= evento.getNome() %>" target="_top">Comentar</a></th></tr>
+                        <tr><th><a href="CriarComentario.jsp?evento=<%= evento.getId() %>" target="_top">Comentar</a></th></tr>
                     </tfoot>
             <%
         }
@@ -63,12 +63,12 @@
             String nome = usuariotn.buscarPorID(comentario.getUsuId()).getNome();
             %>
             
-            <%if(comentario.getMensagem()!=null){%>
+            <%if(comentario.getMensagem().equals("")==false){%>
                 <tr>
-                    <td width=10% height=50> <%= nome %>: <%= comentario.getMensagem() %>
+                    <td width=10% height=50> <a href="Usuario.jsp?Usuario=<%= comentario.getUsuId() %>" target ="_top"><%= nome %></a> : <%= comentario.getMensagem() %>
                         <%
                             if (usuario.getNome() != null){
-                                if (usuario.isSuperUser() == true || nome == usuario.getNome()){
+                                if (usuario.isSuperUser() == true || nome.equals(usuario.getNome())){
                                     %>
                                     <a href="ExcluirComentario.jsp?comentario=<%= comentario.getId() %>" target="_top"><font size="2" color="#ff0000">Excluir comentário</font></a>
                                     <%
@@ -131,7 +131,7 @@
 </form>
     <%
     }
-    //else pageContext.forward("index.jsp");
+    else pageContext.forward("index.jsp");
         %>    
     </body>
 </html>
