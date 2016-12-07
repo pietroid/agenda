@@ -11,7 +11,7 @@
 <%@ page import="transacoes.Usuario" %>
 <%@ page import="java.util.Vector" %>
 
-<%
+<% Integer.parseInt("1");
     if (request.getParameter("evento") != null){
         Comentario comentariotn = new Comentario();
         Evento eventotn = new Evento();
@@ -115,6 +115,7 @@
         <p align="center"> <b>Avalie o evento </b></p> <BR>
 <FORM action="/agenda/Avaliar.jsp" method="post">  
     <center><INPUT type="submit" name="deixar_feedback" value="Avaliar" ></center> <BR>
+    <INPUT type =" hidden" name =" id" value = <%=evento.getId()%>>
 </form>
     <%
     }
