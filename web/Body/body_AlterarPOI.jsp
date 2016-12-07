@@ -23,7 +23,7 @@
         PontoDeInteresseDO PontoDeInteresse = new PontoDeInteresseDO();
         PontoDeInteresse PontoDeInteressetr = new PontoDeInteresse();
         PontoDeInteresse = PontoDeInteressetr.buscarnome(request.getParameter("PontoDeInteresse"));
-
+        if (request.getParameter("submit")== null){
          %>
 <FORM action="AlterarPOI.jsp" method="post">
     Nome do ponto de interesse:<BR>
@@ -39,7 +39,7 @@
 <INPUT type="submit" name="submit" value= "Salvar Mudanças">   
 <INPUT type="reset" name="reset" value= "Reset">
 </FORM>
-<% if(request.getParameter("submit")=="Salvar Mudanças" ) { 
+<% } else if(request.getParameter("submit")=="Salvar Mudanças" ) { 
  
 if (request.getParameter("nome")!= null) PontoDeInteresse.setNome(request.getParameter("nome"));
 if (request.getParameter("descrição")!= null) PontoDeInteresse.setDescrição(request.getParameter("descrição"));
