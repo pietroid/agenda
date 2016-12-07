@@ -11,9 +11,13 @@
 <h1><center>Cadastro Grupo de Extensão<center></h1>
 <BR>
 
+<% if (session.getAttribute("Usuario")!= null){
+
+%>
+
 
     <% 
-if (request.getParameter("submitcad") == null){
+if (request.getParameter("submit") == null){
     %>
 <FORM action="CadastroGE.jsp" method="post">
     
@@ -33,7 +37,7 @@ if (request.getParameter("submitcad") == null){
     <INPUT type="text" name="face"><BR><BR>
     Descrição:<BR>
     <INPUT type="text" name="descricao"><BR><BR>
-    <INPUT type="submit" name="submitcad" value="Submit">
+    <INPUT type="submit" name="submit" value="Submit">
     <INPUT type="reset" name="reset" value="Reset">
 
 
@@ -51,18 +55,19 @@ if (request.getParameter("submit") != null){
     grupo.setDescricao(request.getParameter("descricao"));
     grupo.setFace(request.getParameter("face"));
     try{
-        grupo.setAno(Integer.parseInt(request.getParameter("ano"))); %>
-            Cadastro efetuado com sucesso!  <BR>
-    Espere a confirmação de um de nossos administradores.
-        <%
+        grupo.setAno(Integer.parseInt(request.getParameter("ano"))); 
            GE novo = new GE();
            novo.incluir(grupo);
            MembroDO membro = new MembroDO ();
-           membro.setUSUid(((UsuarioDO)session.getAttribute("usuario")).getId());
+           membro.setUSUid(((UsuarioDO)session.getAttribute("Usuario")).getId());
            membro.setGEid(grupo.getId());
            membro.setADM(1);
            Membro tr = new Membro ();
            tr.incluir (membro);
+           %>
+            Cadastro efetuado com sucesso!  <BR>
+            Espere a confirmação de um de nossos administradores.
+        <%
     }catch(Exception e){
     %>
         É necessário digitar um número para o ano <BR> 
@@ -87,9 +92,17 @@ if (request.getParameter("submit") != null){
     <INPUT type="submit" name="submit" value="Submit">
     <INPUT type="reset" name="reset" value="Reset">
     </FORM>  
- <% }} %>
-  
+ <%} }} %>
+  <%  if (session.getAttribute("Usuario")== null){
+        %>
+        
+        É Necessário realizar login para cadastrar um grupo
+                <FORM action="LoginOut.jsp" method="post">
+                <INPUT type="submit" name="submit2" value="Logar">
+                </form>
+          
+        <%  }
     
- 
+ %>
 </body>
 </html>

@@ -47,7 +47,23 @@ public class PontoDeInteresse {
             e.printStackTrace();
 	}
 	return null;
-    } // buscar
+    } // buscar por id
+    
+        public PontoDeInteresseDO buscarnome(String nome) throws Exception{
+        Transacao tr = new Transacao();
+	try{
+            tr.beginReadOnly();
+  	    PontoDeInteresseData PontoDeInteresseData = new PontoDeInteresseData();
+	    PontoDeInteresseDO i = PontoDeInteresseData.buscarnome(nome, tr);
+            tr.commit();
+            return i;
+	} catch (Exception e) {
+            tr.rollback();
+            System.out.println("Erro ao buscar" + nome);
+            e.printStackTrace();
+	}
+	return null;
+    } // buscar por nome
     
       public boolean atualizar(PontoDeInteresseDO PontoDeInteresse) throws Exception {
         Transacao tr = new Transacao();
