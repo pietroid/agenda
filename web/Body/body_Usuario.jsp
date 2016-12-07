@@ -11,13 +11,16 @@
 
 <%  
     
-    UsuarioDO usuario = (UsuarioDO)session.getAttribute("Usuario");
+
    
     
     UsuarioDO usuarioREQ;
     Usuario tru = new Usuario();
-    UsuarioDO tr = (UsuarioDO)session.getAttribute("UsuarioRequisitado");
-    usuarioREQ=tru.buscarPorID(tr.getId());
+    
+    
+
+    int id = Integer.parseInt(request.getParameter("Usuario"));
+    usuarioREQ=tru.buscarPorID(id);
     String username = usuarioREQ.getUsername();
     String bio = usuarioREQ.getBio();    
     String nome = usuarioREQ.getNome();
@@ -30,7 +33,7 @@
 
 %>
 
-<h1><center><%=username%></center></h1>
+<h1><center><%=nome%></center></h1>
 <BR><BR>
 <table align="left" border=1 cellpadding=10 width=500>
 <th>BIO</th>
@@ -57,7 +60,7 @@
 <th colspan="2">Informações do USUARIO</th>
 <tr>
   <td><b>NOME</b></td>
-  <td><%=nome%></td>
+  <td><%=username%></td>
 </tr>
 <tr>
   <td><b>EMAIL</b></td>

@@ -4,7 +4,20 @@
     Author     : Pedro
 --%>
 
+<%@page import="data.GEDO"%>
+<%@page import="java.util.List"%>
+<%@ page import="transacoes.GE" %>
+<%@page import="data.GEData"%>
 
+<%
+ 
+    
+GE ge= new GE();
+int id =Integer.parseInt(request.getParameter("idGE"));
+GEDO ged=new GEDO();
+ged=ge.buscar(id);
+
+%>
 
     <head>
   <title>Calendario Geral</title>
@@ -44,20 +57,40 @@
     }
     
     </style>
+    
+    
+    <% if(request.getParameter("submit5")!=null){
+      if(request.getParameter("nota")=="imagem1") ged.setImagem("/agenda/PastadeImagens/caneca.png");
+      if(request.getParameter("nota")=="imagem2") ged.setImagem("/agenda/PastadeImagens/livro.png");
+      if(request.getParameter("nota")=="imagem3") ged.setImagem("/agenda/PastadeImagens/social.png");
+      if(request.getParameter("nota")=="imagem4") ged.setImagem("/agenda/PastadeImagens/capacete.png");
+
+
+      ge.atualizar(ged);
+    
+    %>Parabéns, seu grupo foi devidamente cadastrado!<%
+    
+    } 
+       
+        
+    else{    
+    %>
 </head>
+<FORM action="FormularioImagens.jsp" method="post">
     <br>
      <table align="center" border=3 cellpadding=10 width=100>
   <th colspan =" 4"  align = "center">
        Imagens
   </th>
+  
   <tr>
-    <td><img src ="PastadeImagens/GrupodeExtensao1/Grupodeextensao1-imagem1.PNG" align="right" width = 250 height =" 300" >
+    <td><img src ="/agenda/PastadeImagens/caneca.png" align="right" width = 250 height =" 300" >
 </td>
-    <td><img src ="PastadeImagens/GrupodeExtensao1/Grupodeextensao1-imagem1.PNG" align="right" width = 250 height =" 300" >
+    <td><img src ="/agenda/PastadeImagens/livro.png" align="right" width = 250 height =" 300" >
 </td>
-<td><img src ="PastadeImagens/GrupodeExtensao1/Grupodeextensao1-imagem1.PNG" align="right" width = 250 height =" 300" >
+<td><img src ="/agenda/PastadeImagens/social.png" align="right" width = 250 height =" 300" >
 </td>
-<td><img src ="PastadeImagens/GrupodeExtensao1/Grupodeextensao1-imagem1.PNG" align="right" width = 250 height =" 300" >
+<td><img src ="/agenda/PastadeImagens/capacete.png" align="right" width = 250 height =" 300" >
 </td>
   </tr>
   
@@ -69,11 +102,12 @@
   </tr>
   <tfoot width="50">
       <td colspan="4" align=" center" >
-          <FORM action="LoginOut.jsp" method="post">
-<INPUT type="submit" name="submit" value= "Confirma">   
+
+<INPUT type="submit" name="submit5" value= "Confirma">   
 </FORM> 
           
       </td>
   </tfoot>
      
 </table>
+     <%}%>

@@ -19,12 +19,12 @@
     if(session.getAttribute("Usuario")!= null) //HOME LOGADO
     {
  UsuarioDO usuario = (UsuarioDO)session.getAttribute("Usuario");
- String nome = usuario.getNome();
+ String nome = usuario.getNome(); 
 %>
 
 <h1><center> Home </center> </h1>
 
-<h2><font face="verdana">Olá,<%=nome%>  </font><h2>            
+<h2><font face="verdana">Olá, <%=nome%>  </font><h2>            
 <h2><font face="verdana"> Grupos de extensão </font><h2>
 <p><font size="2" face="verdana"><a href="/agenda/ListadosGE.jsp" target="_top">Clique aqui
  para ver uma lista com todos os Grupos de Extensão</a></font></p> 
