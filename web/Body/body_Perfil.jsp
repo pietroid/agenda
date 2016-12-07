@@ -56,7 +56,7 @@
 <h2><font face="verdana">Olá,<%=nome%>  </font><h2>
 <h2><font face="verdana"> Interesses </font><h2>
 <%// adicionado link para preferencia%>
-<p><font size="2" face="verdana"><a href="Preferencia.jsp? ">Clique aqui
+<p><font size="2" face="verdana"><a href="Preferencia.jsp">Clique aqui
  para ver uma lista com todos os Grupos do seu interesse</a></font></p> 
 
 <p><font size="2" face="verdana"><a href="AltPass.jsp">Clique aqui
