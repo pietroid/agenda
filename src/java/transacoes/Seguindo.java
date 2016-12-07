@@ -63,6 +63,36 @@ public class Seguindo {
 	return null;
     }
     
+    public List<SeguindoDO> pesquisarPorEVEid(int EVEid) throws Exception{
+        Transacao tr = new Transacao();
+	try{
+            tr.beginReadOnly();
+  	    SeguindoData SeguindoData = new SeguindoData();
+	    List<SeguindoDO> i = SeguindoData.pesquisarPorEVEid(EVEid, tr);
+            tr.commit();
+            return i;
+	} catch (Exception e) {
+            tr.rollback();
+            System.out.println("Erro ao listar ");  
+	}
+	return null;
+    }
+    
+    public SeguindoDO pesquisarPorUSUidRetornaUmDO(int USUid) throws Exception {
+        Transacao tr = new Transacao();
+        try{
+            tr.beginReadOnly();
+  	    SeguindoData SeguindoData = new SeguindoData();
+	    SeguindoDO i = SeguindoData.pesquisarPorUSUidRetornaUmDO(USUid, tr);
+            tr.commit();
+            return i;
+	} catch (Exception e) {
+            tr.rollback();
+            System.out.println("Erro ao listar ");  
+	}
+	return null;
+    }
+     
     private boolean isEmpty(String s) {
         if (null == s)
             return true;
