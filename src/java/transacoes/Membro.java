@@ -32,6 +32,25 @@ public class Membro {
         return false;
     } // incluir
     
+    public boolean alterar (MembroDO membro) throws Exception{
+        
+        Transacao tr = new Transacao();
+        try {
+            
+            tr.begin();
+                MembroData a = new MembroData();
+                a.atualizar(membro, tr);
+            tr.commit();
+            return true;
+       
+        } catch(Exception e) {
+            tr.rollback();
+            System.out.println("Erro ao alterar ");
+            e.printStackTrace();
+        }
+        return false;
+    } // alterar
+    
     public MembroDO buscar(int MEMBERid) throws Exception{
         Transacao tr = new Transacao();
 	try{
