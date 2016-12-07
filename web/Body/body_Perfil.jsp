@@ -1,21 +1,22 @@
 
+<%@page import="data.GEDO"%>
 <%@page import="data.NotificacaoGeralDO"%>
 <%@page import="transacoes.NotificacaoGeral"%>
 <%@page import="data.MembroDO"%>
 <%@page import="java.util.List"%>
 <%@page import="transacoes.Membro"%>
-<html>
-<body BGCOLOR = #f2f2f2>
-<font face="verdana">
-
+<%@page import="transacoes.GE"%>
 <%@ page import="transacoes.Usuario" %>
 <%@ page import="data.UsuarioDO" %>
 <%@ page import="java.util.Vector" %>
 
+<html>
+<body BGCOLOR = #f2f2f2>
+<font face="verdana">
+
 
 <%
- if(session.getAttribute("Usuario")!= null)
- {
+ if(session.getAttribute("Usuario")!= null){
     UsuarioDO usuario = (UsuarioDO)session.getAttribute("Usuario");
     String nome = usuario.getNome();
     
@@ -31,10 +32,42 @@
     List<NotificacaoGeralDO> ListaNotificacao = list.BuscaNotporUSId(IDusuario);
     String messageNotificacao;
     /*---ALYSON---*/
-%>
-<h1><center> Perfil <center> </h1>
-
-<h2><font face="verdana">Olá,<%=nome%>  </font><h2>
+    
+    %><h1><center> Perfil <center> </h1>
+      <h2><font face="verdana">Olá,<%=nome%>  </font><h2>
+        <%
+    
+    /*----RAFAS2ALYSON---*/
+        
+    //Verifica se o usuário é Admin de algum grupo de extensão
+    boolean AdminGE = false;
+    
+    Membro mtr = new Membro();
+    GE gtr = new GE();
+    GEDO ge = new GEDO();
+    
+    //Relacoes de Membro para os quais o usuario é ADM 
+    List<MembroDO> lmadm = mtr.AdminedGroups(usuario.getId());
+    
+    %><h2><font face="verdana"> Grupos de Extensão </font><h2><%
+    
+    if(lmadm.isEmpty()){
+         %>Você não administra nenhum grupo de extensão!<%
+     }
+    else{
+    %>
+    Caí no Else!
+    <table align="center">
+    <tr>
+      <th>Grupos de Extensão</th>
+    <%for (MembroDO membro_temp : lmadm) {%>
+    <tr>
+        <% ge = gtr.buscar(membro_temp.getGEid()); %>
+        <td align="center"><%=ge.getNome()%></td>
+    </tr>
+    <%}
+    }%>
+    
 <h2><font face="verdana"> Interesses </font><h2>
 <%// adicionado link para preferencia%>
 <p><font size="2" face="verdana"><a href="Preferencia.jsp">Clique aqui
@@ -45,14 +78,8 @@
 
 
 <%/*-----ALYSON--------*/
-    
-    //Verifica se o usuário é Admin de algum grupo de extensão
-    int LiderGE=0;
-    for (MembroDO membro:ListaMembro){
-        if (membro.getADM()==1){
-            LiderGE = 1;
-        }
-    }
+   
+
     /*-----ALYSON--------*/
     //Notificacao para usuario ADM
 %>
@@ -178,8 +205,9 @@
     
 <center>
     
-<%    
-   }else{
+<%
+   } 
+   else{
 
  %>
  
