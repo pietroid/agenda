@@ -38,6 +38,7 @@
 else if(session.getAttribute("Usuario")!=null){
     
 if(request.getParameter("submit") != null){
+        int FeedbackOK=0;
         UsuarioDO usuario = (UsuarioDO) session.getAttribute("Usuario"); //User ID
         int EveId=Integer.parseInt(request.getParameter("id_eve"));
         FeedbackDO m = new FeedbackDO();
@@ -46,10 +47,19 @@ if(request.getParameter("submit") != null){
         m.setUsuId(usuario.getId()); //atribui User ID
         m.setEveId(EveId); //Atribui Event ID
         m.setRating(Integer.parseInt(request.getParameter("nota"))); //Atribui rating
+        if (mtn.incluir(m)){
+            FeedbackOK = 1;
+        }
+        else{
+            FeedbackOK = 0;
+        }
+
         /*-------------ALYSON-----------*/
+        int NotificacaoOK=0; 
         /*Pegando caracteristicas do evento*/
         Evento event = new Evento();
         EventoDO evento = event.buscar(EveId);
+        
         /*mensagem*/
         String message = "Você tem um novo Feedback relacionado ao evento ";
         /*Criacao do objeto de notificacao geral*/
@@ -60,19 +70,27 @@ if(request.getParameter("submit") != null){
         RealizaDO realizacao = eventRealized.buscarPorEVE(EveId);
         int grupoExtensao = realizacao.getGEid();
         
+        
         Membro member = new Membro(); 
         List<MembroDO> ListaMembros = member.buscarPorGEidADM(grupoExtensao);
         
         for (MembroDO UsuADM: ListaMembros){
-        /*Definindo os atributos da notificacao*/
-        FeedbackNote.setUsuId(UsuADM.getUSUid());
-        FeedbackNote.setEVEassociado(EveId);
-        FeedbackNote.setMensagem(message+evento.getNome());
-        FeedbackNote.setClassificacao(2);
-        if ((mtn.incluir(m))&&(Note.incluir(FeedbackNote))){
+            /*Definindo os atributos da notificacao*/
+            FeedbackNote.setUsuId(UsuADM.getUSUid());
+            FeedbackNote.setEVEassociado(EveId);
+            FeedbackNote.setMensagem(message+evento.getNome());
+            FeedbackNote.setClassificacao(2);
+            if (Note.incluir(FeedbackNote)){
+                NotificacaoOK=1;
+            }
+            else{
+                NotificacaoOK=0;
+            }
+        }
+        if ((FeedbackOK == 1) && (NotificacaoOK==1)){
             pageContext.forward("PaineldeControle.jsp");
         }
-    }
+    
     }
         /*------------ALYSON-------------*/
     else {%>
