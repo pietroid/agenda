@@ -70,6 +70,7 @@
             <%
                 }
             }
+            else pageContext.forward("index.jsp");
             %>
 
         </center>    
