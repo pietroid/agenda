@@ -59,8 +59,11 @@ GEDO GE = ge.buscar(id);
     
     <%
         if(request.getParameter("submit")!=null){
-            
-        }
+         if(request.getParameter("imagem1")!=null){
+            GE.setImagem("");
+         }
+        }   
+        
         else{
     %>
 </head>
