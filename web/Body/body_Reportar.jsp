@@ -20,7 +20,9 @@
         %>
         <form action='Reportar.jsp' method ='post'>
             Descreva o problema (este texto será enviado à nossa equipe): <BR><BR>
-            <input type="text" name="report"\><br><br>
+            <input type="text" name="report"><br><br>
+            <INPUT type="submit" name="submit" value="Submit">
+        </form>
             
         <% } else{
                 String action = request.getParameter("report");
