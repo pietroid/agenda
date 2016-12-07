@@ -16,10 +16,10 @@ import utils.Transacao;
 public class PontoDeInteresseData {
     
     public void incluir(PontoDeInteresseDO  PontoDeInteresse, Transacao tr) throws Exception {
-        Connection con = tr.obterConexao();
-        String sql = "insert into agenda.POI (nome,descrição,endereço,link_para_maps,pasta_de_imagens) values (?,?,?,?,?)";
-        PreparedStatement ps = con.prepareStatement(sql);
-        ps.setString(1, PontoDeInteresse.getNome());
+        Connection con = tr.obterConexao(); // conexão com o bd
+        String sql = "insert into agenda.POI (nome,descrição,endereço,link_para_maps,pasta_de_imagens) values (?,?,?,?,?)"; //
+        PreparedStatement ps = con.prepareStatement(sql); // 
+        ps.setString(1, PontoDeInteresse.getNome()); //set no bd dos valores obtidos no objeto POI
         ps.setString(2, PontoDeInteresse.getDescricao());
         ps.setString(3, PontoDeInteresse.getEndereco());
         ps.setString(4,PontoDeInteresse.getLink_para_maps());
