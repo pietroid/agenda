@@ -84,7 +84,7 @@ public class MembroData {
     
     public boolean isADM(int GEid, int USUid, Transacao tr) throws Exception {
         Connection con = tr.obterConexao();
-        String sql = "select * from agenda.Membro where GEid = ? and USUid = ?";
+        String sql = "select * from agenda.Membro where GEid = ? and USUid = ? and Aprovado = '1'";
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setInt(1, GEid);
         ps.setInt(2, USUid);

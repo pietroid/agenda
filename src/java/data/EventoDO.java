@@ -24,6 +24,7 @@ public class EventoDO {
     private String pastaimagens;
     private int avaliação;
     private int numeroava;
+    private boolean conflito;
 
     /**
      * @return the id
@@ -169,6 +170,20 @@ public class EventoDO {
      */
     public int getNumeroava() {
         return numeroava;
+    }
+
+    /**
+     * @return the conflito
+     */
+    public boolean isConflito() {
+        return conflito;
+    }
+
+    /**
+     * @param conflito the conflito to set
+     */
+    public void setConflito(boolean conflito) {
+        this.conflito = conflito;
     }
     
     
