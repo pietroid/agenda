@@ -67,6 +67,6 @@ if(request.getParameter("submit1")!= null){
             <%}
     }
 %>
-<center>
+</center>
 </body>
 </html>
