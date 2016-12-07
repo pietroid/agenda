@@ -35,7 +35,15 @@ public class PreferenciaData {
         ps.setInt(1, preferencia.getId());
         int result = ps.executeUpdate();
     } // excluir
-
+    
+    public void excluirid(int id, Transacao tr) throws Exception {
+        Connection con = tr.obterConexao();
+        String sql = "delete from agenda.preferencia where id = ?";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setInt(1, id);
+        int result = ps.executeUpdate();
+    } // excluir
+    
     public void atualizar(PreferenciaDO preferencia, Transacao tr) throws Exception {
         Connection con = tr.obterConexao();
         String sql = "update agenda.preferencia set GRUPOid = ?, USERid = ? where id = ?";
