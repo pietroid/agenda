@@ -85,6 +85,7 @@
 <p align="center"> <b>O que você achou do evento? </b></p> <BR>
 <FORM action="/agenda/Feedback.jsp" method="post">  
     <center><INPUT type="submit" name="deixar_feedback" value="Deixe seu feedback" ></center> <BR>
+    <input type="hidden" name="id_eve" value="<%=evento.getId()%>">
 </form>
 <!---------------------------FIM DO REDICERIONADOR PARA FEEDBACK.JSP-------------------------------->
 <!-------------------------------------------------------------------------------------------------->
