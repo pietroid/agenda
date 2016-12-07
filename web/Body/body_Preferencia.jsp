@@ -24,21 +24,21 @@
     </head>
     <%
         if (request.getParameter("nome") == null) {
-            UsuarioDO usuario = (UsuarioDO)session.getAttribute("UsuarioDO");
+            UsuarioDO usuario = (UsuarioDO)session.getAttribute("Usuario");
             List<PreferenciaDO> listaPreferencia = new ArrayList<PreferenciaDO>();
             Preferencia preferenciatn = new Preferencia();
             listaPreferencia = preferenciatn.pesquisarPorUser(usuario);
             if (listaPreferencia != null && listaPreferencia.size() != 0) {
     %>
                 <h1><center>Você segue os seguintes grupos:</center></h1>
+                <table align="center" border=1 cellpadding=10 width=1000>
+                    <th>Preferencias</th>
     <%
                 for (int i = 0; i < listaPreferencia.size(); i++) {
                     GEDO GE = new GEDO();
                     GE GEtn = new GE();
                     GE = GEtn.buscar(listaPreferencia.get(i).getGEid());
     %>
-                    <table align="center" border=1 cellpadding=10 width=1000>
-                        <th>Preferencias</th>
                         <tr>
                             <td>
                                 <center><%=GE.getNome()%></center>
@@ -54,16 +54,12 @@
                                         Adicionar preferência</a>
                                 </center>
                             </td>
-                        </tr>
-                        <tr>
                             <td>
                                 <center>
                                     <a href="Preferencia.jsp?nome=Editar">
                                         Editar preferência</a>
                                 </center>
                             </td>
-                        </tr>
-                        <tr>
                             <td>
                                 <center>
                                     <a href="Preferencia.jsp?nome=Excluir">
