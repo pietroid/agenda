@@ -98,10 +98,24 @@ public class GE {
 	}
 	return null;
     } // buscar
-   
-  public boolean excluir(GEDO GE) throws Exception {
+      public List<GEDO> buscaTodosEmEspera() throws Exception{
         Transacao tr = new Transacao();
 	try{
+            tr.beginReadOnly();
+  	    GEData GEData = new GEData();
+	    List<GEDO> i = GEData.buscarTodosEmEspera(tr);
+            tr.commit();
+            return i;
+	} catch (Exception e) {
+            tr.rollback();
+            System.out.println("Erro");
+            e.printStackTrace();
+	}
+	return null;
+    } // buscar 
+    public boolean excluir(GEDO GE) throws Exception {
+         Transacao tr = new Transacao();
+            try{
             
             tr.begin();
                 GEData GEData = new GEData();
