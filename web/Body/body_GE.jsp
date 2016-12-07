@@ -44,9 +44,9 @@
                 <td width=10% height=150> <%= ge.getDescricao() %> </td>
             </tr>
         </table>
-<%  UsuarioDO solicitar = new UsuarioDO();
-    solicitar = (UsuarioDO)session.getAttribute("Usuario");
-    if(session.getAttribute("Usuario")!= null){
+<%  if(session.getAttribute("Usuario")!= null){
+        UsuarioDO solicitar = new UsuarioDO();
+        solicitar = (UsuarioDO)session.getAttribute("Usuario");
         Membro GEsolicitar = new Membro();
         int a = ge.getId();
         int relacaomembro = 0;
