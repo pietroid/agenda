@@ -49,7 +49,7 @@
                             <FORM action = "ExcluirEvento.jsp?evento=<%= evento.getNome() %>" method = "post">
                                 <input type="radio" name="Eve" value="sim" checked> Sim<br>
                                 <input type="radio" name="Eve" value="nao"> Não<br>
-                                <INPUT type="submit" name="submit" value= "Excluir">
+                                <INPUT type="submit" name="submit" value= "Enviar">
                             </form>
                         </center>
                     <%
