@@ -109,6 +109,7 @@
     <tr>
         <% ge = gtr.buscar(membro_temp.getGEid()); %>
         <td align="center"><font face="verdana" size="3"><a href="GE.jsp?GE=<%= ge.getId()%>"><%=ge.getNome()%></a></font></td>
+        <td align="center"><font face="verdana" size="3"><a href="AprovarMembro.jsp?AM=<%= ge.getId()%>">Solicitações de Adesão</a></font></td>
     </tr>
     </table>
     <%}

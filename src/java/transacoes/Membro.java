@@ -88,7 +88,7 @@ public class Membro {
 	try{
             tr.beginReadOnly();
   	    MembroData a = new MembroData();
-	    List<MembroDO> Lista = a.pesquisarPorGEid(GEid, tr);
+	    List<MembroDO> Lista = a.pesquisarPorGEidADM(GEid, tr);
             tr.commit();
             return Lista;
 	} catch (Exception e) {

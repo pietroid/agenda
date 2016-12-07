@@ -93,7 +93,7 @@ public class MembroData {
         ResultSet rs = ps.executeQuery();
         rs.first();
         List<MembroDO> Items = new ArrayList<MembroDO>();
-        while (rs.next()) {
+        do{
             MembroDO i = new MembroDO();
             i.setId (rs.getInt("MEMBERid"));
             i.setGEid (rs.getInt("GEid"));
@@ -101,7 +101,7 @@ public class MembroData {
             i.setADM(rs.getInt("ADM"));
             i.setAprovado(rs.getInt("Aprovado"));
             Items.add(i);
-        }
+        }while (rs.next());
         return Items;
     }
     

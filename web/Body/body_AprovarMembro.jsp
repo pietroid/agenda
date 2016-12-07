@@ -21,38 +21,39 @@
     int ID_Usuario = usuario.getId();
     List<MembroDO> ListaGEAdm = Lista.AdminedGroups(ID_Usuario);
   
-    for(MembroDO membroAdm:ListaGEAdm){
-        List<MembroDO> ListaN_Apv = Lista.buscarPor_N_Apv(membroAdm.getGEid());
-        UsuarioDO Lista_Nome = new UsuarioDO();
-        for(MembroDO membroN_Apv:ListaN_Apv)
-        {
-            int ID_N_Apv = ListaN_Apv.getId();
-            Lista_Nome = usu_N.buscarPorID(ID_N_Apv);
-        }%>
-    
-    <h2><font size="4" face="verdana"> - Solicitações:</font><h2>
-    <table align="cente" border=3    cellpadding = 10 width=1000   >
-        <tr>
-            <th>GE</th>
-            <td>
-                <table>
-            <%
-              for(UsuarioDO membroN_Apv:Lista_Nome){
-                  messageApv = membroN_Apv.getNome() ;
+        int idge = Integer.parseInt(request.getParameter("AM"));
+        List<MembroDO> ListaN_Apv = Lista.buscarPor_N_Apv(idge);
+        for(MembroDO membroN_Apv:ListaN_Apv){
+            UsuarioDO N_Apv = usu_N.buscarPorID(membroN_Apv.getUSUid());
+            String Nome = N_Apv.getNome();
+
             %>
-                    <%
-                        if (membroN_Apv.getClassificacao()==0){
-                    %>
-                    <tr>
-                        -><%=messageApv %> <a href = "Perfil.jsp?NotId=<%=membroN_Apv.getId()%>&Excluir=1">[X]Aprovar!</a> <br>
-                    </tr>
-                    <%
-                        }
-                    }
-                    %>
-                </table>
+               <form action="AprovarMembro.jsp">
                 
-            </td>
-        </tr>
+               <input type="checkbox" name="<%=membroN_Apv.getUSUid()%>" value="1"> <%=Nome%> <br>
             
+        <%}%>
+        
+    
+    <input type="submit" value="Submit">
+    </form>
+    
+    <%if(request.getParameter("submit")!=null){
+        for(MembroDO membros:ListaN_Apv){
+            if(request.getParameter("membro.getUSUid()")== "1"){
+                %>Deu certo porra<%
+            }
+        }
+    }%>
+    
+<%}else{
+
+%>  <h1> <center> Página em Branco <center> </h1>  <%
+
+}
+
+
+
+%>
             
+             
