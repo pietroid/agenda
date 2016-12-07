@@ -31,7 +31,7 @@ public class NotificacaoGeral {
         }
         return false;
     } // incluir
-    public boolean excluir (NotificacaoGeralDO com) throws Exception{
+    public boolean excluir (int com) throws Exception{
         
         Transacao tr = new Transacao();
         try {
