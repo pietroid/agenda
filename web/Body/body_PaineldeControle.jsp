@@ -70,13 +70,13 @@
 <th colspan="2">Notificações</th>
 <tr>
   <td><a href="/agenda/Problemas.jsp"  target="_top"><font size="3" >Problemas do Sistema</font></a></td>
-  <td><a href="/agenda/Solicitações.jsp"  target="_top"><font size="3">Solicitações</font></a></td>
+  <td><a href="/agenda/AceitarGE.jsp"  target="_top"><font size="3">Solicitações</font></a></td>
 </tr>
 </table>
  <BR><BR><BR><BR>
 <table align="left" border=1 cellpadding=10 width=500>
 <th colspan="2">Pontos de Interesse</th>    
- <BR><th <p><font size="2" face="verdana"><a href="/agenda/body_GE.jsp">Clique aqui
+ <BR><th <p><font size="2" face="verdana"><a href="/agenda/ListaPOI.jsp">Clique aqui
  para ver uma lista com todos os Pontos de Interesse</a></font></p> </th>    
 <tr>
   <td><a href="/agenda/Cadastro_POI.jsp"  target="_top"><font size="3">Cadastrar Ponto de Interesse</font></a></td>
