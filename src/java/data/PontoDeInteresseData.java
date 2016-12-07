@@ -84,7 +84,8 @@ public class PontoDeInteresseData {
      ps.setString(3, PontoDeInteresse.getEndereco());
      ps.setString(4, PontoDeInteresse.getLink_para_maps());
      ps.setString(5, PontoDeInteresse.getPasta_de_imagens());
-     
+     ps.setInt(6, PontoDeInteresse.getId());
+
      int result = ps.executeUpdate(); 
     } // atualizar
     
