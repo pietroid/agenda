@@ -254,6 +254,10 @@
 </table>
     
 <center>
+<p><font size="2" face="verdana"><a href="body_excluirMembro.jsp">Clique aqui
+ para remover sua conta</a></font></p>
+
+<%@include  file="Calendario/body_Calendario.jsp"%>
     
 <%
    } 

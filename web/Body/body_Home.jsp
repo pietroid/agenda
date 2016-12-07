@@ -19,7 +19,7 @@
     if(session.getAttribute("Usuario")!= null) //HOME LOGADO
     {
  UsuarioDO usuario = (UsuarioDO)session.getAttribute("Usuario");
- String nome = usuario.getNome();
+ String nome = usuario.getNome(); 
 %>
 
 <h1><center> Home </center> </h1>
