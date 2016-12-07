@@ -26,6 +26,23 @@ public class Usuario {
         }
         return false;
     } // incluir
+    
+    public boolean atualizar(UsuarioDO usuario) throws Exception {
+        Transacao tr = new Transacao();
+	try{
+            // inserir validacoes de regras de negocio
+            tr.begin();
+                UsuarioData usuarioData = new UsuarioData();
+                usuarioData.atualizar(usuario, tr);
+            tr.commit();
+            return true;
+	} catch (Exception e) {
+            tr.rollback();
+            System.out.println("Erro ao atualizar " + usuario.getId());
+            e.printStackTrace();
+	}
+	return false;
+    } // atualizar
     public boolean excluir (UsuarioDO usuario) throws Exception{
         
         Transacao tr = new Transacao();
@@ -43,7 +60,7 @@ public class Usuario {
             e.printStackTrace();
         }
         return false;
-    } // incluir
+    } // excluir
     public boolean verificar(UsuarioDO usuario) throws Exception{
         //Regras de negocio
         if(usuario == null || usuario.getUsername() == null){
