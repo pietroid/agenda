@@ -17,29 +17,32 @@
 
 
 <center>
-<%  
+<% 
     if(request.getParameter("PontoDeInteresse") != null){
         
         PontoDeInteresseDO PontoDeInteresse = new PontoDeInteresseDO();
         PontoDeInteresse PontoDeInteressetr = new PontoDeInteresse();
-        PontoDeInteresse = PontoDeInteressetr.buscarnome(request.getParameter("PontoDeInteresse"));
+        PontoDeInteresse = PontoDeInteressetr.buscar(Integer.parseInt(request.getParameter("PontoDeInteresse")));
         
          %>
 <FORM action="AlterarPOI.jsp" method="post">
     Nome do ponto de interesse:<BR>
-    <INPUT type="text" name="nome"><BR><BR>
+    <INPUT type="text" name="nome" value="<%=PontoDeInteresse.getNome()%>"><BR><BR>
     Descrição:<BR>
-    <INPUT type="text" name="descrição"><BR><BR>
+    <INPUT type="text" name="descrição" value="<%=PontoDeInteresse.getDescrição()%>"><BR><BR>
     Endereço:<BR>
-    <INPUT type="text" name="endereço"><BR><BR>
+    <INPUT type="text" name="endereço" value="<%=PontoDeInteresse.getEndereço()%>"><BR><BR>
     Link para Google Maps:<BR>
-    <INPUT type="text" name="link_para_maps"><BR><BR>
+    <INPUT type="text" name="link_para_maps" value="<%=PontoDeInteresse.getLink_para_maps()%>"><BR><BR>
     Pasta de Imagens:<BR>
-    <INPUT type="text" name="pasta_de_imagens"><BR><BR>
+    <INPUT type="text" name="pasta_de_imagens" value="<%=PontoDeInteresse.getPasta_de_imagens()%>"><BR><BR>
 <INPUT type="submit" name="submit" value= "Salvar Mudanças">   
 <INPUT type="reset" name="reset" value= "Reset">
 </FORM>
-<%if(request.getParameter("submit")=="Salvar Mudanças" ) { 
+<%
+    
+    
+    if(request.getParameter("submit")=="Salvar Mudanças" ) { 
  
 if (request.getParameter("nome")!= null) PontoDeInteresse.setNome(request.getParameter("nome"));
 if (request.getParameter("descrição")!= null) PontoDeInteresse.setDescrição(request.getParameter("descrição"));
@@ -52,9 +55,11 @@ if (request.getParameter("pasta_de_imagens")!= null) PontoDeInteresse.setPasta_d
 boolean update = PontoDeInteressetr.atualizar(PontoDeInteresse);
 
  %>
- <% }else pageContext.forward("ListaPOI.jsp");     
+ <% }else {pageContext.forward("ListaPOI.jsp");}     
     
 %>
+
+
 </center>
 </body>
 </html>
