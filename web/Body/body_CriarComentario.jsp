@@ -15,7 +15,6 @@
 <html>
     <body BGCOLOR = #f2f2f2>
         <font face="verdana">
-        <body BGCOLOR = #f2f2f2>
         <%
             Evento eventotn = new Evento();
             EventoDO evento = new EventoDO();
@@ -71,8 +70,6 @@
                 }
             }
             else pageContext.forward("index.jsp");
-            %>
-
-        </center>    
+            %> 
     </body>
 </html>
