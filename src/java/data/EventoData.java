@@ -127,6 +127,28 @@ public class EventoData {
         return Items;
     }    
     
+    public List<EventoDO> retornaTodosEventos(Transacao tr) throws Exception {
+        Connection con = tr.obterConexao();
+        String sql = "select * from evento";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+        List<EventoDO> Items = new ArrayList<EventoDO>();
+        while (rs.next()) {
+            EventoDO evento = new EventoDO();
+            evento.setId(rs.getInt("EVEid"));
+            evento.setNome(rs.getString("EVEnome"));
+            evento.setDescricao(rs.getString("EVEdescricao"));
+            evento.setTipo(rs.getString("EVEtipo"));
+            evento.setHoraInicial(rs.getTime("EVEhorario_de_inicio"));
+            evento.setHoraFinal(rs.getTime("EVEhorario_de_termino"));
+            evento.setData(rs.getDate("EVEdata"));
+            evento.setMacroEvento(rs.getInt("EVEmacro_evento")==1);
+            evento.setPastaimagens(rs.getString("EVEpasta_de_imagens"));
+            evento.setAvaliação(rs.getInt("EVEavaliacao"));
+            Items.add(evento);
+        }
+        return Items;
+    }
     private int boolToInt(boolean value){
         if(value){
             return 1;
