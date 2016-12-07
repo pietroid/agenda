@@ -28,7 +28,6 @@ GE getn = new GE();
                            if (ge.getImagem() != null){
                                imagem = "/agenda/PastadeImagens/" + ge.getImagem();
                            }
-                           System.out.println(imagem);
                 %>     
                 <tr>
                     <td width=10% height=150 ><center><iframe src=<%= imagem %> scrolling= no width=120 height=150 ></iframe></center>
