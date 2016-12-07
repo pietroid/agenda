@@ -56,11 +56,25 @@
                 MembroDO b = Lista.get(i);
                 if (a == b.getGEid()){
                     relacaomembro = 1;
+                    if (b.getAprovado()==1){
+                        relacaomembro = 2;
+                    }
                 }
             }
         }
     
-    if(relacaomembro==false){
+    if(relacaomembro==0){
+%>
+        <BR>
+        <table align="right" border=1 cellpadding=10 width=200>
+            <tfoot>
+                <tr><th><a href="" target="_top">Aguardando aprovação</a></th></tr>
+            </tfoot>
+        </table>
+        <BR><BR><BR><BR>
+<%
+    }
+    if(relacaomembro==1){
 %>
         <BR>
         <table align="right" border=1 cellpadding=10 width=200>
@@ -69,8 +83,8 @@
             </tfoot>
         </table>
         <BR><BR><BR><BR>
-<%
-    }
+        <%
+}
 }
 
 %>        
