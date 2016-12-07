@@ -3,6 +3,8 @@
     Created on : Dec 6, 2016, 10:57:18 PM
     Author     : audiz_000
 --%>
+<%@page import="transacoes.QG"%>
+<%@page import="transacoes.Acontece"%>
 <%@page import="java.util.*" %>
 <%@page import="transacoes.PontoDeInteresse" %>
 <%@page import="data.PontoDeInteresseDO" %>
@@ -37,13 +39,16 @@
                             PontoDeInteresse PontoDeInteressetr = new PontoDeInteresse();
                             PontoDeInteresse = PontoDeInteressetr.buscarnome(request.getParameter("nome"));
                             if (PontoDeInteresse != null) {
-                                
-                            }
-}
-                            
+                                Acontece Acontecetr = new Acontece();
+                                QG QGtr = new QG();
+                                PontoDeInteressetr.excluir(PontoDeInteresse);
+                                QGtr.excluir(PontoDeInteresse);
+                                Acontecetr.excluir(PontoDeInteresse); %>
+                                <center>Ponto de interesse excluído!</center>
+                            <% } 
                         }
                     }
                 }
-            }
+            } %>
     </body>
 </html>
