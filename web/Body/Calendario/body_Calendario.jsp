@@ -19,13 +19,12 @@
         border: 1px solid #ddd;
         padding: 8px;
     }
-    tr:nth-child(even){background-color: #f2f2f2;}
     #CalendarioGeral td:hover {background-color: #ddd;}
     th {
         padding-top: 12px;
         padding-bottom: 12px;
         text-align: center;
-        background-color: #4CAF50;
+        background-color: #333333;
         color: white;
     }
     
@@ -52,9 +51,10 @@
 <div>
 <table align="center" id="CalendarioGeral">
   <tr>
-    <td width="100%" colspan="7" align = "center">
-      <font size="5">
+    <td width="100%" colspan="7" align = "center" bgcolor="ffffff">
+        <font size="5"><b>
       <%=monthName%>, <%=intYear%>
+      </b>
       </font>
     </td>
   </tr>
@@ -83,11 +83,17 @@
   int firstday = 1;
   int lastday = 0;
   int int_actualMonth = currentMonthInt + 1;
-  int eventos_max = 0;
   String str_actualMonth = new Integer(int_actualMonth).toString();
   String str_lastday = "";
   String str_firstday = "";
   java.sql.Date date_tempday;
+  float Xmax = 0;
+  float Xmin = 0;
+  float Xmed = 0;
+  float Ymax = 0;
+  float Ymin = 0;
+  float Ymed = 0;
+  
   
   
   //CALCULA O PRIMEIRO E ÚLTIMOS DIAS DO MÊS -----------------
@@ -133,11 +139,19 @@
         }  
     }
   
-    for(int k=0; k<40; k++){ // Printa eventos[k]
-        if(eventos[k]>eventos_max){
-            eventos_max = eventos[k];
-        }
+    //XMÁX e XMIN
+    for(int k=0; k<40; k++){
+            if((float)eventos[k]>Xmax){
+                Xmax = (float) eventos[k];
+            }
+            Xmin = Xmax;
+            if((float)eventos[k]<Xmin){
+                Xmin = (float) eventos[k];
+            }
     }
+    
+    Ymin = 0f; // BRILHO MÍNIMO
+    Ymax = 1.0f; // BRILHO MÁXIMO
     
     float br;
     Color RGBColor;
@@ -150,23 +164,27 @@
     {
       localday = days[i][j];
       
+      Xmed = (float) eventos[localday];
+      
       if (localday < 10 && localday !=0){
           str_localdate = currentYearString + "-" + str_actualMonth + "-" + "0" + Integer.toString(localday) ;
-      } else if(localday!=0){
+      }
+      else if(localday >=10 && localday!=0){
               str_localdate = currentYearString + "-" + str_actualMonth + "-" + Integer.toString(localday);
-          }            
-      %><%
+      }
+      else{}
+
       if( days[i][j] == 0 )
       {
         %><td>&nbsp;</td><%
       }
       else
       {
-        br = 1/((float)(100/eventos_max)*(float)(eventos[localday]));//100 aqui é o espectro!
+        Ymed = Ymin + (Xmed - Xmin)/(Xmax - Xmin)*(Ymax - Ymin);
+        br = Ymed;  
 
-        RGBColor = Color.getHSBColor(0.12f, 0.57f, br);
-
-        hexColor = "#"+Integer.toHexString(RGBColor.getRGB()).substring(2);  
+        RGBColor = Color.getHSBColor(0.59f, br, 1f);
+        hexColor = "#"+Integer.toHexString(RGBColor.getRGB()).substring(2); 
 
         // Destaca o Dia de HOJE
         if( currentDayInt == days[i][j] && currentMonthInt == aMonth.getMonth() && currentYearInt == aMonth.getYear() )
