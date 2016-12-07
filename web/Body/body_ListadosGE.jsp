@@ -1,9 +1,7 @@
 <%@page import="java.util.List"%>
-<%@page import="transacoes.GE" %>
-<%@page import="data.GEDO" %>
-<%
-GE getn = new GE();
-%>
+<%@ page import="transacoes.GE" %>
+<%@ page import="data.GEDO" %>
+
 <html>
     <body BGCOLOR = #f2f2f2>
         <font face="verdana">
@@ -14,7 +12,9 @@ GE getn = new GE();
             Para não deixar a tabela feia, talvez seja bom verificar no programa em java se a imagem é 
             menor ou igual a a um tamanho (eu usei 120X150 pixels) ou mesmo pedir pro usuário fazer isso.
         </p>
+<%
 
+%>
         <center>
             <table align="center" border=1 cellpadding=10 width=1000>
                 <th>Imagem </th>
