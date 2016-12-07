@@ -47,8 +47,14 @@
                                 <center>Ponto de interesse excluído!</center>
                             <% } 
                         }
-                    }
+                    } 
                 }
-            } %>
+                else { %>
+                                <center>Você não tem permissão para isso.</center>
+                <% }
+            }
+            else { %>
+                                <center>Você não está logado.</center>
+            <% } %>                
     </body>
 </html>
