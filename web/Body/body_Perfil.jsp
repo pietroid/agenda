@@ -13,6 +13,26 @@
 
 
 <%
+    /*----------ALYSON-----------*/
+    //Rotina para excluir notificacao
+    int exclude;
+    exclude=0;
+    int IDToExclude;
+    IDToExclude = 0;
+    if (request.getParameter("Excluir")!=null){
+        exclude = Integer.parseInt(request.getParameter("Excluir"));
+    }
+    if (request.getParameter("NotId")!=null){
+        IDToExclude = Integer.parseInt(request.getParameter("NotId"));
+    }
+    NotificacaoGeral NotToExclude = new NotificacaoGeral();
+    if ((exclude==1)&&(IDToExclude>0)){
+        NotToExclude.excluir(IDToExclude);
+        IDToExclude = 0;
+        exclude = 0; 
+    } 
+    /*------------ALYSON-------*/
+    
  if(session.getAttribute("Usuario")!= null)
  {
     UsuarioDO usuario = (UsuarioDO)session.getAttribute("Usuario");
@@ -54,7 +74,7 @@
             LiderGE = 1;
         }
     }
-    /*-----ALYSON--------*/
+    
     //Notificacao para usuario ADM
 %>
     <p><font size="3" face="verdana">Notificações:</p>
@@ -71,7 +91,7 @@
                         if (notificacaoCanc.getClassificacao()==0){
                     %>
                     <tr>
-                        -><%=messageNotificacao %> <br>
+                        -><%=messageNotificacao %> <a href = "Perfil.jsp?NotId=<%=notificacaoCanc.getId()%>&Excluir=1">[X]Excluir!</a> <br>
                     </tr>
                     <%
                         }
@@ -93,7 +113,7 @@
                         if (notificacaoEVE.getClassificacao()==1){
                     %>
                     <tr>
-                        -><%=messageNotificacao %><br>
+                        -><%=messageNotificacao %> <a href = "Perfil.jsp?NotId=<%=notificacaoEVE.getId()%>&Excluir=1">[X]Excluir!</a><br>
                     </tr>
                     <%
                         }
@@ -116,7 +136,7 @@
                         if (notificacaoConf.getClassificacao()==2){
                     %>
                     <tr>
-                        -><%=messageNotificacao %><br>
+                        -><%=messageNotificacao %> <a href = "Perfil.jsp?NotId=<%=notificacaoConf.getId()%>&Excluir=1">[X]Excluir!</a><br>
                     </tr>
                     <%
                         }
@@ -139,7 +159,7 @@
                         if (notificacaoFeed.getClassificacao()==3){
                     %>
                     <tr>
-                        -><%=messageNotificacao %><br>
+                        -><%=messageNotificacao %> <a href = "Perfil.jsp?NotId=<%=notificacaoFeed.getId()%>&Excluir=1">[X]Excluir!</a><br>
                     </tr>
                     <%
                         }

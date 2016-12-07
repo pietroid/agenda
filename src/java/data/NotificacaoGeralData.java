@@ -29,11 +29,11 @@ public class NotificacaoGeralData {
         notificacaoGeral.setId(rs.getInt("LAST_INSERT_ID()"));
     }// incluir
 
-    public void excluir(NotificacaoGeralDO notificacaoGeral, Transacao tr) throws Exception {
+    public void excluir(int notificacaoGeralID, Transacao tr) throws Exception {
         Connection con = tr.obterConexao();
         String sql = "delete from notificacaoGeral where id = ?";
         PreparedStatement ps = con.prepareStatement(sql);
-        ps.setInt(1, notificacaoGeral.getId());
+        ps.setInt(1, notificacaoGeralID);
         int result = ps.executeUpdate();
     } // excluir
 
