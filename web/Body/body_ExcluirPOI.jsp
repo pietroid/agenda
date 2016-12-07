@@ -44,17 +44,17 @@
                                 PontoDeInteressetr.excluir(PontoDeInteresse);
                                 QGtr.excluir(PontoDeInteresse);
                                 Acontecetr.excluir(PontoDeInteresse); %>
-                                <center>Ponto de interesse excluído!</center>
+                                <center>Ponto de interesse excluído!</center> <BR>
                             <% } 
                         }
                     } 
                 }
                 else { %>
-                                <center>Você não tem permissão para isso.</center>
+                                <center>Você não tem permissão para isso.</center> <BR>
                 <% }
             }
             else { %>
-                                <center>Você não está logado.</center>
+                                <center>Você não está logado.</center> <BR>
             <% } %>                
     </body>
 </html>
