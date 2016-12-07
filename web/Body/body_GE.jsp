@@ -49,18 +49,18 @@
     if(session.getAttribute("Usuario")!= null){
         Membro GEsolicitar = new Membro();
         int a = ge.getId();
-        boolean igual = false;
+        int relacaomembro = 0;
         List<MembroDO> Lista = GEsolicitar.buscarPorUSUid(solicitar.getId());
         if (Lista != null){
             for(int i = 0; i < Lista.size(); i++){
                 MembroDO b = Lista.get(i);
                 if (a == b.getGEid()){
-                    igual = true;
+                    relacaomembro = 1;
                 }
             }
         }
     
-    if(igual==false){
+    if(relacaomembro==false){
 %>
         <BR>
         <table align="right" border=1 cellpadding=10 width=200>
