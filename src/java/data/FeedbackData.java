@@ -16,7 +16,7 @@ public class FeedbackData {
     
     public void incluir(FeedbackDO feedback, Transacao tr) throws Exception {
         Connection con = tr.obterConexao();
-        String sql = "insert into feedback (EVEid,USUid,mensagem,rating) values (?,?,?,?)";
+        String sql = "insert into feedback (EVEid,USERid,mensagem,rating) values (?,?,?,?)";
         PreparedStatement ps = con.prepareStatement(sql);      
         ps.setInt(1, feedback.getEveId());
         ps.setInt(2, feedback.getUsuId());

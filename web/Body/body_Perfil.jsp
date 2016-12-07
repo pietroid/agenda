@@ -35,11 +35,14 @@
 
 <h2><font face="verdana">Olá,<%=nome%>  </font><h2>
 <h2><font face="verdana"> Interesses </font><h2>
-<p><font size="2" face="verdana"><a href="GE.jsp">Clique aqui
+<%// adicionado link para preferencia%>
+<p><font size="2" face="verdana"><a href="Preferencia.jsp">Clique aqui
  para ver uma lista com todos os Grupos do seu interesse</a></font></p> 
 
 <p><font size="2" face="verdana"><a href="AltPass.jsp">Clique aqui
  para alterar sua senha</a></font></p>
+<p><font size="2" face="verdana" ><a href="ExcluirMembro.jsp">Clique aqui
+ para excluir sua conta</a></font></p>
 
 
 <%/*-----ALYSON--------*/
@@ -68,7 +71,7 @@
                         if (notificacaoCanc.getClassificacao()==0){
                     %>
                     <tr>
-                        <%=messageNotificacao %>
+                        -><%=messageNotificacao %> <br>
                     </tr>
                     <%
                         }
@@ -90,7 +93,7 @@
                         if (notificacaoEVE.getClassificacao()==1){
                     %>
                     <tr>
-                        <%=messageNotificacao %>
+                        -><%=messageNotificacao %><br>
                     </tr>
                     <%
                         }
@@ -113,7 +116,7 @@
                         if (notificacaoConf.getClassificacao()==2){
                     %>
                     <tr>
-                        <%=messageNotificacao %>
+                        -><%=messageNotificacao %><br>
                     </tr>
                     <%
                         }
@@ -136,7 +139,7 @@
                         if (notificacaoFeed.getClassificacao()==3){
                     %>
                     <tr>
-                        <%=messageNotificacao %>
+                        -><%=messageNotificacao %><br>
                     </tr>
                     <%
                         }

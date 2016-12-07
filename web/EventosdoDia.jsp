@@ -14,7 +14,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>George</title>
+
     <style>
     table {
         font-family: "Verdana";
@@ -39,12 +39,26 @@
         color: white;
     }
     </style>
+
+    <title>Poli Agenda</title>
 </head>
 <iframe src="Título\título.jpg" width="1350" height="150" frameBorder="0" scrolling="no"></iframe>
 <%@include  file="Menu/menu.jsp"%>
-<br>
 
-<table align="center">
+<% String str_ClickedDate =request.getParameter("str_ClickedDate");
+
+java.sql.Date date_ClickedDate = java.sql.Date.valueOf(str_ClickedDate);
+    
+Evento tre = new Evento();
+List<EventoDO> eventos_do_Dia=new ArrayList<EventoDO>();
+eventos_do_Dia = tre.buscarData(date_ClickedDate);
+if(eventos_do_Dia.isEmpty()){
+    %><center><font size="5"><b><br><br><br>Ainda não há eventos cadastrados nesse dia :(<br><br><br></b></font></center><%
+}
+else{
+%>
+    <br><br>
+    <table align="center">
   <tr>
       <th>Nome</th>
       <th>Descrição</th>
@@ -55,30 +69,22 @@
       <th>Data</th>
       <th>Avaliação</th>
   </tr>    
-
-<% String str_ClickedDate =request.getParameter("str_ClickedDate");
-
-%><%= str_ClickedDate %>---<%
-
-java.sql.Date date_ClickedDate = java.sql.Date.valueOf(str_ClickedDate);
-      
-
-Evento tre = new Evento();
-List<EventoDO> eventos_do_Dia=new ArrayList<EventoDO>();
-eventos_do_Dia = tre.buscarData(date_ClickedDate);
+    <%
 for (EventoDO evento_temp : eventos_do_Dia) { %>
-<tr>
-    <td align="center"><%=evento_temp.getNome()%></td>
-    <td align="center"><%=evento_temp.getDescricao()%></td>
-    <td align="center"><%=evento_temp.getTipo()%></td>
-    <td align="center"><%=evento_temp.getMacroEvento()%></td>
-    <td align="center"><%=evento_temp.getHoraInicial()%></td>
-    <td align="center"><%=evento_temp.getHoraFinal()%></td>
-    <td align="center"><%=evento_temp.getData()%></td>
-    <td align="center"><%=evento_temp.getAvaliação()%></td>
-</tr>    
-<%}%>
+    <tr>
+        <td align="center"><%=evento_temp.getNome()%></td>
+        <td align="center"><%=evento_temp.getDescricao()%></td>
+        <td align="center"><%=evento_temp.getTipo()%></td>
+        <td align="center"><%=evento_temp.getMacroEvento()%></td>
+        <td align="center"><%=evento_temp.getHoraInicial()%></td>
+        <td align="center"><%=evento_temp.getHoraFinal()%></td>
+        <td align="center"><%=evento_temp.getData()%></td>
+        <td align="center"><%=evento_temp.getAvaliação()%></td>
+    </tr>    
+    <%}
+}%>
 </table>
+    <br><br>
 
 <iframe src="Footer\footer.jsp" width="1350" height="200" frameBorder="0" scrolling="no">    
 </html>

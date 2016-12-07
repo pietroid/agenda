@@ -63,11 +63,12 @@
             String nome = usuariotn.buscarPorID(comentario.getUsuId()).getNome();
             %>
             
-            
+            <%if(comentario.getMensagem()!=null){%>
                 <tr>
                     <td width=10% height=50> <%= nome %>: <%= comentario.getMensagem() %></td>
                 </tr>
                 <%
+            }
         }
                 %>
         </table>
@@ -84,6 +85,7 @@
 <p align="center"> <b>O que você achou do evento? </b></p> <BR>
 <FORM action="/agenda/Feedback.jsp" method="post">  
     <center><INPUT type="submit" name="deixar_feedback" value="Deixe seu feedback" ></center> <BR>
+    <input type="hidden" name="id_eve" value="<%=evento.getId()%>">
 </form>
 <!---------------------------FIM DO REDICERIONADOR PARA FEEDBACK.JSP-------------------------------->
 <!-------------------------------------------------------------------------------------------------->
@@ -91,7 +93,7 @@
         <BR>
         
 
-        <p align="right"><a href="Calendário.jsp" target="_top">Clique aqui para voltar ao calendário</a></p>
+        <p align="right"><a href="Calendario.jsp" target="_top">Clique aqui para voltar ao calendário</a></p>
         <BR><BR><BR><BR>
         
         
@@ -115,8 +117,7 @@
         <p align="center"> <b>Avalie o evento </b></p> <BR>
 <FORM action="/agenda/Avaliar.jsp" method="post">  
     <center><INPUT type="submit" name="deixar_feedback" value="Avaliar" ></center> <BR>
-    <input type =" hidden" name =" id" value = <%=evento.getId()%>>
-           
+    <INPUT type ="hidden" name ="id" value = "<%=evento.getId()%>">
 </form>
     <%
     }

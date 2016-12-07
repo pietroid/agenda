@@ -4,14 +4,12 @@
     Author     : Lucas Freitas
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
 <html>
 <head>
-<title>George</title>
+<title>Poli Agenda</title>
 </head>
-<iframe src="TÃ­tulo\tÃ­tulo.jpg" width="1350" height="150"></iframe><BR>
-<%@include file="Menu\menu.jsp" %> <BR>
-<%@include file="Body\body_AlterarPOI.jsp"%><BR>
-<iframe src="Footer\footer.jsp" width="1350" height="200">
+<%@include file="Título/Título.jsp" %>
+<%@include  file="Menu/menu.jsp"%>
+<%@include  file="Body/body_AlterarPOI.jsp"%>
+<%@include  file="Footer/footer.jsp"%>
 </html>

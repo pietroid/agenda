@@ -37,13 +37,13 @@
     lista = seguindotn.pesquisarPorUSUid(usuario.getId());
     if(lista != null){
         if (lista.size() !=0){ 
-           %><p>Você segue estes eventos:</p><br><%}
-        else{ %><p>Você não segue evento algum!</p><br><% }
-%>
-        <center>
-        <table align="center" border=1 cellpadding=10 width=1000>
+           %><p>Você segue estes eventos:</p><br>
+             <center>
+             <table align="center" border=1 cellpadding=10 width=1000>
             <th> Evento <th>Grupo de extensão
-<%            
+           <%}
+        else{ %><p>Você não segue evento algum!</p><br><% }
+            
         List<EventoDO> lista_eventos = new ArrayList<EventoDO>();
         List<GEDO> lista_GE = new ArrayList<GEDO>();
         for(int i=0; i < lista.size(); i++) {
@@ -72,18 +72,22 @@
 %>
         </table>
         </center>
-<p>Os seus próximos eventos nessa semana são:</p><br>
+<%if (lista.size() !=0){ %>
+    <p>Os seus próximos eventos nessa semana são:</p><br>
         <center>
         <table align="center" border=1 cellpadding=10 width=1000>
-            <th> Evento <th>Grupo de extensão
-<%  for(int i=0; i < lista.size(); i++){
-        EventoDO evento = lista_eventos.get(i);
+            <th> Evento <th>Grupo de extensão <th> Data
+<%}else %><p>Você não tem eventos essa semana!</p><br> <% 
+
+    for(int i=0; i < lista.size(); i++){
+        EventoDO eventoParte = lista_eventos.get(i);
         GEDO ge = lista_GE.get(i);
+        
 %>
         <TR>
-            <TD><center><a href="Evento.jsp?evento = <%=evento.getNome()%>"
-                                ><<%=evento.getNome()%></a><center> </TD>
+            <TD><center><a href="Evento.jsp?evento = "<%=eventoParte.getNome()%>><%=eventoParte.getNome()%></a></center> </TD>
             <TD><center><a href="GE.jsp?GE = "<%=ge.getNome()%>><%=ge.getNome()%></a></center> </TD>
+            <TD><center><%=eventoParte.getData()%></center> </TD>
 
         </TR>
 <%        
@@ -106,15 +110,15 @@
    }else{ //HOME DESLOGADO
 
  %>
- <h1><center> Home </center> </h1>
- <h2><font face="verdana"> Grupos de extensão (PARA TESTAR HOME ESPECIFICA LOGAR COM: alex sen)</font><h2>
+ <h1><center> Home  (PARA TESTAR HOME ESPECIFICA LOGAR COM: alex sen)</center> </h1>
+ <h2><font face="verdana"> Grupos de extensão</font><h2>
 <p><font size="2" face="verdana"><a href="/Agenda/ListadosGE.jsp" target="_top">Clique aqui
  para ver uma lista com todos os Grupos de Extensão</a></font></p> 
 
 <%    
    }
 %>
-<p>Calendário</p>
+<p></p>
 <%@include  file="Calendario/body_Calendario.jsp"%>
 
 </font>

@@ -64,6 +64,25 @@ public class PontoDeInteresse {
 	}
 	return null;
     } // buscar por nome
+        
+    public boolean excluir (PontoDeInteresseDO PontoDeInteresse) throws Exception{
+        
+        Transacao tr = new Transacao();
+        try {
+            
+            tr.begin();
+                PontoDeInteresseData point = new PontoDeInteresseData();
+                point.excluir(PontoDeInteresse, tr);
+            tr.commit();
+            return true;
+       
+        } catch(Exception e) {
+            tr.rollback();
+            System.out.println("Erro ao excluir ");
+            e.printStackTrace();
+        }
+        return false;
+    } // excluir
     
       public boolean atualizar(PontoDeInteresseDO PontoDeInteresse) throws Exception {
         Transacao tr = new Transacao();
