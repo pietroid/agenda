@@ -13,8 +13,8 @@
  
     
 GE ge= new GE();
-int id = Integer.parseInt(request.getParameter("idGE"));
-GEDO GE = ge.buscar(id);
+int id =Integer.parseInt(request.getParameter("idGE"));
+ge.buscar(id);
 %>
 
     <head>
@@ -58,13 +58,9 @@ GEDO GE = ge.buscar(id);
     
     
     <%
-        if(request.getParameter("submit")!=null){
-         if(request.getParameter("imagem1")!=null){
-            GE.setImagem("");
-         }
-        }   
+       
         
-        else{
+        
     %>
 </head>
     <br>
@@ -73,13 +69,13 @@ GEDO GE = ge.buscar(id);
        Imagens
   </th>
   <tr>
-    <td><img src ="PastadeImagens/GrupodeExtensao1/Grupodeextensao1-imagem1.PNG" align="right" width = 250 height =" 300" >
+    <td><img src ="/agenda/PastadeImagens/caneca.png" align="right" width = 250 height =" 300" >
 </td>
-    <td><img src ="PastadeImagens/GrupodeExtensao1/Grupodeextensao1-imagem1.PNG" align="right" width = 250 height =" 300" >
+    <td><img src ="/agenda/PastadeImagens/livro.png" align="right" width = 250 height =" 300" >
 </td>
-<td><img src ="PastadeImagens/GrupodeExtensao1/Grupodeextensao1-imagem1.PNG" align="right" width = 250 height =" 300" >
+<td><img src ="/agenda/PastadeImagens/social.png" align="right" width = 250 height =" 300" >
 </td>
-<td><img src ="PastadeImagens/GrupodeExtensao1/Grupodeextensao1-imagem1.PNG" align="right" width = 250 height =" 300" >
+<td><img src ="/agenda/PastadeImagens/capacete.png" align="right" width = 250 height =" 300" >
 </td>
   </tr>
   
@@ -99,7 +95,4 @@ GEDO GE = ge.buscar(id);
   </tfoot>
      
 </table>
-     <%
-}
-
-%>
+     
