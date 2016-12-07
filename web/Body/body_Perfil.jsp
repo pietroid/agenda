@@ -106,7 +106,7 @@
     <%for (MembroDO membro_temp : lmadm) {%>
     <tr>
         <% ge = gtr.buscar(membro_temp.getGEid()); %>
-        <td align="center"><font face="verdana" size="3"><a href="GE.jsp"><%=ge.getNome()%></a></font></td>
+        <td align="center"><font face="verdana" size="3"><a href="GE.jsp?GE=<%= ge.getId()%>"><%=ge.getNome()%></a></font></td>
     </tr>
     </table>
     <%}
