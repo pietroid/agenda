@@ -35,8 +35,10 @@ else{
         Feedback mtn = new Feedback();
         m.setMensagem(request.getParameter("message"));
         m.setUsuId(usuario.getId());
+        m.setEveId(evento.getId());
         m.setRating(Integer.parseInt(request.getParameter("nota")));
         if (mtn.incluir(m)){
+%> -------------------------------------------------------------------------------------<%
             pageContext.forward("PaineldeControle.jsp");
         }
     }%>
@@ -61,10 +63,7 @@ else{
   <center><INPUT type="submit" name="Enviar_Feedback" value="Enviar" ></center> <BR>
   </form>
     
-    <%}%>
-   
-    
-    
+<%}%>
     </font>
     </body>
     </html>
