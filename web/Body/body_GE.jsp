@@ -1,5 +1,5 @@
-<%@page import="java.util.ArrayList"%>
-<%@page import="java.util.List"%>
+<%@page  import="java.util.ArrayList"%>
+<%@page  import="java.util.List"%>
 <%@ page import="transacoes.GE" %>
 <%@ page import="data.GEDO" %>
 <%@ page import="transacoes.Evento" %>
