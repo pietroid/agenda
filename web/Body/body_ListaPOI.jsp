@@ -7,7 +7,11 @@
 <%@page import="java.util.List"%>
 <%@ page import="transacoes.PontoDeInteresse" %>
 <%@ page import="data.PontoDeInteresseDO" %>
+<%@page import="java.lang.Integer"%>
 
+<%
+PontoDeInteresse getn = new PontoDeInteresse();
+%>
 <html>
 <body BGCOLOR = #f2f2f2>
 <font face="verdana">
@@ -17,22 +21,21 @@
 
 <center>
 <table align="center" border=1 cellpadding=10 width=1000>
-    <th>Nome <th>Descrição
+    <th>Nome </th>
+    <th>Descrição </th>
 <%   
    
    PontoDeInteresse tr= new PontoDeInteresse();
-   List<PontoDeInteresseDO> Lista = tr.ListarPOI();
+   List<PontoDeInteresseDO> Lista = getn.ListarPOI();
+   for(int i = 0; i < Lista.size(); i++){
+                       PontoDeInteresseDO li = Lista.get(i);
     
-   for(PontoDeInteresseDO ponto: Lista){
-       String nome = ponto.getNome();
-       String descricao = ponto.getDescrição();
-       int id   = ponto.getId();
  %>    
 <tr>
-            <td><center><a href="../Body/body_ListaPOI.jsp" <% session.setAttribute("PontoDeInteresseDO", id); %>><%=nome%></a><center>
-            <td><center><a href="../Body/body_ListaPOI.jsp" <% session.setAttribute("PontoDeInteresseDO", id); %>><%=descricao%></a><center>
+            
+            <td><center><a href="AlterarPOI.jsp?PontoDeInteresse=<%= li.getId()%>"><%= li.getNome() %></a></center>
+            <td><center><%= li.getDescricao() %></center>
 </tr>
-
 <%
    }
 %>
@@ -51,8 +54,9 @@
     {
         
         %>
-        <FORM action="body_Cadastro_POI.jsp" method="post">
-        <INPUT type="submit" name="submit3" value="Cadastrar">    
+        <FORM action="Cadastro_POI.jsp" method="post">
+        <INPUT type="submit" name="submit3" value="Cadastrar"> 
+        </form>
 
 <%    
    }else{ //HOME DESLOGADO
@@ -60,8 +64,9 @@
  %>
  <BR>
         Você precisar Logar antes
-        <FORM action="body_LoginOut.jsp" method="post">
-        <INPUT type="submit" name="submit2" value="Logar">    
+        <FORM action="LoginOut.jsp" method="post">
+        <INPUT type="submit" name="submit2" value="Logar">  
+        </form>
  
  
  
@@ -69,6 +74,6 @@
    }
 %>
     
-    
+</center>
 </body>
 </html>
