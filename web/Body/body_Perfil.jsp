@@ -111,7 +111,7 @@
                         if (notificacaoEVE.getClassificacao()==1){
                     %>
                     <tr>
-                        -><%=messageNotificacao %><br>
+                        -><%=messageNotificacao %> <a href = "Perfil.jsp?NotId=<%=notificacaoEVE.getId()%>&Excluir=1">[X]Excluir!</a><br>
                     </tr>
                     <%
                         }
@@ -134,7 +134,7 @@
                         if (notificacaoConf.getClassificacao()==2){
                     %>
                     <tr>
-                        -><%=messageNotificacao %><br>
+                        -><%=messageNotificacao %> <a href = "Perfil.jsp?NotId=<%=notificacaoConf.getId()%>&Excluir=1">[X]Excluir!</a><br>
                     </tr>
                     <%
                         }
@@ -157,7 +157,7 @@
                         if (notificacaoFeed.getClassificacao()==3){
                     %>
                     <tr>
-                        -><%=messageNotificacao %><br>
+                        -><%=messageNotificacao %> <a href = "Perfil.jsp?NotId=<%=notificacaoFeed.getId()%>&Excluir=1">[X]Excluir!</a><br>
                     </tr>
                     <%
                         }
