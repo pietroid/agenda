@@ -63,5 +63,23 @@ public class ProblemaData {
         problema.setMensagem(rs.getString("mensagem"));
         return problema;
     } // buscar
- 
+    
+    
+     public List<ProblemaDO> buscarTodos(Transacao tr) throws Exception {
+        Connection con = tr.obterConexao();
+        String sql = "select * from problema";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+        List<ProblemaDO> Items = new ArrayList<ProblemaDO>();
+        while (rs.next()) {
+            ProblemaDO i = new ProblemaDO();
+           i.setId (rs.getInt("id"));
+            i.setMensagem (rs.getString("mensagem"));
+            i.setData(rs.getDate("datareport"));
+            i.setUserId(rs.getInt("USERid"));
+              
+            Items.add(i);
+        }
+        return Items;
+    }    
 }

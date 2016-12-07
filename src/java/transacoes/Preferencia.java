@@ -50,6 +50,25 @@ public class Preferencia {
         return false;
     }
     
+    public boolean excluirid (int id) throws Exception{
+        
+        Transacao tr = new Transacao();
+        try {
+            
+            tr.begin();
+                PreferenciaData a = new PreferenciaData();
+                a.excluirid(id, tr);
+            tr.commit();
+            return true;
+       
+        } catch(Exception e) {
+            tr.rollback();
+            System.out.println("Erro ao excluir");
+            e.printStackTrace();
+        }
+        return false;
+    }
+    
     public boolean atualizar (PreferenciaDO preferencia) throws Exception{
         
         Transacao tr = new Transacao();

@@ -11,9 +11,8 @@
 <h1> <center> Recuperação de Senha <center> </h1>
 <BR>
 <center>
-
-
-
+    
+    
 <%  UsuarioDO usuario = new UsuarioDO();
     Usuario u = new Usuario();
     String pergunta = "Usuário não cadastrado";
@@ -32,29 +31,8 @@ if (request.getParameter("submit") != null){
     <br>
     <INPUT type="submit" name="submit1" value= "Continuar">   
     <INPUT type="reset" name="reset" value= "Reset">
-<%  
-}else{%>
-<FORM action="Recsenha.jsp" method="post" align = "left">
-UserName:<INPUT type="text" name="username"  > 
-<br>
-<INPUT type="submit" name="submit" value= "Continuar">   
-<INPUT type="reset" name="reset" value= "Reset"><%
-}
-   
-if(request.getParameter("submit1")!= null){
-       UsuarioDO user=(UsuarioDO)session.getAttribute("Usuario");
-       String resposta = user.getResposta();
-       String senha = user.getSenha();
-        if(request.getParameter("resposta").equals(resposta)){
-            %>
-            <BR>
-            Sua senha é <%=senha%>
-            <%}
-     else{
-            %>
-            <BR>
-            Resposta errada
-            <%}
+    
+    <%
     }
 
     else{
@@ -81,6 +59,6 @@ if(request.getParameter("submit")== null){
     }
 
 %>
-</center>
+<center>
 </body>
 </html>
