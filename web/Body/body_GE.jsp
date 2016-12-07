@@ -44,9 +44,37 @@
                 <td width=10% height=150> <%= ge.getDescricao() %> </td>
             </tr>
         </table>
-
+<%  UsuarioDO solicitar = new UsuarioDO();
+    solicitar = (UsuarioDO)session.getAttribute("Usuario");
+    if(session.getAttribute("Usuario")!= null){
+        Membro GEsolicitar = new Membro();
+        int a = ge.getId();
+        boolean igual = false;
+        List<MembroDO> Lista = GEsolicitar.buscarPorUSUid(solicitar.getId());
+        if (Lista != null){
+            for(int i = 0; i < Lista.size(); i++){
+                MembroDO b = Lista.get(i);
+                if (a == b.getGEid()){
+                    igual = true;
+                }
+            }
+        }
+    
+    if(igual==false){
+%>
         <BR>
+        <table align="right" border=1 cellpadding=10 width=200>
+            <tfoot>
+                <tr><th><a href="SolicitarAdesao.jsp" target="_top">Solicitar adesão</a></th></tr>
+            </tfoot>
+        </table>
+        <BR><BR><BR><BR>
+<%
+    }
+}
 
+%>        
+        
         <table align="right" border=1 cellpadding=10 width=200>
             <tfoot>
                 <tr><th><a href="Fotos.jsp" target="_top">Mais Fotos</a></th></tr>
