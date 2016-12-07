@@ -23,7 +23,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     </head>
     <%
-        if (request.getParameter("nome") == null) {
+        if ((request.getParameter("nome") == null)&&(request.getParameter("submit")==null)) {
             UsuarioDO usuario = (UsuarioDO)session.getAttribute("Usuario");
            // UsuarioDO usuario = new UsuarioDO();
             List<PreferenciaDO> listaPreferencia = new ArrayList<PreferenciaDO>();
@@ -70,10 +70,7 @@
                         </tr>
                     </table>
     <%
-            }
-        else if (request.getParameter("nome").equals("Adicionar")) {
-            
-        }   
+        }
         else {
     %>
             <h1><center>Você não segue nenhum grupo de extensão!</center></h1>
@@ -89,22 +86,75 @@
     <%
         }
     }
-    else if (request.getParameter("nome") == "Adicionar"){
-        
+    else if (request.getParameter("nome").equals("Adicionar") && request.getParameter("submit") == null) {
+        UsuarioDO usuario = (UsuarioDO)session.getAttribute("Usuario");
+        // UsuarioDO usuario = new UsuarioDO();
+        List<PreferenciaDO> listaPreferencia = new ArrayList<PreferenciaDO>();
+        Preferencia preferenciatn = new Preferencia();
+        listaPreferencia = preferenciatn.pesquisarPorUser(usuario);
+        List<GEDO> listaGE = new ArrayList<GEDO>();
+        GE GEtn = new GE();
+        listaGE = GEtn.buscarTodos();
+        if (listaGE.size() == listaPreferencia.size()) {
     %>
+            <h1>
+                <center>Você já segue todos os grupos de extensão!</center>
+            </h1>
     <%
-    }    
-    else if (request.getParameter("nome") == "Editar"){
-
+        }
+        else {
     %>
-            
+            <form action="PreferenciaAdicionar.jsp">
+                <select name = "grupo">
     <%
-    }    
-    else if (request.getParameter("nome") == "Excluir"){
-
+            for (int i = 0; i < listaGE.size(); i++) {
+                if (preferenciatn.buscarAPartirDeGeId(listaGE.get(i).getId()) == null) {
+    %>           
+                    <option value="<%=listaGE.get(i).getId()%>"><%=listaGE.get(i).getNome()%></option>
+    <%
+                }
+            }
     %>
+                
+                </select>
+                <input type="submit" name="submit" value="Adicionar">
+            </form>
+    <%
+        }
+    %>
+
+    <%    
+    }    
+    else if (request.getParameter("nome").equals("Excluir")&&(request.getParameter("submit")==null)){
+%>Escolha o grupo de extensão que você quer excluir <%
+        Preferencia preferenciatn = new Preferencia();
+        UsuarioDO usuario = (UsuarioDO)session.getAttribute("Usuario");
+        List<PreferenciaDO> lista_preferencias = new ArrayList<PreferenciaDO>();
+        lista_preferencias = preferenciatn.pesquisarPorUser(usuario);
+%>
+        <form action="PreferenciaExcluir.jsp">
+            <select name ="grupo">
+<%      for(int i=0; i < lista_preferencias.size(); i++) {
+            PreferenciaDO preferencia = lista_preferencias.get(i);
+            int GEid = preferencia.getGEid();
+            GE getn = new GE();
+            GEDO ge = getn.buscar(GEid);            
+%>          
+            <option label="<%=ge.getNome()%>" value="<%=ge.getId()%>"><%=ge.getNome()%></option>
+<%}%>
+            </select>
+            <input type="submit" value="Excluir"></form>
     
 <% 
+    }
+    else if(request.getParameter("submit") != null){
+        %>oi <%= request.getParameter("grupo")%><%
+        int GEid = Integer.parseInt(request.getParameter("grupo"));
+        Preferencia preferenciatn = new Preferencia();
+        boolean update = preferenciatn.excluirid(GEid);
+        if (update){ %>Exclusão feita com sucesso!<%};
+        if(!update) { %>Houve uma falha na exclusão <% };
+
     }
 %>
 </html>

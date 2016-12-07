@@ -23,35 +23,36 @@
   
     for(MembroDO membroAdm:ListaGEAdm){
         List<MembroDO> ListaN_Apv = Lista.buscarPor_N_Apv(membroAdm.getGEid());
-        for(MembroDO membroN_Apv:ListaN_Apv){
-            UsuarioDO N_Apv = usu_N.buscarPorID(membroN_Apv.getUSUid());
-            //String Nome = N_Apv.getNome();
-            %>ID<%=membroN_Apv.getUSUid()%><%
-            if(N_Apv==null){
-                %>NULO<%
-            }else{
-                %>SIM<%
-            }
-            %>  <h1> <center> Página em verde escuro <center> </h1>  <%
-
+        UsuarioDO Lista_Nome = new UsuarioDO();
+        for(MembroDO membroN_Apv:ListaN_Apv)
+        {
+            int ID_N_Apv = ListaN_Apv.getId();
+            Lista_Nome = usu_N.buscarPorID(ID_N_Apv);
+        }%>
+    
+    <h2><font size="4" face="verdana"> - Solicitações:</font><h2>
+    <table align="cente" border=3    cellpadding = 10 width=1000   >
+        <tr>
+            <th>GE</th>
+            <td>
+                <table>
+            <%
+              for(UsuarioDO membroN_Apv:Lista_Nome){
+                  messageApv = membroN_Apv.getNome() ;
             %>
-            <%--   <form action="AprovarMembro.jsp">
+                    <%
+                        if (membroN_Apv.getClassificacao()==0){
+                    %>
+                    <tr>
+                        -><%=messageApv %> <a href = "Perfil.jsp?NotId=<%=membroN_Apv.getId()%>&Excluir=1">[X]Aprovar!</a> <br>
+                    </tr>
+                    <%
+                        }
+                    }
+                    %>
+                </table>
                 
-                <input type="checkbox" name=<%=Nome%> value=""> <%=Nome%> <br>
+            </td>
+        </tr>
             
-       --%> <%}%>
-        
-    <%}%>
-   <%-- <input type="submit" value="Submit">
-    </form>
-                
-    --%>
-<%}else{
-
-%>  <h1> <center> Página em Branco <center> </h1>  <%
-
-}
-
-
-
-%>
+            

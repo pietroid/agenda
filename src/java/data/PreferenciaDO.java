@@ -7,7 +7,7 @@ package data;
 
 /**
  *
- * @author Guilherme
+ * @author Alexandre
  */
 public class PreferenciaDO {
     private int id;
