@@ -45,9 +45,9 @@
                 <td width=10% height=150> <%= ge.getDescricao() %> </td>
             </tr>
         </table>
-<%  UsuarioDO solicitar = new UsuarioDO();
-    solicitar = (UsuarioDO)session.getAttribute("Usuario");
-    if(solicitar!= null){
+<%  if(session.getAttribute("Usuario")!= null){
+        UsuarioDO solicitar = new UsuarioDO();
+        solicitar = (UsuarioDO)session.getAttribute("Usuario");
         Membro GEsolicitar = new Membro();
         int a = ge.getId();
         int relacaomembro = 0;
@@ -56,14 +56,16 @@
             for(MembroDO b : Lista){
                 if (a == b.getGEid()){
                     relacaomembro = 1;
+                    out.println(b.getAprovado());
                     if (b.getAprovado()==1){
                         relacaomembro = 2;
+                        out.println("olar");
                     }
                 }
             }
         }
     
-    if(relacaomembro==0){
+    if(relacaomembro == 0){
 %>
         <BR>
         <table align="right" border=1 cellpadding=10 width=200>
@@ -74,7 +76,7 @@
         <BR><BR><BR><BR>
 <%
     }
-    if(relacaomembro==1){
+    if(relacaomembro == 1){
 %>
         <BR>
         <table align="right" border=1 cellpadding=10 width=200>
@@ -84,9 +86,8 @@
         </table>
         <BR><BR><BR><BR>
         <%
+    }   
 }
-}
-
 %>        
         
         <table align="right" border=1 cellpadding=10 width=200>
@@ -172,7 +173,7 @@ else{ pageContext.forward("index.jsp");}
         
         <%
         
-    }    
+            }    
         }
     
     

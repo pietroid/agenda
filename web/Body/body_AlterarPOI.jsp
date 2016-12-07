@@ -36,23 +36,23 @@
     <INPUT type="text" name="link_para_maps" value="<%=PontoDeInteresse.getLink_para_maps()%>"><BR><BR>
     Pasta de Imagens:<BR>
     <INPUT type="text" name="pasta_de_imagens" value="<%=PontoDeInteresse.getPasta_de_imagens()%>"><BR><BR>
-<INPUT type="submit" name="submit" value= "Salvar Mudanças">   
+<INPUT type="submit" name="submit" value= "Salvar">   
 <INPUT type="reset" name="reset" value= "Reset">
 </FORM>
 <%
     
     
-    if(request.getParameter("submit")=="Salvar Mudanças" ) { 
+    if(request.getParameter("submit")=="Salvar" ) { 
  
 if (request.getParameter("nome")!= null) PontoDeInteresse.setNome(request.getParameter("nome"));
 if (request.getParameter("descrição")!= null) PontoDeInteresse.setDescricao(request.getParameter("descrição"));
 if (request.getParameter("endereço")!= null) PontoDeInteresse.setEndereco(request.getParameter("endereço"));
 if (request.getParameter("link_para_maps")!= null) PontoDeInteresse.setLink_para_maps(request.getParameter("link_para_maps"));
 if (request.getParameter("pasta_de_imagens")!= null) PontoDeInteresse.setPasta_de_imagens(request.getParameter("pasta_de_imagens"));
-
+boolean update = PontoDeInteressetr.atualizar(PontoDeInteresse);
 }
 
-boolean update = PontoDeInteressetr.atualizar(PontoDeInteresse);
+
 
  %>
  <% }else {pageContext.forward("ListaPOI.jsp");}     

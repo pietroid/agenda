@@ -4,7 +4,18 @@
     Author     : Pedro
 --%>
 
+<%@page import="data.GEDO"%>
+<%@page import="java.util.List"%>
+<%@ page import="transacoes.GE" %>
+<%@page import="data.GEData"%>
 
+<%
+ 
+    
+GE ge= new GE();
+int id = Integer.parseInt(request.getParameter("idGE"));
+GEDO GE = ge.buscar(id);
+%>
 
     <head>
   <title>Calendario Geral</title>
@@ -44,6 +55,14 @@
     }
     
     </style>
+    
+    
+    <%
+        if(request.getParameter("submit")!=null){
+            
+        }
+        else{
+    %>
 </head>
     <br>
      <table align="center" border=3 cellpadding=10 width=100>
@@ -77,3 +96,7 @@
   </tfoot>
      
 </table>
+     <%
+}
+
+%>

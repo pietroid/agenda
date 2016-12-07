@@ -64,9 +64,16 @@ if (request.getParameter("submit") != null){
            membro.setADM(1);
            Membro tr = new Membro ();
            tr.incluir (membro);
+           int idGE = 0;
            %>
             Cadastro efetuado com sucesso!  <BR>
-            Espere a confirmação de um de nossos administradores.
+            Espere a confirmação de um de nossos administradores.<BR>
+            Agora escolha uma imagem para seu grupo! <BR>
+                <FORM action="FormularioImagens.jsp" method="post">
+                <INPUT type="submit" name="submitIma" value="Escolher Imagem">
+                <INPUT type="hidden" name="<%=idGE%>" value="novo.getId()">
+                </form>            
+            
         <%
     }catch(Exception e){
     %>
