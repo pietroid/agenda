@@ -65,7 +65,17 @@
             
             <%if(comentario.getMensagem()!=null){%>
                 <tr>
-                    <td width=10% height=50> <%= nome %>: <%= comentario.getMensagem() %></td>
+                    <td width=10% height=50> <%= nome %>: <%= comentario.getMensagem() %>
+                        <%
+                            if (usuario.getNome() != null){
+                                if (usuario.isSuperUser() == true || nome == usuario.getNome()){
+                                    %>
+                                    <a href="ExcluirComentario.jsp?comentario=<%= comentario.getId() %>" target="_top"><font size="2" color="#ff0000">Excluir comentário</font></a>
+                                    <%
+                                }
+                            }
+                        %>
+                    </td>
                 </tr>
                 <%
             }
@@ -121,7 +131,7 @@
 </form>
     <%
     }
-    else pageContext.forward("index.jsp");
+    //else pageContext.forward("index.jsp");
         %>    
     </body>
 </html>
