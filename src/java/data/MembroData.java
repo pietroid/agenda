@@ -96,11 +96,12 @@ public class MembroData {
         return false;
     }
     
-    public List<MembroDO> pesquisarPorGEid(int GEid, Transacao tr) throws Exception {
+    public List<MembroDO> pesquisarPorGEidADM(int GEid, Transacao tr) throws Exception {
         Connection con = tr.obterConexao();
-        String sql = "select * from agenda.Membro where GEid = ?";
+        String sql = "select * from agenda.Membro where GEid = ? and ADM = ?";
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setInt(1, GEid);
+        ps.setInt(2,1);
         ResultSet rs = ps.executeQuery();
         List<MembroDO> Items = new ArrayList<MembroDO>();
         while (rs.next()) {

@@ -70,10 +70,7 @@
                         </tr>
                     </table>
     <%
-            }
-        else if (request.getParameter("nome").equals("Adicionar")&&(request.getParameter("submit")==null)) {
-            
-        }   
+        }
         else {
     %>
             <h1><center>Você não segue nenhum grupo de extensão!</center></h1>
@@ -89,10 +86,44 @@
     <%
         }
     }
-    else if (request.getParameter("nome").equals("Adicionar")&&(request.getParameter("submit")==null)){
-        
+    else if (request.getParameter("nome").equals("Adicionar") && request.getParameter("submit") == null) {
+        UsuarioDO usuario = (UsuarioDO)session.getAttribute("Usuario");
+        // UsuarioDO usuario = new UsuarioDO();
+        List<PreferenciaDO> listaPreferencia = new ArrayList<PreferenciaDO>();
+        Preferencia preferenciatn = new Preferencia();
+        listaPreferencia = preferenciatn.pesquisarPorUser(usuario);
+        List<GEDO> listaGE = new ArrayList<GEDO>();
+        GE GEtn = new GE();
+        listaGE = GEtn.buscarTodos();
+        if (listaGE.size() == listaPreferencia.size()) {
     %>
+            <h1>
+                <center>Você já segue todos os grupos de extensão!</center>
+            </h1>
     <%
+        }
+        else {
+    %>
+            <form action="PreferenciaAdicionar.jsp">
+                <select name = "grupo">
+    <%
+            for (int i = 0; i < listaGE.size(); i++) {
+                if (preferenciatn.buscarAPartirDeGeId(listaGE.get(i).getId()) == null) {
+    %>           
+                    <option value="<%=listaGE.get(i).getId()%>"><%=listaGE.get(i).getNome()%></option>
+    <%
+                }
+            }
+    %>
+                
+                </select>
+                <input type="submit" name="submit" value="Adicionar">
+            </form>
+    <%
+        }
+    %>
+
+    <%    
     }    
     else if (request.getParameter("nome").equals("Excluir")&&(request.getParameter("submit")==null)){
 %>Escolha o grupo de extensão que você quer excluir <%

@@ -54,6 +54,7 @@ if (request.getParameter("submit") != null){
     grupo.setTel(request.getParameter("tel"));
     grupo.setDescricao(request.getParameter("descricao"));
     grupo.setFace(request.getParameter("face"));
+    grupo.setImagem("/agenda/PastadeImagens/caneca.png");
     try{
         grupo.setAno(Integer.parseInt(request.getParameter("ano"))); 
            GE novo = new GE();

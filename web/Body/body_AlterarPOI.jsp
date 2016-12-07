@@ -13,49 +13,67 @@
 <%@ page import="data.PontoDeInteresseDO" %>
 <%@ page import="java.util.Vector" %>
 <%@ page import="java.lang.Integer"%>
+<%@page import="transacoes.Usuario"%>
+<%@page import="java.sql.Date"%>
+<%@page import="data.UsuarioDO"%>
 
 
 
 <center>
 <% 
+    if(session.getAttribute("Usuario")!= null){
+    UsuarioDO usuario = (UsuarioDO)session.getAttribute("Usuario");
+    String nome = usuario.getNome();
+    if(usuario.isSuperUser()){
     if(request.getParameter("PontoDeInteresse") != null){
         
-        PontoDeInteresseDO PontoDeInteresse = new PontoDeInteresseDO();
+        PontoDeInteresseDO poi = new PontoDeInteresseDO();
         PontoDeInteresse PontoDeInteressetr = new PontoDeInteresse();
-        PontoDeInteresse = PontoDeInteressetr.buscar(Integer.parseInt(request.getParameter("PontoDeInteresse")));
+        poi = PontoDeInteressetr.buscar(Integer.parseInt(request.getParameter("PontoDeInteresse")));
         if(request.getParameter("submit")==null){
          %>
 <FORM action="AlterarPOI.jsp" method="post">
     Nome do ponto de interesse:<BR>
-    <INPUT type="text" name="nome" value="<%=PontoDeInteresse.getNome()%>"><BR><BR>
+    <INPUT type="text" name="nome" value="<%=poi.getNome()%>"><BR><BR>
     Descrição:<BR>
-    <INPUT type="text" name="descricao" value="<%=PontoDeInteresse.getDescricao()%>"><BR><BR>
+    <INPUT type="text" name="descricao" value="<%=poi.getDescricao()%>"><BR><BR>
     Endereço:<BR>
-    <INPUT type="text" name="endereco" value="<%=PontoDeInteresse.getEndereco()%>"><BR><BR>
+    <INPUT type="text" name="endereco" value="<%=poi.getEndereco()%>"><BR><BR>
     Link para Google Maps:<BR>
-    <INPUT type="text" name="link_para_maps" value="<%=PontoDeInteresse.getLink_para_maps()%>"><BR><BR>
+    <INPUT type="text" name="link_para_maps" value="<%=poi.getLink_para_maps()%>"><BR><BR>
     Pasta de Imagens:<BR>
-    <INPUT type="text" name="pasta_de_imagens" value="<%=PontoDeInteresse.getPasta_de_imagens()%>"><BR><BR>
+    <INPUT type="text" name="pasta_de_imagens" value="<%=poi.getPasta_de_imagens()%>"><BR><BR>
 <INPUT type="submit" name="submit" value= "Salvar Mudancas">   
 <INPUT type="reset" name="reset" value= "Reset">
+<input type="hidden" name="PontoDeInteresse" value="<%=request.getParameter("PontoDeInteresse")%>">
 </FORM>
-<%} else
+<%
+} else{
     
     
-    if(request.getParameter("submit").equals("Salvar Mudancas") ) { 
- 
-if (request.getParameter("nome")!= null) PontoDeInteresse.setNome(request.getParameter("nome"));
-if (request.getParameter("descricao")!= null) PontoDeInteresse.setDescricao(request.getParameter("descricao"));
-if (request.getParameter("endereco")!= null) PontoDeInteresse.setEndereco(request.getParameter("endereco"));
-if (request.getParameter("link_para_maps")!= null) PontoDeInteresse.setLink_para_maps(request.getParameter("link_para_maps"));
-if (request.getParameter("pasta_de_imagens")!= null) PontoDeInteresse.setPasta_de_imagens(request.getParameter("pasta_de_imagens"));
+    
+
+poi.setNome(request.getParameter("nome"));
+poi.setDescricao(request.getParameter("descricao"));
+poi.setEndereco(request.getParameter("endereco"));
+poi.setLink_para_maps(request.getParameter("link_para_maps"));
+poi.setPasta_de_imagens(request.getParameter("pasta_de_imagens"));
+
+if(PontoDeInteressetr.atualizar(poi)){ %>Alteração Efetuada Com Sucesso<%
+}else{%>Alteração não foi bem sucedida
+<%
+}
+
 
 }
-PontoDeInteressetr.atualizar(PontoDeInteresse);
 
-}else {pageContext.forward("ListaPOI.jsp");}     
-    
-%>
+}else {pageContext.forward("ListaPOI.jsp");}    
+} else{%>Você não possui acesso a esta página<%}
+} else {%>Você precisar Logar antes
+        <FORM action="LoginOut.jsp" method="post">
+        <INPUT type="submit" name="submit2" value="Logar">  
+        </form> <%
+}%>
 
 
 </center>

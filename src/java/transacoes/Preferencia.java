@@ -103,6 +103,22 @@ public class Preferencia {
 	return null;
     } // buscar
     
+    public PreferenciaDO buscarAPartirDeGeId(int Geid) throws Exception{
+        Transacao tr = new Transacao();
+	try{
+            tr.beginReadOnly();
+  	    PreferenciaData a = new PreferenciaData();
+	    PreferenciaDO i = a.buscar(Geid, tr);
+            tr.commit();
+            return i;
+	} catch (Exception e) {
+            tr.rollback();
+            System.out.println("Erro ao buscar" + Geid);
+            e.printStackTrace();
+	}
+	return null;
+    } // buscar
+        
     public List<PreferenciaDO> pesquisarPorUser (UsuarioDO user) throws Exception {
         Transacao tr = new Transacao();
 	try{
@@ -118,6 +134,23 @@ public class Preferencia {
 	}
 	return null;
     }
+    
+    public List<PreferenciaDO> pesquisarPorGEid (int GEid) throws Exception {
+        Transacao tr = new Transacao();
+	try{
+            tr.beginReadOnly();
+  	    PreferenciaData a = new PreferenciaData();
+	    List<PreferenciaDO> i = a.pesquisarPorGEid(GEid, tr);
+            tr.commit();
+            return i;
+	} catch (Exception e) {
+            tr.rollback();
+            System.out.println("Erro ao buscar");
+            e.printStackTrace();
+	}
+	return null; 
+    }
+    
     private boolean isEmpty(String s) {
         if (null == s)
             return true;
