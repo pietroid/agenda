@@ -74,6 +74,7 @@
             LiderGE = 1;
         }
     }
+    ListaMembro.is
     
     //Notificacao para usuario ADM
 %>

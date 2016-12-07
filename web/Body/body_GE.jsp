@@ -152,7 +152,7 @@
         %>
             <table align="center" border=1 cellpadding=10 width=500>
                 <tr>
-                    <td><a href="CriarEvento.jsp?GE=<%= ge.getNome() %>" target="_top"><font size="5" color="#ff0000">Criar evento</font></a></td>
+                    <td><a href="CriarEvento.jsp?GE=<%= ge.getId() %>" target="_top"><font size="5" color="#ff0000">Criar evento</font></a></td>
                 </tr>
             </table>
     <%      
