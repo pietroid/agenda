@@ -50,7 +50,7 @@
         if (usuario.getNome() != null){
             %>
                     <tfoot>
-                        <tr><th><a href="CriarComentario.jsp?evento=<%= evento.getNome() %>" target="_top">Comentar</a></th></tr>
+                        <tr><th><a href="CriarComentario.jsp?evento=<%= evento.getId() %>" target="_top">Comentar</a></th></tr>
                     </tfoot>
             <%
         }
@@ -65,7 +65,7 @@
             
             <%if(comentario.getMensagem().equals("")==false){%>
                 <tr>
-                    <td width=10% height=50> <%= nome %>: <%= comentario.getMensagem() %>
+                    <td width=10% height=50> <a href="Usuario.jsp?usuario=<%= comentario.getUsuId() %>" target ="_top"><%= nome %></a> : <%= comentario.getMensagem() %>
                         <%
                             if (usuario.getNome() != null){
                                 if (usuario.isSuperUser() == true || nome.equals(usuario.getNome())){
@@ -131,7 +131,7 @@
 </form>
     <%
     }
-    //else pageContext.forward("index.jsp");
+    else pageContext.forward("index.jsp");
         %>    
     </body>
 </html>
