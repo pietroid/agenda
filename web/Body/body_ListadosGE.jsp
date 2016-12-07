@@ -13,7 +13,7 @@
             menor ou igual a a um tamanho (eu usei 120X150 pixels) ou mesmo pedir pro usuário fazer isso.
         </p>
 <%
-
+GE getn = new GE();
 %>
         <center>
             <table align="center" border=1 cellpadding=10 width=1000>
