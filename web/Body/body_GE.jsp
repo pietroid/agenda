@@ -76,14 +76,6 @@
         <table align="center" border=1 cellpadding=10 width=200>
             <th><a href="Fotos.jsp" target="_top"><font color="FFFFFF">Mais Fotos</font></a></th>
         </table>
-        <br><br>
-        <table align="center" border=1 cellpadding=10 width=500>
-            <th>Descrição do grupo</th>
-            <tr>
-                <td width=10% height=150> <%= ge.getDescricao() %> </td>
-            </tr>
-        </table>
-        <br><br>
 <%  if(session.getAttribute("Usuario")!= null){
         UsuarioDO solicitar = new UsuarioDO();
         solicitar = (UsuarioDO)session.getAttribute("Usuario");
@@ -104,28 +96,35 @@
     
     if(relacaomembro == 0){
 %>
-        <BR>
+
         <table align="center" border=1 cellpadding=10 width=200>
             <tfoot>
                 <tr><th><a href="SolicitarAdesao.jsp" target="_top"><font color="FFFFFF">Solicitar adesão</font></a></th></tr>
             </tfoot>
         </table>
-        <BR><BR>
+
 <%
     }
     if(relacaomembro == 1){
 %>
-        <BR>
         <table align="center" border=1 cellpadding=10 width=200>
             <tfoot>
                 <tr><th><a href="" target="_top"><font color="FFFFFF">Aguardando aprovação</font></a></th></tr>
             </tfoot>
         </table>
-        <BR><BR>
         <%
     }   
 }
-%>        
+%>          
+        <br><br>
+        <table align="center" border=1 cellpadding=10 width=500>
+            <th>Descrição do grupo</th>
+            <tr>
+                <td width=10% height=150> <%= ge.getDescricao() %> </td>
+            </tr>
+        </table>
+        <br><br>
+      
         
  
         <table align="center" border=1 cellpadding=10 width=500>
