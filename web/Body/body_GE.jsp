@@ -65,8 +65,8 @@
         <BR><BR>
         <table align="center" border=1 cellpadding=10 width=200>
             <%
-                String imagem = "/agenda/PastadeImagens/padrao/logo.PNG";
-                if (ge.getImagem() != null){
+                String imagem = "/agenda/PastadeImagens/padrao/logo.png";
+                if (ge.getImagem() != null && !(ge.getImagem().equals(""))){
                     imagem = "/agenda/PastadeImagens/" + ge.getImagem();
                 }
             %>
