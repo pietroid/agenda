@@ -74,11 +74,9 @@
         </table>
         <BR><BR>
         <table align="center" border=1 cellpadding=10 width=200>
-            <tfoot>
-            <center><td><th><a href="Fotos.jsp" target="_top">Mais Fotos</a></th></td></center>
-            </tfoot>
-         </table>
-            <br><br>
+            <th><a href="Fotos.jsp" target="_top"><font color="FFFFFF">Mais Fotos</font></a></th>
+        </table>
+        <br><br>
         <table align="center" border=1 cellpadding=10 width=500>
             <th>Descrição do grupo</th>
             <tr>
@@ -107,9 +105,9 @@
     if(relacaomembro == 0){
 %>
         <BR>
-        <table align="right" border=1 cellpadding=10 width=200>
+        <table align="center" border=1 cellpadding=10 width=200>
             <tfoot>
-                <tr><th><a href="SolicitarAdesao.jsp" target="_top">Solicitar adesão</a></th></tr>
+                <tr><th><a href="SolicitarAdesao.jsp" target="_top"><font color="FFFFFF">Solicitar adesão</font></a></th></tr>
             </tfoot>
         </table>
         <BR><BR>
@@ -120,7 +118,7 @@
         <BR>
         <table align="center" border=1 cellpadding=10 width=200>
             <tfoot>
-                <tr><th><a href="" target="_top">Aguardando aprovação</a></th></tr>
+                <tr><th><a href="" target="_top"><font color="FFFFFF">Aguardando aprovação</font></a></th></tr>
             </tfoot>
         </table>
         <BR><BR>
