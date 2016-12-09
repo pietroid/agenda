@@ -43,7 +43,7 @@
             GE getn = new GE();
             GEDO ge = getn.buscar(Integer.parseInt(request.getParameter("GE")));
             boolean isadm = membrotn.isADM(ge.getId(), usuario.getId());
-            if (isadm){
+            if (isadm || usuario.isSuperUser()){
                 if (request.getParameter("submit") == null && ge != null){
     %>
                     <center>
