@@ -1,7 +1,11 @@
 <html>
+    
 <body>
-    <div id="footer"><center><img src="Footer.jpg" width="100" height="50" alt="footer.jpg" ><center></div>
+    <font face="verdana">
+<center>
+    <p style="font-size:15px">PMR3304 - Turma 1 - 2016</p>
+    <a style="font-size:15px" href="Reportar.jsp">Reportar problema</a></div>
+</center>
 
-       
 </body>
 </html>

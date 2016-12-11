@@ -22,7 +22,7 @@
                     String envio = "0";
                     envio = request.getParameter("envio");
                     us = tr.buscar(Integer.parseInt(request.getParameter("id")));
-                    if (envio == null || envio == "0"){
+                    if (envio == null || envio.equals("0")){
                     %>
                         <form action = "Avaliar.jsp" method="post"> 
                             Nota:<BR>
@@ -43,7 +43,7 @@
                         Novaava = Integer.parseInt(request.getParameter("avaliacao"));
                         int numava;
                         numava = us.getNumeroava();
-                        Novaava = Novaava + us.getAvaliação();
+                        Novaava = Novaava + us.getAvaliação()*numava;
                         numava = numava + 1;
                         int Media;
                         Media = Novaava/numava;

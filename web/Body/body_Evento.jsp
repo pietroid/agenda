@@ -34,10 +34,10 @@
         <BR><BR>
         <table align="left" border=1 cellpadding=10 width=500>
             <%
-        if (usuario.getNome() != null ){
+        if (evento.getLink()!=null && !evento.getLink().equals("")){
             %>
             <tfoot>
-                <tr><th><a href="Inscricao.jsp" target="_top">Inscrever-se</a></th></tr>
+                <tr><th><a href="<%=evento.getLink()%>" target="_top">Inscrever-se</a></th></tr>
             </tfoot>
             <%
         }
@@ -85,8 +85,6 @@
         }
                 %>
         </table>
-            
-        <img src ="PastadeImagens/GrupodeExtensao1/Grupodeextensao1-imagem1.PNG" align="right" width = 250 height =" 300" >
 
         <BR><BR><BR><BR><BR><BR><BR><BR><BR>
 
@@ -137,8 +135,8 @@
                 %>
                     <table align="left" border=1 cellpadding=10 width=500>
                         <tr>
-                          <td><a href="ExcluirEvento.jsp?evento=<%= evento.getNome() %>" target="_top"><font size="5" color="#ff0000">Excluir evento</font></a></td>
-                          <td><a href="EditarEvento.jsp?evento=<%= evento.getNome() %>" target="_top"><font size="5" color="#ff0000">Alterar evento</font></a></td>
+                          <td><a href="ExcluirEvento.jsp?evento=<%= evento.getId() %>" target="_top"><font size="5" color="#ff0000">Excluir evento</font></a></td>
+                          <td><a href="EditarEvento.jsp?evento=<%= evento.getId() %>" target="_top"><font size="5" color="#ff0000">Alterar evento</font></a></td>
                         </tr>
                     </table>
                 <%

@@ -72,10 +72,7 @@
             %>
             <center><img src ="<%= imagem %>" width = 200 height = 200></center>
         </table>
-        <BR><BR>
-        <table align="center" border=1 cellpadding=10 width=200>
-            <th><a href="Fotos.jsp" target="_top"><font color="FFFFFF">Mais Fotos</font></a></th>
-        </table>
+            <BR><BR>
 <%  if(session.getAttribute("Usuario")!= null){
         UsuarioDO solicitar = new UsuarioDO();
         solicitar = (UsuarioDO)session.getAttribute("Usuario");
@@ -83,7 +80,7 @@
         int a = ge.getId();
         int relacaomembro = 0;
         List<MembroDO> Lista = GEsolicitar.buscarPorUSUid(solicitar.getId());
-        if (Lista != null){
+        if (Lista != null && !Lista.isEmpty()){
             for(MembroDO b : Lista){
                 if (a == b.getGEid()){
                     relacaomembro = 1;
@@ -93,13 +90,16 @@
                 }
             }
         }
+        if(usuario.isSuperUser()){
+            relacaomembro=2;
+        }
     
     if(relacaomembro == 0){
 %>
 
         <table align="center" border=1 cellpadding=10 width=200>
             <tfoot>
-                <tr><th><a href="SolicitarAdesao.jsp" target="_top"><font color="FFFFFF">Solicitar adesão</font></a></th></tr>
+                <tr><th><a href="SolicitarAdesao.jsp?GEDO=<%=ge.getId()%>" target="_top"><font color="FFFFFF">Solicitar adesão</font></a></th></tr>
             </tfoot>
         </table>
 
@@ -144,7 +144,7 @@
         %>
                 <table align="center" border=1 cellpadding=10 width=500>
                     <th> 
-                         <center> <a href="/agenda/AlterarInfoGE.jsp" target="_top"> Alterar Informações </a> </center> 
+                         <center> <a href="/agenda/AlterarInfoGE.jsp?GEDO=<%=ge.getId()%>" target="_top"> Alterar Informações </a> </center> 
                     </th>
                 </table>
         <%
@@ -159,10 +159,8 @@
         for(int i = 0; i < realizas.size(); i++){
             eventos.add(eventotn.buscar(realizas.get(i).getEVEid()));
         }
-        int j;
-        if (eventos.size() > 5) j = 5;
-        else j = eventos.size();
-        for (int i = 0; i < j; i++){
+            
+        for (int i = 0; i < eventos.size(); i++){
             EventoDO evento = eventos.get(i);
                 %>
             <tr>
@@ -185,27 +183,22 @@
             </table>
     <%      
         }
-    }
-else{ pageContext.forward("index.jsp");}
-    %>
-    <% 
         if(session.getAttribute("Usuario")!= null){
             UsuarioDO SUser = (UsuarioDO)session.getAttribute("Usuario");
             if (SUser.isSuperUser()){
-                int idGEexclusao = 0;
                 %>
                 <FORM action="ExcluirGrupo.jsp" method="post">
                 <INPUT type="submit" name="Excluir" value="Excluir Grupo">
-                <INPUT type="hidden" name="<%=idGEexclusao%>" value="ge.getId()">
+                <INPUT type="hidden" name="idGEexclusao" value="<%=ge.getId()%>">
                 </FORM>
         
         <%
         
             }    
         }
-    
-    
-    %> 
+    }
+else{ pageContext.forward("index.jsp");}
+    %>
     </body>
 </html>
 

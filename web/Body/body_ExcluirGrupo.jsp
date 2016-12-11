@@ -30,9 +30,10 @@
         }
         else{
         %>
-            <FORM action="body_ExcluirGrupo.jsp" method="post">
+            <FORM action="ExcluirGrupo.jsp" method="post">
                 Deseja confirmar a exclusão do Grupo de extensão?<br><br>
             <INPUT type="submit" name="ConfExclusao" value= "Confirmar">   
+            <INPUT type="hidden" name="idGEexclusao" value="<%=request.getParameter("idGEexclusao")%>">
             </FORM>
         <%
         }

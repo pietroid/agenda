@@ -16,7 +16,7 @@ public class EventoData {
     
     public void incluir(EventoDO evento, Transacao tr) throws Exception {
         Connection con = tr.obterConexao();
-        String sql = "insert into evento (EVEnome,EVEdescricao,EVEtipo,EVEhorario_de_inicio,EVEhorario_de_termino,EVEdata,EVEmacro_evento,EVEpasta_de_imagens,EVEavaliacao) values (?,?,?,?,?,?,?,?,?)";
+        String sql = "insert into evento (EVEnome,EVEdescricao,EVEtipo,EVEhorario_de_inicio,EVEhorario_de_termino,EVEdata,EVEmacro_evento,EVEpasta_de_imagens,EVEavaliacao,EVEnumeroava,EVEativo,EVElink) values (?,?,?,?,?,?,?,?,?,?,?,?)";
         PreparedStatement ps = con.prepareStatement(sql);   
         ps.setString(1, evento.getNome());
         ps.setString(2, evento.getDescricao());
@@ -24,16 +24,22 @@ public class EventoData {
         ps.setTime(4,evento.getHoraInicial());
         ps.setTime(5,evento.getHoraFinal());
         ps.setDate(6, evento.getData());
-        ps.setInt(7, boolToInt(evento.getMacroEvento()));
+        ps.setInt(7, boolToInt(evento.isMacroEvento()));
         ps.setString(8,"evento");
-        ps.setInt(9, evento.getAvaliação());
-        //int result = ps.executeUpdate();
+        ps.setInt(9, 0);
+        ps.setInt(10,0);
+        ps.setInt(11, 1);
+        ps.setString(12, evento.getLink());
+        int result = ps.executeUpdate();
         
         sql= "SELECT LAST_INSERT_ID();";
         ps = con.prepareStatement(sql);
         ResultSet rs = ps.executeQuery();
         rs.first();
         evento.setId(rs.getInt("LAST_INSERT_ID()"));
+        evento.setAvaliação(0);
+        evento.setNumeroava(0);
+        
     }// incluir
 
     public void excluir(EventoDO evento, Transacao tr) throws Exception {
@@ -46,19 +52,21 @@ public class EventoData {
 
   public void atualizar(EventoDO evento, Transacao tr) throws Exception {
      Connection con = tr.obterConexao();
-     String sql = "update evento set EVEnome=?, EVEdescricao=?, EVEtipo=?, EVEmacro_evento=?, EVEhorario_de_inicio=?, EVEhorario_de_termino=?, EVEdata=?, EVEpasta_de_imagens=?, EVEavaliacao=?, EVEconflito=?  where EVEid=?";
+     String sql = "update evento set EVEnome=?, EVEdescricao=?, EVEtipo=?, EVEmacro_evento=?, EVEhorario_de_inicio=?, EVEhorario_de_termino=?, EVEdata=?, EVEpasta_de_imagens=?, EVEavaliacao=?,EVEnumeroava=?, EVEativo=?, EVElink=?   where EVEid=?";
      PreparedStatement ps = con.prepareStatement(sql);
      ps.setString(1, evento.getNome());
      ps.setString(2, evento.getDescricao());
      ps.setString(3, evento.getTipo());
-     ps.setInt(4, boolToInt(evento.getMacroEvento()));
+     ps.setInt(4, boolToInt(evento.isMacroEvento()));
      ps.setTime(5, evento.getHoraInicial());
      ps.setTime(6, evento.getHoraFinal());
      ps.setDate(7, evento.getData());
      ps.setString(8, evento.getPastaimagens());
      ps.setInt(9, evento.getAvaliação());
-     ps.setInt(11, boolToInt(evento.isConflito()));
-     ps.setInt(10, evento.getId());
+     ps.setInt(10,evento.getNumeroava());
+     ps.setInt(11,boolToInt(evento.isAtivo()));
+     ps.setString(12, evento.getLink());
+     ps.setInt(13, evento.getId());
      int result = ps.executeUpdate(); 
     } // atualizar
 
@@ -79,7 +87,9 @@ public class EventoData {
         evento.setData(rs.getDate("EVEdata"));
         evento.setPastaimagens(rs.getString("EVEpasta_de_imagens"));
         evento.setAvaliação(rs.getInt("EVEavaliacao"));
-        evento.setConflito(rs.getInt("EVEconflito")==1);
+        evento.setNumeroava(rs.getInt("EVEnumeroava"));
+        evento.setAtivo(rs.getInt("EVEativo")==1);
+        evento.setLink(rs.getString("EVElink"));
         return evento;
     } // buscar
     
@@ -101,7 +111,9 @@ public class EventoData {
         evento.setMacroEvento(rs.getInt("EVEmacro_evento")==1);
         evento.setPastaimagens(rs.getString("EVEpasta_de_imagens"));
         evento.setAvaliação(rs.getInt("EVEavaliacao"));
-        evento.setConflito(rs.getInt("EVEconflito")==1);
+        evento.setNumeroava(rs.getInt("EVEnumeroava"));
+        evento.setAtivo(rs.getInt("EVEativo")==1);
+        evento.setLink(rs.getString("EVElink"));
         return evento;
     }
     
@@ -124,7 +136,9 @@ public class EventoData {
             evento.setMacroEvento(rs.getInt("EVEmacro_evento")==1);
             evento.setPastaimagens(rs.getString("EVEpasta_de_imagens"));
             evento.setAvaliação(rs.getInt("EVEavaliacao"));
-            evento.setConflito(rs.getInt("EVEconflito")==1);
+            evento.setNumeroava(rs.getInt("EVEnumeroava"));
+            evento.setAtivo(rs.getInt("EVEativo")==1);
+            evento.setLink(rs.getString("EVElink"));
             Items.add(evento);
         }
         return Items;
@@ -150,6 +164,9 @@ public class EventoData {
             evento.setMacroEvento(rs.getInt("EVEmacro_evento")==1);
             evento.setPastaimagens(rs.getString("EVEpasta_de_imagens"));
             evento.setAvaliação(rs.getInt("EVEavaliacao"));
+            evento.setNumeroava(rs.getInt("EVEnumeroava"));
+            evento.setAtivo(rs.getInt("EVEativo")==1);
+            evento.setLink(rs.getString("EVElink"));
             Items.add(evento);
         }
         return Items;
@@ -173,6 +190,9 @@ public class EventoData {
             evento.setMacroEvento(rs.getInt("EVEmacro_evento")==1);
             evento.setPastaimagens(rs.getString("EVEpasta_de_imagens"));
             evento.setAvaliação(rs.getInt("EVEavaliacao"));
+            evento.setNumeroava(rs.getInt("EVEnumeroava"));
+            evento.setAtivo(rs.getInt("EVEativo")==1);
+            evento.setLink(rs.getString("EVElink"));
             Items.add(evento);
         }
         return Items;
@@ -195,7 +215,9 @@ public class EventoData {
             evento.setMacroEvento(true);
             evento.setPastaimagens(rs.getString("EVEpasta_de_imagens"));
             evento.setAvaliação(rs.getInt("EVEavaliacao"));
-            evento.setConflito(rs.getInt("EVEconflito")==1);
+            evento.setNumeroava(rs.getInt("EVEnumeroava"));
+            evento.setAtivo(rs.getInt("EVEativo")==1);
+            evento.setLink(rs.getString("EVElink"));
             Items.add(evento);
         }
         return Items;

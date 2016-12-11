@@ -63,6 +63,9 @@
  if(session.getAttribute("Usuario")!= null){
     UsuarioDO usuario = (UsuarioDO)session.getAttribute("Usuario");
     String nome = usuario.getNome();
+    if(usuario.isSuperUser()){
+        pageContext.forward("PaineldeControle.jsp");
+    }
     
     /*---ALYSON---*/
     
@@ -78,7 +81,7 @@
     /*---ALYSON---*/
     
     %><h1><center> Perfil <center> </h1>
-                <h1><font face="verdana" size="4">Olá,<%=nome%></font></h1>
+                <h1><font face="verdana" size="4">Olá, <%=nome%></font></h1>
         <%
     
     /*----RAFAS2ALYSON---*/
@@ -108,6 +111,7 @@
         <% ge = gtr.buscar(membro_temp.getGEid()); %>
         <td align="center"><font face="verdana" size="3"><a href="GE.jsp?GE=<%= ge.getId()%>"><%=ge.getNome()%></a></font></td>
         <td align="center"><font face="verdana" size="3"><a href="AprovarMembro.jsp?AM=<%= ge.getId()%>">Solicitações de Adesão</a></font></td>
+        <td align="center"><font face="verdana" size="3"><a href="CriarEvento.jsp?GE=<%= ge.getId()%>">Criar evento</a></font></td>
     </tr>
     </table>
     <%}

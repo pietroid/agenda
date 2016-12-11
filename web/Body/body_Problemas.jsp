@@ -22,7 +22,7 @@ Usuario  ustn = new Usuario();
 
 
 <h1><center> Problemas <center> </h1>
-
+            <%if(session.getAttribute("Usuario")!=null && ((UsuarioDO)session.getAttribute("Usuario")).isSuperUser()){%>
         <center>
             <table align="center" border=1 cellpadding=10 width=1000>
                 <th>Usuário <th>Problema<th>Data<th>Excluir Notificação</th>
@@ -50,7 +50,9 @@ Usuario  ustn = new Usuario();
         </center>
         <BR>
                
-            
+            <%}else{
+pageContext.forward("index.jsp");
+}%>
 </font>
 </body>
 </html>
