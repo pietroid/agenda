@@ -36,7 +36,12 @@ Usuario  ustn = new Usuario();
                        
                 %>    
                 <tr>
+                    
+                <% if(USid != 0){%>
                     <td><center><a href="Usuario.jsp?Usuario=<%= us.getId()%>"><%= us.getNome() %></a></center>
+                <%}else{%>
+                    <td><center>Usuário Anônimo</center><%}%>
+                    
                     <td><center> <%= ge.getMensagem()%></center>
                     <td><center> <%= ge.getData()%></center>
                     <td><center><a href="ExcluirProblema.jsp?EXP=<%= ge.getId()%>">EXCLUIR</a></center>
