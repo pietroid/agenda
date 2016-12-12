@@ -129,6 +129,13 @@ public class Evento {
     
     public boolean excluir(EventoDO evento) throws Exception{
         Transacao tr = new Transacao();
+        if(evento.isMacroEvento()){
+            Pertence pertenceT=new Pertence();
+            List<Integer> pertence=pertenceT.buscarMicroPorMacro(evento);
+            if(!pertence.isEmpty()){
+                return false;
+            }
+        }
 	try{
             tr.begin();
             EventoData eventoData = new EventoData();

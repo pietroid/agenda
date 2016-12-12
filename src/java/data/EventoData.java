@@ -44,10 +44,21 @@ public class EventoData {
 
     public void excluir(EventoDO evento, Transacao tr) throws Exception {
         Connection con = tr.obterConexao();
-        String sql = "delete from evento where EVEid = ?";
+        String sql = "delete from evento where evento.EVEid = ?;"+
+                "delete from comentario where comentario.eveid = ?;"+
+                "delete from feedback where feedback.EVEid = ?;"+
+                "delete from seguindo where seguindo.EVEid = ?;"+
+                "delete from realiza where realiza.EVEid = ?;"+
+                "delete from acontece where acontece.EVEid = ?;";
+        if(evento.isMacroEvento()){
+            sql+="delete from pertence where pertence.macroEventoId = ?;";
+        }else{
+            sql+="delete from pertence where pertence.microEventoId = ?;";
+        }
         PreparedStatement ps = con.prepareStatement(sql);
-        ps.setInt(1, evento.getId());
-        ps.executeUpdate();
+        for(int i=1;i<=7;i++)
+            ps.setInt(i, evento.getId());
+        ps.execute();
     } // excluir
 
   public void atualizar(EventoDO evento, Transacao tr) throws Exception {
