@@ -130,12 +130,9 @@
 
     if(!eventos_do_Mes.isEmpty()){
         for (EventoDO evento_temp : eventos_do_Mes) {
-
             date_tempday = evento_temp.getData();
             tempday2 = date_tempday.getDate();
-
             eventos[tempday2]++;
-
         }  
     }
   
@@ -168,14 +165,12 @@
     for( int j=0; j<7; j++ )
     {
       localday = days[i][j];
-      
       Xmed = (float) eventos[localday];
-      
       if (localday < 10 && localday !=0){
-          str_localdate = currentYearString + "-" + str_actualMonth + "-" + "0" + Integer.toString(localday) ;
+        str_localdate = currentYearString + "-" + str_actualMonth + "-" + "0" + Integer.toString(localday) ;
       }
       else if(localday >=10 && localday!=0){
-              str_localdate = currentYearString + "-" + str_actualMonth + "-" + Integer.toString(localday);
+        str_localdate = currentYearString + "-" + str_actualMonth + "-" + Integer.toString(localday);
       }
       else{}
 
@@ -216,8 +211,7 @@
         }
         else
         {
-        %><td align = "center" bgcolor=<%=hexColor%>>
-          <a href="/agenda/EventosdoDia.jsp?str_ClickedDate=<%=str_localdate%>"<font size="4"><%=days[i][j]%></font></a>
+        %><td align = "center" bgcolor=<%=hexColor%>><a href="/agenda/EventosdoDia.jsp?str_ClickedDate=<%=str_localdate%>"<font size="4"><%=days[i][j]%></font></a>
         </td><%
         }
       }
