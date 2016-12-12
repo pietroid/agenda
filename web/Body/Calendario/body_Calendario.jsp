@@ -160,7 +160,7 @@
     
     float br;
     Color RGBColor;
-    String hexColor;
+    String hexColor, hexBranco;
   
   for(int i=0; i<aMonth.getNumberOfWeeks(); i++ )
   {
@@ -190,11 +190,29 @@
 
         RGBColor = Color.getHSBColor(0.59f, br, 1f);
         hexColor = "#"+Integer.toHexString(RGBColor.getRGB()).substring(2); 
-
+        hexBranco = "#ffffff";
         // Destaca o Dia de HOJE
         if( currentDayInt == days[i][j] && currentMonthInt == aMonth.getMonth() && currentYearInt == aMonth.getYear() )
         {
         %><td  align = "center" bgcolor=<%=hexColor%>><a href="/agenda/EventosdoDia.jsp?str_ClickedDate=<%=str_localdate%>" <font size="5"><b><%=days[i][j]%></b></font></a></td><%
+        }
+        else if ( currentDayInt > days[i][j] && currentMonthInt == aMonth.getMonth() && currentYearInt == aMonth.getYear() )
+        {
+            if(hexColor.equals(hexBranco)){
+            %><td align = "center" bgcolor="#e6e6e6"><a href="/agenda/EventosdoDia.jsp?str_ClickedDate=<%=str_localdate%>"<font size="4"><%=days[i][j]%></font></a></td><%
+            }
+            else{
+            %><td align = "center" bgcolor="#bfbfbf"><a href="/agenda/EventosdoDia.jsp?str_ClickedDate=<%=str_localdate%>"<font size="4"><%=days[i][j]%></font></a></td><%
+            }
+        }
+        else if (currentMonthInt > aMonth.getMonth() && currentYearInt == aMonth.getYear() || currentYearInt > aMonth.getYear())
+        {
+            if(hexColor.equals(hexBranco)){
+            %><td align = "center" bgcolor="#e6e6e6"><a href="/agenda/EventosdoDia.jsp?str_ClickedDate=<%=str_localdate%>"<font size="4"><%=days[i][j]%></font></a></td><%
+            }
+            else{
+            %><td align = "center" bgcolor="#bfbfbf"><a href="/agenda/EventosdoDia.jsp?str_ClickedDate=<%=str_localdate%>"<font size="4"><%=days[i][j]%></font></a></td><%
+            }
         }
         else
         {
