@@ -22,7 +22,7 @@
             GEDO GEexcluir = new GEDO();
             int Solid = Integer.parseInt(request.getParameter("REJ"));
             GE GEtn = new GE();
-            GEtn.buscar(Solid);
+            GEexcluir =  GEtn.buscar(Solid);
             GEtn.excluir(GEexcluir);   
         
             pageContext.forward("SolicitacaoExcluidaGE.jsp");   

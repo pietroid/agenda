@@ -1,4 +1,3 @@
-<%@page import="java.lang.Integer.parseInt(String)"%>
 <%@page import="data.UsuarioDO"%>
 <%@page import="java.util.List"%>
 <html>
@@ -25,7 +24,7 @@
             GEDO GEexcluir = new GEDO();
             int id = Integer.parseInt(request.getParameter("idGEexclusao"));
             GE GEtn = new GE();
-            GEtn.buscar(id);
+            GEexcluir = GEtn.buscar(id);
             GEtn.excluir(GEexcluir);
         }
         else{
