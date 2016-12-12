@@ -1,4 +1,3 @@
-<%@page import="java.lang.Integer.parseInt(String)"%>
 <%@page import="data.UsuarioDO"%>
 <%@page import="java.util.List"%>
 <html>

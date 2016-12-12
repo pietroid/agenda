@@ -149,6 +149,11 @@
                 Xmin = (float) eventos[k];
             }
     }
+    //Caso não haja eventos no mês, colocamos (Xmax = 1) para não causar erros na tabela de cores
+    if (Xmax==0)
+    {
+    Xmax = 1;
+    }
     
     Ymin = 0f; // BRILHO MÍNIMO
     Ymax = 1.0f; // BRILHO MÁXIMO
@@ -178,7 +183,7 @@
       {
         %><td>&nbsp;</td><%
       }
-      else
+     else 
       {
         Ymed = Ymin + (Xmed - Xmin)/(Xmax - Xmin)*(Ymax - Ymin);
         br = Ymed;  
