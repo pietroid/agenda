@@ -24,7 +24,7 @@
             GEDO GEexcluir = new GEDO();
             int id = Integer.parseInt(request.getParameter("idGEexclusao"));
             GE GEtn = new GE();
-            GEtn.buscar(id);
+            GEexcluir = GEtn.buscar(id);
             GEtn.excluir(GEexcluir);
         }
         else{

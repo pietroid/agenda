@@ -9,6 +9,6 @@
 </head>
 <%@include file="Título/Título.jsp" %>
 <%@include  file="Menu/menu.jsp"%>
-<%@include  file="Body/body_SolicitaçãoExcluidaGE.jsp"%>
+<%@include  file="Body/body_SolicitacaoExcluidaGE.jsp"%>
 <%@include  file="Footer/footer.jsp"%>
 </html>

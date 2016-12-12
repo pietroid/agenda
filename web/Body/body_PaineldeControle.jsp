@@ -70,7 +70,7 @@
 <tr>
   <td><a href="/agenda/Cadastro_POI.jsp"  target="_top"><font size="3">Cadastrar Ponto de Interesse</font></a></td>
   <td><a href="/agenda/ListaPOI.jsp"  target="_top"><font size="3" >Alterar Ponto de Interesse</font></a></td>
-  <td><a href="/agenda/ListaPOI.jsp"  target="_top"><font size="3">Excluir Ponto de Interesse</font></a></td>
+  <td><a href="/agenda/ExcluirPOI.jsp"  target="_top"><font size="3">Excluir Ponto de Interesse</font></a></td>
 </tr>
 </table>
  <BR>

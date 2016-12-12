@@ -17,7 +17,7 @@
        
     if (request.getParameter("SIM")== null){
         pageContext.forward("AceitarGE.jsp");
-    }else if(request.getParameter("REJ")==null){
+    }else{
         
             GEDO GEaceitar = new GEDO();
             int GEid2 = Integer.parseInt(request.getParameter("ACE"));
@@ -28,36 +28,20 @@
         
             pageContext.forward("GEokay.jsp");   
             
-    }else if(request.getParameter("ACE")==null){
-            
-            GEDO GErejeitar = new GEDO();    
-            int GEid2 = Integer.parseInt(request.getParameter("REJ"));         
-            GE GEtn = new GE();       
-            GErejeitar = GEtn.buscar(GEid2);
-            GEtn.excluir(GErejeitar);
-            GEtn.atualizar(GErejeitar);    
       
-   }
-            
-            
+    }   
             
 } 
-  if(request.getParameter("ACE")!=null){
+
 %>   
         <h1><center>Tem certeza que deseja adicionar esse Grupo de Extensão?</center></h1>   
-        <%}else{
-      
-  
-    %> <h1><center>Tem certeza que deseja rejeitar essa Solicitação?</center></h1>
-    <%}%>  
-        <BR>
+
         <center>
        
         <FORM action="GEAceito.jsp" method="post">            
         <INPUT type="submit" name="SIM" value= "SIM">   
         <INPUT type="submit" name="NAO" value= "NÃO">
         <input type="hidden" name="ACE" value="<%=request.getParameter("ACE")%>" >
-        <input type="hidden" name="REJ" value="<%=request.getParameter("REJ")%>" >
         </center>
         
         
