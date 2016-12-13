@@ -31,7 +31,7 @@ if (request.getParameter("eve") != null ){
     %>
         <center>
             <table align="center" border=1 cellpadding=10 width=1000>
-                <th>Usuário seguindo <%=evento.getNome()%></th>
+                <th>Usuários seguindo <%=evento.getNome()%></th>
     
     <%
     for (int i = 0; i < seguindo.size(); i++){
