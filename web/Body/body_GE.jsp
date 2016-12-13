@@ -185,12 +185,23 @@
         }
         if(session.getAttribute("Usuario")!= null){
             UsuarioDO SUser = (UsuarioDO)session.getAttribute("Usuario");
-            if (SUser.isSuperUser()){
+            Membro mtn=new Membro();
+            List<MembroDO> membro=mtn.buscarPorUSUid(SUser.getId());
+            boolean sameGE=false;
+            for(MembroDO m : membro){
+                if(m.getGEid()==ge.getId() && m.getADM()==1){
+                    sameGE=true;
+                    break;
+                }
+            }
+            if (SUser.isSuperUser() || sameGE){
                 %>
+    <center>
                 <FORM action="ExcluirGrupo.jsp" method="post">
                 <INPUT type="submit" name="Excluir" value="Excluir Grupo">
                 <INPUT type="hidden" name="idGEexclusao" value="<%=ge.getId()%>">
                 </FORM>
+    </center>
         
         <%
         

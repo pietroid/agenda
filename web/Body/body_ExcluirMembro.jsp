@@ -3,38 +3,46 @@
 <%@page import="transacoes.Usuario"%>
 <%@page import="data.UsuarioDO"%>
 <body BGCOLOR = #f2f2f2>
-<font face="verdana">
-<h1> <center> Excluir sua Conta </center> </h1>
+
+   <center> <h1> <font face="verdana"> Excluir sua Conta </font> </h1></center>
 <BR>
     
     
     <%    
-        UsuarioDO us = new UsuarioDO();
-        us = (UsuarioDO)session.getAttribute("Usuario");
+        UsuarioDO us = (UsuarioDO)session.getAttribute("Usuario");
         Usuario tr = new Usuario();
         
         
-        if(request.getParameter("submit")==null){%>
+        if(request.getParameter("submit")==null){
+            session.setAttribute("Usuario", null);
+            %>
 <FORM action="ExcluirMembro.jsp" method="post" id = "deleteForm">
 Digite sua senha:<BR><INPUT type="password" name="senhaAtual" value= ""> <BR><BR><BR>
 </FORM>
 <INPUT type ="submit" name="submit" value= "Submit" form="deleteForm">   
 <INPUT type ="reset" name="reset" value= "Reset" form = "deleteForm">
+<INPUT type="hidden" name="USUid" value="<%=us.getId()%>">
+<INPUT type="hidden" name="senha_or" value="<%=us.getSenha()%>">
     <%
         } else if (request.getParameter("submit").equals("Submit")){
         
         String atual = request.getParameter("senhaAtual");
-        
-        if (us.getSenha().equals(atual)){
-            tr.excluir(us);
-            session.setAttribute("Usuario", null);
-%><p>Sua conta foi removida.</p><%
+        int id = Integer.parseInt(request.getParameter("USUid"));
+        String senha_or = request.getParameter("senha_or");
+        UsuarioDO us2=new UsuarioDO();
+        us2.setId(id);
+        if (senha_or.equals(atual)){
+            if(tr.excluir(us2)){
+            
+    %><center><p>Sua conta foi removida.</p></center><%
+            }else{
+%><center><p>Você é o único administrador do seu grupo de extensão. Apague primeiro seu grupo</p></center><%
+            }
         }else{
-%><p>Senha atual incorreta! Você precisa digitar a senha atual excluir sua conta.</p><%
+%><center><p>Senha atual incorreta! Você precisa digitar a senha atual para excluir sua conta.</p></center><%
         }}
         
         %>
 
-</center>
 </body>
 </html>

@@ -39,24 +39,41 @@ public class GEData {
 
     public void excluir(GEDO GE, Transacao tr) throws Exception {
         Connection con = tr.obterConexao();
-        String sql = "SET SQL_SAFE_UPDATES = 0;"
-                + "delete from grupodeextensao where grupodeextensao.GEid = ?;"+
-                "delete from QG where QG.GEid = ?;"+
-                "delete from Membro where Membro.GEid = ?;"+
-                "delete from preferencia where preferencia.GRUPOid = ?;"+
-                "DELETE FROM evento , (SELECT realiza.EVEid from realiza where realiza.GEid=?) AS RESULT WHERE evento.EVEid = RESULT.EVEid;"+
-                "delete from comentario , (SELECT realiza.EVEid from realiza where realiza.GEid=?) AS RESULT WHERE comentario.eveid = RESULT.EVEid;"+
-                "delete from feedback , (SELECT realiza.EVEid from realiza where realiza.GEid=?) AS RESULT where feedback.EVEid = RESULT.EVEid;"+
-                "delete from seguindo , (SELECT realiza.EVEid from realiza where realiza.GEid=?) AS RESULT where seguindo.EVEid = RESULT.EVEid;"+
-                "delete from acontece , (SELECT realiza.EVEid from realiza where realiza.GEid=?) AS RESULT where acontece.EVEid = RESULT.EVEid;"+
-                "delete from pertence , (SELECT realiza.EVEid from realiza where realiza.GEid=?) AS RESULT where pertence.microEventoId = RESULT.EVEid;"+
-                "delete from pertence , (SELECT realiza.EVEid from realiza where realiza.GEid=?) AS RESULT where pertence.macroEventoId = RESULT.EVEid;"+
-                "delete from realiza where realiza.GEid = ?;"+
-                "SET SQL_SAFE_UPDATES = 1;";
-        PreparedStatement ps = con.prepareStatement(sql);
-        for (int i=1;i<=12;i++)
-            ps.setInt(i, GE.getId());
-        ps.execute();
+        PreparedStatement ps;
+        String[] sql = {"delete from grupodeextensao where grupodeextensao.GEid = ?",
+                "delete from QG where QG.GEid = ?",
+                "delete from Membro where Membro.GEid = ?",
+                "delete from preferencia where preferencia.GRUPOid = ?"};
+        int GEid=GE.getId();
+        for(int i=0;i<4;i++){
+            ps = con.prepareStatement(sql[i]);
+            ps.setInt(1, GEid);
+            int result = ps.executeUpdate();
+        }
+        
+        String sql2= "select EVEid from realiza where GEid=?";
+        ps = con.prepareStatement(sql2);
+        ps.setInt(1, GEid);
+        ResultSet rs = ps.executeQuery();
+        rs.first();
+        int EVEid=0;
+        EVEid=rs.getInt("EVEid");
+        
+        if(EVEid!=0){
+            String[] sql3 = {"delete from evento where evento.EVEid = ?",
+                "delete from comentario where comentario.eveid = ?",
+                "delete from feedback where feedback.EVEid = ?",
+                "delete from seguindo where seguindo.EVEid = ?",
+                "delete from realiza where realiza.EVEid = ?",
+                "delete from acontece where acontece.EVEid = ?",
+                "delete from pertence where pertence.macroEventoId = ?",
+                "delete from pertence where pertence.microEventoId = ?"};
+            for(int i=0;i<8;i++){
+                ps = con.prepareStatement(sql3[i]);
+                ps.setInt(1, EVEid);
+                int result = ps.executeUpdate();
+            }
+        }
     } // excluir
 
     public GEDO buscar(int id, Transacao tr) throws Exception {
