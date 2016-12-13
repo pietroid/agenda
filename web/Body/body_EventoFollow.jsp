@@ -24,14 +24,14 @@
         Evento eventotn = new Evento();
         EventoDO evento = eventotn.buscar(Integer.parseInt(request.getParameter("eve")));
         List<SeguindoDO> verificaSeUsuarioJaSegueEvento = seguindotn.pesquisarPorUSUid(usuario.getId());
-        boolean segueTodos = false; //booleana para verificar se o usuario segue ja segue o evento
+        boolean segue = false; //booleana para verificar se o usuario segue ja segue o evento
         for (int i = 0; i < verificaSeUsuarioJaSegueEvento.size(); i++) {
             if (verificaSeUsuarioJaSegueEvento.get(i).getEveId() == evento.getId()) {
-                segueTodos = true;
+                segue = true;
             }
         }
         
-        if (segueTodos == true) {
+        if (segue == true) {
         %>
         <h1 align ="center">
             Você já é um seguidor desse evento!
