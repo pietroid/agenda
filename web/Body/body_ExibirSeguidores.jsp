@@ -39,7 +39,7 @@ if (request.getParameter("eve") != null ){
          usuarios.add(usuariotn.buscarPorID(USUid)); 
          %>
             <tr>
-                <td><center><%=usuarios.get(i).getNome()%></center></td>
+                <td><center><a href="Usuario.jsp?Usuario=<%= usuarios.get(i).getId()%>"><%= usuarios.get(i).getNome() %></a></center>
             </tr>
          <%
     }
