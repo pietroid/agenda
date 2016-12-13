@@ -32,6 +32,23 @@ public class Seguindo {
         return false;
     } // incluir
     
+     public boolean excluir (SeguindoDO seguindo) throws Exception{       
+        Transacao tr = new Transacao();
+        try {
+            tr.begin();
+            SeguindoData a = new SeguindoData();
+            a.excluir(seguindo, tr);
+            tr.commit();
+            return true;
+       
+        } catch(Exception e) {
+            tr.rollback();
+            System.out.println("Erro ao excluir ");
+            e.printStackTrace();
+        }
+        return false;
+    } // incluir
+    
     public SeguindoDO buscar(int INSCid) throws Exception{
         Transacao tr = new Transacao();
 	try{
@@ -78,20 +95,6 @@ public class Seguindo {
 	return null;
     }
     
-    public SeguindoDO pesquisarPorUSUidRetornaUmDO(int USUid) throws Exception {
-        Transacao tr = new Transacao();
-        try{
-            tr.beginReadOnly();
-  	    SeguindoData SeguindoData = new SeguindoData();
-	    SeguindoDO i = SeguindoData.pesquisarPorUSUidRetornaUmDO(USUid, tr);
-            tr.commit();
-            return i;
-	} catch (Exception e) {
-            tr.rollback();
-            System.out.println("Erro ao listar ");  
-	}
-	return null;
-    }
      
     private boolean isEmpty(String s) {
         if (null == s)
