@@ -209,7 +209,4 @@ public class EventoDO {
         this.link = link;
     }
 
-    
-    
-    
 }

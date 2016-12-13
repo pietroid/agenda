@@ -7,9 +7,9 @@ public class Transacao {
   // connection data
   static final String ODBC_DRIVER = "com.mysql.jdbc.Driver";
   
-  static final String DSN = "jdbc:mysql://georgedbinstance.cqnxjlvgbpje.us-west-2.rds.amazonaws.com/agenda?allowMultiQueries=true";
-  static final String USER = "georgedb";
-  static final String PWD = "pmr33042016george";
+  static final String DSN = "jdbc:mysql://localhost:3306/agenda";
+  static final String USER = "usuario";
+  static final String PWD = "123456";
   
   private Connection _conexao = null;
   private boolean _readOnly = false;
