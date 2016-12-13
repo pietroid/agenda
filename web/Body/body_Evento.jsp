@@ -117,6 +117,7 @@
             }
         %>
             <center><a href="Evento.jsp?eve=<%=evento.getId()%>">Seguir evento</a></center>
+            <center><a href="ExibirSeguidores.jsp?eve=<%=evento.getId()%>">Ver lista de seguidores</a></center>
             <table align="center">
                 <th>
                     Seguidores: <%=count%>
