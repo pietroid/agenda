@@ -10,7 +10,7 @@
 <head>
 <title>Poli Agenda</title>
 </head>
-<%@include file="TÃ­tulo/TÃ­tulo.jsp" %>
+<%@include file="Título/Título.jsp" %>
 <%@include  file="Menu/menu.jsp"%>
 <%@include  file="Body/body_EventoFollow.jsp"%>
 <%@include  file="Footer/footer.jsp"%>
