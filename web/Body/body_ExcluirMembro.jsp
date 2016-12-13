@@ -15,7 +15,7 @@
         
         
         if(request.getParameter("submit")==null){%>
-<FORM action="body_ExcluirMembro.jsp" method="post" id = "deleteForm">
+<FORM action="ExcluirMembro.jsp" method="post" id = "deleteForm">
 Digite sua senha:<BR><INPUT type="password" name="senhaAtual" value= ""> <BR><BR><BR>
 </FORM>
 <INPUT type ="submit" name="submit" value= "Submit" form="deleteForm">   
