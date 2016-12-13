@@ -50,6 +50,7 @@ if(request.getParameter("submit") != null){
         m.setRating(Integer.parseInt(request.getParameter("nota"))); //Atribui rating
         if (mtn.incluir(m)){
             FeedbackOK = 1;
+            %>Feedback enviado. <a href="Evento.jsp?evento=<%=request.getParameter("evento")%>"> Voltar à pagina do evento</a><%
         }
         else{
             FeedbackOK = 0;

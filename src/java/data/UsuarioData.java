@@ -83,12 +83,26 @@ public class UsuarioData {
     public void excluir(UsuarioDO usuario, Transacao tr) throws Exception {
         int usuID = usuario.getId();
         Connection con = tr.obterConexao();
-        String sql = "delete from agenda.Usuario where USUid = ?";
-        PreparedStatement ps = con.prepareStatement(sql);
-        ps.setInt(1, usuID);
-        int result = ps.executeUpdate();
         
-    };
+        String[] sql = {"delete from agenda.Usuario where Usuario.USUid = ?",
+                "delete from feedback where feedback.USERid = ?",
+                "delete from seguindo where seguindo.USUid = ?",
+                "delete from comentario where comentario.usuid = ?",
+                "delete from problema where problema.USERid = ?",
+                "delete from notificacaoGeral where notificacaoGeral.USERalvoid = ?",
+                "delete from Membro where Membro.USUid = ?",
+                "delete from preferencia where preferencia.USERid = ?"};
+        
+        for(int i=0;i<=7;i++){
+            PreparedStatement ps = con.prepareStatement(sql[i]);
+             ps.setInt(1, usuID);
+             int result = ps.executeUpdate();
+        }
+           
+        
+        
+    }
+        
     private int boolToInt(boolean value){
         if(value){
             return 1;

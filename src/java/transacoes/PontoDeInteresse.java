@@ -66,10 +66,13 @@ public class PontoDeInteresse {
     } // buscar por nome
         
     public boolean excluir (PontoDeInteresseDO PontoDeInteresse) throws Exception{
-        
+        Acontece act=new Acontece();
+        List<AconteceDO> acontece=act.buscarPorPOI(PontoDeInteresse.getId());
+        if(!acontece.isEmpty()){
+            return false;
+        }
         Transacao tr = new Transacao();
         try {
-            
             tr.begin();
                 PontoDeInteresseData point = new PontoDeInteresseData();
                 point.excluir(PontoDeInteresse, tr);

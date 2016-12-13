@@ -18,7 +18,7 @@ public class Evento {
         Transacao tr = new Transacao();
         try {
             
-            tr.begin();
+           tr.begin();
                 EventoData EventoData = new EventoData();
                 EventoData.incluir(Evento, tr);
             tr.commit();
@@ -29,7 +29,7 @@ public class Evento {
             System.out.println("Erro ao incluir " + Evento.getId());
             e.printStackTrace();
         }
-        return false;
+        return true ;
     } // incluir
     
     public boolean atualizar(EventoDO evento) throws Exception {
@@ -81,20 +81,6 @@ public class Evento {
 	return null;
     }
     
-/*    public List<EventoDO> pesquisarPorEVEid(int EVEid) throws Exception{
-        Transacao tr = new Transacao();
-	try{
-            tr.beginReadOnly();
-  	    EventoData EventoData = new EventoData();
-	    List<EventoDO> i = EventoData.pesquisarPorEVEid(EVEid, tr);
-            tr.commit();
-            return i;
-	} catch (Exception e) {
-            tr.rollback();
-            System.out.println("Erro ao listar ");  
-	}
-	return null;
-    }*/
     public List<EventoDO> buscarData(java.sql.Date data) throws Exception{
         Transacao tr = new Transacao();
 	try{
@@ -125,9 +111,31 @@ public class Evento {
 	}
 	return null;
     }
+    public List<EventoDO> buscarMes(java.sql.Date data1, java.sql.Date data2) throws Exception{
+        Transacao tr = new Transacao();
+	try{
+            tr.beginReadOnly();
+  	    EventoData EventoData = new EventoData();
+	    List<EventoDO> i = EventoData.buscarMes(data1, data2, tr);
+            tr.commit();
+            return i;
+	} catch (Exception e) {
+            tr.rollback();
+            System.out.println("Erro ao buscar datas do mês");
+           
+	}
+	return null;
+    }       
     
     public boolean excluir(EventoDO evento) throws Exception{
         Transacao tr = new Transacao();
+        if(evento.isMacroEvento()){
+            Pertence pertenceT=new Pertence();
+            List<Integer> pertence=pertenceT.buscarMicroPorMacro(evento);
+            if(!pertence.isEmpty()){
+                return false;
+            }
+        }
 	try{
             tr.begin();
             EventoData eventoData = new EventoData();
@@ -141,7 +149,21 @@ public class Evento {
 	}
 	return false;
     }
-
+    public List<EventoDO> listarMacro() throws Exception{
+        Transacao tr = new Transacao();
+	try{
+            tr.beginReadOnly();
+  	    EventoData EventoData = new EventoData();
+	    List<EventoDO> i = EventoData.listarMacro(tr);
+            tr.commit();
+            return i;
+	} catch (Exception e) {
+            tr.rollback();
+            System.out.println("Erro ao buscar");
+           
+	}
+	return null;
+    }
     private boolean isEmpty(String s) {
         if (null == s)
             return true;

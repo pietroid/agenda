@@ -24,6 +24,8 @@ public class EventoDO {
     private String pastaimagens;
     private int avaliação;
     private int numeroava;
+    private boolean ativo;
+    private String link;
 
     /**
      * @return the id
@@ -84,7 +86,7 @@ public class EventoDO {
     /**
      * @return the macroEvento
      */
-    public boolean getMacroEvento() {
+    public boolean isMacroEvento() {
         return macroEvento;
     }
 
@@ -164,12 +166,49 @@ public class EventoDO {
     public void setAvaliação(int avaliação) {
         this.avaliação = avaliação;
     }
-     /**
+
+    /**
      * @return the numeroava
      */
     public int getNumeroava() {
         return numeroava;
     }
+
+    /**
+     * @param numeroava the numeroava to set
+     */
+    public void setNumeroava(int numeroava) {
+        this.numeroava = numeroava;
+    }
+
+    /**
+     * @return the ativo
+     */
+    public boolean isAtivo() {
+        return ativo;
+    }
+
+    /**
+     * @param ativo the ativo to set
+     */
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
+    }
+
+    /**
+     * @return the link
+     */
+    public String getLink() {
+        return link;
+    }
+
+    /**
+     * @param link the link to set
+     */
+    public void setLink(String link) {
+        this.link = link;
+    }
+
     
     
     

@@ -63,6 +63,9 @@
  if(session.getAttribute("Usuario")!= null){
     UsuarioDO usuario = (UsuarioDO)session.getAttribute("Usuario");
     String nome = usuario.getNome();
+    if(usuario.isSuperUser()){
+        pageContext.forward("PaineldeControle.jsp");
+    }
     
     /*---ALYSON---*/
     
@@ -78,7 +81,7 @@
     /*---ALYSON---*/
     
     %><h1><center> Perfil <center> </h1>
-                <h1><font face="verdana" size="4">Olá,<%=nome%></font></h1>
+                <h1><font face="verdana" size="4">Olá, <%=nome%></font></h1>
         <%
     
     /*----RAFAS2ALYSON---*/
@@ -107,6 +110,8 @@
     <tr>
         <% ge = gtr.buscar(membro_temp.getGEid()); %>
         <td align="center"><font face="verdana" size="3"><a href="GE.jsp?GE=<%= ge.getId()%>"><%=ge.getNome()%></a></font></td>
+        <td align="center"><font face="verdana" size="3"><a href="AprovarMembro.jsp?AM=<%= ge.getId()%>">Solicitações de Adesão</a></font></td>
+        <td align="center"><font face="verdana" size="3"><a href="CriarEvento.jsp?GE=<%= ge.getId()%>">Criar evento</a></font></td>
     </tr>
     </table>
     <%}
@@ -230,34 +235,11 @@
 /*---------------ALYSON--------------*/
 %>
 
-<h2> Calendário </h2>
-<center>
-<table align="center" border=1 cellpadding=10 width=1000>
-<tr>
-<th>Domingo <th>Segunda <th>Terça <th>Quarta <th>Quinta <th>Sexta <th>Sábado
-</tr>
-<tr>
-<td> <td> <td> <td> <td>1 <td>2 <td>3
-</tr>
-<tr>
-<td>4 <td>5 <td>6 <td>7 <td>8 <td>9 <td>10
-</tr>
-<tr>
-<td>11 <td>12 <td>13 <td>14 <td>15 <td>16 <td>17
-</tr>
-<tr>
-<td>18 <td>19 <td>20 <td>21 <td>22 <td>23 <td>24
-</tr>
-<tr>
-<td>25 <td>26 <td>27 <td>28 <td>29 <td>30 <td>
-</tr>
-</table>
-    
+   
 <center>
 <p><font size="2" face="verdana"><a href="body_excluirMembro.jsp">Clique aqui
  para remover sua conta</a></font></p>
 
-<%@include  file="Calendario/body_Calendario.jsp"%>
     
 <%
    } 

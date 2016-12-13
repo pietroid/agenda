@@ -36,11 +36,11 @@ public class PreferenciaData {
         int result = ps.executeUpdate();
     } // excluir
     
-    public void excluirid(int id, Transacao tr) throws Exception {
+    public void excluirid(int GEid, Transacao tr) throws Exception {
         Connection con = tr.obterConexao();
-        String sql = "delete from agenda.preferencia where id = ?";
+        String sql = "delete from agenda.preferencia where GRUPOid = ?";
         PreparedStatement ps = con.prepareStatement(sql);
-        ps.setInt(1, id);
+        ps.setInt(1, GEid);
         int result = ps.executeUpdate();
     } // excluir
     
@@ -59,6 +59,20 @@ public class PreferenciaData {
         String sql = "select * from agenda.preferencia where id = ?";
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setInt(1, id);
+        ResultSet rs = ps.executeQuery();
+        rs.first();
+        PreferenciaDO preferencia = new PreferenciaDO();
+        preferencia.setId(rs.getInt("id"));
+        preferencia.setGEid(rs.getInt("GRUPOid"));
+        preferencia.setUSUid(rs.getInt("USERid"));
+        return preferencia;
+    } // buscar
+    
+    public PreferenciaDO buscarAPartirDeGeId(int GEid, Transacao tr) throws Exception {
+        Connection con = tr.obterConexao();
+        String sql = "select * from agenda.preferencia where GRUPOid = ?";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setInt(1, GEid);
         ResultSet rs = ps.executeQuery();
         rs.first();
         PreferenciaDO preferencia = new PreferenciaDO();

@@ -50,14 +50,14 @@ public class Preferencia {
         return false;
     }
     
-    public boolean excluirid (int id) throws Exception{
+    public boolean excluirid (int GEid) throws Exception{
         
         Transacao tr = new Transacao();
         try {
             
             tr.begin();
                 PreferenciaData a = new PreferenciaData();
-                a.excluirid(id, tr);
+                a.excluirid(GEid, tr);
             tr.commit();
             return true;
        
@@ -108,7 +108,7 @@ public class Preferencia {
 	try{
             tr.beginReadOnly();
   	    PreferenciaData a = new PreferenciaData();
-	    PreferenciaDO i = a.buscar(Geid, tr);
+	    PreferenciaDO i = a.buscarAPartirDeGeId(Geid, tr);
             tr.commit();
             return i;
 	} catch (Exception e) {
