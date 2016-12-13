@@ -118,10 +118,11 @@
         if (session.getAttribute("Usuario") != null){
         %>
             <center><a href="EventoFollow.jsp?eve=<%=evento.getId()%>">Seguir evento</a></center>
+            <center><a href="EventoUnfollow.jsp?eve=<%=evento.getId()%>">Deixar de seguir evento</a></center>
         <%
         }
         %>
-  
+        <center><a href="ExibirSeguidores.jsp?eve=<%=evento.getId()%>">Clique para ver uma lista dos seguidores do evento</a></center>
             <table align="center">
                 <th>
                     Seguidores: <%=count%>
