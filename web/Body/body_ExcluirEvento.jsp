@@ -36,7 +36,7 @@
                 Usuario usuariotn = new Usuario();
                 Evento eventotn = new Evento();
                 if (request.getParameter("evento") != null){
-                    EventoDO evento = eventotn.buscarNome(request.getParameter("evento"));
+                    EventoDO evento = eventotn.buscar(Integer.parseInt(request.getParameter("evento")));
                     Realiza realizatn = new Realiza();
                     RealizaDO realiza = realizatn.buscarPorEVE(evento.getId());
                     boolean isadm = membrotn.isADM(realiza.getGEid(), usuario.getId());
@@ -46,7 +46,7 @@
                     %>  
                         <center>
                             Deseja excluir o evento: <%= evento.getNome() %>?
-                            <FORM action = "ExcluirEvento.jsp?evento=<%= evento.getNome() %>" method = "post">
+                            <FORM action = "ExcluirEvento.jsp?evento=<%= evento.getId() %>" method = "post">
                                 <input type="radio" name="Eve" value="sim" checked> Sim<br>
                                 <input type="radio" name="Eve" value="nao"> Não<br>
                                 <INPUT type="submit" name="submit" value= "Enviar">
@@ -59,7 +59,7 @@
                                 Pertence pertencetn = new Pertence();
                                 Comentario comentariotn = new Comentario();
                                 if(action.equals("sim")){
-                                    if (evento.getMacroEvento() == true){
+                                    if (evento.isMacroEvento() == true){
                                         List<Integer> microIds = pertencetn.buscarMicroPorMacro(evento);
                                         for(int i = 0; i < microIds.size(); i++){
                                             realizatn.excluirPorEVEid(microIds.get(i));

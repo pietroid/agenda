@@ -65,27 +65,14 @@
         <BR><BR>
         <table align="center" border=1 cellpadding=10 width=200>
             <%
-                String imagem = "/agenda/PastadeImagens/padrao/logo.PNG";
-                if (ge.getImagem() != null){
+                String imagem = "/agenda/PastadeImagens/padrao/logo.png";
+                if (ge.getImagem() != null && !(ge.getImagem().equals(""))){
                     imagem = "/agenda/PastadeImagens/" + ge.getImagem();
                 }
             %>
             <center><img src ="<%= imagem %>" width = 200 height = 200></center>
         </table>
-        <BR><BR>
-        <table align="center" border=1 cellpadding=10 width=200>
-            <tfoot>
-            <center><td><th><a href="Fotos.jsp" target="_top">Mais Fotos</a></th></td></center>
-            </tfoot>
-         </table>
-            <br><br>
-        <table align="center" border=1 cellpadding=10 width=500>
-            <th>Descrição do grupo</th>
-            <tr>
-                <td width=10% height=150> <%= ge.getDescricao() %> </td>
-            </tr>
-        </table>
-        <br><br>
+            <BR><BR>
 <%  if(session.getAttribute("Usuario")!= null){
         UsuarioDO solicitar = new UsuarioDO();
         solicitar = (UsuarioDO)session.getAttribute("Usuario");
@@ -93,7 +80,7 @@
         int a = ge.getId();
         int relacaomembro = 0;
         List<MembroDO> Lista = GEsolicitar.buscarPorUSUid(solicitar.getId());
-        if (Lista != null){
+        if (Lista != null && !Lista.isEmpty()){
             for(MembroDO b : Lista){
                 if (a == b.getGEid()){
                     relacaomembro = 1;
@@ -103,31 +90,41 @@
                 }
             }
         }
+        if(usuario.isSuperUser()){
+            relacaomembro=2;
+        }
     
     if(relacaomembro == 0){
 %>
-        <BR>
-        <table align="right" border=1 cellpadding=10 width=200>
+
+        <table align="center" border=1 cellpadding=10 width=200>
             <tfoot>
-                <tr><th><a href="SolicitarAdesao.jsp" target="_top">Solicitar adesão</a></th></tr>
+                <tr><th><a href="SolicitarAdesao.jsp?GEDO=<%=ge.getId()%>" target="_top"><font color="FFFFFF">Solicitar adesão</font></a></th></tr>
             </tfoot>
         </table>
-        <BR><BR>
+
 <%
     }
     if(relacaomembro == 1){
 %>
-        <BR>
         <table align="center" border=1 cellpadding=10 width=200>
             <tfoot>
-                <tr><th><a href="" target="_top">Aguardando aprovação</a></th></tr>
+                <tr><th><a href="" target="_top"><font color="FFFFFF">Aguardando aprovação</font></a></th></tr>
             </tfoot>
         </table>
-        <BR><BR>
         <%
     }   
 }
-%>        
+%>          
+        <br><br>
+        <table align="center" border=1 cellpadding=10 width=500>
+            <th>Descrição do grupo</th>
+            <tr>
+                <td width=10% height=150> <%= ge.getDescricao() %> </td>
+            </tr>
+        </table>
+        <br><br>
+      
         
  
         <table align="center" border=1 cellpadding=10 width=500>
@@ -147,7 +144,7 @@
         %>
                 <table align="center" border=1 cellpadding=10 width=500>
                     <th> 
-                         <center> <a href="/agenda/AlterarInfoGE.jsp" target="_top"> Alterar Informações </a> </center> 
+                         <center> <a href="/agenda/AlterarInfoGE.jsp?GEDO=<%=ge.getId()%>" target="_top"> Alterar Informações </a> </center> 
                     </th>
                 </table>
         <%
@@ -162,10 +159,8 @@
         for(int i = 0; i < realizas.size(); i++){
             eventos.add(eventotn.buscar(realizas.get(i).getEVEid()));
         }
-        int j;
-        if (eventos.size() > 5) j = 5;
-        else j = eventos.size();
-        for (int i = 0; i < j; i++){
+            
+        for (int i = 0; i < eventos.size(); i++){
             EventoDO evento = eventos.get(i);
                 %>
             <tr>
@@ -188,27 +183,33 @@
             </table>
     <%      
         }
-    }
-else{ pageContext.forward("index.jsp");}
-    %>
-    <% 
         if(session.getAttribute("Usuario")!= null){
             UsuarioDO SUser = (UsuarioDO)session.getAttribute("Usuario");
-            if (SUser.isSuperUser()){
-                int idGEexclusao = 0;
+            Membro mtn=new Membro();
+            List<MembroDO> membro=mtn.buscarPorUSUid(SUser.getId());
+            boolean sameGE=false;
+            for(MembroDO m : membro){
+                if(m.getGEid()==ge.getId() && m.getADM()==1){
+                    sameGE=true;
+                    break;
+                }
+            }
+            if (SUser.isSuperUser() || sameGE){
                 %>
+    <center>
                 <FORM action="ExcluirGrupo.jsp" method="post">
                 <INPUT type="submit" name="Excluir" value="Excluir Grupo">
-                <INPUT type="hidden" name="<%=idGEexclusao%>" value="ge.getId()">
+                <INPUT type="hidden" name="idGEexclusao" value="<%=ge.getId()%>">
                 </FORM>
+    </center>
         
         <%
         
             }    
         }
-    
-    
-    %> 
+    }
+else{ pageContext.forward("index.jsp");}
+    %>
     </body>
 </html>
 

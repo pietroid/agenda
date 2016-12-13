@@ -18,7 +18,7 @@ public class Evento {
         Transacao tr = new Transacao();
         try {
             
-            tr.begin();
+           tr.begin();
                 EventoData EventoData = new EventoData();
                 EventoData.incluir(Evento, tr);
             tr.commit();
@@ -29,7 +29,7 @@ public class Evento {
             System.out.println("Erro ao incluir " + Evento.getId());
             e.printStackTrace();
         }
-        return false;
+        return true ;
     } // incluir
     
     public boolean atualizar(EventoDO evento) throws Exception {
@@ -129,6 +129,13 @@ public class Evento {
     
     public boolean excluir(EventoDO evento) throws Exception{
         Transacao tr = new Transacao();
+        if(evento.isMacroEvento()){
+            Pertence pertenceT=new Pertence();
+            List<Integer> pertence=pertenceT.buscarMicroPorMacro(evento);
+            if(!pertence.isEmpty()){
+                return false;
+            }
+        }
 	try{
             tr.begin();
             EventoData eventoData = new EventoData();

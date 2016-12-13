@@ -32,11 +32,11 @@
     <h1><center>Criar Evento<center></h1>
     <BR>
     <%
-        UsuarioDO usuario = new UsuarioDO();
+        UsuarioDO usuario=null;
         if (session.getAttribute("Usuario") != null){
             usuario = (UsuarioDO) session.getAttribute("Usuario");
         }
-        if (usuario != null){
+        if (usuario != null && request.getParameter("GE")!=null){
             Realiza realizatn = new Realiza();
             Membro membrotn = new Membro();
             Usuario usuariotn = new Usuario();
@@ -44,19 +44,19 @@
             GEDO ge = getn.buscar(Integer.parseInt(request.getParameter("GE")));
             boolean isadm = membrotn.isADM(ge.getId(), usuario.getId());
             if (isadm){
-                if (request.getParameter("submit") == null && ge != null){
+                if (request.getParameter("submit1") == null && request.getParameter("submit2") == null){
     %>
                     <center>
                     <form action = "CriarEvento.jsp?GE=<%=ge.getId()%>" method = "post">
                         Selecione se o evento é macro ou micro: <BR><BR>
                         <input type="radio" name="Eve" value="macro" checked> Macro<br>
                         <input type="radio" name="Eve" value="micro"> Micro<br>
-                        <INPUT type="submit" name="submit" value= "Ok"><BR><BR>
+                        <INPUT type="submit" name="submit1" value= "Ok"><BR><BR>
                     </form>
                     </center>
     <% 
-                }
-                if (request.getParameter("submit") != null){
+                }else
+                if (request.getParameter("submit1") == null && request.getParameter("submit2") != null){
                     String action = request.getParameter("Eve");
                     boolean campospreenchidos = true;
                     boolean ok = false;
@@ -67,7 +67,7 @@
                     PertenceDO pertence = new PertenceDO();
                     AconteceDO acontece=new AconteceDO();
                     Acontece acontecetn=new Acontece();
-                    if (request.getParameter("submit").equals("Criar micro")){
+                    if (request.getParameter("submit2").equals("Criar micro")){
                         if (request.getParameter("EVEnome") != null && !(request.getParameter("EVEnome").equals("")) &&
                             request.getParameter("EVEdescricao") != null && !(request.getParameter("EVEdescricao").equals("")) &&
                             request.getParameter("EVEtipo") != null && !(request.getParameter("EVEtipo").equals("")) &&
@@ -79,38 +79,82 @@
                             request.getParameter("EVEdataM") != null && !(request.getParameter("EVEdataM").equals("")) &&
                             request.getParameter("EVEdataY") != null && !(request.getParameter("EVEdataY").equals("")) &&
                             request.getParameter("EVEmacro_evento") != null && !(request.getParameter("EVEmacro_evento").equals("")))
-                        {
-                            evento.setNome(request.getParameter("EVEnome"));
-                            evento.setDescricao(request.getParameter("EVEdescricao"));
-                            evento.setTipo(request.getParameter("EVEtipo"));
-                            evento.setHoraInicial(new Time(Integer.valueOf(request.getParameter("EVEhoraI")), Integer.valueOf(request.getParameter("EVEminI")), 0));
-                            evento.setHoraFinal(new Time(Integer.valueOf(request.getParameter("EVEhoraT")), Integer.valueOf(request.getParameter("EVEminT")), 0));
-                            evento.setData(new Date(Integer.valueOf(request.getParameter("EVEdataY")) - 1900, Integer.valueOf(request.getParameter("EVEdataM")) - 1, Integer.valueOf(request.getParameter("EVEdataD"))));
-                            evento.setMacroEvento(false);
-                            ok = eventotn.incluir(evento);
-                            int idEv=evento.getId();
-                            if (ok == true){
-                                acontece.setEVEid(idEv);
-                                acontece.setPOI_id(Integer.parseInt(request.getParameter("")));
-                                acontecetn.incluir(acontece);
-                                if (ge != null){
-                                    realiza.setEVEid(idEv);
-                                    realiza.setGEid(ge.getId());
-                                    boolean realizaok = realizatn.incluir(realiza);
+                            {
+                                evento.setNome(request.getParameter("EVEnome"));
+                                evento.setDescricao(request.getParameter("EVEdescricao"));
+                                evento.setTipo(request.getParameter("EVEtipo"));
+                                evento.setHoraInicial(new Time(Integer.valueOf(request.getParameter("EVEhoraI")), Integer.valueOf(request.getParameter("EVEminI")), 0));
+                                evento.setHoraFinal(new Time(Integer.valueOf(request.getParameter("EVEhoraT")), Integer.valueOf(request.getParameter("EVEminT")), 0));
+                                evento.setData(new Date(Integer.valueOf(request.getParameter("EVEdataY")) - 1900, Integer.valueOf(request.getParameter("EVEdataM")) - 1, Integer.valueOf(request.getParameter("EVEdataD"))));
+                                evento.setMacroEvento(false);
+                                evento.setLink(request.getParameter("EVElink"));
+                                ok=eventotn.incluir(evento);
+                                int idEv=evento.getId();
+                                if (ok == true){ 
+                                    acontece.setEVEid(idEv);
+                                    acontece.setPOI_id(Integer.parseInt(request.getParameter("EVElocal")));
+                                    acontecetn.incluir(acontece);
+                                    if (ge != null){
+                                        realiza.setEVEid(idEv);
+                                        realiza.setGEid(ge.getId());
+                                        boolean realizaok = realizatn.incluir(realiza);
+                                    }
+                                    if (request.getParameter("hasMacro")!=null){
+                                        pertence.setMicroId(idEv);
+                                        pertence.setMacroId(Integer.parseInt(request.getParameter("EVEmacro_evento")));
+                                        boolean pertenceok = pertencetn.incluir(pertence);
+                                    }
+%><p>Evento criado com sucesso!</p><BR><a href="Evento.jsp?evento=<%=idEv%>">Página do evento</a><%
                                 }
-                                EventoDO macro = eventotn.buscar(Integer.parseInt(request.getParameter("EVEmacro_evento")));
-                                if (macro != null && request.getParameter("hasMacro")!=null){
-                                    pertence.setMicroId(idEv);
-                                    pertence.setMacroId(macro.getId());
-                                    boolean pertenceok = pertencetn.incluir(pertence);
-                                }
+                            }else{
+                                PontoDeInteresse tpoi=new PontoDeInteresse();
+                                List<PontoDeInteresseDO> listaPOI=tpoi.ListarPOI();
+                                Evento tev=new Evento();
+                                List<EventoDO> listaMEventos=tev.listarMacro();
+                        
+    %>
+                        <b style="color:red">Preencha os campos corretamente!</b>
+                        <div align = "left|justify">
+                            <FORM action = "CriarEvento.jsp?GE=<%=ge.getId()%>" method = "post">
+                                Nome do Evento:
+                                <INPUT type="text" name="EVEnome" maxlength = "30"><BR>
+                                Descrição:
+                                <INPUT type="text" name="EVEdescricao" maxlength = "140" size = "140"><BR>
+                                Tipo do evento:
+                                <INPUT type="text" name="EVEtipo"><BR>
+                                Horário de início:
+                                <INPUT type="number" name="EVEhoraI" min = "0" max = "23" size = "2">:<INPUT type="number" name="EVEminI" min = "0" max = "59" size = "2"><BR>
+                                Horário de término:
+                                <INPUT type="number" name="EVEhoraT" min = "0" max = "23" size = "2">:<INPUT type="number" name="EVEminT" min = "0" max = "59" size = "2"><BR>
+                                Data (dd/mm/yyyy):
+                                <INPUT type="number" name="EVEdataD" min = "1" max = "31" size = "2">/<INPUT type="number" name="EVEdataM" min = "1" max = "12" size = "2">/<INPUT type="number" name="EVEdataY" min = "2016" max = "2050" size = "4"><BR>
+                                <INPUT type="checkbox" name="hasMacro" value="sim"> Tem macro evento </INPUT><BR>
+                                Macro evento:
+                                <select name="EVEmacro_evento">
+                                        <%if(listaMEventos!=null && !listaMEventos.isEmpty()){
+                                            for(EventoDO ev : listaMEventos){
+                                                %><option value="<%=ev.getId()%>"><%=ev.getNome()%></option><%
+                                            }
+                                        }%>
+                                </select><BR>
+                                Local:
+                                <select name="EVElocal">
+                                    <%if(listaPOI!=null && !listaPOI.isEmpty()){
+                                            for(PontoDeInteresseDO poi : listaPOI){
+                                                %><option value="<%=poi.getId()%>"><%=poi.getNome()%></option><%
+                                            }
+                                    }%>
+                                </select>
+                                <a href="Cadastro_POI.jsp">Cadastro de local...</a><BR><BR>
+                                 Link de inscrição para evento, se houver (google forms, site, etc):
+                                <INPUT type="text" name="EVElink" maxlength = "100"><BR>
+                                <button name="submit2" value="Criar micro">Criar evento</button><BR><BR>
+                            </FORM>
+                            <BR><BR>
+                        </div> <%
                             }
-                        }
-                        else{
-                            %>MERDA<%
-                        }
                     }else 
-                    if (request.getParameter("submit").equals("Criar macro")){
+                    if (request.getParameter("submit2").equals("Criar macro")){
                         if (request.getParameter("EVEnome") != null && !(request.getParameter("EVEnome").equals("")) &&
                             request.getParameter("EVEdescricao") != null && !(request.getParameter("EVEnome").equals("")) &&
                             request.getParameter("EVEtipo") != null && !(request.getParameter("EVEnome").equals("")) &&
@@ -121,35 +165,67 @@
                             request.getParameter("EVEdataD") != null && !(request.getParameter("EVEnome").equals("")) &&
                             request.getParameter("EVEdataM") != null && !(request.getParameter("EVEnome").equals("")) &&
                             request.getParameter("EVEdataY") != null && !(request.getParameter("EVEnome").equals("")))
-                        {
-                            evento.setNome(request.getParameter("EVEnome"));
-                            evento.setDescricao(request.getParameter("EVEdescricao"));
-                            evento.setTipo(request.getParameter("EVEtipo"));
-                            evento.setHoraInicial(new Time(Integer.valueOf(request.getParameter("EVEhoraI")), Integer.valueOf(request.getParameter("EVEminI")), 0));
-                            evento.setHoraFinal(new Time(Integer.valueOf(request.getParameter("EVEhoraT")), Integer.valueOf(request.getParameter("EVEminT")), 0));
-                            evento.setData(new Date(Integer.valueOf(request.getParameter("EVEdataY")) - 1900, Integer.valueOf(request.getParameter("EVEdataM")) - 1, Integer.valueOf(request.getParameter("EVEdataD"))));
-                            evento.setMacroEvento(true);
-                            ok = eventotn.incluir(evento);
-                            int idEv=evento.getId();
-                            if (ok == true){
-                                acontece.setEVEid(idEv);
-                                acontece.setPOI_id(Integer.parseInt(request.getParameter("")));
-                                acontecetn.incluir(acontece);
-                                if (ge != null){
-                                    realiza.setEVEid(idEv);
-                                    realiza.setGEid(ge.getId());
-                                    boolean realizaok = realizatn.incluir(realiza);
+                            {
+                                evento.setNome(request.getParameter("EVEnome"));
+                                evento.setDescricao(request.getParameter("EVEdescricao"));
+                                evento.setTipo(request.getParameter("EVEtipo"));
+                                evento.setHoraInicial(new Time(Integer.valueOf(request.getParameter("EVEhoraI")), Integer.valueOf(request.getParameter("EVEminI")), 0));
+                                evento.setHoraFinal(new Time(Integer.valueOf(request.getParameter("EVEhoraT")), Integer.valueOf(request.getParameter("EVEminT")), 0));
+                                evento.setData(new Date(Integer.valueOf(request.getParameter("EVEdataY")) - 1900, Integer.valueOf(request.getParameter("EVEdataM")) - 1, Integer.valueOf(request.getParameter("EVEdataD"))));
+                                evento.setMacroEvento(true);
+                                evento.setLink(request.getParameter("EVElink"));
+                                ok = eventotn.incluir(evento);
+                                int idEv=evento.getId();
+                                if (ok == true){
+                                    acontece.setEVEid(idEv);
+                                    acontece.setPOI_id(Integer.parseInt(request.getParameter("EVElocal")));
+                                    acontecetn.incluir(acontece);
+                                    if (ge != null){
+                                        realiza.setEVEid(idEv);
+                                        realiza.setGEid(ge.getId());
+                                        boolean realizaok = realizatn.incluir(realiza);
+                                    }
+                                    %><p>Evento criado com sucesso!</p><BR><a href="Evento.jsp?evento=<%=idEv%>">Página do evento</a><%
                                 }
-                            }
+                        }else{
+                            PontoDeInteresse tpoi=new PontoDeInteresse();
+                            List<PontoDeInteresseDO> listaPOI=tpoi.ListarPOI();%>
+                            
+                        <div align = "left|justify">
+                            <FORM action = "CriarEvento.jsp?GE=<%=ge.getId()%>" method = "post">
+                                Nome do Evento:
+                                <INPUT type="text" name="EVEnome" maxlength = "30"> <BR>
+                                Descrição:
+                                <INPUT type="text" name="EVEdescricao" maxlength = "140" size = "140"><BR>
+                                Tipo:
+                                <INPUT type="text" name="EVEtipo"><BR>
+                                 Horário de início:
+                                <INPUT type="number" name="EVEhoraI" min = "0" max = "23" size = "2">:<INPUT type="number" name="EVEminI" min = "0" max = "59" size = "2"><BR>
+                                Horário de término:
+                                <INPUT type="number" name="EVEhoraT" min = "0" max = "23" size = "2">:<INPUT type="number" name="EVEminT" min = "0" max = "59" size = "2"><BR>
+                                Data (dd/mm/yyyy):
+                                <INPUT type="number" name="EVEdataD" min = "1" max = "31" size = "2">/<INPUT type="number" name="EVEdataM" min = "1" max = "12" size = "2">/<INPUT type="number" name="EVEdataY" min = "2016" max = "2050" size = "4"><BR><BR>
+                                Local:
+                                <select name="EVElocal">
+                                    <%if(listaPOI!=null && !listaPOI.isEmpty()){
+                                            for(PontoDeInteresseDO poi : listaPOI){
+                                                %><option value="<%=poi.getId()%>"><%=poi.getNome()%></option><%
+                                            }
+                                    }%>
+                                </select>
+                                <a href="Cadastro_POI.jsp">Cadastro de local...</a><BR><BR>
+                                Link de inscrição para evento, se houver (google forms, site, etc):
+                                <INPUT type="text" name="EVElink" maxlength = "100"><BR>
+                                <button name="submit2" value="Criar macro">Criar evento</button><BR><BR>
+                            </FORM>
+                            <BR><BR>
+                        </div> <%
                         }
-                        else{
-                            %>MERDA<%
-                        }
-                    }else{
-                    
+                    }
+                    }else if(request.getParameter("submit1") != null && request.getParameter("submit2") == null){
                     PontoDeInteresse tpoi=new PontoDeInteresse();
                     List<PontoDeInteresseDO> listaPOI=tpoi.ListarPOI();
-                    if((action != null) && action.equals("micro")){
+                    if((request.getParameter("Eve") != null) && request.getParameter("Eve").equals("micro")){
                         Evento tev=new Evento();
                         List<EventoDO> listaMEventos=tev.listarMacro();
                         
@@ -186,14 +262,15 @@
                                     }%>
                                 </select>
                                 <a href="Cadastro_POI.jsp">Cadastro de local...</a><BR><BR>
-                                <button name="submit" value="Criar micro">Criar evento</button><BR><BR>
+                                Link de inscrição para evento, se houver (google forms, site, etc):
+                                <INPUT type="text" name="EVElink" maxlength = "100"><BR>
+                                <button name="submit2" value="Criar micro">Criar evento</button><BR><BR>
                             </FORM>
                             <BR><BR>
                         </div>
     
     <%  
-                    }else
-                    if((action != null) && action.equals ("macro")){
+                    }else if((request.getParameter("Eve") != null) && request.getParameter("Eve").equals("macro")){
     %>
     
                         <div align = "left|justify">
@@ -219,13 +296,14 @@
                                     }%>
                                 </select>
                                 <a href="Cadastro_POI.jsp">Cadastro de local...</a><BR><BR>
-                                <button name="submit" value="Criar macro">Criar evento</button><BR><BR>
+                                Link de inscrição para evento, se houver (google forms, site, etc):
+                                <INPUT type="text" name="EVElink" maxlength = "100"><BR>
+                                <button name="submit2" value="Criar macro">Criar evento</button><BR><BR>
                             </FORM>
                             <BR><BR>
                         </div>
     <%  
                     }
-                }
                 }
             }
             else pageContext.forward("index.jsp");
