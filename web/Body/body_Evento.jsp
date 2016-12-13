@@ -8,6 +8,10 @@
 <%@ page import="data.MembroDO" %>
 <%@ page import="transacoes.Realiza" %>
 <%@ page import="data.RealizaDO" %>
+<%@page import="data.PontoDeInteresseDO"%>
+<%@page import="transacoes.PontoDeInteresse"%>
+<%@page import="data.AconteceDO"%>
+<%@page import="transacoes.Acontece"%>
 <%@page import="java.util.List"%>
 <%@ page import="transacoes.Usuario" %>
 <%@ page import="java.util.Vector" %>
@@ -19,7 +23,11 @@
         Comentario comentariotn = new Comentario();
         Evento eventotn = new Evento();
         Usuario usuariotn = new Usuario();
+        PontoDeInteresse poitn = new PontoDeInteresse();
         Realiza realizatn = new Realiza();
+        Acontece acontecetn = new Acontece();
+        AconteceDO acontece = acontecetn.buscarPorEVEid(Integer.valueOf(request.getParameter("evento")));
+        PontoDeInteresseDO poi = poitn.buscar(acontece.getPOI_id());
         Membro membrotn = new Membro();
         UsuarioDO usuario = new UsuarioDO();
         EventoDO evento = eventotn.buscar(Integer.parseInt(request.getParameter("evento")));
@@ -49,8 +57,17 @@
                 <td width=10% height=200> <%= evento.getDescricao() %></td>
             </tr>
         </table>
-            
-        <table align="center" border=1 cellpadding=10 width=500>
+        
+        <table align = "right" border = 1 cellpadding = 10 width = 500>
+            <th>Informações</th>
+            <tr><td>Data: <%= evento.getData() %></td></tr>
+            <tr><td>Horario de inicio: <%= evento.getHoraInicial() %></td></tr>
+            <tr><td>Horario de termino: <%= evento.getHoraFinal() %></td></tr>
+            <tr><td>Local: <%= poi.getEndereco() %></td></tr>
+        </table>
+        
+            <BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR>
+        <table align="left" border=1 cellpadding=10 width=500>
             <% 
         if (usuario.getNome() != null){
             %>
@@ -90,7 +107,7 @@
 
         <BR><BR><BR><BR><BR><BR><BR><BR><BR>
 
-        <BR>
+        <BR><BR><BR><BR><BR>
         
         <!-------------------------------------------------------------------------------------------------->
 <!----------------------------- REDIRECIONA PARA FEEDBACK------------------------------------------->
