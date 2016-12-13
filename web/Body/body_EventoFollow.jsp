@@ -34,10 +34,10 @@
         if (segueTodos == true) {
         %>
         <h1 align ="center">
-            VocÃª jÃ¡ Ã© um seguidor desse evento!
+            Você já é um seguidor desse evento!
         </h1>
         <BR>
-        <a href ="Evento.jsp">Clique aqui para voltar Ã  pÃ¡gina do evento</a>
+        <a href ="Evento.jsp?evento=<%=evento.getId()%>">Clique aqui para voltar à página do evento</a>
         <%   
         }
         else { 
@@ -46,15 +46,15 @@
             if (seguindotn.incluir(seguindo)) {
     %>
             <h1 align="center">
-                VocÃª agora Ã© um seguidor do evento <%=evento.getNome()%>!
+                Você agora é um seguidor do evento <%=evento.getNome()%>!
             </h1>
-            <a href ="Evento.jsp">Clique aqui para voltar Ã  pÃ¡gina do evento</a>
+            <a href ="Evento.jsp?evento=<%=evento.getId()%>">Clique aqui para voltar à página do evento</a>
     <%
             }
             else {
     %>
     Houve um erro! <BR>
-        <a href ="Evento.jsp">Clique aqui para voltar Ã  pÃ¡gina do evento</a>
+        <a href ="Evento.jsp?evento=<%=evento.getId()%>">Clique aqui para voltar à página do evento</a>
     <%
             }
         }
