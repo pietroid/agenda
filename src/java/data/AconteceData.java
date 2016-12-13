@@ -67,4 +67,18 @@ public class AconteceData {
         acontece.setPOI_id(rs.getInt("POI_id"));
         return acontece;
     } // buscar
+    
+    public AconteceDO buscarPorEVEid(int EVEid, Transacao tr) throws Exception {
+        Connection con = tr.obterConexao();
+        String sql = "select * from agenda.acontece where EVEid = ?";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setInt(1, EVEid);
+        ResultSet rs = ps.executeQuery();
+        rs.first();
+        AconteceDO acontece = new AconteceDO();
+        acontece.setId(rs.getInt("acontece_id"));
+        acontece.setEVEid(rs.getInt("EVEid"));
+        acontece.setPOI_id(rs.getInt("POI_id"));
+        return acontece;
+    }
 }
