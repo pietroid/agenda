@@ -209,12 +209,4 @@ public class EventoDO {
         this.link = link;
     }
 
-    
-    public int getAtivo(){
-        return ativo;
-    }
-    
-    public void setAtivo(int ativo){
-        this.ativo = ativo;
-    }
 }
