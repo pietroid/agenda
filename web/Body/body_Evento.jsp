@@ -15,7 +15,7 @@
 <%@page import="data.SeguindoDO"%>
 
 <% 
-    if (request.getParameter("evento") != null) {
+    if (request.getParameter("evento") != null && request.getParameter("eve") == null){
         Comentario comentariotn = new Comentario();
         Evento eventotn = new Evento();
         Usuario usuariotn = new Usuario();
@@ -116,7 +116,7 @@
                 for (count = 0; count < seguindo.size(); count++);
             }
         %>
-            <center><a href="EventoFollow.jsp?eve=<%=evento.getId()%>">Seguir evento</a></center>
+            <center><a href="Evento.jsp?eve=<%=evento.getId()%>">Seguir evento</a></center>
             <table align="center">
                 <th>
                     Seguidores: <%=count%>
@@ -150,7 +150,48 @@
 </form>
     <%
     }
-
+    else if ((request.getParameter("eve")) != null) {
+        SeguindoDO seguindo = new SeguindoDO();
+        Seguindo seguindotn = new Seguindo();      
+        UsuarioDO usuario = (UsuarioDO)session.getAttribute("Usuario");
+        Evento eventotn = new Evento();
+        EventoDO evento = eventotn.buscar(Integer.parseInt(request.getParameter("eve")));
+        List<SeguindoDO> verificaSeUsuarioJaSegueEvento = seguindotn.pesquisarPorUSUid(usuario.getId());
+        boolean segue = false;
+        for (int i = 0; i < verificaSeUsuarioJaSegueEvento.size(); i++) {
+            if (verificaSeUsuarioJaSegueEvento.get(i).getEveId() == evento.getId()) {
+                segue = true;
+            }
+        }
+        
+        if (segue == true) {
+        %>
+        <h1 align ="center">
+            Você já é um seguidor desse evento!
+        </h1>
+        <BR>
+        <a href ="Evento.jsp">Clique aqui para voltar à página do evento</a>
+        <%   
+        }
+        else { 
+            seguindo.setEveId(evento.getId());
+            seguindo.setUsuId(usuario.getId());
+            if (seguindotn.incluir(seguindo)) {
+    %>
+            <h1 align="center">
+                Você agora é um seguidor do evento <%=evento.getNome()%>!
+            </h1>
+            <a href ="Evento.jsp">Clique aqui para voltar à página do evento</a>
+    <%
+            }
+            else {
+    %>
+    Houve um erro! <BR>
+        <a href ="Evento.jsp">Clique aqui para voltar à página do evento</a>
+    <%
+            }
+        }
+    }
     else pageContext.forward("index.jsp");
         %>    
     </body>
