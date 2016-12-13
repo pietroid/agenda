@@ -44,22 +44,11 @@
     {
  UsuarioDO superuser = (UsuarioDO)session.getAttribute("Usuario");
  String nome = superuser.getNome();
+ if(superuser.isSuperUser()){
 %>
 <h1><center> Painel de controle <center> </h1>
 
-<h2><font face="verdana">Olá,<%=nome%>  </font><h2>
-        
-        
-        
-        
-        
-<h2><font face="verdana"> Interesses </font><h2>
-        
-        
- 
-        
-<p><font size="2" face="verdana"><a href="/agenda/body_GE.jsp">Clique aqui
- para ver uma lista com todos os Grupos do seu interesse</a></font></p> 
+<h2><font face="verdana">Olá, <%=nome%>  </font><h2>
 
 <p><font size="2" face="verdana"><a href="/agenda/AltPass.jsp">Clique aqui
  para alterar sua senha</a></font></p>
@@ -81,13 +70,18 @@
 <tr>
   <td><a href="/agenda/Cadastro_POI.jsp"  target="_top"><font size="3">Cadastrar Ponto de Interesse</font></a></td>
   <td><a href="/agenda/ListaPOI.jsp"  target="_top"><font size="3" >Alterar Ponto de Interesse</font></a></td>
-  <td><a href="/agenda/ListaPOI.jsp"  target="_top"><font size="3">Excluir Ponto de Interesse</font></a></td>
+  <td><a href="/agenda/ExcluirPOI.jsp"  target="_top"><font size="3">Excluir Ponto de Interesse</font></a></td>
 </tr>
 </table>
  <BR>
  
  <%
-   }
+   }else{
+        pageContext.forward("index.jsp");
+    }
+}else{
+pageContext.forward("index.jsp");
+}
 %>
  
 </font>

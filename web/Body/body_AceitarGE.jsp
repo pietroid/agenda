@@ -25,7 +25,7 @@ Usuario  ustn = new Usuario();
 
         <center>
             <table align="center" border=1 cellpadding=10 width=1000>
-                <th>Nome do GE<th>Descrição<th>Tipo<th>Aceitar Solicitação</th>
+                <th>Nome do GE<th>Descrição<th>Tipo<th>Aceitar Solicitação<th>Rejeitar Solicitação</th>
     
                 <%   
 
@@ -38,7 +38,8 @@ Usuario  ustn = new Usuario();
                     <td><center><%=ge.getNome()%></center>                                
                     <td><center><%=ge.getDescricao()%></center> 
                     <td><center><%=ge.getTipo()%></center>            
-                    <td><center><a href="GEAceito.jsp?EXP=<%= ge.getId()%>">ACEITAR</a></center>
+                    <td><center><a href="GEAceito.jsp?ACE=<%= ge.getId()%>">ACEITAR</a></center>
+                    <td><center><a href="SolicitacaoRejeitada.jsp?REJ=<%= ge.getId()%>">REJEITAR</a></center>
                 </tr>
 
                 <%

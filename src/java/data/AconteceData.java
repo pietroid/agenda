@@ -38,12 +38,29 @@ public class AconteceData {
         int result = ps.executeUpdate();
     } // excluir
 
+    public List<AconteceDO> buscarPorPOI(int POI_id, Transacao tr) throws Exception {
+        Connection con = tr.obterConexao();
+        String sql = "select * from agenda.acontece where POI_id = ?";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setInt(1, POI_id);
+        ResultSet rs = ps.executeQuery();
+        List<AconteceDO> ac = new ArrayList<AconteceDO>();
+        while(rs.next()){
+            AconteceDO acontece = new AconteceDO();
+            acontece.setId(rs.getInt("acontece_id"));
+            acontece.setEVEid(rs.getInt("EVEid"));
+            acontece.setPOI_id(rs.getInt("POI_id"));
+            ac.add(acontece);
+        }
+        return ac;
+    } // buscar
     public AconteceDO buscar(int acontece_id, Transacao tr) throws Exception {
         Connection con = tr.obterConexao();
         String sql = "select * from agenda.acontece where acontece_id = ?";
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setInt(1, acontece_id);
         ResultSet rs = ps.executeQuery();
+        rs.first();
         AconteceDO acontece = new AconteceDO();
         acontece.setId(rs.getInt("acontece_id"));
         acontece.setEVEid(rs.getInt("EVEid"));
