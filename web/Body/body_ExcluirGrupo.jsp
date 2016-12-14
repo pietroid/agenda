@@ -18,10 +18,12 @@
 
 <% 
     UsuarioDO SUser = (UsuarioDO)session.getAttribute("Usuario");
+    if(SUser!=null){
     GEDO GEexcluir = new GEDO();
     int id = Integer.parseInt(request.getParameter("idGEexclusao"));
     GE GEtn = new GE();
     Membro mtn=new Membro();
+    
     List<MembroDO> membro=mtn.buscarPorUSUid(SUser.getId());
     boolean sameGE=false;
     for(MembroDO m : membro){
@@ -50,8 +52,11 @@
         }
     }
     else { %>
-    Voce não tem permissão para realizar esta operação
+    Você não tem permissão para realizar esta operação
     <% }
+}else{%>
+Você não tem permissão para realizar esta operação
+<%}
 %>
 
 </center>

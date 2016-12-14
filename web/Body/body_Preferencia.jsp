@@ -102,7 +102,7 @@
                 <select name = "grupo">
     <%
             for (int i = 0; i < listaGE.size(); i++) {
-                if (preferenciatn.buscarAPartirDeGeId(listaGE.get(i).getId()) == null) {
+                if (preferenciatn.buscarAPartirDeGeId(listaGE.get(i).getId()) == null && listaGE.get(i).getAutorizado()==1) {
     %>           
                     <option value="<%=listaGE.get(i).getId()%>"><%=listaGE.get(i).getNome()%></option>
     <%

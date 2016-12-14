@@ -60,6 +60,7 @@
             superuser = usuario.isSuperUser();
             isadm = membrotn.isADM(ge.getId(), usuario.getId());
         }
+        if(ge.getAutorizado()==1 || isadm || superuser){
 %>
         <h1><center><%= ge.getNome() %></center></h1>
         <BR><BR>
@@ -138,6 +139,20 @@
                 <td> <%= ge.getTel()%></td>
             </tr>
         </table>
+        <table align="center" border=1 cellpadding=10 width=500>
+            <th colspan="2">Membros do grupo</th>
+            <%
+                Membro mtnn=new Membro();
+                List<MembroDO> mbrs  =mtnn.buscarPorGEid(ge.getId()); 
+            for(MembroDO mbr : mbrs){
+                Usuario ust=new Usuario();
+                UsuarioDO uss=ust.buscarPorID(mbr.getUSUid());
+%>
+            <tr align="center">
+                <td><a href="Usuario.jsp?Usuario=<%=uss.getId()%>" ><%=uss.getNome()%></a></td>
+            </tr>
+            <%}%>
+        </table>
         <BR><BR>
         <%
         if (isadm == true || superuser == true){
@@ -174,12 +189,14 @@
         <BR><BR>
 
         <%
-        if(isadm == true || superuser == true){
+        if(isadm == true){
         %>
             <table align="center" border=1 cellpadding=10 width=500>
+                <center>
                 <tr>
-                    <td><a href="CriarEvento.jsp?GE=<%= ge.getId() %>" target="_top"><font size="5" color="#ff0000">Criar evento</font></a></td>
+                    <td><a href="CriarEvento.jsp?GE=<%= ge.getId() %>" style="color:red">Criar evento</a></td>
                 </tr>
+                </center>
             </table>
     <%      
         }
@@ -207,6 +224,9 @@
         
             }    
         }
+}else{
+pageContext.forward("index.jsp");
+}
     }
 else{ pageContext.forward("index.jsp");}
     %>

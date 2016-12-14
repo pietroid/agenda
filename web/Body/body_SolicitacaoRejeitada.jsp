@@ -23,11 +23,8 @@
             int Solid = Integer.parseInt(request.getParameter("REJ"));
             GE GEtn = new GE();
             GEexcluir =  GEtn.buscar(Solid);
-            GEtn.excluir(GEexcluir);   
-        
+            GEtn.excluir(GEexcluir);
             pageContext.forward("SolicitacaoExcluidaGE.jsp");   
-            
-      
     }   
             
 } 

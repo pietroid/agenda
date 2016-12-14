@@ -57,7 +57,11 @@ public class GEData {
         ResultSet rs = ps.executeQuery();
         rs.first();
         int EVEid=0;
-        EVEid=rs.getInt("EVEid");
+        try{
+            EVEid=rs.getInt("EVEid");
+        }catch(Exception e){
+            
+        }
         
         if(EVEid!=0){
             String[] sql3 = {"delete from evento where evento.EVEid = ?",
