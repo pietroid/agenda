@@ -52,6 +52,8 @@ public class MembroData {
         int result = ps.executeUpdate();
     } // atualizar
 
+    
+    
     public MembroDO buscar(int MEMBERid, Transacao tr) throws Exception {
         Connection con = tr.obterConexao();
         String sql = "select * from agenda.Membro where MEMBERid = ?";
@@ -83,7 +85,28 @@ public class MembroData {
         Membro.setAprovado(rs.getInt("Aprovado"));
         return Membro;
     }
-
+    
+    public List<MembroDO> buscarPorUSU_N_Aprv(int GEid, Transacao tr) throws Exception {
+        Connection con = tr.obterConexao();
+        String sql = "select * from agenda.Membro where GEid = ? and Aprovado = ?";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setInt(1, GEid);
+        ps.setInt(2, 0);
+        ResultSet rs = ps.executeQuery();
+        rs.first();
+        List<MembroDO> Items = new ArrayList<MembroDO>();
+        do{
+            MembroDO i = new MembroDO();
+            i.setId (rs.getInt("MEMBERid"));
+            i.setGEid (rs.getInt("GEid"));
+            i.setUSUid(rs.getInt("USUid"));
+            i.setADM(rs.getInt("ADM"));
+            i.setAprovado(rs.getInt("Aprovado"));
+            Items.add(i);
+        }while (rs.next());
+        return Items;
+    }
+    
     public boolean isADM(int GEid, int USUid, Transacao tr) throws Exception {
         Connection con = tr.obterConexao();
         String sql = "select * from agenda.Membro where GEid = ? and USUid = ? and Aprovado = '1'";
