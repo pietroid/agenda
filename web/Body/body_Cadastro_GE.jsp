@@ -1,3 +1,5 @@
+<%@page import="transacoes.QG"%>
+<%@page import="data.QGDO"%>
 <%@page import="java.util.List"%>
 <%@page import="transacoes.PontoDeInteresse"%>
 <%@page import="data.PontoDeInteresseDO"%>
@@ -81,6 +83,13 @@ if (request.getParameter("submit") != null){
            Membro tr = new Membro ();
            tr.incluir (membro);
            int idGE = 0;
+           QGDO qgo= new QGDO ();
+           qgo.setPOI_id(Integer.parseInt((request.getParameter("GElocal"))));
+           qgo.setGEid(grupo.getId());
+           QG trqg=new QG();
+           trqg.incluir(qgo);
+
+
            %>
             Cadastro efetuado com sucesso!  <BR>
             Espere a confirmação de um de nossos administradores.<BR>
