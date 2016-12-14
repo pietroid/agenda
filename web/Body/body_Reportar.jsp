@@ -33,14 +33,20 @@
                     Integer usuarioid = usuario.getId();
                     problema.setUserId(usuarioid);
                 }
+                if(action.equals("")){
+
+             %><center><p>Por favor, descreva o problema detectado!</p></center><%
+
+                }else{
                 problema.setMensagem(action);
                 DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
                 LocalDate localDate = LocalDate.now();
                 problema.setData(Date.valueOf(dtf.format(localDate)));
                 Problema prob = new Problema();
-                if (prob.incluir(problema)){ %>
+                if ( prob.incluir(problema)){ %>
                 <center><p>Report enviado com sucesso!</p></center>
-                <% }
+                <%}
+                }
             } %>
         </center>
     </body>
