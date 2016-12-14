@@ -100,7 +100,7 @@
 %><h2><font face="verdana" size="4"> Seus Grupos de Extensão </font></h2><%
     
     if(lmadm.isEmpty()){
-         %><font face="verdana" size="3">Você não administra nenhum grupo de extensão!</font><%
+         %><font face="verdana" size="3">Você não administra nenhum grupo de extensão!</font> <a href="CadastroGE.jsp">Criar grupo de extensão...</a><%
      }
     else{
     %>
