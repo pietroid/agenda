@@ -44,7 +44,7 @@ li a:hover:not(.active) {
 <body>
     <font face="verdana">
     <ul>
-      <li><a class="active" href="/agenda/index.jsp">Home</a></li>
+      <li><a href="/agenda/index.jsp">Home</a></li>
       <li><a href="/agenda/ListadosGE.jsp">Grupos de Extensão</a></li>
       <li><a href="/agenda/Calendario.jsp">Calendário Geral</a></li>
   

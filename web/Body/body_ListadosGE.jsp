@@ -7,25 +7,19 @@
         <font face="verdana">
         <h1> <center>Grupos de Extensão </center></h1>
 
-        <p>
-            A imagem deve ser a mesma imagem do grupo quando este se cadastra no sistema. 
-            Para não deixar a tabela feia, talvez seja bom verificar no programa em java se a imagem é 
-            menor ou igual a a um tamanho (eu usei 120X150 pixels) ou mesmo pedir pro usuário fazer isso.
-        </p>
-<%
-GE getn = new GE();
+        <%
+        GE getn = new GE();
 %>
         <center>
             <table align="center" border=1 cellpadding=10 width=1000>
-                <th>Imagem </th>
-                <th>Grupo de extensão</th>
+                
                 <%   
                     List<GEDO> ges = getn.buscarTodos();
                     for(int i = 0; i < ges.size(); i++){
                        GEDO ge = ges.get(i);
                        if(ge.getAutorizado() == 1) {
-                           String imagem = "/agenda/PastadeImagens/padrao/logo.PNG";
-                           if (ge.getImagem() != null){
+                           String imagem = "/agenda/PastadeImagens/padrao/logo.png";
+                           if (ge.getImagem() != null && !(ge.getImagem().equals(""))){
                                imagem = "/agenda/PastadeImagens/" + ge.getImagem();
                            }
                 %>     

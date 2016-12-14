@@ -94,19 +94,6 @@ public class SeguindoData {
         return Items;
     }
     
-    public SeguindoDO pesquisarPorUSUidRetornaUmDO(int USUid, Transacao tr) throws Exception {
-        Connection con = tr.obterConexao();
-        String sql = "select * from agenda.seguindo where USUid = ?";
-        PreparedStatement ps = con.prepareStatement(sql);
-        ps.setInt(1, USUid);
-        ResultSet rs = ps.executeQuery();
-        rs.first();
-        SeguindoDO seguindo = new SeguindoDO();
-        seguindo.setId(rs.getInt("INSCid"));
-        seguindo.setEveId(rs.getInt("EVEid"));
-        seguindo.setUsuId(rs.getInt("USUid"));
-        return seguindo;
-    }
 }
 
 

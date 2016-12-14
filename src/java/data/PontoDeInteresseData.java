@@ -35,10 +35,12 @@ public class PontoDeInteresseData {
 
     public void excluir(PontoDeInteresseDO  PontoDeInteresse, Transacao tr) throws Exception {
         Connection con = tr.obterConexao();
-        String sql = "delete from agenda.POI where POI_id = ?";
+        String sql = "delete from agenda.POI where POI_id = ?;"+
+                "delete from QG where POI_id = ?;";
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setInt(1, PontoDeInteresse.getId());
-        int result = ps.executeUpdate();
+        ps.setInt(2, PontoDeInteresse.getId());
+        ps.execute();
     } // excluir
 
     public PontoDeInteresseDO buscar(int POI_id, Transacao tr) throws Exception {

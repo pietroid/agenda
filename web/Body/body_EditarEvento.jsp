@@ -34,7 +34,7 @@
             Membro membrotn = new Membro();
             Usuario usuariotn = new Usuario();
             if (request.getParameter("evento") != null) {
-                EventoDO evento = eventotn.buscarNome(request.getParameter("evento"));
+                EventoDO evento = eventotn.buscar(Integer.parseInt(request.getParameter("evento")));
                 Realiza realizatn = new Realiza();
                 RealizaDO realiza = realizatn.buscarPorEVE(evento.getId());
                 boolean isadm = membrotn.isADM(realiza.getGEid(), usuario.getId());
@@ -86,11 +86,11 @@
 
                 <%
                     }
-                    boolean macro = evento.getMacroEvento();
+                    boolean macro = evento.isMacroEvento();
                     if(!macro){
     %>
     <div align = "left|justify">
-        <form action = "EditarEvento.jsp?evento=<%= evento.getNome() %>" method = "post">
+        <form action = "EditarEvento.jsp?evento=<%= evento.getId() %>" method = "post">
             Nome do Evento:
             <INPUT type="text" name="EVEnome" maxlength = "30"><BR>
             Descrição:
@@ -114,7 +114,7 @@
                     if(macro){
     %>
     <div align = "left|justify">
-        <form action = "EditarEvento.jsp?evento=<%= evento.getNome() %>" method = "post">
+        <form action = "EditarEvento.jsp?evento=<%= evento.getId() %>" method = "post">
             Nome do Evento:
             <INPUT type="text" name="EVEnome" maxlength = "30"> <BR>
             Descrição:
