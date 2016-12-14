@@ -80,6 +80,21 @@ public class Seguindo {
 	return null;
     }
     
+    public List<SeguindoDO> matchUsrEvent(int USUid, int EVEid) throws Exception{
+        Transacao tr = new Transacao();
+	try{
+            tr.beginReadOnly();
+  	    SeguindoData SeguindoData = new SeguindoData();
+	    List<SeguindoDO> i = SeguindoData.matchUsrEvent(USUid, EVEid, tr);
+            tr.commit();
+            return i;
+	} catch (Exception e) {
+            tr.rollback();
+            System.out.println("Erro ao listar ");  
+	}
+	return null;
+    }    
+    
     public List<SeguindoDO> pesquisarPorEVEid(int EVEid) throws Exception{
         Transacao tr = new Transacao();
 	try{

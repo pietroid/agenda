@@ -92,7 +92,7 @@ if(request.getParameter("submit") != null){
             }
         }
         if ((FeedbackOK == 1) && (NotificacaoOK==1)){
-            pageContext.forward("PaineldeControle.jsp");
+            %>Feedback enviado. <a href="Evento.jsp?evento=<%=request.getParameter("evento")%>"> Voltar à pagina do evento</a><%
         }
     
     }
