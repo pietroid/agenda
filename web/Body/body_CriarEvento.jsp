@@ -116,7 +116,7 @@
                         <b style="color:red">Preencha os campos corretamente!</b>
                         <div align = "left|justify">
                             <FORM action = "CriarEvento.jsp?GE=<%=ge.getId()%>" method = "post">
-                                <center>
+                              
                                 Nome do Evento:
                                 <INPUT type="text" name="EVEnome" maxlength = "30"><BR>
                                 Descrição:
@@ -150,7 +150,7 @@
                                  Link de inscrição para evento, se houver (google forms, site, etc):
                                 <INPUT type="text" name="EVElink" maxlength = "100"><BR>
                                 <button name="submit2" value="Criar micro">Criar evento</button><BR><BR>
-                                </center>
+                                
                             </FORM>
                             <BR><BR>
                         </div> <%
@@ -195,7 +195,7 @@
                             
                         <div align = "left|justify">
                             <FORM action = "CriarEvento.jsp?GE=<%=ge.getId()%>" method = "post">
-                                <center>
+                                
                                 Nome do Evento:
                                 <INPUT type="text" name="EVEnome" maxlength = "30"> <BR>
                                 Descrição:
@@ -220,7 +220,7 @@
                                 Link de inscrição para evento, se houver (google forms, site, etc):
                                 <INPUT type="text" name="EVElink" maxlength = "100"><BR>
                                 <button name="submit2" value="Criar macro">Criar evento</button><BR><BR>
-                                </center>
+                               
                             </FORM>
                             <BR><BR>
                         </div> <%
@@ -236,7 +236,7 @@
     %>
                         <div align = "left|justify">
                             <FORM action = "CriarEvento.jsp?GE=<%=ge.getId()%>" method = "post">
-                                <center>
+                               
                                 Nome do Evento:
                                 <INPUT type="text" name="EVEnome" maxlength = "30"><BR>
                                 Descrição:
@@ -270,7 +270,7 @@
                                 Link de inscrição para evento, se houver (google forms, site, etc):
                                 <INPUT type="text" name="EVElink" maxlength = "100"><BR>
                                 <button name="submit2" value="Criar micro">Criar evento</button><BR><BR>
-                                </center>
+                               
                             </FORM>
                             <BR><BR>
                         </div>
@@ -281,7 +281,7 @@
     
                         <div align = "left|justify">
                             <FORM action = "CriarEvento.jsp?GE=<%=ge.getId()%>" method = "post">
-                                <center>
+                              
                                 Nome do Evento:
                                 <INPUT type="text" name="EVEnome" maxlength = "30"> <BR>
                                 Descrição:
@@ -306,7 +306,7 @@
                                 Link de inscrição para evento, se houver (google forms, site, etc):
                                 <INPUT type="text" name="EVElink" maxlength = "100"><BR>
                                 <button name="submit2" value="Criar macro">Criar evento</button><BR><BR>
-                                </center>
+                               
                             </FORM>
                             <BR><BR>
                         </div>
