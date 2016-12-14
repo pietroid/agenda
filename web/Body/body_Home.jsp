@@ -100,7 +100,7 @@
 %>
         </table>
         </center>   
-<BR><BR><BR><BR><BR><BR>
+<BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR>
 <%if (lista.size() !=0){ %>
     <h2>Os seus próximos eventos nessa semana são:</h2><br>
         <center>
@@ -134,9 +134,7 @@
 
 %>
 
-<p></p>
-<%@include  file="Calendario/body_Calendario_home.jsp"
-%>
+<%@include  file="Calendario/body_Calendario_home.jsp"%>
 <%    
    }else{ //HOME DESLOGADO
 
