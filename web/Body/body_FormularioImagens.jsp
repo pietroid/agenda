@@ -10,7 +10,6 @@
 <%@page import="data.GEData"%>
 
 <%
- 
     
 GE ge= new GE();
 int id =Integer.parseInt(request.getParameter("idGE"));
@@ -59,16 +58,17 @@ ged=ge.buscar(id);
     </style>
     
     
-    <% if(request.getParameter("submit5")!=null){
+    <%if(request.getParameter("submit5")!=null){
       if(request.getParameter("nota")=="imagem1") ged.setImagem("/agenda/PastadeImagens/caneca.png");
       if(request.getParameter("nota")=="imagem2") ged.setImagem("/agenda/PastadeImagens/livro.png");
       if(request.getParameter("nota")=="imagem3") ged.setImagem("/agenda/PastadeImagens/social.png");
       if(request.getParameter("nota")=="imagem4") ged.setImagem("/agenda/PastadeImagens/capacete.png");
+    boolean update = false;
 
-
-      ge.atualizar(ged);
-    
-    %>Parabéns, seu grupo foi devidamente cadastrado!<%
+    update=ge.atualizar(ged);
+    if (update){%><br> Parabéns, seu grupo foi devidamente cadastrado!<%}
+    else {%><br> Erro ao cadastrar! <%}
+    %><%
     
     } 
        
@@ -76,6 +76,7 @@ ged=ge.buscar(id);
     else{    
     %>
 </head>
+<%if(request.getParameter("submit5")==null){%>
 <FORM action="FormularioImagens.jsp" method="post">
     <br>
      <table align="center" border=3 cellpadding=10 width=100>
@@ -99,6 +100,7 @@ ged=ge.buscar(id);
       <td><input type="radio" name="nota" value="imagem2" >Imagem 2</td>
       <td><input type="radio" name="nota" value="imagem3" >Imagem 3</td>
       <td><input type="radio" name="nota" value="imagem4" >Imagem 4</td>
+      <INPUT type="hidden" name="idGE" value="<%=ged.getId()%>">
   </tr>
   <tfoot width="50">
       <td colspan="4" align=" center" >
@@ -110,4 +112,4 @@ ged=ge.buscar(id);
   </tfoot>
      
 </table>
-     <%}%>
+     <%}}%>

@@ -37,7 +37,7 @@ if (request.getParameter("submit") == null){
     <INPUT type="text" name="face"><BR><BR>
     Descrição:<BR>
     <INPUT type="text" name="descricao"><BR><BR>
-    <INPUT type="submit" name="submit" value="Submit">
+    <INPUT type="submit" name="submit" value="Cadastrar">
     <INPUT type="reset" name="reset" value="Reset">
 
 
@@ -98,7 +98,7 @@ if (request.getParameter("submit") != null){
     <INPUT type="text" name="face" value="<%=request.getParameter("face")%>"><BR><BR>
     Descrição:<BR>
     <INPUT type="text" name="descricao" value="<%=request.getParameter("descricao")%>"><BR><BR>
-    <INPUT type="submit" name="submit" value="Submit">
+    <INPUT type="submit" name="submit" value="Cadastrar">
     <INPUT type="reset" name="reset" value="Reset">
     </FORM>  
  <%} }} %>

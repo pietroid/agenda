@@ -105,21 +105,23 @@
 
 %>
 
-
+<p></p>
+<%@include  file="Calendario/body_Calendario.jsp"
+%>
 <%    
    }else{ //HOME DESLOGADO
 
  %>
- <h1><center> Home  (PARA TESTAR HOME ESPECIFICA LOGAR COM: alex sen)</center> </h1>
+ <h1><center> Home</center> </h1>
  <h2><font face="verdana"> Grupos de extensão</font><h2>
 <p><font size="2" face="verdana"><a href="/Agenda/ListadosGE.jsp" target="_top">Clique aqui
  para ver uma lista com todos os Grupos de Extensão</a></font></p> 
+<p></p>
+<%@include  file="Calendario/body_Calendario.jsp"%>
 
 <%    
    }
 %>
-<p></p>
-<%@include  file="Calendario/body_Calendario.jsp"%>
 
 </font>
 </body>

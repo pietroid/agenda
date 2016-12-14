@@ -44,7 +44,19 @@ public class Usuario {
 	return false;
     } // atualizar
     public boolean excluir (UsuarioDO usuario) throws Exception{
-        
+        Membro mtn=new Membro();
+        List<MembroDO> membro=mtn.buscarPorUSUid(usuario.getId());
+        List<MembroDO> admin;
+        if(!membro.isEmpty()){
+            for(MembroDO m : membro){
+                if(m.getADM()==1){
+                    admin=mtn.buscarPorGEidADM(m.getGEid());
+                    if(admin.size()==1){
+                        return false;
+                    }
+                }
+            }
+        }
         Transacao tr = new Transacao();
         try {
             

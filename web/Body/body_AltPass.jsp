@@ -16,7 +16,7 @@
         
         
         if(request.getParameter("submit")==null){%>
-<FORM action="body_AltPass.jsp" method="post" id = "changePassForm">
+<FORM action="AltPass.jsp" method="post" id = "changePassForm">
 Nome:<BR><INPUT type="text" name="nome" value= "<% out.write(us.getNome()); %>"> <BR>
 E-mail:<BR><INPUT type="text" name="email" value= "<% out.write(us.getEmail()); %>"> <BR>
 Curso:<BR><INPUT type="text" name="curso" value= "<% out.write(us.getCurso()); %>"> <BR>

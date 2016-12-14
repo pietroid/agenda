@@ -38,7 +38,7 @@
     Pasta de Imagens:<BR>
     <INPUT type="text" name="pasta_de_imagens"><BR><BR>
     
-    <INPUT type="submit" name="submit" value="Submit">
+    <INPUT type="submit" name="submit" value="Cadastrar">
       
 </FORM>      
     <% }else

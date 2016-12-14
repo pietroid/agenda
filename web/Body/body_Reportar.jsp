@@ -19,10 +19,10 @@
         if (request.getParameter("submit") == null){
         %>
         <center>
-        <form action='Reportar.jsp' method ='post'>
+        <form action="Reportar.jsp" method ="post">
             Descreva o problema (este texto será enviado à nossa equipe): <BR>
             <input type="text" name="report"><br><br>
-            <INPUT type="submit" name="submit" value="Submit">
+            <INPUT type="submit" name="submit" value="Reportar">
         </form>
             
         <% } else {
@@ -34,13 +34,12 @@
                     problema.setUserId(usuarioid);
                 }
                 problema.setMensagem(action);
-                if (!request.getParameter("ano").equals("")){ 
-                    Date dt = Date.valueOf(request.getParameter("ano")+"-01-01");
-                    problema.setData(dt);
-                }
+                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                LocalDate localDate = LocalDate.now();
+                problema.setData(Date.valueOf(dtf.format(localDate)));
                 Problema prob = new Problema();
                 if (prob.incluir(problema)){ %>
-                <h2>Report enviado com sucesso!</h2>
+                <center><p>Report enviado com sucesso!</p></center>
                 <% }
             } %>
         </center>

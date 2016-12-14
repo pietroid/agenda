@@ -48,6 +48,38 @@ public class Acontece {
 	}
 	return null;
     } // buscar
+    
+    public AconteceDO buscarPorEVEid(int EVEid) throws Exception{
+        Transacao tr = new Transacao();
+	try{
+            tr.beginReadOnly();
+  	    AconteceData a = new AconteceData();
+	    AconteceDO i = a.buscarPorEVEid(EVEid, tr);
+            tr.commit();
+            return i;
+	} catch (Exception e) {
+            tr.rollback();
+            System.out.println("Erro ao buscar" + EVEid);
+            e.printStackTrace();
+	}
+	return null;
+    }
+    
+    public List<AconteceDO> buscarPorPOI(int POI_id) throws Exception{
+        Transacao tr = new Transacao();
+	try{
+            tr.beginReadOnly();
+  	    AconteceData a = new AconteceData();
+	    List<AconteceDO> i = a.buscarPorPOI(POI_id, tr);
+            tr.commit();
+            return i;
+	} catch (Exception e) {
+            tr.rollback();
+            System.out.println("Erro ao buscar" + POI_id);
+            e.printStackTrace();
+	}
+	return null;
+    } // buscar
 
     private boolean isEmpty(String s) {
         if (null == s)
