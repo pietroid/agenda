@@ -82,6 +82,7 @@
             <tr><td>Horario de inicio: <%= evento.getHoraInicial() %></td></tr>
             <tr><td>Horario de termino: <%= evento.getHoraFinal() %></td></tr>
             <tr><td>Local: <%= poi.getEndereco() %></td></tr>
+            <tr><td>Avaliação: <%= evento.getAvaliação() %></td></tr>
         </table>
         <%}%>
         

@@ -1,5 +1,5 @@
 <html>
 <body>
-<iframe src="Título\título.jpg" width="1000" height="150" frameBorder="0" scrolling="no"></iframe>
+<img src="Título\LogoHorizNovo.png" alt="Logo Poli Agenda" style="width:45%; margin-left: 27.5%;">
 </body>
 </html>

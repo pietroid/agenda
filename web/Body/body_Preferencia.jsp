@@ -42,7 +42,7 @@
     %>
                         <tr>
                             <td colspan="2">
-                                <center><%=GE.getNome()%></center>
+                                <center> <a href="GE.jsp?GE=<%=GE.getId()%>"><%=GE.getNome()%></a></center>
                             </td>
                         </tr>
     <%
