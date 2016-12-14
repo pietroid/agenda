@@ -131,12 +131,29 @@
         <table align="center" border=1 cellpadding=10 width=500>
             <th colspan="2">Informações do grupo</th>
             <tr>
+                <td><b>Tipo de grupo</b></td>
+                <td> <%= ge.getTipo() %></td>
+            </tr>
+            <tr>
                 <td><b>E-mail</b></td>
                 <td> <%= ge.getEmail() %></td>
             </tr>
+            
             <tr>
                 <td><b>Telefone</b></td>
                 <td> <%= ge.getTel()%></td>
+            </tr>
+            <tr>
+                <td><b>Facebook</b></td>
+                <td><a href="<%=ge.getFace()%>"> <%= ge.getFace()%> </a></td>
+            </tr>
+            <tr>
+                <td><b>Ano de fundação</b></td>
+                <td><%= ge.getAno() %> </td>
+            </tr>
+            <tr>
+                <td><b>Site</b></td>
+                <td><a href="<%= ge.getSite() %>" ><%= ge.getSite() %> </a></td>
             </tr>
         </table>
         <table align="center" border=1 cellpadding=10 width=500>
@@ -145,13 +162,15 @@
                 Membro mtnn=new Membro();
                 List<MembroDO> mbrs  =mtnn.buscarPorGEid(ge.getId()); 
             for(MembroDO mbr : mbrs){
+                if(mbr.getAprovado()==1){
                 Usuario ust=new Usuario();
                 UsuarioDO uss=ust.buscarPorID(mbr.getUSUid());
 %>
             <tr align="center">
                 <td><a href="Usuario.jsp?Usuario=<%=uss.getId()%>" ><%=uss.getNome()%></a></td>
             </tr>
-            <%}%>
+            <%}
+}%>
         </table>
         <BR><BR>
         <%
