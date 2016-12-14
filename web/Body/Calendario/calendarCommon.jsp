@@ -16,6 +16,7 @@
   if ( newMonth != null )
   {
     currentMonthString = newMonth;
+    currentMonthInt = new Integer(currentMonthString).intValue();
   }
   if ( newYear != null )
   {
@@ -23,7 +24,7 @@
   }
 
   // determine the next/previous month and year
-  int intMonth = new Integer(currentMonthString).intValue();
+ int intMonth = new Integer(currentMonthString).intValue();
   int intYear  = new Integer(currentYearString).intValue();
 
   // determine the name of the current intMonth

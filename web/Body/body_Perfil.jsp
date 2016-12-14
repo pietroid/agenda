@@ -119,10 +119,10 @@
 <%
     }%>
     
-    <h2><font face="verdana" size="4"> - Interesses </font></h2>
+    <h2><font face="verdana" size="4"> Interesses </font></h2>
 <%// adicionado link para preferencia%>
 <p><font size="2" face="verdana"><a href="Preferencia.jsp">Lista dos Grupos de Extensão de seu interesse</a></font></p> 
-<h2><font face="verdana" size="4"> - Conta </font></h2>
+<h2><font face="verdana" size="4"> Conta </font></h2>
 <p><font size="2" face="verdana"><a href="AltPass.jsp">Alterar informações da conta</a></font></p>
 <p><font size="2" face="verdana" ><a href="ExcluirMembro.jsp">Excluir sua conta</a></font></p>
 
@@ -139,13 +139,14 @@
     
     //Notificacao para usuario ADM
 %>
-<h2><font size="4" face="verdana"> - Notificações:</font></h2>
-    <table align="center" border="3"    cellpadding = "10" width="1000"   >
+<h2><font size="4" face="verdana"> Notificações:</font></h2>
+    <table align="left" border="3"    cellpadding = "10" width="1000"   >
         <tr>
             <th>Eventos Cancelados</th>
             <td>
                 <table>
             <%
+              
               for (NotificacaoGeralDO notificacaoCanc:ListaNotificacao){
                   messageNotificacao = notificacaoCanc.getMensagem() ;
             %>
@@ -257,6 +258,8 @@
         
         
 %>
+<BR><BR><BR><BR><BR>
+<BR><BR>
 </font>
 </body>
 </html>
