@@ -18,13 +18,13 @@
 <BR>
 <center>
 <%
-     if(session.getAttribute("Usuario")!= null){
-    UsuarioDO usuario = (UsuarioDO)session.getAttribute("Usuario");
-    String nome = usuario.getNome();
-    if(usuario.isSuperUser()){
-    PontoDeInteresseDO p1=new PontoDeInteresseDO();
+    if(session.getAttribute("Usuario")!= null){
+        UsuarioDO usuario = (UsuarioDO)session.getAttribute("Usuario");
+        String nome = usuario.getNome();
+        if(usuario.isSuperUser()){
+            PontoDeInteresseDO p1=new PontoDeInteresseDO();
             
-      if(request.getParameter("submit")==null){%>
+            if(request.getParameter("submit")==null){%>
 <FORM action="Cadastro_POI.jsp" method="post">
     
     Nome do ponto de interesse:<BR>
@@ -41,22 +41,26 @@
     <INPUT type="submit" name="submit" value="Cadastrar">
       
 </FORM>      
-    <% }else
-if (request.getParameter("submit")!=null){
-    PontoDeInteresseDO ponto = new PontoDeInteresseDO();
-    ponto.setNome(request.getParameter("nome"));
-    ponto.setDescricao(request.getParameter("descricao"));
-    ponto.setEndereco(request.getParameter("endereco"));
-    ponto.setLink_para_maps(request.getParameter("link_para_maps"));
-    ponto.setPasta_de_imagens(request.getParameter("pasta_de_imagens"));
-    PontoDeInteresse novo=new PontoDeInteresse();
-    novo.incluir(ponto);
-}
-} else{%>Você não possui acesso a esta página<%}
-} else{%>Você precisar Logar antes
-        <FORM action="LoginOut.jsp" method="post">
-        <INPUT type="submit" name="submit2" value="Logar">  
-        </form><%}
+    <%      }
+            else if (request.getParameter("submit")!=null){
+                PontoDeInteresseDO ponto = new PontoDeInteresseDO();
+                ponto.setNome(request.getParameter("nome"));
+                ponto.setDescricao(request.getParameter("descricao"));
+                ponto.setEndereco(request.getParameter("endereco"));
+                ponto.setLink_para_maps(request.getParameter("link_para_maps"));
+                ponto.setPasta_de_imagens(request.getParameter("pasta_de_imagens"));
+                PontoDeInteresse novo=new PontoDeInteresse();
+                novo.incluir(ponto);
+            }
+        }
+        else{%>Você não possui acesso a esta página<%}
+    } 
+    else{%>
+            Você precisar Logar antes
+            <FORM action="LoginOut.jsp" method="post">
+            <INPUT type="submit" name="submit2" value="Logar">  
+            </form>
+        <%}
 %>
 
   
