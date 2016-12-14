@@ -10,6 +10,8 @@
 <%@ page import="data.PertenceDO" %>
 <%@ page import="transacoes.Comentario" %>
 <%@ page import="data.ComentarioDO" %>
+<%@ page import="transacoes.Acontece" %>
+<%@ page import="data.AconteceDO" %>
 <%@ page import="transacoes.Usuario" %>
 <%@ page import="data.UsuarioDO" %>
 <%@ page import="transacoes.Realiza" %>
@@ -35,6 +37,7 @@
                 Membro membrotn = new Membro();
                 Usuario usuariotn = new Usuario();
                 Evento eventotn = new Evento();
+                Acontece acontecetn = new Acontece();
                 if (request.getParameter("evento") != null){
                     EventoDO evento = eventotn.buscar(Integer.parseInt(request.getParameter("evento")));
                     Realiza realizatn = new Realiza();
@@ -64,16 +67,20 @@
                                         for(int i = 0; i < microIds.size(); i++){
                                             realizatn.excluirPorEVEid(microIds.get(i));
                                             eventotn.excluir(eventotn.buscar(microIds.get(i)));
+                                            comentariotn.excluirPorEVEid(microIds.get(i));
+                                            acontecetn.excluirPorEVEid(microIds.get(i));
                                         }
                                         pertencetn.excluirPorMacro(evento.getId());
                                         realizatn.excluirPorEVEid(evento.getId());
                                         comentariotn.excluirPorEVEid(evento.getId());
+                                        acontecetn.excluirPorEVEid(evento.getId());
                                         eventotn.excluir(evento);
                                     }
                                     else{
                                         pertencetn.excluirPorMicro(evento.getId());
                                         comentariotn.excluirPorEVEid(evento.getId());
                                         realizatn.excluirPorEVEid(evento.getId());
+                                        acontecetn.excluirPorEVEid(evento.getId());
                                         eventotn.excluir(evento);
                                     }
                     %>
