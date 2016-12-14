@@ -37,7 +37,15 @@ public class AconteceData {
         ps.setInt(1, acontece.getId());
         int result = ps.executeUpdate();
     } // excluir
-
+    
+    public void excluirPorEVEid(int EVEid, Transacao tr) throws Exception {
+        Connection con = tr.obterConexao();
+        String sql = "delete from agenda.acontece where EVEid = ?";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setInt(1, EVEid);
+        int result = ps.executeUpdate();
+    }
+    
     public List<AconteceDO> buscarPorPOI(int POI_id, Transacao tr) throws Exception {
         Connection con = tr.obterConexao();
         String sql = "select * from agenda.acontece where POI_id = ?";
