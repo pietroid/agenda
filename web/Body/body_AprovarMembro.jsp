@@ -21,12 +21,13 @@ UsuarioDO usuario = (UsuarioDO)session.getAttribute("Usuario");
 int ID_Usuario = usuario.getId();
 List<MembroDO> ListaGEAdm = Lista.AdminedGroups(ID_Usuario);
 int idge = Integer.parseInt(request.getParameter("AM"));
-%><center><h1><font face="verdana"> Solitações de Entrada no GE </font></h1></center><%
 List<MembroDO> ListaN_Apv = Lista.buscarPor_N_Apv(idge);
+
+%><center><h1><font face="verdana"> Solitações de Entrada no GE </font></h1></center><%
     
 if(ListaN_Apv != null){ 
     
-    %><form action="AprovarMembro.jsp" method="post"><%    
+    %><form action="AprovarMembro.jsp" method="get"><%    
     
         if(request.getParameter("submit")!=null){
         Membro Muda = new Membro();
@@ -58,15 +59,16 @@ if(ListaN_Apv != null){
     
     <input type="hidden" name="AM" value="<%=request.getParameter("AM")%>" >
     <BR>
-    <input type="submit" name="submit" value="Submit" <a HREF="Perfil.jsp">
+    <input type="submit" name="submit" value="Submit">
     
     </form>
     
    <% 
     
+}
 
 
-}else{%>  
+else{%>  
     <h1> <center> Não há novas solitações <center> </h1><BR>
     <p> <center> <a href="http:Perfil.jsp">Voltar</a> <center> </p><BR>
 <%
