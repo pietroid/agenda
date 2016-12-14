@@ -48,6 +48,7 @@
                         int Media;
                         Media = Novaava/numava;
                         us.setAvaliação(Media);
+                        us.setNumeroava(numava);
                         tr.atualizar(us);
                     %>
                     Evento Avaliado
