@@ -116,6 +116,24 @@ public class MembroData {
         return Items;
     } // pesquisar por GEid
     
+    public List<MembroDO> pesquisarPorGEid(int GEid, Transacao tr) throws Exception {
+        Connection con = tr.obterConexao();
+        String sql = "select * from agenda.Membro where GEid = ?";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setInt(1, GEid);
+        ResultSet rs = ps.executeQuery();
+        List<MembroDO> Items = new ArrayList<MembroDO>();
+        while (rs.next()) {
+            MembroDO i = new MembroDO();
+            i.setId (rs.getInt("MEMBERid"));
+            i.setGEid (rs.getInt("GEid"));
+            i.setUSUid(rs.getInt("USUid"));
+            i.setADM(rs.getInt("ADM"));
+            i.setAprovado(rs.getInt("Aprovado"));
+            Items.add(i);
+        }
+        return Items;
+    } // pesquisar por GEid
     public List<MembroDO> pesquisarPorUSUid(int USUid, Transacao tr) throws Exception {
         Connection con = tr.obterConexao();
         String sql = "select * from agenda.Membro where USUid = ?";
