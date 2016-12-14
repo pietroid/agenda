@@ -1,4 +1,5 @@
-<%@page import="java.lang.Integer.parseInt(String)"%>
+<%@page import="data.MembroDO"%>
+<%@page import="transacoes.Membro"%>
 <%@page import="data.UsuarioDO"%>
 <%@page import="java.util.List"%>
 <html>
@@ -17,22 +18,33 @@
 
 <% 
     UsuarioDO SUser = (UsuarioDO)session.getAttribute("Usuario");
-    if (SUser.isSuperUser()){
+    GEDO GEexcluir = new GEDO();
+    int id = Integer.parseInt(request.getParameter("idGEexclusao"));
+    GE GEtn = new GE();
+    Membro mtn=new Membro();
+    List<MembroDO> membro=mtn.buscarPorUSUid(SUser.getId());
+    boolean sameGE=false;
+    for(MembroDO m : membro){
+        if(m.getGEid()==id && m.getADM()==1){
+            sameGE=true;
+            break;
+        }
+    }
+    if (SUser.isSuperUser() || sameGE){
         if (request.getParameter("ConfExclusao")!=null){ 
             %>
         O grupo foi excluido!    
             <%
-            GEDO GEexcluir = new GEDO();
-            int id = Integer.parseInt(request.getParameter("idGEexclusao"));
-            GE GEtn = new GE();
-            GEtn.buscar(id);
+            
+            GEexcluir = GEtn.buscar(id);
             GEtn.excluir(GEexcluir);
         }
         else{
         %>
-            <FORM action="body_ExcluirGrupo.jsp" method="post">
+            <FORM action="ExcluirGrupo.jsp" method="post">
                 Deseja confirmar a exclusão do Grupo de extensão?<br><br>
             <INPUT type="submit" name="ConfExclusao" value= "Confirmar">   
+            <INPUT type="hidden" name="idGEexclusao" value="<%=request.getParameter("idGEexclusao")%>">
             </FORM>
         <%
         }

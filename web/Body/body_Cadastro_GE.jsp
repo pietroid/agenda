@@ -37,7 +37,7 @@ if (request.getParameter("submit") == null){
     <INPUT type="text" name="face"><BR><BR>
     Descrição:<BR>
     <INPUT type="text" name="descricao"><BR><BR>
-    <INPUT type="submit" name="submit" value="Submit">
+    <INPUT type="submit" name="submit" value="Cadastrar">
     <INPUT type="reset" name="reset" value="Reset">
 
 
@@ -54,6 +54,7 @@ if (request.getParameter("submit") != null){
     grupo.setTel(request.getParameter("tel"));
     grupo.setDescricao(request.getParameter("descricao"));
     grupo.setFace(request.getParameter("face"));
+    grupo.setImagem("/agenda/PastadeImagens/caneca.png");
     try{
         grupo.setAno(Integer.parseInt(request.getParameter("ano"))); 
            GE novo = new GE();
@@ -97,7 +98,7 @@ if (request.getParameter("submit") != null){
     <INPUT type="text" name="face" value="<%=request.getParameter("face")%>"><BR><BR>
     Descrição:<BR>
     <INPUT type="text" name="descricao" value="<%=request.getParameter("descricao")%>"><BR><BR>
-    <INPUT type="submit" name="submit" value="Submit">
+    <INPUT type="submit" name="submit" value="Cadastrar">
     <INPUT type="reset" name="reset" value="Reset">
     </FORM>  
  <%} }} %>

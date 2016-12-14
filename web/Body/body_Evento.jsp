@@ -1,3 +1,4 @@
+<%@page import="java.util.ArrayList"%>
 <%@page import="data.EventoDO"%>
 <%@page import="transacoes.Evento"%>
 <%@page import="data.UsuarioDO"%>
@@ -7,21 +8,33 @@
 <%@ page import="data.MembroDO" %>
 <%@ page import="transacoes.Realiza" %>
 <%@ page import="data.RealizaDO" %>
+<%@page import="data.PontoDeInteresseDO"%>
+<%@page import="transacoes.PontoDeInteresse"%>
+<%@page import="data.AconteceDO"%>
+<%@page import="transacoes.Acontece"%>
 <%@page import="java.util.List"%>
 <%@ page import="transacoes.Usuario" %>
 <%@ page import="java.util.Vector" %>
+<%@page import="transacoes.Seguindo"%>
+<%@page import="data.SeguindoDO"%>
 
 <% 
-    if (request.getParameter("evento") != null){
+    if (request.getParameter("evento") != null) {
         Comentario comentariotn = new Comentario();
         Evento eventotn = new Evento();
         Usuario usuariotn = new Usuario();
+        PontoDeInteresse poitn = new PontoDeInteresse();
         Realiza realizatn = new Realiza();
+        Acontece acontecetn = new Acontece();
+        AconteceDO acontece = acontecetn.buscarPorEVEid(Integer.valueOf(request.getParameter("evento")));
+        PontoDeInteresseDO poi = poitn.buscar(acontece.getPOI_id());
         Membro membrotn = new Membro();
         UsuarioDO usuario = new UsuarioDO();
         EventoDO evento = eventotn.buscar(Integer.parseInt(request.getParameter("evento")));
         if (session.getAttribute("Usuario") != null){
             usuario = (UsuarioDO) session.getAttribute("Usuario");
+            
+            /*------ALYSON-------*/
         }
 %>
 <html>
@@ -31,10 +44,10 @@
         <BR><BR>
         <table align="left" border=1 cellpadding=10 width=500>
             <%
-        if (usuario.getNome() != null ){
+        if (evento.getLink()!=null && !evento.getLink().equals("")){
             %>
             <tfoot>
-                <tr><th><a href="Inscricao.jsp" target="_top">Inscrever-se</a></th></tr>
+                <tr><th><a href="<%=evento.getLink()%>" target="_top">Inscrever-se</a></th></tr>
             </tfoot>
             <%
         }
@@ -44,13 +57,22 @@
                 <td width=10% height=200> <%= evento.getDescricao() %></td>
             </tr>
         </table>
-            
-        <table align="center" border=1 cellpadding=10 width=500>
+        
+        <table align = "right" border = 1 cellpadding = 10 width = 500>
+            <th>Informações</th>
+            <tr><td>Data: <%= evento.getData() %></td></tr>
+            <tr><td>Horario de inicio: <%= evento.getHoraInicial() %></td></tr>
+            <tr><td>Horario de termino: <%= evento.getHoraFinal() %></td></tr>
+            <tr><td>Local: <%= poi.getEndereco() %></td></tr>
+        </table>
+        
+            <BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR>
+        <table align="left" border=1 cellpadding=10 width=500>
             <% 
         if (usuario.getNome() != null){
             %>
                     <tfoot>
-                        <tr><th><a href="CriarComentario.jsp?evento=<%= evento.getNome() %>" target="_top">Comentar</a></th></tr>
+                        <tr><th><a href="CriarComentario.jsp?evento=<%= evento.getId() %>" target="_top">Comentar</a></th></tr>
                     </tfoot>
             <%
         }
@@ -65,7 +87,7 @@
             
             <%if(comentario.getMensagem().equals("")==false){%>
                 <tr>
-                    <td width=10% height=50> <%= nome %>: <%= comentario.getMensagem() %>
+                    <td width=10% height=50> <a href="Usuario.jsp?Usuario=<%= comentario.getUsuId() %>" target ="_top"><%= nome %></a> : <%= comentario.getMensagem() %>
                         <%
                             if (usuario.getNome() != null){
                                 if (usuario.isSuperUser() == true || nome.equals(usuario.getNome())){
@@ -82,12 +104,10 @@
         }
                 %>
         </table>
-            
-        <img src ="PastadeImagens/GrupodeExtensao1/Grupodeextensao1-imagem1.PNG" align="right" width = 250 height =" 300" >
 
         <BR><BR><BR><BR><BR><BR><BR><BR><BR>
 
-        <BR>
+        <BR><BR><BR><BR><BR>
         
         <!-------------------------------------------------------------------------------------------------->
 <!----------------------------- REDIRECIONA PARA FEEDBACK------------------------------------------->
@@ -104,10 +124,29 @@
         
 
         <p align="right"><a href="Calendario.jsp" target="_top">Clique aqui para voltar ao calendário</a></p>
-        <BR><BR><BR><BR>
+        <BR><BR><BR><BR><BR><BR>
+        <%
         
-        
-        
+        List<SeguindoDO> seguindo = new ArrayList<SeguindoDO>();
+        Seguindo seguindotn = new Seguindo();
+        seguindo = seguindotn.pesquisarPorEVEid(evento.getId());
+        int count = 0;
+        if (seguindo != null) {
+            for (count = 0; count < seguindo.size(); count++);
+        }
+        if (session.getAttribute("Usuario") != null){
+        %>
+            <center><a href="EventoFollow.jsp?eve=<%=evento.getId()%>">Seguir evento</a></center>
+            <center><a href="EventoUnfollow.jsp?eve=<%=evento.getId()%>">Deixar de seguir evento</a></center>
+        <%
+        }
+        %>
+        <center><a href="ExibirSeguidores.jsp?eve=<%=evento.getId()%>">Clique aqui para ver uma lista dos seguidores do evento</a></center>
+            <table align="center">
+                <th>
+                    Seguidores: <%=count%>
+                </th>
+            </table>
         <% 
         if (usuario.getNome() != null){
             RealizaDO realiza = realizatn.buscarPorEVE(evento.getId());
@@ -116,8 +155,8 @@
                 %>
                     <table align="left" border=1 cellpadding=10 width=500>
                         <tr>
-                          <td><a href="ExcluirEvento.jsp?evento=<%= evento.getNome() %>" target="_top"><font size="5" color="#ff0000">Excluir evento</font></a></td>
-                          <td><a href="EditarEvento.jsp?evento=<%= evento.getNome() %>" target="_top"><font size="5" color="#ff0000">Alterar evento</font></a></td>
+                          <td><a href="ExcluirEvento.jsp?evento=<%= evento.getId() %>" target="_top"><font size="5" color="#ff0000">Excluir evento</font></a></td>
+                          <td><a href="EditarEvento.jsp?evento=<%= evento.getId() %>" target="_top"><font size="5" color="#ff0000">Alterar evento</font></a></td>
                         </tr>
                     </table>
                 <%
@@ -131,7 +170,8 @@
 </form>
     <%
     }
-    //else pageContext.forward("index.jsp");
+
+    else pageContext.forward("index.jsp");
         %>    
     </body>
 </html>

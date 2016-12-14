@@ -16,7 +16,8 @@
         <body BGCOLOR = #f2f2f2>
         <font face="verdana">
         <h1><center>Excluir ponto de interesse</center></h1>
-        <BR>        
+        <BR>
+        <center>
         <% 
             UsuarioDO usuario = new UsuarioDO();
             if (session.getAttribute("Usuario") != null){
@@ -42,19 +43,18 @@
                                 Acontece Acontecetr = new Acontece();
                                 QG QGtr = new QG();
                                 PontoDeInteressetr.excluir(PontoDeInteresse);
-                                QGtr.excluir(PontoDeInteresse);
-                                Acontecetr.excluir(PontoDeInteresse); %>
-                                <center>Ponto de interesse excluído!</center> <BR>
+                            %>    Ponto de interesse excluído! <BR>
                             <% } 
                         }
                     } 
                 }
                 else { %>
-                    <center>Você não tem permissão para isso.</center> <BR>
+                    Você não tem permissão para isso. <BR>
                 <% }
             }
             else { %>
-                <center>Você não está logado.</center> <BR>
-            <% } %>                
+                Você não está logado.<BR>
+            <% } %>  
+        </center>
     </body>
 </html>

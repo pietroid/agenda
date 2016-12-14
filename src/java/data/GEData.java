@@ -39,10 +39,41 @@ public class GEData {
 
     public void excluir(GEDO GE, Transacao tr) throws Exception {
         Connection con = tr.obterConexao();
-        String sql = "delete from agenda.grupodeextensao where GEid = ?";
-        PreparedStatement ps = con.prepareStatement(sql);
-        ps.setInt(1, GE.getId());
-        int result = ps.executeUpdate();
+        PreparedStatement ps;
+        String[] sql = {"delete from grupodeextensao where grupodeextensao.GEid = ?",
+                "delete from QG where QG.GEid = ?",
+                "delete from Membro where Membro.GEid = ?",
+                "delete from preferencia where preferencia.GRUPOid = ?"};
+        int GEid=GE.getId();
+        for(int i=0;i<4;i++){
+            ps = con.prepareStatement(sql[i]);
+            ps.setInt(1, GEid);
+            int result = ps.executeUpdate();
+        }
+        
+        String sql2= "select EVEid from realiza where GEid=?";
+        ps = con.prepareStatement(sql2);
+        ps.setInt(1, GEid);
+        ResultSet rs = ps.executeQuery();
+        rs.first();
+        int EVEid=0;
+        EVEid=rs.getInt("EVEid");
+        
+        if(EVEid!=0){
+            String[] sql3 = {"delete from evento where evento.EVEid = ?",
+                "delete from comentario where comentario.eveid = ?",
+                "delete from feedback where feedback.EVEid = ?",
+                "delete from seguindo where seguindo.EVEid = ?",
+                "delete from realiza where realiza.EVEid = ?",
+                "delete from acontece where acontece.EVEid = ?",
+                "delete from pertence where pertence.macroEventoId = ?",
+                "delete from pertence where pertence.microEventoId = ?"};
+            for(int i=0;i<8;i++){
+                ps = con.prepareStatement(sql3[i]);
+                ps.setInt(1, EVEid);
+                int result = ps.executeUpdate();
+            }
+        }
     } // excluir
 
     public GEDO buscar(int id, Transacao tr) throws Exception {
@@ -102,8 +133,8 @@ public class GEData {
         ps.setString(7, GE.getImagem());
         ps.setString(8, GE.getTel());
         ps.setString(9, GE.getTipo());
-        ps.setInt(10, GE.getId());
-        ps.setInt(11, GE.getAutorizado());
+        ps.setInt(10, GE.getAutorizado());        
+        ps.setInt(11, GE.getId());
         int result = ps.executeUpdate(); 
     } // atualizar
      
@@ -130,5 +161,31 @@ public class GEData {
             Items.add(i);
         }
         return Items;
-    }    
+    }
+    
+    public List<GEDO> buscarTodosEmEspera(Transacao tr) throws Exception {
+        Connection con = tr.obterConexao();
+        String sql = "select * from grupodeextensao where autorizado = 0";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+        List<GEDO> Items = new ArrayList<GEDO>();
+        while (rs.next()) {
+            GEDO i = new GEDO();
+            i.setId (rs.getInt("GEid"));
+            i.setNome (rs.getString("GEnome"));
+            i.setDescricao(rs.getString("GEdescricao"));
+            i.setAno(rs.getInt("GEano_de_inicio"));
+            i.setSite (rs.getString("GEsite"));
+            i.setFace (rs.getString("GEpagina_do_fb"));
+            i.setEmail(rs.getString("GEemail"));
+            i.setImagem(rs.getString("GEpasta_de_imagens"));            
+            i.setTel(rs.getString("GEtel"));              
+            i.setTipo(rs.getString("GEtipo")); 
+            i.setAutorizado(rs.getInt("autorizado"));
+            Items.add(i);
+        }
+        return Items;
+    }        
+    
+    
 }

@@ -1,17 +1,16 @@
 <%-- 
-    Document   : AceitarGE
-    Created on : 07/12/2016, 02:34:16
-    Author     : Convidado
+    Document   : Problemas
+    Created on : 03/12/2016, 19:32:53
+    Author     : Diego;
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <body>
-        <h1>Hello World!</h1>
-    </body>
+<head>
+<title>George</title>
+</head>
+<%@include file="Título/Título.jsp" %>
+<%@include  file="Menu/menu.jsp"%>
+<%@include  file="Body/body_AceitarGE.jsp"%>
+<%@include  file="Footer/footer.jsp"%>
 </html>
