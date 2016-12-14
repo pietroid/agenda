@@ -101,6 +101,7 @@
         <table align="center" border=1 cellpadding=10 width=200>
             <tfoot>
                 <tr><th><a href="SolicitarAdesao.jsp?GEDO=<%=ge.getId()%>" target="_top"><font color="FFFFFF">Solicitar adesão</font></a></th></tr>
+                <tr><th><a href="PreferenciaAdicionar.jsp?grupo=<%=ge.getId()%>" target="_top"><font color="FFFFFF">Seguir grupo de extensão</font></a></th></tr>
             </tfoot>
         </table>
 
