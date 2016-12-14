@@ -26,10 +26,10 @@ Curso:<BR><INPUT type="text" name="curso" value= "<% out.write(us.getCurso()); %
 Senha Atual:<BR><INPUT type="password" name="senhaAtual" value= ""> <BR><BR>
 Nova Senha<BR><INPUT type="password" name="novaSenha" value= ""> <BR><BR>
 Repita a Nova Senha<BR><INPUT type="password" name="repNovaSenha" value= ""> <BR><BR>
-    </center>
 </FORM>
 <INPUT type ="submit" name="submit" value= "Submit" form="changePassForm">   
 <INPUT type ="reset" name="reset" value= "Reset" form = "changePassForm">
+    </center>
     <%
         } else if (request.getParameter("submit").equals("Submit")){
         
