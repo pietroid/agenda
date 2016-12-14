@@ -11,8 +11,6 @@
 <%@page import="data.UsuarioDO"%>
 
 
-
-
 <%if(session.getAttribute("Usuario")!= null)
 {
     Membro Lista = new Membro();
@@ -23,37 +21,45 @@
   
         int idge = Integer.parseInt(request.getParameter("AM"));
         List<MembroDO> ListaN_Apv = Lista.buscarPor_N_Apv(idge);
+        
+        %><form action="AprovarMembro.jsp" method="get"><%
         for(MembroDO membroN_Apv:ListaN_Apv){
             UsuarioDO N_Apv = usu_N.buscarPorID(membroN_Apv.getUSUid());
             String Nome = N_Apv.getNome();
-
+            
+           
             %>
-               <form action="AprovarMembro.jsp">
+               
                 
-               <input type="checkbox" name="<%=membroN_Apv.getUSUid()%>" value="1"> <%=Nome%> <br>
+            <input type="checkbox" name="<%=N_Apv.getId()%>" value="1"> <%=Nome%> <br>
             
         <%}%>
         
     
-    <input type="submit" value="Submit">
+    
+    <input type="hidden" name="AM" value="<%=request.getParameter("AM")%>" >
+    <input type="submit" name="submit" value="Submit">
     </form>
     
-    <%if(request.getParameter("submit")!=null){
+   <% if(request.getParameter("submit")!=null){
+   
         for(MembroDO membros:ListaN_Apv){
-            if(request.getParameter("membro.getUSUid()")== "1"){
-                %>Deu certo porra<%
-            }
+            int id = membros.getUSUid();
+            String valor = request.getParameter(Integer.toString(id));
+            if(valor!=null && valor.equals("1")){
+               %>deu certo<BR><%
+            }else{%>deu errado<BR><%}
         }
-    }%>
+    }
     
-<%}else{
 
-%>  <h1> <center> Página em Branco <center> </h1>  <%
 
+}else{%>  
+    <h1> <center> Página em Branco <center> </h1> 
+            
+            
+<%
 }
-
-
-
 %>
             
              
