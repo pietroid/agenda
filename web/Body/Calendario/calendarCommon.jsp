@@ -1,66 +1,72 @@
-<%@page import="java.util.Calendar"%>
+
+<%@page import="java.time.LocalDate"%>
 <%
-  // get the current year/month/day
-  Calendar theCal = Calendar.getInstance();
-  int currentYearInt  = theCal.get(Calendar.YEAR);
-  int currentMonthInt = theCal.get(Calendar.MONTH);
-  int currentDayInt   = theCal.get(Calendar.DATE);
-  String currentYearString  = new Integer(currentYearInt).toString();
-  String currentMonthString = new Integer(currentMonthInt).toString();
+    //OBTÉM A DATA ATUAL ------------------------------------------------------  
+    LocalDate local2 = LocalDate.now();
+    int int_currentYear = local2.getYear();
+    int int_currentMonth = local2.getMonthValue();
+    int int_currentDay = local2.getDayOfMonth();
 
-  // get parameters the user might have sent by clicking fwd or back
-  String newMonth = request.getParameter("month");
-  String newYear  = request.getParameter("year");
+    //Strings, caso sejam úteis
+    String str_currentYear = new Integer(int_currentYear).toString();
+    String str_currentMonth = new Integer(int_currentMonth).toString();
+    String str_currentDay = new Integer(int_currentDay).toString();
+    //fim data atual
 
-  // reset the month and year if necessary
-  if ( newMonth != null )
-  {
-    currentMonthString = newMonth;
-    currentMonthInt = new Integer(currentMonthString).intValue();
-  }
-  if ( newYear != null )
-  {
-    currentYearString = newYear;
-    currentYearInt = new Integer(currentYearString).intValue();
-  }
+    // DETERMINA A DATA SELECIONADA -------------------------------------------  
+    //Na primeira ocorrência, o dia selecionado é a data atual
+    int int_selectedYear = int_currentYear;
+    int int_selectedMonth = int_currentMonth;
 
-  // determine the next/previous month and year
- int intMonth = new Integer(currentMonthString).intValue();
- int intYear  = new Integer(currentYearString).intValue();
+    // Caso o usuário clique nas setas, a data selecionada é atualizada
+    String newMonth = request.getParameter("month");
+    String newYear = request.getParameter("year");
 
-  // determine the name of the current intMonth
-  String monthNames[] = {"Janeiro",
-                         "Fevereiro",
-                         "Março",
-                         "Abril",
-                         "Maio",
-                         "Junho",
-                         "Julho",
-                         "Agosto",
-                         "Setembro",
-                         "Outubro",
-                         "Novembro",
-                         "Dezembro" };
+    if (newMonth != null) {
+        int_selectedMonth = new Integer(newMonth).intValue();
+    }
+    if (newYear != null) {
+        int_selectedYear = new Integer(newYear).intValue();
+    }
+    
+    //Strings, caso sejam úteis
+    String str_selectedYear = new Integer(int_selectedYear).toString();
+    String str_selectedMonth = new Integer(int_selectedMonth).toString();
+    
+    // fim data selecionada
+    
+    
+    // DETERMINA O NOME DO MÊS -------------------------------------------
+    String monthNames[] = {"Janeiro",
+        "Fevereiro",
+        "Março",
+        "Abril",
+        "Maio",
+        "Junho",
+        "Julho",
+        "Agosto",
+        "Setembro",
+        "Outubro",
+        "Novembro",
+        "Dezembro"};
 
-  String monthName = monthNames[intMonth];
+    // determine the next/previous month and year.
+    // this is really only needed by calendar.jsp, but i moved it here
+    // to simplify calendar.jsp.
+    int nextYear = int_selectedYear;
+    int prevYear = int_selectedYear;
 
-  // determine the next/previous month and year.
-  // this is really only needed by calendar.jsp, but i moved it here
-  // to simplify calendar.jsp.
-  int nextYear = intYear;
-  int prevYear = intYear;
-  int prevMonth = intMonth-1;
-  if ( prevMonth==-1 )
-  {
-    prevMonth=11;
-    prevYear--;
-  }
-  int nextMonth = intMonth+1;
-  if ( nextMonth==12 )
-  {
-    nextMonth = 0;
-    nextYear++;
-  }
+    int prevMonth = int_selectedMonth - 1;
+    if (prevMonth == 0) {
+        prevMonth = 12;
+        prevYear--;
+    }
+
+    int nextMonth = int_selectedMonth + 1;
+    if (nextMonth == 13) {
+        nextMonth = 1;
+        nextYear++;
+    }
 
 %>
 
