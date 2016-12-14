@@ -49,6 +49,22 @@ public class Acontece {
 	return null;
     } // buscar
     
+    public boolean excluirPorEVEid(int EVEid) throws Exception{
+        Transacao tr = new Transacao();
+	try{
+            tr.beginReadOnly();
+  	    AconteceData a = new AconteceData();
+	    a.excluirPorEVEid(EVEid, tr);
+            tr.commit();
+            return true;
+	} catch (Exception e) {
+            tr.rollback();
+            System.out.println("Erro ao excluir o evento " + EVEid);
+            e.printStackTrace();
+	}
+	return false;
+    }
+    
     public AconteceDO buscarPorEVEid(int EVEid) throws Exception{
         Transacao tr = new Transacao();
 	try{
@@ -80,6 +96,23 @@ public class Acontece {
 	}
 	return null;
     } // buscar
+    
+    public boolean atualizar(AconteceDO acontece) throws Exception {
+        Transacao tr = new Transacao();
+	try{
+            // inserir validacoes de regras de negocio
+            tr.begin();
+                AconteceData aconteceData = new AconteceData();
+                aconteceData.atualizar(acontece, tr);
+            tr.commit();
+            return true;
+	} catch (Exception e) {
+            tr.rollback();
+            System.out.println("Erro ao atualizar " + acontece.getId());
+            e.printStackTrace();
+	}
+	return false;
+    }
 
     private boolean isEmpty(String s) {
         if (null == s)

@@ -108,7 +108,7 @@ public class Pertence {
             return i;
 	} catch (Exception e) {
             tr.rollback();
-            System.out.println("Erro ao buscar " + id);
+            System.out.println("Erro ao buscar o micro: " + id);
 	}
 	return null;
     }
