@@ -213,7 +213,7 @@
                                             }
                                     }%>
                                 </select>
-                                <a href="Cadastro_POI.jsp">Cadastro de local...</a><BR><BR>
+                                <BR>
                                 Link de inscrição para evento, se houver (google forms, site, etc):
                                 <INPUT type="text" name="EVElink" maxlength = "100"><BR>
                                 <button name="submit2" value="Criar macro">Criar evento</button><BR><BR>
