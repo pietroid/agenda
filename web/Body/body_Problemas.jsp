@@ -21,22 +21,31 @@ Usuario  ustn = new Usuario();
 <font face="verdana">
 
 
-<h1><center> Problemas <center> </h1>
+
             <%if(session.getAttribute("Usuario")!=null && ((UsuarioDO)session.getAttribute("Usuario")).isSuperUser()){%>
         <center>
-            <table align="center" border=1 cellpadding=10 width=1000>
-                <th>Usuário <th>Problema<th>Data<th>Excluir Notificação</th>
+            
+           
     
                 <%   
                     List<ProblemaDO> ges = getn.buscarTodos();
                     for(int i = 0; i < ges.size(); i++){
+                        
+                       if(i==0){%><h1><center> Problemas <center> </h1>
+                <table align="center" border=1 cellpadding=10 width=1000>
+                <th>Usuário <th>Problema<th>Data<th>Excluir Notificação</th>
+                      <%}
                        ProblemaDO ge = ges.get(i);
                        int USid = ge.getUserId();
                        UsuarioDO us = ustn.buscarPorID(USid);
                        
                 %>    
-                <tr>
-                    
+                       
+
+                
+                
+                
+                <tr>    
                 <% if(USid != 0){%>
                     <td><center><a href="Usuario.jsp?Usuario=<%= us.getId()%>"><%= us.getNome() %></a></center>
                 <%}else{%>
@@ -50,6 +59,12 @@ Usuario  ustn = new Usuario();
 
                 <%
                 }
+
+                if(ges.size()< 1){
+
+              %>  <h1><center>Não há problemas reportados.<center></h1><%
+}
+
                 %>
             </table>
         </center>

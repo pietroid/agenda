@@ -25,7 +25,7 @@
 %>
 <FORM action="AlterarInfoGE.jsp" method="post">
 Nome:<BR><INPUT type="text" maxlenght="140" name="nome" value="<%=ge.getNome() %>" ><BR><BR>
-Descrição:<BR><INPUT type="text" maxlength="140" name="descrição" value= "<%=ge.getDescricao() %>"> <BR><BR>
+Descrição:<BR><INPUT type="text" maxlength="140" name="descricao" value= "<%=ge.getDescricao() %>"> <BR><BR>
 E-mail:<BR><INPUT type="text" name="email" value= "<%=ge.getEmail() %>" ><BR><BR>
 Ano:<BR><INPUT type="int" name="ano" value= "<%=ge.getAno() %>"><BR><BR>
 Site:<BR><INPUT type="text" name="site" value= "<%=ge.getSite() %>"><BR><BR>
@@ -71,7 +71,7 @@ Tipo:<BR><INPUT type="text" name="tipo" value= "<%=ge.getTipo() %>"><BR><BR>
 <%} else if(request.getParameter("submit")!=null) { 
  
 if (request.getParameter("nome")!= null) ge.setNome(request.getParameter("nome"));
-if (request.getParameter("descrição")!= null) ge.setDescricao(request.getParameter("descrição"));
+if (request.getParameter("descricao")!= null) ge.setDescricao(request.getParameter("descricao"));
 if (request.getParameter("email")!= null) ge.setEmail(request.getParameter("email"));
 if (request.getParameter("foto")!= null) ge.setImagem(request.getParameter("foto"));
 if (request.getParameter("ano")!= null){
@@ -81,7 +81,7 @@ if (request.getParameter("ano")!= null){
         %>
 <FORM action="AlterarInfoGE.jsp" method="post">
 Nome:<BR><INPUT type="text" maxlenght="140" name="nome" value="<%=ge.getNome() %>" ><BR><BR>
-Descrição:<BR><INPUT type="text" maxlength="140" name="descrição" value= "<%=ge.getDescricao() %>"> <BR><BR>
+Descrição:<BR><INPUT type="text" maxlength="140" name="descricao" value= "<%=ge.getDescricao() %>"> <BR><BR>
 E-mail:<BR><INPUT type="text" name="email" value= "<%=ge.getEmail() %>" ><BR><BR>
 Ano:<BR><INPUT type="int" name="ano" value= "<%=ge.getAno() %>"><BR><BR>
 Site:<BR><INPUT type="text" name="site" value= "<%=ge.getSite() %>"><BR><BR>

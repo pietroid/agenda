@@ -1,3 +1,7 @@
+<%@page import="data.GEDO"%>
+<%@page import="transacoes.GE"%>
+<%@page import="java.time.LocalDate"%>
+<%@page import="java.sql.Date"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="data.EventoDO"%>
 <%@page import="transacoes.Evento"%>
@@ -26,21 +30,35 @@
         PontoDeInteresse poitn = new PontoDeInteresse();
         Realiza realizatn = new Realiza();
         Acontece acontecetn = new Acontece();
-        AconteceDO acontece = acontecetn.buscarPorEVEid(Integer.valueOf(request.getParameter("evento")));
+        AconteceDO acontece = acontecetn.buscarPorEVEid(Integer.parseInt(request.getParameter("evento")));
         PontoDeInteresseDO poi = poitn.buscar(acontece.getPOI_id());
         Membro membrotn = new Membro();
         UsuarioDO usuario = new UsuarioDO();
+        RealizaDO realizador=realizatn.buscarPorEVE(Integer.parseInt(request.getParameter("evento")));
         EventoDO evento = eventotn.buscar(Integer.parseInt(request.getParameter("evento")));
+        GE getn=new GE();
+        GEDO ge=getn.buscar(realizador.getGEid());
+        boolean isAdm=false;
+        boolean sUser=false;
         if (session.getAttribute("Usuario") != null){
             usuario = (UsuarioDO) session.getAttribute("Usuario");
-            
+            isAdm=membrotn.isADM(ge.getId(),usuario.getId());
+            sUser=usuario.isSuperUser();
             /*------ALYSON-------*/
         }
+        if(ge.getAutorizado()==1 || isAdm || sUser){
 %>
 <html>
     <body BGCOLOR = #f2f2f2>
         <font face="verdana">
+        <%if(evento.isAtivo()){ %>
         <h1><center><%= evento.getNome() %></center></h1>
+        <h2><center><%= ge.getNome() %></center></h2>
+        <%}else{%>
+        <h1><center><b style="color:red">EVENTO CANCELADO</b></center></h1>
+        <h1><center><%= evento.getNome() %></center></h1>
+        <h2><center><%= ge.getNome() %></center></h2>
+        <%}%>
         <BR><BR>
         <table align="left" border=1 cellpadding=10 width=500>
             <%
@@ -57,19 +75,21 @@
                 <td width=10% height=200> <%= evento.getDescricao() %></td>
             </tr>
         </table>
-        
-        <table align = "right" border = 1 cellpadding = 10 width = 500>
+        <%if(evento.isAtivo()|| isAdm || sUser){ %>
+        <table align = "right" border = "1" cellpadding = "10" width = "500">
             <th>Informações</th>
             <tr><td>Data: <%= evento.getData() %></td></tr>
             <tr><td>Horario de inicio: <%= evento.getHoraInicial() %></td></tr>
             <tr><td>Horario de termino: <%= evento.getHoraFinal() %></td></tr>
             <tr><td>Local: <%= poi.getEndereco() %></td></tr>
+            <tr><td>Avaliação: <%= evento.getAvaliação() %></td></tr>
         </table>
+        <%}%>
         
             <BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR>
         <table align="left" border=1 cellpadding=10 width=500>
             <% 
-        if (usuario.getNome() != null){
+        if (usuario != null&& !usuario.isSuperUser()){
             %>
                     <tfoot>
                         <tr><th><a href="CriarComentario.jsp?evento=<%= evento.getId() %>" target="_top">Comentar</a></th></tr>
@@ -102,6 +122,10 @@
                 <%
             }
         }
+        if(comentarios.isEmpty()){
+            %>
+                <tr><td width=10% height=50> Não há comentários para este evento. Seja o primeiro a comentar!</td></tr><%
+        }
                 %>
         </table>
 
@@ -111,20 +135,19 @@
         
         <!-------------------------------------------------------------------------------------------------->
 <!----------------------------- REDIRECIONA PARA FEEDBACK------------------------------------------->
-
+<%   LocalDate localDate = LocalDate.now();
+    Date dateNow = Date.valueOf(localDate.toString());
+    if(evento.getData().before(dateNow)  && !usuario.isSuperUser() && evento.isAtivo()){        %>
 <p align="center"> <b>O que você achou do evento? </b></p> <BR>
 <FORM action="/agenda/Feedback.jsp" method="post">  
     <center><INPUT type="submit" name="deixar_feedback" value="Deixe seu feedback" ></center> <BR>
     <input type="hidden" name="id_eve" value="<%=evento.getId()%>">
-</form>
+</form><%}
+%>
 <!---------------------------FIM DO REDICERIONADOR PARA FEEDBACK.JSP-------------------------------->
 <!-------------------------------------------------------------------------------------------------->
         
-        <BR>
-        
-
-        <p align="right"><a href="Calendario.jsp" target="_top">Clique aqui para voltar ao calendário</a></p>
-        <BR><BR><BR><BR><BR><BR>
+<BR> <BR>
         <%
         
         List<SeguindoDO> seguindo = new ArrayList<SeguindoDO>();
@@ -134,7 +157,7 @@
         if (seguindo != null) {
             for (count = 0; count < seguindo.size(); count++);
         }
-        if (session.getAttribute("Usuario") != null){
+        if (usuario != null && evento.isAtivo() && !usuario.isSuperUser()){
         %>
             <center><a href="EventoFollow.jsp?eve=<%=evento.getId()%>">Seguir evento</a></center>
             <center><a href="EventoUnfollow.jsp?eve=<%=evento.getId()%>">Deixar de seguir evento</a></center>
@@ -153,25 +176,28 @@
             boolean isadm = membrotn.isADM(realiza.getGEid(), usuario.getId());
             if (usuario.isSuperUser() == true || isadm == true){
                 %>
-                    <table align="left" border=1 cellpadding=10 width=500>
+        <center> <table align="center" border=1 cellpadding=10 width=500>
                         <tr>
-                          <td><a href="ExcluirEvento.jsp?evento=<%= evento.getId() %>" target="_top"><font size="5" color="#ff0000">Excluir evento</font></a></td>
-                          <td><a href="EditarEvento.jsp?evento=<%= evento.getId() %>" target="_top"><font size="5" color="#ff0000">Alterar evento</font></a></td>
+                          <td><a href="ExcluirEvento.jsp?evento=<%= evento.getId() %>"><font  color="#ff0000">Excluir evento</font></a></td>
+                          <td><a href="EditarEvento.jsp?evento=<%= evento.getId() %>"><font  color="#ff0000">Alterar evento</font></a></td>
                         </tr>
-                    </table>
+            </table></center>
                 <%
             }
         }
         %>
+        <BR><BR>
+        <%if(usuario!=null && !usuario.isSuperUser()){%>
         <p align="center"> <b>Avalie o evento </b></p> <BR>
 <FORM action="/agenda/Avaliar.jsp" method="post">  
     <center><INPUT type="submit" name="deixar_feedback" value="Avaliar" ></center> <BR>
     <INPUT type ="hidden" name ="id" value = "<%=evento.getId()%>">
-</form>
+</form><%}%>
     <%
-    }
-
-    else pageContext.forward("index.jsp");
+        }else{
+pageContext.forward("index.jsp");
+}
+    }else{ pageContext.forward("index.jsp");}
         %>    
     </body>
 </html>

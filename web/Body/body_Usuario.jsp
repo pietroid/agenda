@@ -44,7 +44,7 @@
 
 <BR>
 
-<table align="right" border=1 cellpadding=10 width=200>
+<table align="right" border="1" cellpadding="10" width="200">
     <tfoot>
         <tr><th><a href="Fotos.jsp" target="_top">Mais Fotos</a></th></tr>
     </tfoot>
@@ -56,7 +56,7 @@
 <BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR>
 
 
-<table align="left" border=1 cellpadding=10 width=500>
+<table align="left" border="1" cellpadding="10" width="500">
 <th colspan="2">Informações do USUARIO</th>
 <tr>
   <td><b>NOME</b></td>
@@ -67,7 +67,7 @@
   <td><%=email%></td>
 </tr>
 <tr>
-  <td><b>DATA DE NACIMENTO</b></td>
+  <td><b>DATA DE ENTRADA</b></td>
   <td><%=data%></td>
 </tr>
 <tr>
@@ -80,8 +80,8 @@
 </tr>
 </table>
 <BR><BR><BR><BR><BR><BR><BR><BR>
-
-
+<BR><BR><BR><BR><BR><BR><BR><BR>
+<BR><BR><BR><BR><BR><BR><BR><BR>
 </body>
 </html>
 
