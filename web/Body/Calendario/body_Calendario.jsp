@@ -12,7 +12,6 @@
 
 <html>
 <head>
-  <title>Calendario Geral</title>
     <style>
     table {
         font-family: "Verdana";

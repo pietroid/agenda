@@ -1,3 +1,5 @@
+<%@page import="data.PreferenciaDO"%>
+<%@page import="transacoes.Preferencia"%>
 <html>
 <body BGCOLOR = #f2f2f2>
 <font face="verdana">
@@ -18,29 +20,55 @@
 <%
     if(session.getAttribute("Usuario")!= null) //HOME LOGADO
     {
- UsuarioDO usuario = (UsuarioDO)session.getAttribute("Usuario");
- String nome = usuario.getNome(); 
+ UsuarioDO Usu = (UsuarioDO)session.getAttribute("Usuario");
+ String nome = Usu.getNome(); 
 %>
 
 <h1><center> Home </center> </h1>
 
-<h2><font face="verdana">Olá, <%=nome%>  </font><h2>            
-<h2><font face="verdana"> Grupos de extensão </font><h2>
-<p><font size="2" face="verdana"><a href="/agenda/ListadosGE.jsp" target="_top">Clique aqui
- para ver uma lista com todos os Grupos de Extensão</a></font></p> 
+<h2><font face="verdana">Olá, <%=nome%>  </font></h2>            
+<h2><font face="verdana"> Grupos de extensão </font></h2>
+
+<%if(Usu!=null && !Usu.isSuperUser()){
+    List<PreferenciaDO> pref;
+    Preferencia preft=new Preferencia();
+    pref=preft.pesquisarPorUser(Usu);
+    if(pref!=null && pref.size()>0){
+        %><table align="left" border="1" cellpadding="10" width="1000">
+            <th> Grupo de extensão </th>
+<%
+        for(PreferenciaDO pr : pref){
+            GE getrn = new GE();
+            GEDO ge = getrn.buscar(pr.getGEid());
+            ge.getNome();
+            %><TR>
+                <TD> <center><a href="Evento.jsp?GE=<%=ge.getId()%>"><%=ge.getNome()%></a><center> </TD>
+            </TR><%
+        }%>
+        </table><BR><BR><BR><BR><BR><BR>
+        <%
+    }else{
+        %>
+        
+        Você não segue nenhum grupo de extensão!
+    <%
+    }
+}%>
+<p><font size="2" face="verdana"><a href="Preferencia.jsp">Visualizar preferências</a></font></p>
+
 
 
 <%
     SeguindoDO seguindo = new SeguindoDO();
     Seguindo seguindotn = new Seguindo();
     List<SeguindoDO> lista = new ArrayList<SeguindoDO>();
-    lista = seguindotn.pesquisarPorUSUid(usuario.getId());
+    lista = seguindotn.pesquisarPorUSUid(Usu.getId());
     if(lista != null){
         if (lista.size() !=0){ 
-           %><p>Você segue estes eventos:</p><br>
+           %><h2>Você segue estes eventos:</h2><br>
              <center>
-             <table align="center" border=1 cellpadding=10 width=1000>
-            <th> Evento <th>Grupo de extensão
+             <table align="left" border="1" cellpadding="10" width="1000">
+                 <th> Evento</th> <th>Grupo de extensão</th>
            <%}
         else{ %><p>Você não segue evento algum!</p><br><% }
             
@@ -71,11 +99,12 @@
 <%      }
 %>
         </table>
-        </center>
+        </center>   
+<BR><BR><BR><BR><BR><BR>
 <%if (lista.size() !=0){ %>
-    <p>Os seus próximos eventos nessa semana são:</p><br>
+    <h2>Os seus próximos eventos nessa semana são:</h2><br>
         <center>
-        <table align="center" border=1 cellpadding=10 width=1000>
+        <table align="left" border=1 cellpadding=10 width=1000>
             <th> Evento <th>Grupo de extensão <th> Data
 <%}else %><p>Você não tem eventos essa semana!</p><br> <% 
 
@@ -94,7 +123,7 @@
     }
 %>
         </table>
-        </center><br>    
+        </center><br><BR><BR><BR><BR> 
 <%    }
     else{
 %>
@@ -114,7 +143,7 @@
  %>
  <h1><center> Home</center> </h1>
  <h2><font face="verdana"> Grupos de extensão</font><h2>
-<p><font size="2" face="verdana"><a href="/Agenda/ListadosGE.jsp" target="_top">Clique aqui
+<p><font size="2" face="verdana"><a href="ListadosGE.jsp" target="_top">Clique aqui
  para ver uma lista com todos os Grupos de Extensão</a></font></p> 
 <p></p>
 <%@include  file="Calendario/body_Calendario.jsp"%>
