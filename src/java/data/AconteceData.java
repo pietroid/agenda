@@ -81,4 +81,14 @@ public class AconteceData {
         acontece.setPOI_id(rs.getInt("POI_id"));
         return acontece;
     }
+    
+    public void atualizar(AconteceDO acontece, Transacao tr) throws Exception {
+        Connection con = tr.obterConexao();
+        String sql = "update acontece set POI_id=?, EVEid = ? where acontece_id=?";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setInt(1, acontece.getPOI_id());
+        ps.setInt(2, acontece.getEVEid());
+        ps.setInt(3, acontece.getId());
+        int result = ps.executeUpdate(); 
+    }
 }
