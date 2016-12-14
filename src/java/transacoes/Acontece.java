@@ -49,6 +49,22 @@ public class Acontece {
 	return null;
     } // buscar
     
+    public boolean excluirPorEVEid(int EVEid) throws Exception{
+        Transacao tr = new Transacao();
+	try{
+            tr.beginReadOnly();
+  	    AconteceData a = new AconteceData();
+	    a.excluirPorEVEid(EVEid, tr);
+            tr.commit();
+            return true;
+	} catch (Exception e) {
+            tr.rollback();
+            System.out.println("Erro ao excluir o evento " + EVEid);
+            e.printStackTrace();
+	}
+	return false;
+    }
+    
     public AconteceDO buscarPorEVEid(int EVEid) throws Exception{
         Transacao tr = new Transacao();
 	try{
