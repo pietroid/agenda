@@ -1,4 +1,9 @@
 
+<%@page import="data.RealizaDO"%>
+<%@page import="data.GEDO"%>
+<%@page import="transacoes.Realiza"%>
+<%@page import="transacoes.GE"%>
+<%@page import="transacoes.GE"%>
 <%@page import="data.EventoDO"%>
 <%@page import="transacoes.Evento"%>
 <%@page import="java.awt.Color"%>
@@ -65,7 +70,12 @@
   </tr>
 <%
   //LEMBRAR QUE JANEIRO É O MÊS ZERO!!  
-  Month aMonth = Month.getMonth( Integer.parseInt(currentMonthString), Integer.parseInt(currentYearString) );
+  Month aMonth;
+  if(request.getParameter("month")!=null && request.getParameter("year")!=null){
+     aMonth = Month.getMonth( Integer.parseInt(request.getParameter("month")), Integer.parseInt(request.getParameter("year")) ); 
+  }else{
+    aMonth = Month.getMonth( Integer.parseInt(currentMonthString), Integer.parseInt(currentYearString) );
+  }
   
   int [][] days = aMonth.getDays();
   String str_localdate = "1900-01-01";
@@ -113,8 +123,23 @@
     eventos_do_Mes = tre.buscarMes(date_FirstDay, date_LastDay);
     
   //---------------------------------------------------------
+  //FILTRA DOS GRUPOS NÃO ATIVOS
   
   //CONSTROI ARRAY LINEAR DE NÚMERO DE EVENTOS POR DIA, PARA UM MÊS
+  GE gtn=new GE();
+    Realiza rtn=new Realiza();
+    GEDO ge;
+    RealizaDO real;
+
+if(eventos_do_Mes.size()>0){
+    for(int i=0;i< eventos_do_Mes.size();i++){
+        ge=gtn.buscar(rtn.buscarPorEVE(eventos_do_Mes.get(i).getId()).getGEid());
+        if(ge.getAutorizado()==0){
+            eventos_do_Mes.remove(i);
+        }
+    }
+}
+  //CONSTROI TABELA EVENTOS
   
     int[] eventos = new int[40]; // Começamos a usar a partir do Dia 1
     

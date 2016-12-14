@@ -4,6 +4,10 @@
     Author     : RFRejtman
 --%>
 
+<%@page import="data.RealizaDO"%>
+<%@page import="transacoes.Realiza"%>
+<%@page import="data.GEDO"%>
+<%@page import="transacoes.GE"%>
 <%@page import="java.sql.Time"%>
 <%@page import="java.sql.Date"%>
 <%@ page import="transacoes.Evento" %>
@@ -50,8 +54,23 @@ String str_NiceDate = String.valueOf(date_ClickedDate.getDate()) + "/" + String.
 %><center><font size="5"><b><br>Eventos em <%=str_NiceDate%><br></b></font></center><%
     
 Evento tre = new Evento();
+
 List<EventoDO> eventos_do_Dia=new ArrayList<EventoDO>();
 eventos_do_Dia = tre.buscarData(date_ClickedDate);
+GE gtn=new GE();
+Realiza rtn=new Realiza();
+GEDO ge;
+RealizaDO real;
+
+if(eventos_do_Dia.size()>0){
+    for(int i=0;i< eventos_do_Dia.size();i++){
+        ge=gtn.buscar(rtn.buscarPorEVE(eventos_do_Dia.get(i).getId()).getGEid());
+        if(ge.getAutorizado()==0){
+            eventos_do_Dia.remove(i);
+        }
+    }
+}
+
 if(eventos_do_Dia.isEmpty()){
     %><center><font size="5"><b><br><br><br>Ainda não há eventos cadastrados nesse dia :(<br><br><br></b></font></center><%
 }
@@ -68,7 +87,8 @@ else{
       <th>Avaliação</th>
   </tr>    
     <%
-for (EventoDO evento_temp : eventos_do_Dia) { %>
+for (EventoDO evento_temp : eventos_do_Dia) { 
+    if(evento_temp.isAtivo()){%>
     <tr>
         <td align="center"><a href="Evento.jsp?evento=<%= evento_temp.getId() %>"><%= evento_temp.getNome() %></a></td>
         <td align="center"><%=evento_temp.getTipo()%></td>
@@ -77,7 +97,17 @@ for (EventoDO evento_temp : eventos_do_Dia) { %>
         <td align="center"><%=evento_temp.getData()%></td>
         <td align="center"><%=evento_temp.getAvaliação()%></td>
     </tr>    
+    <%}else{%>
+     <tr>
+        <td align="center"><a style="color:red" href="Evento.jsp?evento=<%= evento_temp.getId() %>"><%= evento_temp.getNome() %>(CANCELADO)</a></td>
+        <td align="center"><%=evento_temp.getTipo()%></td>
+        <td align="center"><%=evento_temp.getHoraInicial()%></td>
+        <td align="center"><%=evento_temp.getHoraFinal()%></td>
+        <td align="center"><%=evento_temp.getData()%></td>
+        <td align="center"><%=evento_temp.getAvaliação()%></td>
+    </tr>       
     <%}
+}
 }%>
 </table>
     <br><br>
