@@ -22,7 +22,20 @@
         int idge = Integer.parseInt(request.getParameter("AM"));
         List<MembroDO> ListaN_Apv = Lista.buscarPor_N_Apv(idge);
         
-        %><form action="AprovarMembro.jsp" method="get"><%
+        if(request.getParameter("submit")!=null){
+        Membro Muda = new Membro();
+   
+            for(MembroDO membros:ListaN_Apv){
+                int id = membros.getUSUid();
+                String valor = request.getParameter(Integer.toString(id));
+                if(valor!=null && valor.equals("1")){
+                    membros.setAprovado(1);
+                    Muda.alterar(membros);                    
+                }
+            }
+        }
+
+        %><form action="AprovarMembro.jsp" method="post"><%
         for(MembroDO membroN_Apv:ListaN_Apv){
             UsuarioDO N_Apv = usu_N.buscarPorID(membroN_Apv.getUSUid());
             String Nome = N_Apv.getNome();
@@ -39,25 +52,15 @@
     
     <input type="hidden" name="AM" value="<%=request.getParameter("AM")%>" >
     <input type="submit" name="submit" value="Submit">
+        
     </form>
     
-   <% if(request.getParameter("submit")!=null){
-   
-        for(MembroDO membros:ListaN_Apv){
-            int id = membros.getUSUid();
-            String valor = request.getParameter(Integer.toString(id));
-            if(valor!=null && valor.equals("1")){
-               %>deu certo<BR><%
-            }else{%>deu errado<BR><%}
-        }
-    }
+   <% 
     
 
 
 }else{%>  
     <h1> <center> Página em Branco <center> </h1> 
-            
-            
 <%
 }
 %>
