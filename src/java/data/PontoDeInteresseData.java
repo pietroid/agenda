@@ -60,7 +60,7 @@ public class PontoDeInteresseData {
         return PontoDeInteresse;
     } // buscar por Id
     
-        public PontoDeInteresseDO buscarnome(String nome, Transacao tr) throws Exception {
+    public PontoDeInteresseDO buscarnome(String nome, Transacao tr) throws Exception {
         Connection con = tr.obterConexao();
         String sql = "select * from agenda.POI where nome = '?' ";
         PreparedStatement ps = con.prepareStatement(sql);
@@ -78,20 +78,19 @@ public class PontoDeInteresseData {
     } // buscar por nome
         
     public void atualizar(PontoDeInteresseDO PontoDeInteresse, Transacao tr) throws Exception {
-     Connection con = tr.obterConexao();
-     String sql = "update agenda.POI set nome=?, descrição=?,endereço=?,link_para_maps=?,pasta_de_imagens=? where POI_id=?";
-     PreparedStatement ps = con.prepareStatement(sql);
-     ps.setString(1, PontoDeInteresse.getNome());
-     ps.setString(2, PontoDeInteresse.getDescricao());
-     ps.setString(3, PontoDeInteresse.getEndereco());
-     ps.setString(4, PontoDeInteresse.getLink_para_maps());
-     ps.setString(5, PontoDeInteresse.getPasta_de_imagens());
-     ps.setInt(6, PontoDeInteresse.getId());
-
-     int result = ps.executeUpdate(); 
+        Connection con = tr.obterConexao();
+        String sql = "update agenda.POI set nome=?, descrição=?,endereço=?,link_para_maps=?,pasta_de_imagens=? where POI_id=?";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setString(1, PontoDeInteresse.getNome());
+        ps.setString(2, PontoDeInteresse.getDescricao());
+        ps.setString(3, PontoDeInteresse.getEndereco());
+        ps.setString(4, PontoDeInteresse.getLink_para_maps());
+        ps.setString(5, PontoDeInteresse.getPasta_de_imagens());
+        ps.setInt(6, PontoDeInteresse.getId());
+        int result = ps.executeUpdate(); 
     } // atualizar
     
-        public List<PontoDeInteresseDO> ListarPOI(Transacao tr) throws Exception {
+    public List<PontoDeInteresseDO> ListarPOI(Transacao tr) throws Exception {
         Connection con = tr.obterConexao();
         String sql = "select * from POI";
         PreparedStatement ps = con.prepareStatement(sql);

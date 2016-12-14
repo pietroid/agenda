@@ -28,7 +28,7 @@
 if (request.getParameter("submit") == null){
     %>
 <FORM action="CadastroGE.jsp" method="post">
-    
+    <center>
     Nome grupo:<BR>
     <INPUT type="text" name="nome"><BR><BR>
     Tipo/finalidade:<BR>
@@ -37,7 +37,7 @@ if (request.getParameter("submit") == null){
     <INPUT type="text" name="site"><BR><BR>
     Ano de criação:<BR>
     <INPUT type="text" name="ano"><BR><BR>
-    e-mail para contato (do grupo):<BR>
+    E-mail para contato (do grupo):<BR>
     <INPUT type="text" name="email"><BR><BR>
     Telefone para contato (do grupo):<BR>
     <INPUT type="text" name="tel"><BR><BR>
@@ -55,7 +55,7 @@ if (request.getParameter("submit") == null){
                                 </select><BR><BR>
     <INPUT type="submit" name="submit" value="Cadastrar">
     <INPUT type="reset" name="reset" value="Reset">
-
+    </center>
 
 
     <% }%>
@@ -104,7 +104,8 @@ if (request.getParameter("submit") != null){
     %>
         É necessário digitar um número para o ano <BR> 
         
-    <FORM action="CadastroGE.jsp" method="post">           
+    <FORM action="CadastroGE.jsp" method="post">      
+        <center>
     Nome grupo:<BR>
     <INPUT type="text" name="nome" value="<%=request.getParameter("nome")%>"><BR><BR>
     Tipo/finalidade:<BR>
@@ -113,7 +114,7 @@ if (request.getParameter("submit") != null){
     <INPUT type="text" name="site" value="<%=request.getParameter("site")%>"><BR><BR>
     Ano de criação:<BR>
     <INPUT type="text" name="ano" ><BR><BR>
-    e-mail para contato (do grupo):<BR>
+    E-mail para contato (do grupo):<BR>
     <INPUT type="text" name="email" value="<%=request.getParameter("email")%>"><BR><BR>
     Telefone para contato (do grupo):<BR>
     <INPUT type="text" name="tel" value="<%=request.getParameter("tel")%>"><BR><BR>
@@ -131,6 +132,7 @@ if (request.getParameter("submit") != null){
                                 </select><BR><BR>
     <INPUT type="submit" name="submit" value="Cadastrar">
     <INPUT type="reset" name="reset" value="Reset">
+        </center>
     </FORM>  
  <%} }} %>
   <%  if (session.getAttribute("Usuario")== null){

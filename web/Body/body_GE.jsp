@@ -162,13 +162,15 @@
                 Membro mtnn=new Membro();
                 List<MembroDO> mbrs  =mtnn.buscarPorGEid(ge.getId()); 
             for(MembroDO mbr : mbrs){
+                if(mbr.getAprovado()==1){
                 Usuario ust=new Usuario();
                 UsuarioDO uss=ust.buscarPorID(mbr.getUSUid());
 %>
             <tr align="center">
                 <td><a href="Usuario.jsp?Usuario=<%=uss.getId()%>" ><%=uss.getNome()%></a></td>
             </tr>
-            <%}%>
+            <%}
+}%>
         </table>
         <BR><BR>
         <%
