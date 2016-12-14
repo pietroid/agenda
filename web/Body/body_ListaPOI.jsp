@@ -10,50 +10,41 @@
 <%@page import="java.lang.Integer"%>
 
 <%
-PontoDeInteresse getn = new PontoDeInteresse();
+    PontoDeInteresse getn = new PontoDeInteresse();
 %>
 <html>
 <body BGCOLOR = #f2f2f2>
 <font face="verdana">
 <h1> <center>Pontos de Interesse <center></h1>
 
-
-
 <center>
 <table align="center" border=1 cellpadding=10 width=1000>
     <th>Nome </th>
     <th>Descrição </th>
 <%   
-   
-   PontoDeInteresse tr= new PontoDeInteresse();
-   List<PontoDeInteresseDO> Lista = getn.ListarPOI();
-   for(int i = 0; i < Lista.size(); i++){
-                       PontoDeInteresseDO li = Lista.get(i);
+    PontoDeInteresse tr= new PontoDeInteresse();
+    List<PontoDeInteresseDO> Lista = getn.ListarPOI();
+    for(int i = 0; i < Lista.size(); i++){
+        PontoDeInteresseDO li = Lista.get(i);
     
  %>    
-<tr>
-            
-            <td><center><a href="AlterarPOI.jsp?PontoDeInteresse=<%= li.getId()%>"><%= li.getNome() %></a></center>
-            <td><center><%= li.getDescricao() %></center>
+<tr>          
+    <td><center><a href="AlterarPOI.jsp?PontoDeInteresse=<%= li.getId()%>"><%= li.getNome() %></a></center>
+    <td><center><%= li.getDescricao() %></center>
 </tr>
 <%
-   }
+    }
 %>
-
-
 </table>
 <center>
     <BR>
     <BR>
     Deseja cadastrar um novo ponto de interesse? 
     <BR> <BR>
-    
-    
 <%
     if(session.getAttribute("Usuario")!= null) //HOME LOGADO
     {
-        
-        %>
+%>
         <FORM action="Cadastro_POI.jsp" method="post">
         <INPUT type="submit" name="submit3" value="Cadastrar"> 
         </form>
