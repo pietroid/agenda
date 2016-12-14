@@ -106,7 +106,7 @@
 %>
 
 <p></p>
-<%@include  file="Calendario/body_Calendario.jsp"
+<%@include  file="Calendario/body_Calendario_home.jsp"
 %>
 <%    
    }else{ //HOME DESLOGADO

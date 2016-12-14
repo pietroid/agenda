@@ -44,6 +44,10 @@
 <% String str_ClickedDate =request.getParameter("str_ClickedDate");
 
 java.sql.Date date_ClickedDate = java.sql.Date.valueOf(str_ClickedDate);
+
+String str_NiceDate = String.valueOf(date_ClickedDate.getDate()) + "/" + String.valueOf(date_ClickedDate.getMonth()+1) + "/" + String.valueOf(date_ClickedDate.getYear()+1900);
+
+%><center><font size="5"><b><br>Eventos em <%=str_NiceDate%><br></b></font></center><%
     
 Evento tre = new Evento();
 List<EventoDO> eventos_do_Dia=new ArrayList<EventoDO>();
