@@ -21,19 +21,21 @@ Usuario  ustn = new Usuario();
 <font face="verdana">
 
 
-<h1><center> Solicitações de criação de Grupo de Extensão <center> </h1>
-
-        <center>
-            <table align="center" border=1 cellpadding=10 width=1000>
-                <th>Nome do GE<th>Descrição<th>Tipo<th>Aceitar Solicitação<th>Rejeitar Solicitação</th>
     
                 <%   
 
                     List<GEDO> ges = getn.buscaTodosEmEspera();
                     for(int i = 0; i < ges.size(); i++){
+                        if(i==0){%>
+<h1><center> Solicitações de criação de Grupo de Extensão <center> </h1>
+        <center>
+            <table align="center" border=1 cellpadding=10 width=1000>
+                <th>Nome do GE<th>Descrição<th>Tipo<th>Aceitar Solicitação<th>Rejeitar Solicitação</th><%}
                        GEDO ge = ges.get(i);
-                      
-                %>    
+%>
+                
+                
+                
                 <tr>
                     <td><center><%=ge.getNome()%></center>                                
                     <td><center><%=ge.getDescricao()%></center> 
@@ -43,8 +45,10 @@ Usuario  ustn = new Usuario();
                 </tr>
 
                 <%
-                }
-                %>
+                }if(ges.size()<1){
+              %>  <h1><center>Não há solicitações de criação de GE.<center></h1><%
+
+}%>
             </table>
         </center>
         <BR>

@@ -62,7 +62,7 @@ public class PontoDeInteresseData {
     
     public PontoDeInteresseDO buscarnome(String nome, Transacao tr) throws Exception {
         Connection con = tr.obterConexao();
-        String sql = "select * from agenda.POI where nome = ?";
+        String sql = "select * from agenda.POI where nome = '?' ";
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setString(1, nome);
         ResultSet rs = ps.executeQuery();
