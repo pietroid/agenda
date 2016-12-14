@@ -43,7 +43,6 @@
     Pasta de Imagens:<BR>
     <INPUT type="text" name="pasta_de_imagens" value="<%=poi.getPasta_de_imagens()%>"><BR><BR>
 <INPUT type="submit" name="submit" value= "Salvar Mudancas">   
-<INPUT type="reset" name="reset" value= "Reset">
 <input type="hidden" name="PontoDeInteresse" value="<%=request.getParameter("PontoDeInteresse")%>">
 </FORM>
 <%
