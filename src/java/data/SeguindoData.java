@@ -94,19 +94,25 @@ public class SeguindoData {
         return Items;
     }
     
-    public SeguindoDO pesquisarPorUSUidRetornaUmDO(int USUid, Transacao tr) throws Exception {
+    // Retorna relações Seguindo que tem Usuário com USRid e Evento com EVEid
+    public List<SeguindoDO> matchUsrEvent(int USUid, int EVEid, Transacao tr) throws Exception {
         Connection con = tr.obterConexao();
-        String sql = "select * from agenda.seguindo where USUid = ?";
+        String sql = "select * from agenda.seguindo where USUid = ? and EVEid = ?";
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setInt(1, USUid);
+        ps.setInt(2, EVEid);
         ResultSet rs = ps.executeQuery();
-        rs.first();
-        SeguindoDO seguindo = new SeguindoDO();
-        seguindo.setId(rs.getInt("INSCid"));
-        seguindo.setEveId(rs.getInt("EVEid"));
-        seguindo.setUsuId(rs.getInt("USUid"));
-        return seguindo;
-    }
+        List<SeguindoDO> Items = new ArrayList<SeguindoDO>();
+        while (rs.next()) {
+            SeguindoDO i = new SeguindoDO();
+            i.setId (rs.getInt("INSCid"));
+            i.setUsuId (rs.getInt("USUid"));
+            i.setEveId (rs.getInt("EVEid"));
+            Items.add(i);
+        }
+        return Items;
+    }    
+    
 }
 
 

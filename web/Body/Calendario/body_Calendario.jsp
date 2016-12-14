@@ -1,3 +1,9 @@
+
+<%@page import="data.RealizaDO"%>
+<%@page import="data.GEDO"%>
+<%@page import="transacoes.Realiza"%>
+<%@page import="transacoes.GE"%>
+<%@page import="transacoes.GE"%>
 <%@page import="data.EventoDO"%>
 <%@page import="transacoes.Evento"%>
 <%@page import="java.awt.Color"%>
@@ -41,11 +47,6 @@
 
     <title>Poli Agenda</title>
 </head>
-
-<!-- REMOVER IDS! -->
-<!-- TAGS ALIGN E FONT NÃO COMPATÍVEIS COM HTML5 -->
-<!-- REMOVER PAGE IMPORT? -->
-
 <body>
     
 <div>
@@ -69,8 +70,12 @@
   </tr>
 <%
   //LEMBRAR QUE JANEIRO É O MÊS ZERO!!  
-  Month aMonth = Month.getMonth( Integer.parseInt(currentMonthString), Integer.parseInt(currentYearString) );
-  //DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy", Locale.ENGLISH);
+  Month aMonth;
+  if(request.getParameter("month")!=null && request.getParameter("year")!=null){
+     aMonth = Month.getMonth( Integer.parseInt(request.getParameter("month")), Integer.parseInt(request.getParameter("year")) ); 
+  }else{
+    aMonth = Month.getMonth( Integer.parseInt(currentMonthString), Integer.parseInt(currentYearString) );
+  }
   
   int [][] days = aMonth.getDays();
   String str_localdate = "1900-01-01";
@@ -87,6 +92,7 @@
   String str_lastday = "";
   String str_firstday = "";
   java.sql.Date date_tempday;
+  //VARIÁVEIS DE INTERPOLAÇÃO
   float Xmax = 0;
   float Xmin = 0;
   float Xmed = 0;
@@ -94,9 +100,7 @@
   float Ymin = 0;
   float Ymed = 0;
   
-  
-  
-  //CALCULA O PRIMEIRO E ÚLTIMOS DIAS DO MÊS -----------------
+  //CALCULA O PRIMEIRO E ÚLTIMO DIAS DO MÊS -----------------
     for( int i=3; i<aMonth.getNumberOfWeeks()+1; i++ ){
          for( int j=0; j<7; j++ ){
              last_day_prev = tempday;
@@ -119,7 +123,22 @@
     eventos_do_Mes = tre.buscarMes(date_FirstDay, date_LastDay);
     
   //---------------------------------------------------------
+  //FILTRA DOS GRUPOS NÃO ATIVOS
   
+  //CONSTROI ARRAY LINEAR DE NÚMERO DE EVENTOS POR DIA, PARA UM MÊS
+  GE gtn=new GE();
+    Realiza rtn=new Realiza();
+    GEDO ge;
+    RealizaDO real;
+
+if(eventos_do_Mes.size()>0){
+    for(int i=0;i< eventos_do_Mes.size();i++){
+        ge=gtn.buscar(rtn.buscarPorEVE(eventos_do_Mes.get(i).getId()).getGEid());
+        if(ge.getAutorizado()==0){
+            eventos_do_Mes.remove(i);
+        }
+    }
+}
   //CONSTROI TABELA EVENTOS
   
     int[] eventos = new int[40]; // Começamos a usar a partir do Dia 1
@@ -130,8 +149,8 @@
 
     if(!eventos_do_Mes.isEmpty()){
         for (EventoDO evento_temp : eventos_do_Mes) {
-            date_tempday = evento_temp.getData();
-            tempday2 = date_tempday.getDate();
+            date_tempday = evento_temp.getData(); // pega a data com formato Date
+            tempday2 = date_tempday.getDate(); // converte a data para Int
             eventos[tempday2]++;
         }  
     }
@@ -146,26 +165,80 @@
                 Xmin = (float) eventos[k];
             }
     }
+    
     //Caso não haja eventos no mês, colocamos (Xmax = 1) para não causar erros na tabela de cores
     if (Xmax==0)
     {
     Xmax = 1;
     }
     
-    Ymin = 0f; // BRILHO MÍNIMO
-    Ymax = 1.0f; // BRILHO MÁXIMO
+    Ymin = 0f; // SATURAÇÃO MÍNIMA
+    Ymax = 1.0f; // SATURAÇÃO MÁXIMA
     
-    float br;
+    float sat;
     Color RGBColor;
-    String hexColor, hexBranco;
-  
+    String hexColor;
+    
+    //---------------------------------------------------------
+
+    //CONSTROI ARRAY LINEAR DE CORES POR DIA, PARA UM MÊS    
+    
+    String[] cores = new String[40]; // Começamos a usar a partir do Dia 1
+    
+    for(int k=0; k<40; k++){ // Inicializa cores com vazios
+        cores[k] = "";
+    }
+    
+    for(int i=0; i<aMonth.getNumberOfWeeks(); i++ )
+    {
+      for( int j=0; j<7; j++ )
+      {
+        localday = days[i][j];
+                
+        //INTERPOLAÇÃO POR NÚMERO DE EVENTOS POR DIA --------------------------------------------
+        Xmed = (float) eventos[localday];
+        Ymed = Ymin + (Xmed - Xmin)/(Xmax - Xmin)*(Ymax - Ymin);
+        sat = Ymed;
+        RGBColor = Color.getHSBColor(0.59f, sat, 1f);
+        hexColor = "#"+Integer.toHexString(RGBColor.getRGB()).substring(2);
+        // --------------------------------------------------------------------------------------
+        
+        //DIAS JÁ PASSADOS DESSE MES EM CINZA
+        if (currentDayInt > days[i][j] && currentMonthInt == aMonth.getMonth() && currentYearInt == aMonth.getYear() )
+        {
+            if(eventos[localday] == 0){
+                cores[localday] = "#e6e6e6";
+            }
+            else{
+                cores[localday] = "#bfbfbf";
+            }
+        }
+        
+        //DIAS DE MESES OU ANOS PASSADOS EM CINZA
+        else if (currentMonthInt > aMonth.getMonth() && currentYearInt == aMonth.getYear() || currentYearInt > aMonth.getYear())
+        {
+            if(eventos[localday] == 0){
+                cores[localday] = "#e6e6e6";
+            }
+            else{
+                cores[localday] = "#bfbfbf";
+            }
+        }
+        
+        else
+        {
+            cores[localday] = hexColor;
+        }       
+      }
+    }
+    
   for(int i=0; i<aMonth.getNumberOfWeeks(); i++ )
   {
     %><tr><%
     for( int j=0; j<7; j++ )
     {
       localday = days[i][j];
-      Xmed = (float) eventos[localday];
+      
       if (localday < 10 && localday !=0){
         str_localdate = currentYearString + "-" + str_actualMonth + "-" + "0" + Integer.toString(localday) ;
       }
@@ -178,40 +251,17 @@
       {
         %><td>&nbsp;</td><%
       }
-     else 
-      {
-        Ymed = Ymin + (Xmed - Xmin)/(Xmax - Xmin)*(Ymax - Ymin);
-        br = Ymed;  
 
-        RGBColor = Color.getHSBColor(0.59f, br, 1f);
-        hexColor = "#"+Integer.toHexString(RGBColor.getRGB()).substring(2); 
-        hexBranco = "#ffffff";
+      else
+      {
         // Destaca o Dia de HOJE
         if( currentDayInt == days[i][j] && currentMonthInt == aMonth.getMonth() && currentYearInt == aMonth.getYear() )
         {
-        %><td  align = "center" bgcolor=<%=hexColor%>><a href="/agenda/EventosdoDia.jsp?str_ClickedDate=<%=str_localdate%>" <font size="5"><b><%=days[i][j]%></b></font></a></td><%
-        }
-        else if ( currentDayInt > days[i][j] && currentMonthInt == aMonth.getMonth() && currentYearInt == aMonth.getYear() )
-        {
-            if(hexColor.equals(hexBranco)){
-            %><td align = "center" bgcolor="#e6e6e6"><a href="/agenda/EventosdoDia.jsp?str_ClickedDate=<%=str_localdate%>"<font size="4"><%=days[i][j]%></font></a></td><%
-            }
-            else{
-            %><td align = "center" bgcolor="#bfbfbf"><a href="/agenda/EventosdoDia.jsp?str_ClickedDate=<%=str_localdate%>"<font size="4"><%=days[i][j]%></font></a></td><%
-            }
-        }
-        else if (currentMonthInt > aMonth.getMonth() && currentYearInt == aMonth.getYear() || currentYearInt > aMonth.getYear())
-        {
-            if(hexColor.equals(hexBranco)){
-            %><td align = "center" bgcolor="#e6e6e6"><a href="/agenda/EventosdoDia.jsp?str_ClickedDate=<%=str_localdate%>"<font size="4"><%=days[i][j]%></font></a></td><%
-            }
-            else{
-            %><td align = "center" bgcolor="#bfbfbf"><a href="/agenda/EventosdoDia.jsp?str_ClickedDate=<%=str_localdate%>"<font size="4"><%=days[i][j]%></font></a></td><%
-            }
+        %><td  align = "center" bgcolor=<%=cores[localday]%>><a href="/agenda/EventosdoDia.jsp?str_ClickedDate=<%=str_localdate%>" <font size="5"><b><%=days[i][j]%></b></font></a></td><%
         }
         else
         {
-        %><td align = "center" bgcolor=<%=hexColor%>><a href="/agenda/EventosdoDia.jsp?str_ClickedDate=<%=str_localdate%>"<font size="4"><%=days[i][j]%></font></a>
+        %><td align = "center" bgcolor=<%=cores[localday]%>><a href="/agenda/EventosdoDia.jsp?str_ClickedDate=<%=str_localdate%>"<font size="4"><%=days[i][j]%></font></a>
         </td><%
         }
       }
@@ -223,7 +273,6 @@
 </table>
 
 </div>
-
 <!-- Botões de Navegação -->
 <table  align="center" border="0" id="B_navegacao">
   <tr>

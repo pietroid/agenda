@@ -1,5 +1,7 @@
 
+
 <%@page import="transacoes.Seguindo"%>
+<%@page import="data.SeguindoDO"%>
 <%@page import="data.MembroDO"%>
 <%@page import="transacoes.Membro"%>
 <%@page import="data.UsuarioDO"%>
@@ -12,7 +14,6 @@
 
 <html>
 <head>
-  <title>Calendario Geral</title>
     <style>
     table {
         font-family: "Verdana";
@@ -24,13 +25,12 @@
         border: 1px solid #ddd;
         padding: 8px;
     }
-    tr:nth-child(even){background-color: #f2f2f2;}
     #CalendarioGeral td:hover {background-color: #ddd;}
     th {
         padding-top: 12px;
         padding-bottom: 12px;
         text-align: center;
-        background-color: #4CAF50;
+        background-color: #333333;
         color: white;
     }
     
@@ -45,20 +45,18 @@
     
     </style>
 
+    <title>Poli Agenda</title> <!-- DOIS TITLES?? -->
 </head>
-
-<!-- REMOVER IDS! -->
-<!-- TAGS ALIGN E FONT NÃO COMPATÍVEIS COM HTML5 -->
-<!-- REMOVER PAGE IMPORT? -->
 
 <body>
     
 <div>
 <table align="center" id="CalendarioGeral">
   <tr>
-    <td width="100%" colspan="7" align = "center">
-      <font size="5">
+    <td width="100%" colspan="7" align = "center" bgcolor="ffffff">
+        <font size="5"><b>
       <%=monthName%>, <%=intYear%>
+      </b>
       </font>
     </td>
   </tr>
@@ -71,10 +69,10 @@
       <th width="15%"><font size="4">Sexta</font></th>
       <th width="15%"><font size="4">Sábado</font></th>
   </tr>
+  
 <%
   //LEMBRAR QUE JANEIRO É O MÊS ZERO!!  
   Month aMonth = Month.getMonth( Integer.parseInt(currentMonthString), Integer.parseInt(currentYearString) );
-  //DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy", Locale.ENGLISH);
   
   int [][] days = aMonth.getDays();
   String str_localdate = "1900-01-01";
@@ -87,14 +85,39 @@
   int firstday = 1;
   int lastday = 0;
   int int_actualMonth = currentMonthInt + 1;
-  int eventos_max = 0;
   String str_actualMonth = new Integer(int_actualMonth).toString();
   String str_lastday = "";
   String str_firstday = "";
   java.sql.Date date_tempday;
-  float ev = 0;
+  //VARIÁVEIS DE INTERPOLAÇÃO
+  float Xmax = 0;
+  float Xmin = 0;
+  float Xmed = 0;
+  float Ymax = 0;
+  float Ymin = 0;
+  float Ymed = 0;
+  int eveID = 0;
   
-  //CALCULA O PRIMEIRO E ÚLTIMOS DIAS DO MÊS -----------------
+  
+  //DETERMINA O TIPO DE USUÁRIO
+  
+    boolean admin2 = false;
+    UsuarioDO usr2= (UsuarioDO)session.getAttribute("Usuario");
+    int usrID = usr2.getId();
+    
+    if(usr2!=null){
+
+      Membro tr = new Membro();
+
+      //Relacoes de Membro para os quais o usuario é ADM 
+      List<MembroDO> lm = tr.AdminedGroups(usrID);
+
+      if(!lm.isEmpty()){
+          admin2 = true;
+      }
+    }  
+  
+    //CALCULA O PRIMEIRO E ÚLTIMO DIAS DO MÊS -----------------
     for( int i=3; i<aMonth.getNumberOfWeeks()+1; i++ ){
          for( int j=0; j<7; j++ ){
              last_day_prev = tempday;
@@ -108,6 +131,7 @@
     str_lastday = currentYearString + "-" + str_actualMonth + "-" + Integer.toString(lastday);
     java.sql.Date date_LastDay = java.sql.Date.valueOf(str_lastday);
     
+
   //---------------------------------------------------------
   
   //BUSCA EVENTOS DO MÊS ATUAL
@@ -115,60 +139,116 @@
     Evento tre = new Evento();
     List<EventoDO> eventos_do_Mes=new ArrayList<EventoDO>();
     eventos_do_Mes = tre.buscarMes(date_FirstDay, date_LastDay);
-    
-  //---------------------------------------------------------
   
-  //DETERMINA TIPO DE USUÁRIO------------------------------
-    int [] eventos_seguidos = new int[40]; // Começamos a usar a partir do Dia 1     
-    UsuarioDO usr= (UsuarioDO)session.getAttribute("Usuario");
-    boolean registered_usr = false;
-    boolean admin_usr = false;
-    boolean super_usr = false;
-    int usrID = usr.getId();
-    int eventoID;
-    Membro tr = new Membro();
-    Seguindo sg = new Seguindo();
-   
-    if(usr!=null){
-        registered_usr = true;
-        
-        List<MembroDO> lm = tr.AdminedGroups(usrID);        
-        if(!lm.isEmpty()){
-            admin_usr = true;
-        }    
-    }
-    
-    //USUÁRIO COMUM
-    if(registered_usr && !admin_usr){
+  //CONSTROI ARRAY LINEAR DE NÚMERO DE EVENTOS POR DIA, PARA UM MÊS
   
-    //CONSTROI TABELA DE EVENTOS SEGUIDOS
-
-   
+    int[] eventos = new int[40]; // Começamos a usar a partir do Dia 1
+    
     for(int k=0; k<40; k++){ // Inicializa eventos com zeros
-        eventos_seguidos[k] = 0;
+        eventos[k] = 0;
     }
+    
+  //PARA USUÁRIO COMUM -------------------------------------------------------------------- 
+  
+  Seguindo trs = new Seguindo();
+  List<SeguindoDO> matchUsrEvent = new ArrayList<SeguindoDO>();
+  
+  if(!admin2){
 
     if(!eventos_do_Mes.isEmpty()){
         for (EventoDO evento_temp : eventos_do_Mes) {
-            eventoID = evento_temp.getId(); 
-            date_tempday = evento_temp.getData();
-            tempday2 = date_tempday.getDate();
-            eventos_seguidos[tempday2]++;
+            eveID = evento_temp.getId();
+            matchUsrEvent = trs.matchUsrEvent(usrID, eveID);
+            if(!matchUsrEvent.isEmpty()){ //Se o usuário seguir o evento
+                date_tempday = evento_temp.getData(); // pega a data com formato Date
+                tempday2 = date_tempday.getDate(); // converte a data para Int
+                eventos[tempday2]++;
+            }
+            else{}
         }  
     }
+  } 
+    
+   //FIM USUÁRIO COMUM --------------------------------------------------------------------
   
-    for(int k=0; k<40; k++){ // Printa eventos[k]
-        if(eventos_seguidos[k]>eventos_max){
-            eventos_max = eventos_seguidos[k];
-        }
+    //XMÁX e XMIN
+    for(int k=0; k<40; k++){
+            if((float)eventos[k]>Xmax){
+                Xmax = (float) eventos[k];
+            }
+            Xmin = Xmax;
+            if((float)eventos[k]<Xmin){
+                Xmin = (float) eventos[k];
+            }
     }
+    
+    //Caso não haja eventos no mês, colocamos (Xmax = 1) para não causar erros na tabela de cores
+    if (Xmax==0)
+    {
+    Xmax = 1;
     }
-    if(eventos_max == 0){
-        eventos_max = 1;
-    }
-    float br;
+    
+    Ymin = 0f; // SATURAÇÃO MÍNIMA
+    Ymax = 1.0f; // SATURAÇÃO MÁXIMA
+    
+    float sat;
     Color RGBColor;
-    String hexColor, hexBranco;
+    String hexColor;
+    
+    //---------------------------------------------------------
+
+    //CONSTROI ARRAY LINEAR DE CORES POR DIA, PARA UM MÊS    
+    
+    String[] cores = new String[40]; // Começamos a usar a partir do Dia 1
+    
+    for(int k=0; k<40; k++){ // Inicializa cores com vazios
+        cores[k] = "";
+    }
+    
+    for(int i=0; i<aMonth.getNumberOfWeeks(); i++ )
+    {
+      for( int j=0; j<7; j++ )
+      {
+        localday = days[i][j];
+        %><%=eventos[localday]%><%
+                
+        //INTERPOLAÇÃO POR NÚMERO DE EVENTOS POR DIA --------------------------------------------
+        Xmed = (float) eventos[localday];
+        Ymed = Ymin + (Xmed - Xmin)/(Xmax - Xmin)*(Ymax - Ymin);
+        sat = Ymed;
+        RGBColor = Color.getHSBColor(0.59f, sat, 1f);
+        hexColor = "#"+Integer.toHexString(RGBColor.getRGB()).substring(2);
+        // --------------------------------------------------------------------------------------
+        
+        //DIAS JÁ PASSADOS DESSE MES EM CINZA
+        if (currentDayInt > days[i][j] && currentMonthInt == aMonth.getMonth() && currentYearInt == aMonth.getYear() )
+        {
+            if(eventos[localday] == 0){
+                cores[localday] = "#e6e6e6";
+            }
+            else{
+                cores[localday] = "#bfbfbf";
+            }
+        }
+        
+        //DIAS DE MESES OU ANOS PASSADOS EM CINZA
+        else if (currentMonthInt > aMonth.getMonth() && currentYearInt == aMonth.getYear() || currentYearInt > aMonth.getYear())
+        {
+            if(eventos[localday] == 0){
+                cores[localday] = "#e6e6e6";
+            }
+            else{
+                cores[localday] = "#bfbfbf";
+            }
+        }
+        
+        else
+        {
+            cores[localday] = hexColor;
+        }       
+      }
+    }
+
   
   for(int i=0; i<aMonth.getNumberOfWeeks(); i++ )
   {
@@ -178,50 +258,29 @@
       localday = days[i][j];
       
       if (localday < 10 && localday !=0){
-          str_localdate = currentYearString + "-" + str_actualMonth + "-" + "0" + Integer.toString(localday) ;
-      } else if(localday!=0){
-              str_localdate = currentYearString + "-" + str_actualMonth + "-" + Integer.toString(localday);
-          }            
-      %><%
+        str_localdate = currentYearString + "-" + str_actualMonth + "-" + "0" + Integer.toString(localday) ;
+      }
+      else if(localday >=10 && localday!=0){
+        str_localdate = currentYearString + "-" + str_actualMonth + "-" + Integer.toString(localday);
+      }
+      else{}
+
       if( days[i][j] == 0 )
       {
         %><td>&nbsp;</td><%
       }
-      else
-      { 
-        ev = (float)(eventos_seguidos[localday]);
-        br = 1/((float)(100/eventos_max)*ev);//100 aqui é o espectro!
-        RGBColor = Color.getHSBColor(0.12f, 0.57f, br);
 
-        hexColor = "#"+Integer.toHexString(RGBColor.getRGB()).substring(2);  
-        hexBranco = "#ffffff";
-        
+      else
+      {
         // Destaca o Dia de HOJE
         if( currentDayInt == days[i][j] && currentMonthInt == aMonth.getMonth() && currentYearInt == aMonth.getYear() )
         {
-            %><td  align = "center" bgcolor=<%=hexColor%> ><a href="/agenda/EventosdoDia.jsp?str_ClickedDate=<%=str_localdate%>" <font size="5"><b><%=days[i][j]%></b></font></a></td><%
-        }
-        else if ( currentDayInt > days[i][j] && currentMonthInt == aMonth.getMonth() && currentYearInt == aMonth.getYear() )
-        {
-            if(hexColor.equals(hexBranco)){
-                %><td align = "center" bgcolor="#e6e6e6"> <a href="/agenda/EventosdoDia.jsp?str_ClickedDate=<%=str_localdate%>"<font size="4"><%=days[i][j]%></font></a></td><%
-            }
-            else{
-                %><td align = "center" bgcolor="#bfbfbf"><a href="/agenda/EventosdoDia.jsp?str_ClickedDate=<%=str_localdate%>"<font size="4"><%=days[i][j]%></font></a></td><%
-            }
-        }
-        else if (currentMonthInt > aMonth.getMonth() && currentYearInt == aMonth.getYear() || currentYearInt > aMonth.getYear())
-        {
-            if(hexColor.equals(hexBranco)){
-                %><td align = "center" bgcolor="#e6e6e6"><a href="/agenda/EventosdoDia.jsp?str_ClickedDate=<%=str_localdate%>"<font size="4"><%=days[i][j]%></font></a></td><%
-            }
-            else{
-                %><td align = "center" bgcolor="#bfbfbf"><a href="/agenda/EventosdoDia.jsp?str_ClickedDate=<%=str_localdate%>"<font size="4"><%=days[i][j]%></font></a></td><%
-            }
+        %><td  align = "center" bgcolor=<%=cores[localday]%>><a href="/agenda/EventosdoDia.jsp?str_ClickedDate=<%=str_localdate%>" <font size="5"><b><%=days[i][j]%></b></font></a></td><%
         }
         else
         {
-            %><td align = "center" bgcolor=<%=hexColor%>><a href="/agenda/EventosdoDia.jsp?str_ClickedDate=<%=str_localdate%>"<font size="4"><%=days[i][j]%></font></a></td><%
+        %><td align = "center" bgcolor=<%=cores[localday]%>><a href="/agenda/EventosdoDia.jsp?str_ClickedDate=<%=str_localdate%>"<font size="4"><%=days[i][j]%></font></a>
+        </td><%
         }
       }
     }
@@ -232,6 +291,7 @@
 </table>
 
 </div>
+
 
 <!-- Botões de Navegação -->
 <table  align="center" border="0" id="B_navegacao">
@@ -256,3 +316,4 @@
 
 </body>
 </html>
+

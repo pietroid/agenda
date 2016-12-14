@@ -60,6 +60,7 @@
             superuser = usuario.isSuperUser();
             isadm = membrotn.isADM(ge.getId(), usuario.getId());
         }
+        if(ge.getAutorizado()==1 || isadm || superuser){
 %>
         <h1><center><%= ge.getNome() %></center></h1>
         <BR><BR>
@@ -130,13 +131,46 @@
         <table align="center" border=1 cellpadding=10 width=500>
             <th colspan="2">Informações do grupo</th>
             <tr>
+                <td><b>Tipo de grupo</b></td>
+                <td> <%= ge.getTipo() %></td>
+            </tr>
+            <tr>
                 <td><b>E-mail</b></td>
                 <td> <%= ge.getEmail() %></td>
             </tr>
+            
             <tr>
                 <td><b>Telefone</b></td>
                 <td> <%= ge.getTel()%></td>
             </tr>
+            <tr>
+                <td><b>Facebook</b></td>
+                <td><a href="<%=ge.getFace()%>"> <%= ge.getFace()%> </a></td>
+            </tr>
+            <tr>
+                <td><b>Ano de fundação</b></td>
+                <td><%= ge.getAno() %> </td>
+            </tr>
+            <tr>
+                <td><b>Site</b></td>
+                <td><a href="<%= ge.getSite() %>" ><%= ge.getSite() %> </a></td>
+            </tr>
+        </table>
+        <table align="center" border=1 cellpadding=10 width=500>
+            <th colspan="2">Membros do grupo</th>
+            <%
+                Membro mtnn=new Membro();
+                List<MembroDO> mbrs  =mtnn.buscarPorGEid(ge.getId()); 
+            for(MembroDO mbr : mbrs){
+                if(mbr.getAprovado()==1){
+                Usuario ust=new Usuario();
+                UsuarioDO uss=ust.buscarPorID(mbr.getUSUid());
+%>
+            <tr align="center">
+                <td><a href="Usuario.jsp?Usuario=<%=uss.getId()%>" ><%=uss.getNome()%></a></td>
+            </tr>
+            <%}
+}%>
         </table>
         <BR><BR>
         <%
@@ -174,28 +208,44 @@
         <BR><BR>
 
         <%
-        if(isadm == true || superuser == true){
+        if(isadm == true){
         %>
             <table align="center" border=1 cellpadding=10 width=500>
+                <center>
                 <tr>
-                    <td><a href="CriarEvento.jsp?GE=<%= ge.getId() %>" target="_top"><font size="5" color="#ff0000">Criar evento</font></a></td>
+                    <td><a href="CriarEvento.jsp?GE=<%= ge.getId() %>" style="color:red">Criar evento</a></td>
                 </tr>
+                </center>
             </table>
     <%      
         }
         if(session.getAttribute("Usuario")!= null){
             UsuarioDO SUser = (UsuarioDO)session.getAttribute("Usuario");
-            if (SUser.isSuperUser()){
+            Membro mtn=new Membro();
+            List<MembroDO> membro=mtn.buscarPorUSUid(SUser.getId());
+            boolean sameGE=false;
+            for(MembroDO m : membro){
+                if(m.getGEid()==ge.getId() && m.getADM()==1){
+                    sameGE=true;
+                    break;
+                }
+            }
+            if (SUser.isSuperUser() || sameGE){
                 %>
+    <center>
                 <FORM action="ExcluirGrupo.jsp" method="post">
                 <INPUT type="submit" name="Excluir" value="Excluir Grupo">
                 <INPUT type="hidden" name="idGEexclusao" value="<%=ge.getId()%>">
                 </FORM>
+    </center>
         
         <%
         
             }    
         }
+}else{
+pageContext.forward("index.jsp");
+}
     }
 else{ pageContext.forward("index.jsp");}
     %>
