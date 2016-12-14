@@ -31,15 +31,17 @@ Usuario  ustn = new Usuario();
                     List<ProblemaDO> ges = getn.buscarTodos();
                     for(int i = 0; i < ges.size(); i++){
                         
-                       if(i==0){%><h1><center> Problemas <center> </h1><%}
+                       if(i==0){%><h1><center> Problemas <center> </h1>
+                <table align="center" border=1 cellpadding=10 width=1000>
+                <th>Usuário <th>Problema<th>Data<th>Excluir Notificação</th>
+                      <%}
                        ProblemaDO ge = ges.get(i);
                        int USid = ge.getUserId();
                        UsuarioDO us = ustn.buscarPorID(USid);
                        
                 %>    
                        
-              <table align="center" border=1 cellpadding=10 width=1000>
-                <th>Usuário <th>Problema<th>Data<th>Excluir Notificação</th>
+
                 
                 
                 
@@ -62,9 +64,6 @@ Usuario  ustn = new Usuario();
 
               %>  <h1><center>Não há problemas reportados.<center></h1><%
 }
-
-
-
 
                 %>
             </table>
