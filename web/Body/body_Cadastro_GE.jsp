@@ -1,3 +1,6 @@
+<%@page import="java.util.List"%>
+<%@page import="transacoes.PontoDeInteresse"%>
+<%@page import="data.PontoDeInteresseDO"%>
 <%@page import="data.UsuarioDO"%>
 <%@page import="data.MembroDO"%>
 <%@page import="transacoes.Membro"%>
@@ -10,7 +13,10 @@
 <font face="verdana">
 <h1><center>Cadastro Grupo de Extensão<center></h1>
 <BR>
-
+<%                    PontoDeInteresse tpoi=new PontoDeInteresse();
+                    List<PontoDeInteresseDO> listaPOI=tpoi.ListarPOI();
+                    
+                    %>
 <% if (session.getAttribute("Usuario")!= null){
 
 %>
@@ -37,6 +43,14 @@ if (request.getParameter("submit") == null){
     <INPUT type="text" name="face"><BR><BR>
     Descrição:<BR>
     <INPUT type="text" name="descricao"><BR><BR>
+    Local:<BR>
+                                <select name="GElocal">
+                                    <%if(listaPOI!=null && !listaPOI.isEmpty()){
+                                            for(PontoDeInteresseDO poi : listaPOI){
+                                                %><option value="<%=poi.getId()%>"><%=poi.getNome()%></option><%
+                                            }
+                                    }%>
+                                </select><BR><BR>
     <INPUT type="submit" name="submit" value="Cadastrar">
     <INPUT type="reset" name="reset" value="Reset">
 
@@ -98,6 +112,14 @@ if (request.getParameter("submit") != null){
     <INPUT type="text" name="face" value="<%=request.getParameter("face")%>"><BR><BR>
     Descrição:<BR>
     <INPUT type="text" name="descricao" value="<%=request.getParameter("descricao")%>"><BR><BR>
+    Local:<BR>
+                                <select name="GElocal">
+                                    <%if(listaPOI!=null && !listaPOI.isEmpty()){
+                                            for(PontoDeInteresseDO poi : listaPOI){
+                                                %><option value="<%=poi.getId()%>"><%=poi.getNome()%></option><%
+                                            }
+                                    }%>
+                                </select><BR><BR>
     <INPUT type="submit" name="submit" value="Cadastrar">
     <INPUT type="reset" name="reset" value="Reset">
     </FORM>  
