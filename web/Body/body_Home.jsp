@@ -4,7 +4,9 @@
 <body BGCOLOR = #f2f2f2>
 <font face="verdana">
 
-<%@page import="data.EventoDO"%>
+<%@ page import= "java.sql.Date"%>
+<%@ page import= "java.time.LocalDate"%>
+<%@ page import= "data.EventoDO"%>
 <%@ page import="transacoes.Usuario" %>
 <%@ page import="data.UsuarioDO" %>
 <%@ page import="java.util.Vector" %>
@@ -61,8 +63,13 @@
 <%
     SeguindoDO seguindo = new SeguindoDO();
     Seguindo seguindotn = new Seguindo();
+    Evento eventotr = new Evento();
     List<SeguindoDO> lista = new ArrayList<SeguindoDO>();
+    List<EventoDO> listaSemana = new ArrayList<EventoDO>();
     lista = seguindotn.pesquisarPorUSUid(Usu.getId());
+    LocalDate aqui = LocalDate.now();
+    java.sql.Date today = java.sql.Date.valueOf(aqui);
+    listaSemana = eventotr.buscarSemana(today);
     if(lista != null){
         if (lista.size() !=0){ 
            %><h2>Você segue estes eventos:</h2><br>
@@ -77,8 +84,8 @@
         for(int i=0; i < lista.size(); i++) {
             SeguindoDO seguido = lista.get(i);
             int EVEid = seguido.getEveId();
-            
             Evento eventotn = new Evento();
+
             EventoDO evento = eventotn.buscar(EVEid);
             lista_eventos.add(evento);
             String nomeEven = evento.getNome();
@@ -101,7 +108,7 @@
         </table>
         </center>   
 <BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR>
-<%if (lista.size() !=0){ %>
+<%if (lista.size() !=0 && listaSemana.size() != 0){ %>
     <h2>Os seus próximos eventos nessa semana são:</h2><br>
         <center>
         <table align="left" border=1 cellpadding=10 width=1000>
@@ -111,7 +118,12 @@
     for(int i=0; i < lista.size(); i++){
         EventoDO eventoParte = lista_eventos.get(i);
         GEDO ge = lista_GE.get(i);
-        
+        boolean contem = false;
+        for(int j=0; j < listaSemana.size(); j ++){
+            if(listaSemana.get(j).getId() == lista_eventos.get(i).getId())
+                contem = true;
+        }
+        if(contem == true ){
 %>
         <TR>
             <TD><center><a href="Evento.jsp?evento = "<%=eventoParte.getId()%>><%=eventoParte.getNome()%></a></center> </TD>
@@ -120,6 +132,7 @@
 
         </TR>
 <%        
+        }
     }
 %>
         </table>

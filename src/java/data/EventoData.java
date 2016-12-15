@@ -185,7 +185,7 @@ public class EventoData {
     }        
     public List<EventoDO> buscarSemana(java.sql.Date data1, Transacao tr) throws Exception {
         Connection con = tr.obterConexao();
-        String sql = "select * from evento where EVEdata between ? and dateadd(dd,7,?)";
+        String sql = "select * from evento where EVEdata between ? and ? + INTERVAL 7 DAY;";
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setDate(1, data1);
         ps.setDate(2, data1);
