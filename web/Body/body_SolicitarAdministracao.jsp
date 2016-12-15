@@ -6,6 +6,7 @@
 <%@page import="java.util.List"%>
 
 <html>
+    
 <%@ page import="transacoes.NotificacaoGeral" %>
 <%@ page import="data.NotificacaoGeralDO" %>    
 <%@ page import="transacoes.Membro" %>
@@ -22,19 +23,45 @@
     int geadmID = Integer.parseInt(request.getParameter("GEid"));
     int IDusersol = usersol.getId();
     
-    NotificacaoGeralDO Notsol = new NotificacaoGeralDO();
-    NotificacaoGeral Notsoltr = new NotificacaoGeral();
+    Membro membAdmtr = new Membro();
+    MembroDO membAdm = new MembroDO();
+    
+    Membro membsoltr = new Membro();
+    
+    List<MembroDO> listadm = membAdmtr.buscarPorGEidADM(geadmID);
+    membAdm=listadm.get(0);  
+    
+    List<MembroDO> listmemb = membsoltr.buscarPorUSUid(IDusersol); 
+    for(MembroDO membro: listmemb){
+        if(membro.getGEid()== geadmID){
+    
+        NotificacaoGeralDO Notsol = new NotificacaoGeralDO();
+        NotificacaoGeral Notsoltr = new NotificacaoGeral();
     
 
-    Notsol.setUsuId(IDusersol);
-    Notsol.setClassificacao(4);
-    Notsol.setEVEassociado(eventoAssociado);
+    
+
+        Notsol.setUsuId(membAdm.getUSUid());
+        Notsol.setClassificacao(4);
+        Notsol.setIDassociado(membro.getId());
+        Notsol.setMensagem("");
+    
+        if (Notsoltr.incluir(Notsol)){
+
+            %> <th><center>A sua solicitação foi feita com sucesso!<center></th>  <%
+
+        }else{
+            %>Não foi possível enviar sua solicitação.<%
+
+        }
 
 
 
- %> <th><center>A sua solicitação foi feita com sucesso!<center></th>  <%
+       }
 
- 
+    }
+
+
 %>
 
 </body>
