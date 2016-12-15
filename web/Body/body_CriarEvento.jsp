@@ -120,7 +120,7 @@
                                 Nome do Evento:
                                 <INPUT type="text" name="EVEnome" maxlength = "30"><BR>
                                 Descrição:
-                                <INPUT type="text" name="EVEdescricao" maxlength = "140" size = "140"><BR>
+                                <INPUT type="text" name="EVEdescricao" maxlength = "1500" size = "140"><BR>
                                 Tipo do evento:
                                 <INPUT type="text" name="EVEtipo"><BR>
                                 Horário de início:

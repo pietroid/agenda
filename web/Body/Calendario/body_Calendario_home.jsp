@@ -156,40 +156,129 @@
                             }
                         }
                     }
-
-                    //CONSTROI ARRAY LINEAR DE NÚMERO DE EVENTOS POR DIA, PARA UM MÊS                    
-                    int[] eventos = new int[40]; // Começamos a usar a partir do Dia 1
+                    
+                    //CONSTROI ARRAY LINEAR DE NÚMERO DE EVENTOS SEGUIDOS POR DIA, PARA UM MÊS                   
+                    int[] eventos_seguidos = new int[40]; // Começamos a usar a partir do Dia 1
 
                     for (int k = 0; k < 40; k++) { // Inicializa eventos com zeros
-                        eventos[k] = 0;
-                    }
+                        eventos_seguidos[k] = 0;
+                    }                      
+                                    
+                    
+                    //CONSTROI ARRAY LINEAR DE CORES POR DIA, PARA UM MÊS    
+                    String[] cores = new String[40]; // Começamos a usar a partir do Dia 1
+
+                    for (int k = 0; k < 40; k++) { // Inicializa cores com vazios
+                        cores[k] = "";
+                    }                    
+                    
 
                     //PARA USUÁRIO COMUM -------------------------------------------------------------------- 
                     Seguindo trs = new Seguindo();
                     int eveID;
-                    
-                    if (!admin2) {
+                                   
+                    if (!admin2) {                          
+                        
                         if (!eventos_do_Mes.isEmpty()) {
                             for (EventoDO evento_temp : eventos_do_Mes) {
                                 eveID = evento_temp.getId(); // Pega o ID do evento da iteracao
                                 if (trs.isSeguindo(usrID, eveID)) { //Se o usuário seguir o evento
                                     date_tempday = evento_temp.getData(); // pega a data com formato Date
                                     tempday2 = date_tempday.getDate(); // converte a data para Int
-                                    eventos[tempday2]++;
-                                } 
+                                    eventos_seguidos[tempday2]++;
+                                }
                             }
+                        }
+                        
+                    //INTERPOLAÇÃO ---------------------------------------------------
+                    //XMÁX e XMIN (maximo e minimo numero de eventos em um mes)
+                    for (int k = 0; k < 40; k++) {
+                        if ((float) eventos_seguidos[k] > Xmax) {
+                            Xmax = (float) eventos_seguidos[k];
+                        }
+                        Xmin = Xmax;
+                        if ((float) eventos_seguidos[k] < Xmin) {
+                            Xmin = (float) eventos_seguidos[k];
                         }
                     }
 
-                    //FIM USUÁRIO COMUM --------------------------------------------------------------------
+                    //Caso não haja eventos no mês, colocamos (Xmax = 1) para não causar erros na tabela de cores
+                    if (Xmax == 0) {
+                        Xmax = 1;
+                    }
+
+                    Ymin = 0f; // SATURAÇÃO MÍNIMA
+                    Ymax = 1.0f; // SATURAÇÃO MÁXIMA
+
+                    float sat;
+                    Color RGBColor;
+                    String hexColor;
+
+                    for (int i = 0; i < aMonth.getNumberOfWeeks(); i++) {
+                        for (int j = 0; j < 7; j++) {
+                            localday = days[i][j];
+
+                            //INTERPOLAÇÃO POR NÚMERO DE EVENTOS POR DIA --------------------------------------------
+                            Xmed = (float) eventos_seguidos[localday];
+                            Ymed = Ymin + (Xmed - Xmin) / (Xmax - Xmin) * (Ymax - Ymin);
+                            sat = Ymed;
+                            RGBColor = Color.getHSBColor(0.36f, sat, 1f);
+                            hexColor = "#" + Integer.toHexString(RGBColor.getRGB()).substring(2);
+                            // --------------------------------------------------------------------------------------
+
+                            //DIAS JÁ PASSADOS EM CINZA
+                            if (int_selectedYear < int_currentYear) {
+                                if (eventos_seguidos[localday] == 0) {
+                                    cores[localday] = "#e6e6e6";
+                                } else {
+                                    cores[localday] = "#bfbfbf";
+                                }
+                            } else if (int_selectedYear == int_currentYear) {
+                                if (int_selectedMonth < int_currentMonth) {
+                                    if (eventos_seguidos[localday] == 0) {
+                                        cores[localday] = "#e6e6e6";
+                                    } else {
+                                        cores[localday] = "#bfbfbf";
+                                    }
+                                } else if (int_selectedMonth == int_currentMonth) {
+                                    if (days[i][j] < int_currentDay) {
+                                        if (eventos_seguidos[localday] == 0) {
+                                            cores[localday] = "#e6e6e6";
+                                        } else {
+                                            cores[localday] = "#bfbfbf";
+                                        }
+                                    } else {
+                                        cores[localday] = hexColor;
+                                    }
+                                } else {
+                                    cores[localday] = hexColor;
+                                }
+                            } else {
+                                cores[localday] = hexColor;
+                            }
+                        }
+                    }
+                  }
+
+                    //FIM USUÁRIO COMUM --------------------------------------------------------------------                    
                     
-                    //PARA USUÁRIO ADMIN -------------------------------------------------------------------- 
+                    
+                    //PARA USUÁRIO ADMIN --------------------------------------------------------------------
+                    
+                    if (admin2) {
+                        
                     Realiza trr = new Realiza();
                     RealizaDO realizaDO = new RealizaDO();
                     Membro trm2 = new Membro();
-                    int geID;
+                    int geID;                           
                     
-                    if (admin2) {
+                    //CONSTROI ARRAY LINEAR DE NÚMERO DE EVENTOS ADMINISTRADOS POR DIA, PARA UM MÊS                   
+                    int[] eventos_admined = new int[40]; // Começamos a usar a partir do Dia 1
+
+                    for (int k = 0; k < 40; k++) { // Inicializa eventos com zeros
+                        eventos_admined[k] = 0;
+                    }                            
+                        
                         if (!eventos_do_Mes.isEmpty()) {
                             for (EventoDO evento_temp : eventos_do_Mes) {
                                 eveID = evento_temp.getId(); // Pegamos o ID do evento da iteracao
@@ -198,28 +287,30 @@
                                 if(trm2.isADM(geID, usrID)){
                                     date_tempday = evento_temp.getData(); // pega a data com formato Date
                                     tempday2 = date_tempday.getDate(); // converte a data para Int
-                                    eventos[tempday2]++; //adiciona no Array eventos                                                                    
+                                    eventos_admined[tempday2]++; //adiciona no Array de eventos administrados                                                                
                                 }
                                 if (trs.isSeguindo(usrID, eveID)) { //Se o usuário seguir o evento
                                     date_tempday = evento_temp.getData(); // pega a data com formato Date
                                     tempday2 = date_tempday.getDate(); // converte a data para Int
-                                    eventos[tempday2]++; //adiciona no Array eventos
-                                } 
+                                    eventos_seguidos[tempday2]++; //adiciona no Array de eventos seguidos
+                                }
+
                             }
                         }
-                    }
-
-                    //FIM USUÁRIO ADMIN --------------------------------------------------------------------                    
-
-                    //INTERPOLAÇÃO ---------------------------------------------------
-                    //XMÁX e XMIN (maximo e minimo numero de eventos em um mes)
+                        
+                    //CORES[] SEGUIDOS ---------------------------------------------------
+                    //XMÁX e XMIN (maximo e minimo numero de eventos seguidos em um mes)
+                    
+                    Xmax=0;
+                    Xmin=0;
+                    
                     for (int k = 0; k < 40; k++) {
-                        if ((float) eventos[k] > Xmax) {
-                            Xmax = (float) eventos[k];
+                        if ((float) eventos_seguidos[k] > Xmax) {
+                            Xmax = (float) eventos_seguidos[k];
                         }
                         Xmin = Xmax;
-                        if ((float) eventos[k] < Xmin) {
-                            Xmin = (float) eventos[k];
+                        if ((float) eventos_seguidos[k] < Xmin) {
+                            Xmin = (float) eventos_seguidos[k];
                         }
                     }
 
@@ -237,10 +328,10 @@
 
                     //---------------------------------------------------------
                     //CONSTROI ARRAY LINEAR DE CORES POR DIA, PARA UM MÊS    
-                    String[] cores = new String[40]; // Começamos a usar a partir do Dia 1
+                    String[] cores_seguidos = new String[40]; // Começamos a usar a partir do Dia 1
 
                     for (int k = 0; k < 40; k++) { // Inicializa cores com vazios
-                        cores[k] = "";
+                        cores_seguidos[k] = "";
                     }
 
                     for (int i = 0; i < aMonth.getNumberOfWeeks(); i++) {
@@ -248,46 +339,148 @@
                             localday = days[i][j];
 
                             //INTERPOLAÇÃO POR NÚMERO DE EVENTOS POR DIA --------------------------------------------
-                            Xmed = (float) eventos[localday];
+                            Xmed = (float) eventos_seguidos[localday];
                             Ymed = Ymin + (Xmed - Xmin) / (Xmax - Xmin) * (Ymax - Ymin);
                             sat = Ymed;
-                            RGBColor = Color.getHSBColor(0.59f, sat, 1f);
+                            RGBColor = Color.getHSBColor(0.36f, sat, 1f);
                             hexColor = "#" + Integer.toHexString(RGBColor.getRGB()).substring(2);
                             // --------------------------------------------------------------------------------------
 
                             //DIAS JÁ PASSADOS EM CINZA
                             if (int_selectedYear < int_currentYear) {
-                                if (eventos[localday] == 0) {
-                                    cores[localday] = "#e6e6e6";
+                                if (eventos_seguidos[localday] == 0) {
+                                    cores_seguidos[localday] = "#e6e6e6";
                                 } else {
-                                    cores[localday] = "#bfbfbf";
+                                    cores_seguidos[localday] = "#bfbfbf";
                                 }
                             } else if (int_selectedYear == int_currentYear) {
                                 if (int_selectedMonth < int_currentMonth) {
-                                    if (eventos[localday] == 0) {
-                                        cores[localday] = "#e6e6e6";
+                                    if (eventos_seguidos[localday] == 0) {
+                                        cores_seguidos[localday] = "#e6e6e6";
                                     } else {
-                                        cores[localday] = "#bfbfbf";
+                                        cores_seguidos[localday] = "#bfbfbf";
                                     }
                                 } else if (int_selectedMonth == int_currentMonth) {
                                     if (days[i][j] < int_currentDay) {
-                                        if (eventos[localday] == 0) {
-                                            cores[localday] = "#e6e6e6";
+                                        if (eventos_seguidos[localday] == 0) {
+                                            cores_seguidos[localday] = "#e6e6e6";
                                         } else {
-                                            cores[localday] = "#bfbfbf";
+                                            cores_seguidos[localday] = "#bfbfbf";
                                         }
                                     } else {
-                                        cores[localday] = hexColor;
+                                        cores_seguidos[localday] = hexColor;
                                     }
                                 } else {
-                                    cores[localday] = hexColor;
+                                    cores_seguidos[localday] = hexColor;
                                 }
                             } else {
-                                cores[localday] = hexColor;
+                                cores_seguidos[localday] = hexColor;
                             }
                         }
                     }
+                        
+                    //CORES[] ADMINED ---------------------------------------------------
+                    //XMÁX e XMIN (maximo e minimo numero de eventos seguidos em um mes)
+                    
+                    Xmax=0;
+                    Xmin=0;
+                    
+                    for (int k = 0; k < 40; k++) {
+                        if ((float) eventos_admined[k] > Xmax) {
+                            Xmax = (float) eventos_admined[k];
+                        }
+                        Xmin = Xmax;
+                        if ((float) eventos_admined[k] < Xmin) {
+                            Xmin = (float) eventos_admined[k];
+                        }
+                    }
 
+                    //Caso não haja eventos no mês, colocamos (Xmax = 1) para não causar erros na tabela de cores
+                    if (Xmax == 0) {
+                        Xmax = 1;
+                    }
+
+                    Ymin = 0f; // SATURAÇÃO MÍNIMA
+                    Ymax = 1.0f; // SATURAÇÃO MÁXIMA
+                    
+                    sat = 0f;
+                    RGBColor=new Color(0,0,0);
+                    hexColor = "";                    
+
+                    //---------------------------------------------------------
+                    //CONSTROI ARRAY LINEAR DE CORES POR DIA, PARA UM MÊS    
+                    String[] cores_admined = new String[40]; // Começamos a usar a partir do Dia 1
+
+                    for (int k = 0; k < 40; k++) { // Inicializa cores com vazios
+                        cores_admined[k] = "";
+                    }
+
+                    for (int i = 0; i < aMonth.getNumberOfWeeks(); i++) {
+                        for (int j = 0; j < 7; j++) {
+                            localday = days[i][j];
+
+                            //INTERPOLAÇÃO POR NÚMERO DE EVENTOS POR DIA --------------------------------------------
+                            Xmed = (float) eventos_admined[localday];
+                            Ymed = Ymin + (Xmed - Xmin) / (Xmax - Xmin) * (Ymax - Ymin);
+                            sat = Ymed;
+                            RGBColor = Color.getHSBColor(0f, sat, 1f);
+                            hexColor = "#" + Integer.toHexString(RGBColor.getRGB()).substring(2);
+                            // --------------------------------------------------------------------------------------
+
+                            //DIAS JÁ PASSADOS EM CINZA
+                            if (int_selectedYear < int_currentYear) {
+                                if (eventos_admined[localday] == 0) {
+                                    cores_admined[localday] = "#e6e6e6";
+                                } else {
+                                    cores_admined[localday] = "#bfbfbf";
+                                }
+                            } else if (int_selectedYear == int_currentYear) {
+                                if (int_selectedMonth < int_currentMonth) {
+                                    if (eventos_admined[localday] == 0) {
+                                        cores_admined[localday] = "#e6e6e6";
+                                    } else {
+                                        cores_admined[localday] = "#bfbfbf";
+                                    }
+                                } else if (int_selectedMonth == int_currentMonth) {
+                                    if (days[i][j] < int_currentDay) {
+                                        if (eventos_admined[localday] == 0) {
+                                            cores_admined[localday] = "#e6e6e6";
+                                        } else {
+                                            cores_admined[localday] = "#bfbfbf";
+                                        }
+                                    } else {
+                                        cores_admined[localday] = hexColor;
+                                    }
+                                } else {
+                                    cores_admined[localday] = hexColor;
+                                }
+                            } else {
+                                cores_admined[localday] = hexColor;
+                            }
+                        }
+                    }
+                    
+                    List<String> nullColors = Arrays.asList("#e6e6e6","#bfbfbf","#ffffff");
+
+                    //MESCLA CORES[] SEGUIDOS COM CORES[] ADMINED
+
+                    for (int k = 0; k < 40; k++) {
+                        if(!nullColors.contains(cores_seguidos[k]) && nullColors.contains(cores_admined[k])){
+                            cores[k] = cores_seguidos[k];
+                        }
+                        else if(nullColors.contains(cores_seguidos[k]) && !nullColors.contains(cores_admined[k])){
+                            cores[k] = cores_admined[k];
+                        }
+                        else if(!nullColors.contains(cores_seguidos[k]) && !nullColors.contains(cores_admined[k])){
+                            cores[k] = "#f600ff";
+                        }                         
+                    }
+
+                    }                    
+
+                    //FIM USUÁRIO ADMIN --------------------------------------------------------------------                   
+
+                // PRINTA CALENDARIO    
                 for (int i = 0; i < aMonth.getNumberOfWeeks(); i++) {
                 %><tr><%
                     for (int j = 0; j < 7; j++) {
