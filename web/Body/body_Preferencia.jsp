@@ -51,7 +51,7 @@
                         <tr>
                             <td>
                                 <center>
-                                    <a href="Preferencia.jsp?nome=Adicionar">
+                                    <a href="PreferenciaAdicionar.jsp?nome=Adicionar">
                                         Seguir um grupo</a>
                                 </center>
                             </td>
@@ -68,10 +68,10 @@
         else {
     %>
             <h1><center>Você não segue nenhum grupo de extensão!</center></h1>
-            <table align="center" border=1 cellpadding=10 width=170>
+            <table align="center" border=1 cellpadding=10 width=160>
                 <tr>
                     <td>
-                        <a href="Preferencia.jsp?nome=Adicionar" align="center">
+                        <a href="PreferenciaAdicionar.jsp?nome=Adicionar" align="center">
                             Seguir um grupo
                         </a>
                     </td>
@@ -79,45 +79,6 @@
             </table>
     <%
         }
-    }
-    else if (request.getParameter("nome").equals("Adicionar") && request.getParameter("submit") == null) {
-        UsuarioDO usuario = (UsuarioDO)session.getAttribute("Usuario");
-        // UsuarioDO usuario = new UsuarioDO();
-        List<PreferenciaDO> listaPreferencia = new ArrayList<PreferenciaDO>();
-        Preferencia preferenciatn = new Preferencia();
-        listaPreferencia = preferenciatn.pesquisarPorUser(usuario);
-        List<GEDO> listaGE = new ArrayList<GEDO>();
-        GE GEtn = new GE();
-        listaGE = GEtn.buscarTodos();
-        if (listaGE.size() == listaPreferencia.size()) {
-    %>
-            <h1>
-                <center>Você já segue todos os grupos de extensão!</center>
-            </h1>
-    <%
-        }
-        else {
-    %>
-            <form action="PreferenciaAdicionar.jsp">
-                <select name = "grupo">
-    <%
-            for (int i = 0; i < listaGE.size(); i++) {
-                if (preferenciatn.buscarAPartirDeGeId(listaGE.get(i).getId()) == null && listaGE.get(i).getAutorizado()==1) {
-    %>           
-                    <option value="<%=listaGE.get(i).getId()%>"><%=listaGE.get(i).getNome()%></option>
-    <%
-                }
-            }
-    %>
-                
-                </select>
-                <input type="submit" name="submit" value="Adicionar">
-            </form>
-    <%
-        }
-    %>
-
-    <%    
     }    
     else if (request.getParameter("nome").equals("Excluir")&&(request.getParameter("submit")==null)){
 %>Escolha o grupo de extensão que você quer excluir <%
@@ -134,7 +95,7 @@
             GE getn = new GE();
             GEDO ge = getn.buscar(GEid);            
 %>          
-            <option label="<%=ge.getNome()%>" value="<%=ge.getId()%>"><%=ge.getNome()%></option>
+            <option label="<%=ge.getNome()%>" value="<%=preferencia.getId()%>"><%=ge.getNome()%></option>
 <%}%>
             </select>
             <input type="submit" value="Excluir"></form>

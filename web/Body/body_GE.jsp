@@ -101,6 +101,7 @@
         <table align="center" border=1 cellpadding=10 width=200>
             <tfoot>
                 <tr><th><a href="SolicitarAdesao.jsp?GEDO=<%=ge.getId()%>" target="_top"><font color="FFFFFF">Solicitar adesão</font></a></th></tr>
+                <tr><th><a href="PreferenciaAdicionar.jsp?grupo=<%=ge.getId()%>" target="_top"><font color="FFFFFF">Seguir grupo de extensão</font></a></th></tr>
             </tfoot>
         </table>
 
@@ -167,7 +168,10 @@
                 UsuarioDO uss=ust.buscarPorID(mbr.getUSUid());
 %>
             <tr align="center">
-                <td><a href="Usuario.jsp?Usuario=<%=uss.getId()%>" ><%=uss.getNome()%></a></td>
+                <td>
+                    <center><a href="Usuario.jsp?Usuario=<%=uss.getId()%>" ><%=uss.getNome()%></a></center>
+                    <% if (isadm == true) {%><right><a href="TirarMembro.jsp?membro=<%=mbr.getId()%>"><font size="2" color="#ff0000">Excluir membro</a></right><%;}%>
+                </td>
             </tr>
             <%}
 }%>
@@ -213,7 +217,7 @@
             <table align="center" border=1 cellpadding=10 width=500>
                 <center>
                 <tr>
-                    <td><a href="CriarEvento.jsp?GE=<%= ge.getId() %>" style="color:red">Criar evento</a></td>
+                    <td><a href="CriarEvento.jsp?GE=<%= ge.getId() %>" style="color:red"><center>Criar evento</center></a></td>
                 </tr>
                 </center>
             </table>
@@ -222,6 +226,7 @@
         if(session.getAttribute("Usuario")!= null){
             UsuarioDO SUser = (UsuarioDO)session.getAttribute("Usuario");
             Membro mtn=new Membro();
+            int id = 0;
             List<MembroDO> membro=mtn.buscarPorUSUid(SUser.getId());
             boolean sameGE=false;
             for(MembroDO m : membro){
@@ -229,6 +234,18 @@
                     sameGE=true;
                     break;
                 }
+                if (m.getGEid() == ge.getId()) id = m.getId();
+            }
+            if (id != 0){
+                %>
+                <table align="center" border=1 cellpadding=10 width=50>
+                    <center>
+                    <tr>
+                        <td><a href="SairDoGrupo.jsp?membro=<%= id %>" style="color:red"><center>Sair do grupo</center></a></td>
+                    </tr>
+                    </center>
+                </table>
+                <%
             }
             if (SUser.isSuperUser() || sameGE){
                 %>
@@ -241,7 +258,8 @@
         
         <%
         
-            }    
+            }
+            
         }
 }else{
 pageContext.forward("index.jsp");
