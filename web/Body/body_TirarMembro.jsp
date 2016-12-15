@@ -32,34 +32,38 @@
                 user = (UsuarioDO) usuariotn.buscarPorID(membro.getUSUid());
                 boolean isadm = membrotn.isADM(ge.getId(), usuario.getId());
                 if (isadm == true){
-                    %>
-                        <title>Excluir membro</title>
-                        </head>
-                        <body BGCOLOR = #f2f2f2>
-                            <font face="verdana">
-                            <%
-                                if (request.getParameter("submit") == null){
-                                    %>
-                                         <center>
-                                            Deseja tirar o membro <%= user.getNome() %> do grupo de extensão <%= ge.getNome() %>?
-                                            <FORM action = "TirarMembro.jsp?membro=<%= membro.getId() %>" method = "post">
-                                                <input type="radio" name="Eve" value="sim" checked> Sim<br>
-                                                <input type="radio" name="Eve" value="nao"> Não<br>
-                                                <INPUT type="submit" name="submit" value= "Enviar">
-                                            </form>
-                                        </center>
-                                    <%
-                                }
-                                else{
-                                    String action = request.getParameter("Eve");
-                                    if (action.equals("sim")){ 
-                                        membrotn.excluir(membro);
+                    if (usuario.getId() != user.getId()){
+                        %>
+                            <title>Excluir membro</title>
+                            </head>
+                            <body BGCOLOR = #f2f2f2>
+                                <font face="verdana">
+                                <BR><BR>
+                                <%
+                                    if (request.getParameter("submit") == null){
                                         %>
-                                            <center> Membro excluído. </center>
+                                             <center>
+                                                Deseja tirar o membro <%= user.getNome() %> do grupo de extensão <%= ge.getNome() %>?
+                                                <FORM action = "TirarMembro.jsp?membro=<%= membro.getId() %>" method = "post">
+                                                    <input type="radio" name="Eve" value="sim" checked> Sim<br>
+                                                    <input type="radio" name="Eve" value="nao"> Não<br>
+                                                    <INPUT type="submit" name="submit" value= "Enviar">
+                                                </form>
+                                            </center>
                                         <%
                                     }
-                                    if (action.equals("nao")) %> <center> Membro não excluído. </center> <%;
-                                }
+                                    else{
+                                        String action = request.getParameter("Eve");
+                                        if (action.equals("sim")){ 
+                                            membrotn.excluir(membro);
+                                            %>
+                                                <center> Membro excluído. </center>
+                                            <%
+                                        }
+                                        if (action.equals("nao")) %> <center> Membro não excluído. </center> <%;
+                                    }
+                    }
+                    else %> <center> O ADM de um grupo não pode se excluir. </center> <%;
                 }
                 else %> <center> Você precisa ser o administrador do grupo. </center> <%;
             }
