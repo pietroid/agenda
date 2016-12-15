@@ -4,6 +4,8 @@
     Author     : Marcus
 --%>
 
+<%@page import="data.SeguindoDO"%>
+<%@page import="transacoes.Seguindo"%>
 <%@page import="data.NotificacaoGeralDO"%>
 <%@page import="transacoes.NotificacaoGeral"%>
 <%@page import="data.RealizaDO"%>
@@ -43,26 +45,34 @@
         </form>
     </center>
     <%} else {
-                if (request.getParameter("submit").equals("Sim")) {
-                    Evento evnt=new Evento();
-                    EventoDO evento=evnt.buscar(Integer.parseInt(request.getParameter("evento")));
-                    evento.setAtivo(false);
-                    evnt.atualizar(evento);
-                    NotificacaoGeral ngt=new NotificacaoGeral();
-                    NotificacaoGeralDO not=new NotificacaoGeralDO();
-                    not.setClassificacao(0);
-                    not.setIDassociado(evento.getId());
-                    not.setMensagem(evento.getNome()+" foi cancelado!");
-                    %><p>Evento cancelado!</p><%
-                } else {
-                    pageContext.forward("Evento.jsp?evento="+request.getParameter("evento"));
+        if (request.getParameter("submit").equals("Sim")) {
+            Evento evnt = new Evento();
+            EventoDO evento = evnt.buscar(Integer.parseInt(request.getParameter("evento")));
+            evento.setAtivo(false);
+            evnt.atualizar(evento);
+
+            Seguindo segtn = new Seguindo();
+            List<SeguindoDO> listaSeguindo = segtn.pesquisarPorEVEid(evento.getId());
+
+            for (SeguindoDO seg : listaSeguindo) {
+                NotificacaoGeral ngt = new NotificacaoGeral();
+                NotificacaoGeralDO not = new NotificacaoGeralDO();
+                not.setClassificacao(0);
+                not.setIDassociado(evento.getId());
+                not.setMensagem(evento.getNome() + " foi cancelado!");
+                not.setUsuId(seg.getUsuId());
+                ngt.incluir(not);
+            }
+    %><p>Evento cancelado!</p><%
+                    } else {
+                        pageContext.forward("Evento.jsp?evento=" + request.getParameter("evento"));
+                    }
                 }
+            } else {
+                pageContext.forward("index.jsp");
             }
         } else {
             pageContext.forward("index.jsp");
-                        }
-                    } else {
-    pageContext.forward("index.jsp");
-    }%>
+        }%>
 </body>
 </html>

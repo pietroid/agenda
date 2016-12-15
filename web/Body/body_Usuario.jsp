@@ -78,7 +78,7 @@
 </tr>
 <BR><BR>
 <%UsuarioDO curr_user=(UsuarioDO)session.getAttribute("Usuario");
-    if(curr_user.isSuperUser()){
+    if(curr_user!=null && curr_user.isSuperUser()){
 %><caption align="bottom"><center><a style="color:red" size="6" href="ExcluirOutroMembro.jsp?id=<%=id%>">Excluir Usuário</a></center></caption><% 
     }%>
 </table>

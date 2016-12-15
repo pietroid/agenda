@@ -289,6 +289,7 @@
    
 <center>
     <br>
+    <% if(LiderGE==1){%>
 <table align="left" border="3"    cellpadding = "10" width="1000"   >
 <th>Novos Feedbacks</th>
 
@@ -310,6 +311,7 @@
                 }
             %>
         </table>
+        <%}%>
     
 <%
    } 
