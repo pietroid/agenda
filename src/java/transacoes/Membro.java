@@ -184,4 +184,20 @@ public class Membro {
 	}
 	return null;
     }
+    
+    public boolean excluir(MembroDO membro) throws Exception{
+        Transacao tr = new Transacao();
+	try{
+            tr.begin();
+            MembroData membroData = new MembroData();
+            membroData.excluir(membro, tr);
+            tr.commit();
+            return true;
+	} catch (Exception e) {
+            tr.rollback();
+            System.out.println("Erro ao excluir " + membro.getId());
+            e.printStackTrace();
+	}
+	return false;
+    }
 }
