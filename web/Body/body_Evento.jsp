@@ -178,6 +178,7 @@
                 %>
         <center> <table align="center" border=1 cellpadding=10 width=500>
                         <tr>
+                          <td><a href="CancelarEvento.jsp?evento=<%= evento.getId() %>"><font  color="#ff0000">Cancelar evento</font></a></td>
                           <td><a href="ExcluirEvento.jsp?evento=<%= evento.getId() %>"><font  color="#ff0000">Excluir evento</font></a></td>
                           <td><a href="EditarEvento.jsp?evento=<%= evento.getId() %>"><font  color="#ff0000">Alterar evento</font></a></td>
                         </tr>

@@ -30,7 +30,6 @@ E-mail:<BR><INPUT type="text" name="email" value= "<%=ge.getEmail() %>" ><BR><BR
 Ano:<BR><INPUT type="int" name="ano" value= "<%=ge.getAno() %>"><BR><BR>
 Site:<BR><INPUT type="text" name="site" value= "<%=ge.getSite() %>"><BR><BR>
 Facebook:<BR><INPUT type="text" name="face" value= "<%=ge.getFace() %>"><BR><BR>
-Imagem:<BR><INPUT type="text" name="imagem" value= "<%=ge.getImagem() %> "><BR><BR>
 Telefone:<BR><INPUT type="text" name="tel" value= "<%=ge.getTel() %>"><BR><BR>
 Tipo:<BR><INPUT type="text" name="tipo" value= "<%=ge.getTipo() %>"><BR><BR>
     <br>
@@ -39,26 +38,26 @@ Tipo:<BR><INPUT type="text" name="tipo" value= "<%=ge.getTipo() %>"><BR><BR>
        Imagens
   </th>
   
-  <tr>
-    <td><img src ="/agenda/PastadeImagens/caneca.png" align="right" width = 250 height =" 300" >
+<tr>
+<td><img src ="/agenda/PastadeImagens/caneca.png" align="right" width = 250 height =" 300" >
 </td>
-    <td><img src ="/agenda/PastadeImagens/livro.png" align="right" width = 250 height =" 300" >
+<td><img src ="/agenda/PastadeImagens/livro.png" align="right" width = 250 height =" 300" >
 </td>
 <td><img src ="/agenda/PastadeImagens/social.png" align="right" width = 250 height =" 300" >
 </td>
 <td><img src ="/agenda/PastadeImagens/capacete.png" align="right" width = 250 height =" 300" >
 </td>
-  </tr>
+</tr>
   
   <tr>
-      <td><input type="radio" name="foto" value="imagem1" >Imagem 1</td>
-      <td><input type="radio" name="foto" value="imagem2" >Imagem 2</td>
-      <td><input type="radio" name="foto" value="imagem3" >Imagem 3</td>
-      <td><input type="radio" name="foto" value="imagem4" >Imagem 4</td>
+      <td><input type="radio" name="foto" value="caneca.png" >Imagem 1</td>
+      <td><input type="radio" name="foto" value="livro.png" >Imagem 2</td>
+      <td><input type="radio" name="foto" value="social.png" >Imagem 3</td>
+      <td><input type="radio" name="foto" value="capacete.png" >Imagem 4</td>
   </tr>
   <tfoot width="50">
-      <td colspan="4" align=" center" >
- <INPUT type="submit" name="submit" value= "Salvar Mudanças">   
+    <td colspan="4" align=" center" >
+<INPUT type="submit" name="submit" value= "Salvar Mudanças">   
 <INPUT type="reset" name="reset" value= "Reset">
 <input type="hidden" name="GEDO" value="<%=request.getParameter("GEDO")%>">
           
