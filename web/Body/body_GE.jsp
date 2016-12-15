@@ -246,7 +246,7 @@
                     sameGE=true;
                     break;
                 }
-                if (m.getGEid() == ge.getId()) id = m.getId();
+                if (m.getGEid() == ge.getId() && m.getAprovado()==1) id = m.getId();
             }
             if (id != 0){
                 %>

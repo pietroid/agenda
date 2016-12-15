@@ -186,7 +186,7 @@
                         if (notificacaoCanc.getClassificacao()==0){
                     %>
                     <tr>
-                        -><%=messageNotificacao %> <a href = "Perfil.jsp?NotId=<%=notificacaoCanc.getId()%>&Excluir=1">[X]Excluir!</a> <br>
+                    <a href="Eventos.jsp?evento=<%=notificacaoCanc.getIDassociado() %>"> -><%=messageNotificacao %> </a> <a href = "Perfil.jsp?NotId=<%=notificacaoCanc.getId()%>&Excluir=1">[X]Excluir!</a> <br>
                     </tr>
                     <%
                         }
@@ -265,7 +265,7 @@
         </tr>
         
         <tr>
-            <th>Soliciatações de Adm de Grupo de Extensão</th>
+            <th>Solicitações de Adm de Grupo de Extensão</th>
             <td>
             <table>
             <%
