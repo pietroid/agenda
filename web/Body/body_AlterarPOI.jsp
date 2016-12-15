@@ -48,6 +48,25 @@
 <%
                 }
                 else{
+if(request.getParameter("nome").equals("")){%> O campo Nome é obrigatório! <br><br><br>
+
+<FORM action="AlterarPOI.jsp" method="post">
+    Nome do ponto de interesse:<BR>
+    <INPUT type="text" name="nome" value="<%=poi.getNome()%>"><BR><BR>
+    Descrição:<BR>
+    <INPUT type="text" name="descricao" value="<%=poi.getDescricao()%>"><BR><BR>
+    Endereço:<BR>
+    <INPUT type="text" name="endereco" value="<%=poi.getEndereco()%>"><BR><BR>
+    Link para Google Maps:<BR>
+    <INPUT type="text" name="link_para_maps" value="<%=poi.getLink_para_maps()%>"><BR><BR>
+    Pasta de Imagens:<BR>
+    <INPUT type="text" name="pasta_de_imagens" value="<%=poi.getPasta_de_imagens()%>"><BR><BR>
+<INPUT type="submit" name="submit" value= "Salvar Mudancas">   
+<input type="hidden" name="PontoDeInteresse" value="<%=request.getParameter("PontoDeInteresse")%>">
+</FORM>
+
+<%}
+                    else{
                     poi.setNome(request.getParameter("nome"));
                     poi.setDescricao(request.getParameter("descricao"));
                     poi.setEndereco(request.getParameter("endereco"));
@@ -55,9 +74,9 @@
                     poi.setPasta_de_imagens(request.getParameter("pasta_de_imagens"));
 
                     if(PontoDeInteressetr.atualizar(poi)){ %>Alteração Efetuada Com Sucesso<% }
-                    else{%>Alteração não foi bem sucedida<%
+                    else{%>Alteração não foi bem sucedida<%}
+                        }
                     }
-                }
             }
             else {pageContext.forward("ListaPOI.jsp");}    
         }
