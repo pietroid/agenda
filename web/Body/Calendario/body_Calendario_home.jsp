@@ -1,4 +1,9 @@
 
+<%@page import="data.SeguindoDO"%>
+<%@page import="transacoes.Seguindo"%>
+<%@page import="data.MembroDO"%>
+<%@page import="transacoes.Membro"%>
+<%@page import="data.UsuarioDO"%>
 <%@page import="java.sql.Date"%>
 <%@page import="java.time.LocalDate"%>
 <%@page import="data.RealizaDO"%>
@@ -91,9 +96,25 @@
                     float Ymax = 0;
                     float Ymin = 0;
                     float Ymed = 0;
-                   //java.time.Month mt=java.time.Month.of(int_selectedMonth);
-                   //mt.m
-                    //CALCULA ÚLTIMO DIA DO MÊS -----------------
+                    
+                    //DETERMINA O TIPO DE USUÁRIO ----------------------------------
+                    boolean admin2 = false;
+                    UsuarioDO usr2 = (UsuarioDO) session.getAttribute("Usuario");
+                    int usrID = usr2.getId();
+
+                    if (usr2 != null) {
+
+                        Membro tr = new Membro();
+
+                        //Relacoes de Membro para os quais o usuario é ADM 
+                        List<MembroDO> lm = tr.AdminedGroups(usrID);
+
+                        if (!lm.isEmpty()) {
+                            admin2 = true;
+                        }
+                    }                    
+                   
+                    //CALCULA ÚLTIMO DIA DO MÊS ----------------------------------
                     for (int i = 3; i < aMonth.getNumberOfWeeks(); i++) {
                         for (int j = 0; j < 7; j++) {
                             last_day_prev = lastday;
@@ -143,13 +164,52 @@
                         eventos[k] = 0;
                     }
 
-                    if (!eventos_do_Mes.isEmpty()) {
-                        for (EventoDO evento_temp : eventos_do_Mes) {
-                            date_tempday = evento_temp.getData(); // pega a data com formato Date
-                            tempday2 = date_tempday.getDate(); // converte a data para Int
-                            eventos[tempday2]++;
+                    //PARA USUÁRIO COMUM -------------------------------------------------------------------- 
+                    Seguindo trs = new Seguindo();
+                    int eveID;
+                    
+                    if (!admin2) {
+                        if (!eventos_do_Mes.isEmpty()) {
+                            for (EventoDO evento_temp : eventos_do_Mes) {
+                                eveID = evento_temp.getId(); // Pega o ID do evento da iteracao
+                                if (trs.isSeguindo(usrID, eveID)) { //Se o usuário seguir o evento
+                                    date_tempday = evento_temp.getData(); // pega a data com formato Date
+                                    tempday2 = date_tempday.getDate(); // converte a data para Int
+                                    eventos[tempday2]++;
+                                } 
+                            }
                         }
                     }
+
+                    //FIM USUÁRIO COMUM --------------------------------------------------------------------
+                    
+                    //PARA USUÁRIO ADMIN -------------------------------------------------------------------- 
+                    Realiza trr = new Realiza();
+                    RealizaDO realizaDO = new RealizaDO();
+                    Membro trm2 = new Membro();
+                    int geID;
+                    
+                    if (admin2) {
+                        if (!eventos_do_Mes.isEmpty()) {
+                            for (EventoDO evento_temp : eventos_do_Mes) {
+                                eveID = evento_temp.getId(); // Pegamos o ID do evento da iteracao
+                                realizaDO = trr.buscarPorEVE(eveID);
+                                geID = realizaDO.getGEid(); // Pegamos o ID do GE que realiza o evento da iteracao
+                                if(trm2.isADM(geID, usrID)){
+                                    date_tempday = evento_temp.getData(); // pega a data com formato Date
+                                    tempday2 = date_tempday.getDate(); // converte a data para Int
+                                    eventos[tempday2]++; //adiciona no Array eventos                                                                    
+                                }
+                                if (trs.isSeguindo(usrID, eveID)) { //Se o usuário seguir o evento
+                                    date_tempday = evento_temp.getData(); // pega a data com formato Date
+                                    tempday2 = date_tempday.getDate(); // converte a data para Int
+                                    eventos[tempday2]++; //adiciona no Array eventos
+                                } 
+                            }
+                        }
+                    }
+
+                    //FIM USUÁRIO ADMIN --------------------------------------------------------------------                    
 
                     //INTERPOLAÇÃO ---------------------------------------------------
                     //XMÁX e XMIN (maximo e minimo numero de eventos em um mes)
