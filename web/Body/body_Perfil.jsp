@@ -9,6 +9,8 @@
 <%@ page import="transacoes.Usuario" %>
 <%@ page import="data.UsuarioDO" %>
 <%@ page import="java.util.Vector" %>
+<%@ page import="transacoes.Feedback" %>
+<%@ page import="data.FeedbackDO" %>
 
 <html>
     <head>
@@ -32,6 +34,9 @@
         background-color: #4CAF50;
         color: white;
     }
+    table {
+    clear: left;
+}
     
     </style>
     </head>    
@@ -228,7 +233,7 @@
                   messageNotificacao = notificacaoConf.getMensagem() ;
             %>
                     <%
-                        if (notificacaoConf.getClassificacao()==2){
+                        if (notificacaoConf.getClassificacao()==3){
                     %>
                     <tr>
                         -><%=messageNotificacao %> <a href = "Perfil.jsp?NotId=<%=notificacaoConf.getId()%>&Excluir=1">[X]Excluir!</a><br>
@@ -242,27 +247,7 @@
         </td>
         </tr>
         
-        <tr>
-            <th>Novos Feedbacks</th>
-            <td>
-            <table>
-            <%
-              for (NotificacaoGeralDO notificacaoFeed:ListaNotificacao){
-                  messageNotificacao = notificacaoFeed.getMensagem() ;
-            %>
-                    <%
-                        if (notificacaoFeed.getClassificacao()==3){
-                    %>
-                    <tr>
-                        -><%=messageNotificacao %> <a href = "Perfil.jsp?NotId=<%=notificacaoFeed.getId()%>&Excluir=1">[X]Excluir!</a><br>
-                    </tr>
-                    <%
-                        }
-                }
-                    %>
-            </table>   
-        </td>
-        </tr>
+        
         
         <tr>
             <th>Solicitações de Adm de Grupo de Extensão</th>
@@ -296,14 +281,35 @@
         <%}
         %>
     </table>
+
 <%
 /*---------------ALYSON--------------*/
 %>
 
    
 <center>
+    <br>
+<table align="left" border="3"    cellpadding = "10" width="1000"   >
+<th>Novos Feedbacks</th>
 
-
+            <%
+                Feedback fdt=new Feedback();
+              for (NotificacaoGeralDO notificacaoFeed:ListaNotificacao){
+                  messageNotificacao = notificacaoFeed.getMensagem() ;
+                        if (notificacaoFeed.getClassificacao()==2){
+                            FeedbackDO fdbck = fdt.buscar(notificacaoFeed.getIDassociado());
+                    %>
+                    <tr>
+                    <td> -><%=messageNotificacao %> <a href = "Perfil.jsp?NotId=<%=notificacaoFeed.getId()%>&Excluir=1">[X]Excluir!</a><br> 
+                        <%=fdbck.getMensagem() %>
+                    </td>        
+            </tr>
+                    
+                    <%
+                        }
+                }
+            %>
+        </table>
     
 <%
    } 

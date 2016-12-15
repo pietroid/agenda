@@ -116,7 +116,7 @@
         </table>
         <%
     }
-    if(relacaomembro == 2){
+    if(relacaomembro == 2 && !isadm && !superuser){
 %>
 
         <table align="center" border=1 cellpadding=10 width=200>
