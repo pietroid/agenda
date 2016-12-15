@@ -131,6 +131,7 @@ public class Membro {
 	}
 	return false;
     }
+    
     //Retorna uma Lista de Relacoes de Membro para os quais o Usuario é ADM 
     public List<MembroDO> AdminedGroups(int usrID) throws Exception{
         Transacao tr = new Transacao();
@@ -183,5 +184,21 @@ public class Membro {
             e.printStackTrace();
 	}
 	return null;
+    }
+    
+    public boolean excluir(MembroDO membro) throws Exception{
+        Transacao tr = new Transacao();
+	try{
+            tr.begin();
+            MembroData membroData = new MembroData();
+            membroData.excluir(membro, tr);
+            tr.commit();
+            return true;
+	} catch (Exception e) {
+            tr.rollback();
+            System.out.println("Erro ao excluir " + membro.getId());
+            e.printStackTrace();
+	}
+	return false;
     }
 }
