@@ -168,7 +168,10 @@
                 UsuarioDO uss=ust.buscarPorID(mbr.getUSUid());
 %>
             <tr align="center">
-                <td><a href="Usuario.jsp?Usuario=<%=uss.getId()%>" ><%=uss.getNome()%></a></td>
+                <td>
+                    <a href="Usuario.jsp?Usuario=<%=uss.getId()%>" ><%=uss.getNome()%></a>
+                    <% if (isadm == true) {%><a href="TirarMembro.jsp?membro=<%=mbr.getId()%>"><font size="2" color="#ff0000">Excluir membro</a><%;}%>
+                </td>
             </tr>
             <%}
 }%>
