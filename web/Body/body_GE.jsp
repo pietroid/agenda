@@ -115,7 +115,19 @@
             </tfoot>
         </table>
         <%
-    }   
+    }
+    if(relacaomembro == 2){
+%>
+
+        <table align="center" border=1 cellpadding=10 width=200>
+            <tfoot>
+                <tr><th><a href="SolicitarAdministracao.jsp?GEid=<%=ge.getId()%>" target="_top"><font color="FFFFFF">Solicitar administração</font></a></th></tr>
+                
+            </tfoot>
+        </table>
+<%
+}
+
 }
 %>          
         <br><br>
