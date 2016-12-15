@@ -182,6 +182,33 @@ public class EventoData {
         }
         return Items;
     }        
+    public List<EventoDO> buscarSemana(java.sql.Date data1, Transacao tr) throws Exception {
+        Connection con = tr.obterConexao();
+        String sql = "select * from evento where EVEdata between ? and dateadd(dd,7,?)";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setDate(1, data1);
+        ps.setDate(2, data1);
+        ResultSet rs = ps.executeQuery();
+        List<EventoDO> Items = new ArrayList<EventoDO>();
+        while (rs.next()) {
+            EventoDO evento = new EventoDO();
+            evento.setId(rs.getInt("EVEid"));
+            evento.setNome(rs.getString("EVEnome"));
+            evento.setDescricao(rs.getString("EVEdescricao"));
+            evento.setTipo(rs.getString("EVEtipo"));
+            evento.setHoraInicial(rs.getTime("EVEhorario_de_inicio"));
+            evento.setHoraFinal(rs.getTime("EVEhorario_de_termino"));
+            evento.setData(rs.getDate("EVEdata"));
+            evento.setMacroEvento(rs.getInt("EVEmacro_evento")==1);
+            evento.setPastaimagens(rs.getString("EVEpasta_de_imagens"));
+            evento.setAvaliação(rs.getInt("EVEavaliacao"));
+            evento.setNumeroava(rs.getInt("EVEnumeroava"));
+            evento.setAtivo(rs.getInt("EVEativo")==1);
+            evento.setLink(rs.getString("EVElink"));
+            Items.add(evento);
+        }
+        return Items;
+    }
     
     public List<EventoDO> retornaTodosEventos(Transacao tr) throws Exception {
         Connection con = tr.obterConexao();
