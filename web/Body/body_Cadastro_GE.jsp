@@ -63,6 +63,40 @@ if (request.getParameter("submit") == null){
 if (request.getParameter("submit") != null){
     
     GEDO grupo = new GEDO();
+if (request.getParameter("nome").equals("")){%> <center>  O campo Nome é obrigatório!<br><br><br> </center>
+<FORM action="CadastroGE.jsp" method="post">
+    <center>
+    Nome grupo:<BR>
+    <INPUT type="text" name="nome"><BR><BR>
+    Tipo/finalidade:<BR>
+    <INPUT type="text" name="tipo"><BR><BR>
+    Site do grupo:<BR>
+    <INPUT type="text" name="site"><BR><BR>
+    Ano de criação:<BR>
+    <INPUT type="text" name="ano"><BR><BR>
+    E-mail para contato (do grupo):<BR>
+    <INPUT type="text" name="email"><BR><BR>
+    Telefone para contato (do grupo):<BR>
+    <INPUT type="text" name="tel"><BR><BR>
+    Facebook do grupo:<BR>
+    <INPUT type="text" name="face"><BR><BR>
+    Descrição:<BR>
+    <INPUT type="text" name="descricao"><BR><BR>
+    Local:<BR>
+                                <select name="GElocal">
+                                    <%if(listaPOI!=null && !listaPOI.isEmpty()){
+                                            for(PontoDeInteresseDO poi : listaPOI){
+                                                %><option value="<%=poi.getId()%>"><%=poi.getNome()%></option><%
+                                            }
+                                    }%>
+                                </select><BR><BR>
+    <INPUT type="submit" name="submit" value="Cadastrar">
+    <INPUT type="reset" name="reset" value="Reset">
+    </center>
+
+<%}
+
+else{
     grupo.setNome(request.getParameter("nome"));
     grupo.setTipo(request.getParameter("tipo"));
     grupo.setSite(request.getParameter("site"));
@@ -90,7 +124,7 @@ if (request.getParameter("submit") != null){
            trqg.incluir(qgo);
 
 
-           %>
+ %>
             Cadastro efetuado com sucesso!  <BR>
             Espere a confirmação de um de nossos administradores.<BR>
             Agora escolha uma imagem para seu grupo! <BR>
@@ -134,7 +168,7 @@ if (request.getParameter("submit") != null){
     <INPUT type="reset" name="reset" value="Reset">
         </center>
     </FORM>  
- <%} }} %>
+ <%} }}} %>
   <%  if (session.getAttribute("Usuario")== null){
         %>
         

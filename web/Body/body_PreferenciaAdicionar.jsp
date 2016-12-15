@@ -41,14 +41,12 @@
             boolean jaSegue = false;
             for (int i = 0; i < listaGE.size(); i++) {
                 jaSegue = false;
-                List<PreferenciaDO> listaPreferenciaPorGEid = preferenciatn.pesquisarPorGEid(listaGE.get(i).getId());
-                for (int j = 0; j < listaPreferenciaPorGEid.size(); j++) {
-                    if (listaPreferenciaPorGEid.get(j).getUSUid() == usuario.getId() && listaGE.get(i).getAutorizado()==1) {
-
-                    jaSegue = true;
+                for (int j = 0; j < listaPreferencia.size(); j++) {
+                    if (listaPreferencia.get(j).getGEid() == listaGE.get(i).getId() && listaGE.get(i).getAutorizado()==1) {
+                        jaSegue = true;
                     }
                 }
-                if (jaSegue == false) {
+                if (jaSegue == false && listaGE.get(i).getAutorizado() == 1) {
     %>           
                     <option value="<%=listaGE.get(i).getId()%>"><%=listaGE.get(i).getNome()%></option>
     <%
