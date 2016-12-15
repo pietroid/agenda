@@ -1,4 +1,5 @@
 
+<%@page import="java.sql.Date"%>
 <%@page import="java.time.LocalDate"%>
 <%@page import="data.RealizaDO"%>
 <%@page import="data.GEDO"%>
@@ -45,19 +46,13 @@
             }
 
         </style>
-
-        <title>Poli Agenda</title>
     </head>
     <body>
-
         <div>
             <table align="center" id="CalendarioGeral">
                 <tr>
                     <td width="100%" colspan="7" align = "center" bgcolor="ffffff">
-                        <font size="5"><b>
-                            <%=monthName%>, <%=intYear%>
-                        </b>
-                        </font>
+                        <font size="5"><b><%=monthNames[int_selectedMonth-1]%>, <%=int_selectedYear%></b></font>
                     </td>
                 </tr>
                 <tr>
@@ -70,9 +65,9 @@
                     <th width="15%"><font size="4">Sábado</font></th>
                 </tr>
                 <%
-                    //LEMBRAR QUE JANEIRO É O MÊS ZERO!!  
+                    //LEMBRAR QUE JANEIRO É O MÊS ZERO??  
                     Month aMonth;
-                    aMonth = Month.getMonth(Integer.parseInt(currentMonthString), Integer.parseInt(currentYearString));
+                    aMonth = Month.getMonth(int_selectedMonth-1, int_selectedYear);
                     LocalDate local = LocalDate.now();
                     int[][] days = aMonth.getDays();
                     String str_localdate = "1900-01-01";
@@ -82,10 +77,10 @@
                     int tempday = 0;
                     int tempday2 = 0;
                     int last_day_prev = 0;
-                    int firstday = 1;
+                    int firstday = 1; // Primeiro dia do mês sempre sera 1
                     int lastday = 0;
-                    int int_actualMonth = currentMonthInt + 1;
-                    String str_actualMonth = new Integer(int_actualMonth).toString();
+                    //NECESSÁRIO?? int int_actualMonth = currentMonthInt + 1;
+                    //String str_actualMonth = new Integer(int_actualMonth).toString();
                     String str_lastday = "";
                     String str_firstday = "";
                     java.sql.Date date_tempday;
@@ -96,21 +91,24 @@
                     float Ymax = 0;
                     float Ymin = 0;
                     float Ymed = 0;
-
-                    //CALCULA O PRIMEIRO E ÚLTIMO DIAS DO MÊS -----------------
-                    for (int i = 3; i < aMonth.getNumberOfWeeks() + 1; i++) {
+                   //java.time.Month mt=java.time.Month.of(int_selectedMonth);
+                   //mt.m
+                    //CALCULA ÚLTIMO DIA DO MÊS -----------------
+                    for (int i = 3; i < aMonth.getNumberOfWeeks(); i++) {
                         for (int j = 0; j < 7; j++) {
-                            last_day_prev = tempday;
-                            tempday = days[i][j];
-                            if (lastday == 0 && tempday == 0) {
+                            last_day_prev = lastday;
+                            lastday = days[i][j];
+                            if (lastday == 0) {
                                 lastday = last_day_prev;
+                                break;
                             }
                         }
                     }
+                    //lastday=30;
 
-                    str_firstday = currentYearString + "-" + str_actualMonth + "-" + "0" + Integer.toString(firstday);
+                    str_firstday = str_selectedYear + "-" + str_selectedMonth + "-" + "0" + Integer.toString(firstday);
                     java.sql.Date date_FirstDay = java.sql.Date.valueOf(str_firstday);
-                    str_lastday = currentYearString + "-" + str_actualMonth + "-" + Integer.toString(lastday);
+                    str_lastday = str_selectedYear + "-" + str_selectedMonth + "-" + Integer.toString(lastday);
                     java.sql.Date date_LastDay = java.sql.Date.valueOf(str_lastday);
 
                     //---------------------------------------------------------
@@ -121,24 +119,24 @@
 
                     //---------------------------------------------------------
                     //FILTRA DOS GRUPOS NÃO ATIVOS
-                    //CONSTROI ARRAY LINEAR DE NÚMERO DE EVENTOS POR DIA, PARA UM MÊS
                     GE gtn = new GE();
                     Realiza rtn = new Realiza();
                     GEDO ge;
                     RealizaDO real;
 
                     if (eventos_do_Mes.size() > 0) {
-                        int i=0;
-                        while (i<eventos_do_Mes.size()) {
+                        int i = 0;
+                        while (i < eventos_do_Mes.size()) {
                             ge = gtn.buscar(rtn.buscarPorEVE(eventos_do_Mes.get(i).getId()).getGEid());
                             if (ge.getAutorizado() == 0) {
                                 eventos_do_Mes.remove(i);
-                            }else{
+                            } else {
                                 i++;
                             }
                         }
                     }
 
+                    //CONSTROI ARRAY LINEAR DE NÚMERO DE EVENTOS POR DIA, PARA UM MÊS                    
                     int[] eventos = new int[40]; // Começamos a usar a partir do Dia 1
 
                     for (int k = 0; k < 40; k++) { // Inicializa eventos com zeros
@@ -153,7 +151,8 @@
                         }
                     }
 
-                    //XMÁX e XMIN
+                    //INTERPOLAÇÃO ---------------------------------------------------
+                    //XMÁX e XMIN (maximo e minimo numero de eventos em um mes)
                     for (int k = 0; k < 40; k++) {
                         if ((float) eventos[k] > Xmax) {
                             Xmax = (float) eventos[k];
@@ -197,21 +196,21 @@
                             // --------------------------------------------------------------------------------------
 
                             //DIAS JÁ PASSADOS EM CINZA
-                            if (currentYearInt < local.getYear()) {
+                            if (int_selectedYear < int_currentYear) {
                                 if (eventos[localday] == 0) {
                                     cores[localday] = "#e6e6e6";
                                 } else {
                                     cores[localday] = "#bfbfbf";
                                 }
-                            } else if(currentYearInt == local.getYear()) {
-                                if (int_actualMonth < local.getMonthValue()) {
+                            } else if (int_selectedYear == int_currentYear) {
+                                if (int_selectedMonth < int_currentMonth) {
                                     if (eventos[localday] == 0) {
                                         cores[localday] = "#e6e6e6";
                                     } else {
                                         cores[localday] = "#bfbfbf";
                                     }
-                                } else if(int_actualMonth == local.getMonthValue()){
-                                    if (days[i][j] < currentDayInt) {
+                                } else if (int_selectedMonth == int_currentMonth) {
+                                    if (days[i][j] < int_currentDay) {
                                         if (eventos[localday] == 0) {
                                             cores[localday] = "#e6e6e6";
                                         } else {
@@ -220,24 +219,24 @@
                                     } else {
                                         cores[localday] = hexColor;
                                     }
-                                }else{
+                                } else {
                                     cores[localday] = hexColor;
                                 }
-                            }else{
+                            } else {
                                 cores[localday] = hexColor;
                             }
                         }
                     }
 
-                    for (int i = 0; i < aMonth.getNumberOfWeeks(); i++) {
+                for (int i = 0; i < aMonth.getNumberOfWeeks(); i++) {
                 %><tr><%
                     for (int j = 0; j < 7; j++) {
                         localday = days[i][j];
 
                         if (localday < 10 && localday != 0) {
-                            str_localdate = currentYearString + "-" + str_actualMonth + "-" + "0" + Integer.toString(localday);
+                            str_localdate = str_selectedYear + "-" + str_selectedMonth + "-" + "0" + Integer.toString(localday);
                         } else if (localday >= 10 && localday != 0) {
-                            str_localdate = currentYearString + "-" + str_actualMonth + "-" + Integer.toString(localday);
+                            str_localdate = str_selectedYear + "-" + str_selectedMonth + "-" + Integer.toString(localday);
                         } else {
                         }
 
@@ -245,7 +244,7 @@
                     %><td>&nbsp;</td><%
                     } else {
                         // Destaca o Dia de HOJE
-                        if (currentDayInt == days[i][j] && currentMonthInt == aMonth.getMonth() && currentYearInt == aMonth.getYear()) {
+                        if (int_currentDay == days[i][j] && int_currentMonth == int_selectedMonth && int_currentYear == int_selectedYear) {
                     %><td  align = "center" bgcolor=<%=cores[localday]%>><a href="/agenda/EventosdoDia.jsp?str_ClickedDate=<%=str_localdate%>" <font size="5"><b><%=days[i][j]%></b></font></a></td><%
                     } else {
                                 %><td align = "center" bgcolor=<%=cores[localday]%>><a href="/agenda/EventosdoDia.jsp?str_ClickedDate=<%=str_localdate%>"<font size="4"><%=days[i][j]%></font></a>
