@@ -133,8 +133,8 @@
 
         <BR><BR><BR><BR><BR>
         
-        <!-------------------------------------------------------------------------------------------------->
-<!----------------------------- REDIRECIONA PARA FEEDBACK------------------------------------------->
+<!-------------------------------------------------------------------------------------------------->
+<!----------------------------- REDIRECIONA PARA BODY_FEEDBACK------------------------------------------->
 <%   LocalDate localDate = LocalDate.now();
     Date dateNow = Date.valueOf(localDate.toString());
     if(evento.getData().before(dateNow)  && !usuario.isSuperUser() && evento.isAtivo()){        %>
@@ -144,7 +144,7 @@
     <input type="hidden" name="id_eve" value="<%=evento.getId()%>">
 </form><%}
 %>
-<!---------------------------FIM DO REDICERIONADOR PARA FEEDBACK.JSP-------------------------------->
+<!---------------------------FIM DO REDICERIONADOR PARA BODY_FEEDBACK.JSP-------------------------------->
 <!-------------------------------------------------------------------------------------------------->
         
 <BR> <BR>

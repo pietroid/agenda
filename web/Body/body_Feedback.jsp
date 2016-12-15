@@ -50,7 +50,7 @@ if(request.getParameter("submit") != null){
         m.setRating(Integer.parseInt(request.getParameter("nota"))); //Atribui rating
         if (mtn.incluir(m)){
             FeedbackOK = 1;
-            %>Feedback enviado. <a href="Evento.jsp?evento=<%=request.getParameter("evento")%>"> Voltar à pagina do evento</a><%
+            %>Feedback enviado. <a href="/agenda/Evento.jsp?evento=<%=EveId%>"> Voltar à pagina do evento</a><%
         }
         else{
             FeedbackOK = 0;
@@ -91,12 +91,11 @@ if(request.getParameter("submit") != null){
                 NotificacaoOK=0;
             }
         }
-        if ((FeedbackOK == 1) && (NotificacaoOK==1)){
-            %>Feedback enviado. <a href="Evento.jsp?evento=<%=request.getParameter("evento")%>"> Voltar à pagina do evento</a><%
-        }
+        
     
     }
         /*------------ALYSON-------------*/
+
     else {%>
 
     <textarea name="message" rows="6" cols="50" maxlength="500" form="fdb">
@@ -106,7 +105,7 @@ if(request.getParameter("submit") != null){
     
     <BR>
     
-    <p>Ah, e que nota você daria para o evento?</p>
+    <p>Ah, e como foi o evento?</p>
     
     <BR>
     <form action="Feedback.jsp" method="post" id="fdb">
