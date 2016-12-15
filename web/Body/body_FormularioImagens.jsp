@@ -65,9 +65,9 @@ ged=ge.buscar(id);
       if(request.getParameter("nota")=="imagem4") ged.setImagem("/agenda/PastadeImagens/capacete.png");
     boolean update = false;
 
-    update=ge.atualizar(ged);
-    if (update){%><br> Parabéns, seu grupo foi devidamente cadastrado!<%}
-    else {%><br> Erro ao cadastrar! <%}
+    ge.atualizar(ged);
+    %> <br> Parabéns, seu grupo foi devidamente cadastrado!<%
+
     %><%
     
     } 

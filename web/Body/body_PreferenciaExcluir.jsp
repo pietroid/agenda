@@ -21,3 +21,4 @@
         if (update){ %>Exclusão feita com sucesso!<%};
         if(!update) { %>Houve uma falha na exclusão <% };
 %>
+<BR><a href="Preferencia.jsp" target="_top">Voltar para a página de preferências</a>
