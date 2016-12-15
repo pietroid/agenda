@@ -34,7 +34,7 @@
         AconteceDO acontece = acontecetn.buscarPorEVEid(Integer.parseInt(request.getParameter("evento")));
         PontoDeInteresseDO poi = poitn.buscar(acontece.getPOI_id());
         Membro membrotn = new Membro();
-        UsuarioDO usuario = new UsuarioDO();
+        UsuarioDO usuario=null;
         RealizaDO realizador=realizatn.buscarPorEVE(Integer.parseInt(request.getParameter("evento")));
         EventoDO evento = eventotn.buscar(Integer.parseInt(request.getParameter("evento")));
         GE getn=new GE();
@@ -134,7 +134,7 @@
                 <tr>
                     <td width=10% height=50> <a href="Usuario.jsp?Usuario=<%= comentario.getUsuId() %>" target ="_top"><%= nome %></a> : <%= comentario.getMensagem() %>
                         <%
-                            if (usuario.getNome() != null){
+                            if (usuario != null){
                                 if (usuario.isSuperUser() == true || nome.equals(usuario.getNome())){
                                     %>
                                     <a href="ExcluirComentario.jsp?comentario=<%= comentario.getId() %>" target="_top"><font size="2" color="#ff0000">Excluir comentário</font></a>
@@ -158,18 +158,18 @@
 
         <BR><BR><BR><BR><BR>
         
-        <!-------------------------------------------------------------------------------------------------->
-<!----------------------------- REDIRECIONA PARA FEEDBACK------------------------------------------->
+<!-------------------------------------------------------------------------------------------------->
+<!----------------------------- REDIRECIONA PARA BODY_FEEDBACK------------------------------------------->
 <%   LocalDate localDate = LocalDate.now();
     Date dateNow = Date.valueOf(localDate.toString());
-    if(evento.getData().before(dateNow)  && !usuario.isSuperUser() && evento.isAtivo()){        %>
+    if(usuario!=null && evento.getData().before(dateNow) && evento.isAtivo()){        %>
 <p align="center"> <b>O que você achou do evento? </b></p> <BR>
 <FORM action="/agenda/Feedback.jsp" method="post">  
     <center><INPUT type="submit" name="deixar_feedback" value="Deixe seu feedback" ></center> <BR>
     <input type="hidden" name="id_eve" value="<%=evento.getId()%>">
 </form><%}
 %>
-<!---------------------------FIM DO REDICERIONADOR PARA FEEDBACK.JSP-------------------------------->
+<!---------------------------FIM DO REDICERIONADOR PARA BODY_FEEDBACK.JSP-------------------------------->
 <!-------------------------------------------------------------------------------------------------->
         
 <BR> <BR>
@@ -196,7 +196,7 @@
                 </th>
             </table>
         <% 
-        if (usuario.getNome() != null){
+        if (usuario != null){
             RealizaDO realiza = realizatn.buscarPorEVE(evento.getId());
             boolean isadm = membrotn.isADM(realiza.getGEid(), usuario.getId());
             if (usuario.isSuperUser() == true || isadm == true){

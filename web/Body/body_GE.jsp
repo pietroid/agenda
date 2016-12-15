@@ -1,3 +1,7 @@
+<%@page import="data.PontoDeInteresseDO"%>
+<%@page import="transacoes.PontoDeInteresse"%>
+<%@page import="transacoes.QG"%>
+<%@page import="data.QGDO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
 <%@ page import="transacoes.GE" %>
@@ -49,13 +53,18 @@
         if (session.getAttribute("Usuario") != null){
            usuario = (UsuarioDO) session.getAttribute("Usuario");
         }
+        QG qgtn = new QG();
         GE getn = new GE();
         Evento eventotn = new Evento();
         Membro membrotn = new Membro();
         Realiza realizatn = new Realiza();
         boolean isadm = false;
         boolean superuser = false;
-        GEDO ge = getn.buscar(Integer.parseInt(request.getParameter("GE"))); //
+        GEDO ge = getn.buscar(Integer.parseInt(request.getParameter("GE"))); 
+        
+        QGDO qg=qgtn.buscarPorGE(ge.getId());
+        PontoDeInteresse ptn=new PontoDeInteresse();
+        PontoDeInteresseDO poi = ptn.buscar(qg.getPOI_id());//
         if (usuario != null){
             superuser = usuario.isSuperUser();
             isadm = membrotn.isADM(ge.getId(), usuario.getId());
@@ -116,7 +125,19 @@
             </tfoot>
         </table>
         <%
-    }   
+    }
+    if(relacaomembro == 2 && !isadm && !superuser){
+%>
+
+        <table align="center" border=1 cellpadding=10 width=200>
+            <tfoot>
+                <tr><th><a href="SolicitarAdministracao.jsp?GEid=<%=ge.getId()%>" target="_top"><font color="FFFFFF">Solicitar administração</font></a></th></tr>
+                
+            </tfoot>
+        </table>
+<%
+}
+
 }
 %>          
         <br><br>
@@ -128,6 +149,21 @@
         </table>
         <br><br>
       
+        <br><br>
+        <table align="center" border=1 cellpadding=10 width=500>
+            <th>Local do grupo</th>
+            <tr>
+                <td height=150> <%= poi.getNome() %> </td>
+            </tr>
+            <tr>
+            <td><b>Descrição</b></td>
+            <td> <%= poi.getDescricao() %></td>
+            </tr>
+            <tr>
+            <td><b>Link</b></td>
+            <td> <a href="<%=poi.getLink_para_maps()%>"><%= poi.getLink_para_maps() %></a></td>
+            </tr>
+        </table>
         
  
         <table align="center" border=1 cellpadding=10 width=500>
@@ -235,7 +271,7 @@
                     sameGE=true;
                     break;
                 }
-                if (m.getGEid() == ge.getId()) id = m.getId();
+                if (m.getGEid() == ge.getId() && m.getAprovado()==1) id = m.getId();
             }
             if (id != 0){
                 %>

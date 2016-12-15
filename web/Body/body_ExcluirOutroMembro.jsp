@@ -20,11 +20,11 @@
         
         if(us!=null && us.isSuperUser() && request.getParameter("id")!=null){
             if(request.getParameter("submit")==null){%>
-            <center><p>Tem certeza de que deseja excluir este membro?</p></center>    
+            <center><p>Tem certeza de que deseja excluir este membro?</p>   
             <FORM action="ExcluirOutroMembro.jsp" method="post">
 <INPUT type ="submit" name="submit" value= "Sim">   
-<INPUT type ="reset" name="submit" value= "Não">
-<INPUT type="hidden" name="id" value="<%=request.getParameter("id")%>">
+<INPUT type ="submit" name="submit" value= "Não">
+<INPUT type="hidden" name="id" value="<%=request.getParameter("id")%>"></form></center> 
 <%
             }else if(request.getParameter("submit").equals("Sim")){
                 UsuarioDO exclUs = new UsuarioDO();
@@ -32,13 +32,13 @@
                 Usuario ust=new Usuario();
                 Membro mtn=new Membro();
                 List<MembroDO> membro=mtn.buscarPorUSUid(exclUs.getId());
-                List<MembroDO> admin;
+                List<MembroDO> adm;
                 List<String> grupos=new ArrayList<String>();
                 if(!membro.isEmpty()){
                     for(MembroDO m : membro){
                         if(m.getADM()==1){
-                            admin=mtn.buscarPorGEidADM(m.getGEid());
-                            if(admin.size()==1){
+                            adm=mtn.buscarPorGEidADM(m.getGEid());
+                            if(adm.size()==1){
                                GE gtn=new GE();
                                grupos.add(gtn.buscar(m.getGEid()).getNome());
                             }

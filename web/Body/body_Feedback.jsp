@@ -74,7 +74,7 @@ if(request.getParameter("submit") != null){
         m.setRating(Integer.parseInt(request.getParameter("nota"))); //Atribui rating
         if (mtn.incluir(m)){
             FeedbackOK = 1;
-            %>Feedback enviado. <a href="Evento.jsp?evento=<%=request.getParameter("evento")%>"> Voltar à pagina do evento</a><%
+            %>Feedback enviado. <a href="/agenda/Evento.jsp?evento=<%=EveId%>"> Voltar à pagina do evento</a><%
         }
         else{
             FeedbackOK = 0;
@@ -89,7 +89,7 @@ if(request.getParameter("submit") != null){
         
         /*mensagem*/
         String nomeEvento = evento.getNome();
-        String message = "Você tem um novo Feedback relacionado ao evento ";
+        String message = "Feedback do evento ";
         /*Criacao do objeto de notificacao geral*/
         NotificacaoGeralDO FeedbackNote = new NotificacaoGeralDO();
         NotificacaoGeral Note = new NotificacaoGeral();
@@ -105,7 +105,7 @@ if(request.getParameter("submit") != null){
         for (MembroDO UsuADM: ListaMembros){
             /*Definindo os atributos da notificacao*/
             FeedbackNote.setUsuId(UsuADM.getUSUid());
-            FeedbackNote.setIDassociado(EveId);
+            FeedbackNote.setIDassociado(m.getId());
             FeedbackNote.setMensagem(message+nomeEvento);
             FeedbackNote.setClassificacao(2);
             if (Note.incluir(FeedbackNote)){
@@ -115,12 +115,11 @@ if(request.getParameter("submit") != null){
                 NotificacaoOK=0;
             }
         }
-        if ((FeedbackOK == 1) && (NotificacaoOK==1)){
-            %>Feedback enviado. <a href="Evento.jsp?evento=<%=request.getParameter("evento")%>"> Voltar à pagina do evento</a><%
-        }
+        
     
     }
         /*------------ALYSON-------------*/
+
     else {%>
 
     <textarea name="message" rows="6" cols="50" maxlength="500" form="fdb">
@@ -130,7 +129,7 @@ if(request.getParameter("submit") != null){
     
     <BR>
     
-    <p>Ah, e que nota você daria para o evento?</p>
+    <p>Ah, e como foi o evento?</p>
     
     <BR>
     <form action="Feedback.jsp" method="post" id="fdb">

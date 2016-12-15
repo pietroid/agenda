@@ -9,6 +9,8 @@
 <%@ page import="transacoes.Usuario" %>
 <%@ page import="data.UsuarioDO" %>
 <%@ page import="java.util.Vector" %>
+<%@ page import="transacoes.Feedback" %>
+<%@ page import="data.FeedbackDO" %>
 
 <html>
     <head>
@@ -32,6 +34,9 @@
         background-color: #4CAF50;
         color: white;
     }
+    table {
+    clear: left;
+}
     
     </style>
     </head>    
@@ -55,12 +60,44 @@
     if (request.getParameter("NotId")!=null){
         IDToExclude = Integer.parseInt(request.getParameter("NotId"));
     }
-    NotificacaoGeral NotToExclude = new NotificacaoGeral();
-    if ((exclude==1)&&(IDToExclude>0)){
-        NotToExclude.excluir(IDToExclude);
-        IDToExclude = 0;
-        exclude = 0; 
-    } 
+    
+    int approve = 0;
+    int IDToApprove = 0; 
+    if (request.getParameter("Aprovar")!=null){
+        approve = Integer.parseInt(request.getParameter("Aprovar"));
+    }
+    if (request.getParameter("MemberToADMId")!=null){
+        IDToApprove= Integer.parseInt(request.getParameter("MemberToADMId"));
+    }
+    
+    
+    if (approve!=1){
+        NotificacaoGeral NotToExclude = new NotificacaoGeral();
+        if ((exclude==1)&&(IDToExclude>0)){
+            NotToExclude.excluir(IDToExclude);
+            IDToExclude = 0;
+            exclude = 0; 
+        } 
+    }
+    //Rotina para aceitar membro como adm do GE
+   
+    if (approve == 1 && IDToApprove>0){
+        MembroDO memberAp = new MembroDO();
+        Membro memberToAp = new Membro();
+        memberAp = memberToAp.buscar(IDToApprove);
+        memberAp.setADM(1); 
+        memberToAp.alterar(memberAp); 
+        approve = 0;
+        IDToApprove = 0;
+        NotificacaoGeral NotToExclude = new NotificacaoGeral();
+        if ((exclude==1)&&(IDToExclude>0)){
+            NotToExclude.excluir(IDToExclude);
+            IDToExclude = 0;
+            exclude = 0; 
+        } 
+    }
+    
+    
     /*------------ALYSON-------*/
     
  if(session.getAttribute("Usuario")!= null){
@@ -156,7 +193,7 @@
                         if (notificacaoCanc.getClassificacao()==0){
                     %>
                     <tr>
-                        -><%=messageNotificacao %> <a href = "Perfil.jsp?NotId=<%=notificacaoCanc.getId()%>&Excluir=1">[X]Excluir!</a> <br>
+                    <a href="Eventos.jsp?evento=<%=notificacaoCanc.getIDassociado() %>"> -><%=messageNotificacao %> </a> <a href = "Perfil.jsp?NotId=<%=notificacaoCanc.getId()%>&Excluir=1">[X]Excluir!</a> <br>
                     </tr>
                     <%
                         }
@@ -198,7 +235,7 @@
                   messageNotificacao = notificacaoConf.getMensagem() ;
             %>
                     <%
-                        if (notificacaoConf.getClassificacao()==2){
+                        if (notificacaoConf.getClassificacao()==3){
                     %>
                     <tr>
                         -><%=messageNotificacao %> <a href = "Perfil.jsp?NotId=<%=notificacaoConf.getId()%>&Excluir=1">[X]Excluir!</a><br>
@@ -212,19 +249,29 @@
         </td>
         </tr>
         
+        
+        
         <tr>
-            <th>Novos Feedbacks</th>
+            <th>Solicitações de Adm de Grupo de Extensão</th>
             <td>
             <table>
             <%
-              for (NotificacaoGeralDO notificacaoFeed:ListaNotificacao){
-                  messageNotificacao = notificacaoFeed.getMensagem() ;
+              for (NotificacaoGeralDO notificacaoADM:ListaNotificacao){
+                  messageNotificacao = notificacaoADM.getMensagem() ;
             %>
                     <%
-                        if (notificacaoFeed.getClassificacao()==3){
+                        if (notificacaoADM.getClassificacao()==4){
+                            MembroDO memberSolADM = new MembroDO();
+                            Membro memberToAcc = new Membro();
+                            UsuarioDO userSolADM = new UsuarioDO();
+                            Usuario userToAcc = new Usuario();
+                            memberSolADM = memberToAcc.buscar(notificacaoADM.getIDassociado());
+                            userSolADM = userToAcc.buscarPorID(memberSolADM.getUSUid());                        
                     %>
                     <tr>
-                        -><%=messageNotificacao %> <a href = "Perfil.jsp?NotId=<%=notificacaoFeed.getId()%>&Excluir=1">[X]Excluir!</a><br>
+                        ->O usuário <%=userSolADM.getNome()%> quer se tornar Administrador do Grupo de Extensão! <a href = "Perfil.jsp?NotId=<%=notificacaoADM.getId()%>&Excluir=1">[X]Excluir!</a>
+                        <a href = "Perfil.jsp?MemberToADMId=<%=memberSolADM.getId()%>&Aprovar=1&NotId=<%=notificacaoADM.getId()%>&Excluir=1">[V]Aprovar!</a> <br>
+                        
                     </tr>
                     <%
                         }
@@ -236,14 +283,37 @@
         <%}
         %>
     </table>
+
 <%
 /*---------------ALYSON--------------*/
 %>
 
    
 <center>
+    <br>
+    <% if(LiderGE==1){%>
+<table align="left" border="3"    cellpadding = "10" width="1000"   >
+<th>Novos Feedbacks</th>
 
-
+            <%
+                Feedback fdt=new Feedback();
+              for (NotificacaoGeralDO notificacaoFeed:ListaNotificacao){
+                  messageNotificacao = notificacaoFeed.getMensagem() ;
+                        if (notificacaoFeed.getClassificacao()==2){
+                            FeedbackDO fdbck = fdt.buscar(notificacaoFeed.getIDassociado());
+                    %>
+                    <tr>
+                    <td> -><%=messageNotificacao %> <a href = "Perfil.jsp?NotId=<%=notificacaoFeed.getId()%>&Excluir=1">[X]Excluir!</a><br> 
+                        <%=fdbck.getMensagem() %>
+                    </td>        
+            </tr>
+                    
+                    <%
+                        }
+                }
+            %>
+        </table>
+        <%}%>
     
 <%
    } 

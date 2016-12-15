@@ -120,7 +120,7 @@
                                 Nome do Evento:
                                 <INPUT type="text" name="EVEnome" maxlength = "30"><BR>
                                 Descrição:
-                                <INPUT type="text" name="EVEdescricao" maxlength = "140" size = "140"><BR>
+                                <INPUT type="text" name="EVEdescricao" maxlength = "1500" size = "140"><BR>
                                 Tipo do evento:
                                 <INPUT type="text" name="EVEtipo"><BR>
                                 Horário de início:
@@ -146,7 +146,6 @@
                                             }
                                     }%>
                                 </select>
-                                <a href="Cadastro_POI.jsp">Cadastro de local...</a><BR><BR>
                                  Link de inscrição para evento, se houver (google forms, site, etc):
                                 <INPUT type="text" name="EVElink" maxlength = "100"><BR>
                                 <button name="submit2" value="Criar micro">Criar evento</button><BR><BR>

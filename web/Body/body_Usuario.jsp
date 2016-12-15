@@ -80,15 +80,15 @@
 <table align="left" border="1" cellpadding="10" width="500">
 <th colspan="2">Informações do USUARIO</th>
 <tr>
-  <td><b>NOME</b></td>
+  <td><b>Username</b></td>
   <td><%=username%></td>
 </tr>
 <tr>
-  <td><b>EMAIL</b></td>
+  <td><b>E-mail</b></td>
   <td><%=email%></td>
 </tr>
 <tr>
-  <td><b>DATA DE ENTRADA</b></td>
+  <td><b>Data de entrada</b></td>
   <td><%=data%></td>
 </tr>
 <tr>
@@ -96,10 +96,16 @@
   <td><%=curso%></td>
 </tr>
 <tr>
-  <td><b>ano de ingresso</b></td>
+  <td><b>Ano de ingresso</b></td>
   <td><%=ingresso%></td>
 </tr>
+<BR><BR>
+<%UsuarioDO curr_user=(UsuarioDO)session.getAttribute("Usuario");
+    if(curr_user!=null && curr_user.isSuperUser()){
+%><caption align="bottom"><center><a style="color:red" size="6" href="ExcluirOutroMembro.jsp?id=<%=id%>">Excluir Usuário</a></center></caption><% 
+    }%>
 </table>
+
 <BR><BR><BR><BR><BR><BR><BR><BR>
 <BR><BR><BR><BR><BR><BR><BR><BR>
 <BR><BR><BR><BR><BR><BR><BR><BR>

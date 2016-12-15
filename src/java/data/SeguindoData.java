@@ -115,12 +115,17 @@ public class SeguindoData {
         
     public boolean isSeguindo(int USUid, int EVEid, Transacao tr) throws Exception {
         Connection con = tr.obterConexao();
-        String sql = "select * from agenda.Membro where USUid = ? and EVEid = ?";
+        String sql = "select * from agenda.seguindo where USUid = ? and EVEid = ?";
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setInt(1, USUid);
         ps.setInt(2, EVEid);
         ResultSet rs = ps.executeQuery();
-        if(rs.next()){
+        List<SeguindoDO> Items = new ArrayList<SeguindoDO>();
+        while (rs.next()) {
+            SeguindoDO i = new SeguindoDO();
+            Items.add(i);
+        }        
+        if(!Items.isEmpty()){
             return true;
         }
         return false;

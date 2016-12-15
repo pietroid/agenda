@@ -127,6 +127,22 @@ public class Evento {
 	return null;
     }       
     
+    public List<EventoDO> buscarSemana(java.sql.Date data1) throws Exception{
+        Transacao tr = new Transacao();
+	try{
+            tr.beginReadOnly();
+  	    EventoData EventoData = new EventoData();
+	    List<EventoDO> i = EventoData.buscarSemana(data1, tr);
+            tr.commit();
+            return i;
+	} catch (Exception e) {
+            tr.rollback();
+            System.out.println("Erro ao buscar datas na semana");
+           
+	}
+	return null;
+    }
+    
     public boolean excluir(EventoDO evento) throws Exception{
         Transacao tr = new Transacao();
         if(evento.isMacroEvento()){

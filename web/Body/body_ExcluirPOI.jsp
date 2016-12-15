@@ -74,9 +74,8 @@
                     PontoDeInteresse PontoDeInteressetr = new PontoDeInteresse();
                     Ponto.setId(Integer.parseInt(request.getParameter("excluido")));
                     if (Ponto != null) {
-                        if (PontoDeInteressetr.excluir(Ponto)) {%>
-                            O Ponto de Interesse será excluído
-                        <%
+                        if (PontoDeInteressetr.excluir(Ponto)) {
+                            pageContext.forward("index.jsp");
                         } else {
                         %> Não foi possível excluir pois há eventos nesse Ponto de Interesse<%
                         }
