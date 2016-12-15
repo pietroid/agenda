@@ -51,7 +51,7 @@
                                     <%
                                 }
                                 else{
-                                    String action = request.getParameter("submit");
+                                    String action = request.getParameter("Eve");
                                     if (action.equals("sim")){ 
                                         membrotn.excluir(membro);
                                         %>
