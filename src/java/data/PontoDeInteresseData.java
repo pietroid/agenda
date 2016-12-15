@@ -22,7 +22,7 @@ public class PontoDeInteresseData {
         ps.setString(1, PontoDeInteresse.getNome()); //set no bd dos valores obtidos no objeto POI
         ps.setString(2, PontoDeInteresse.getDescricao());
         ps.setString(3, PontoDeInteresse.getEndereco());
-        ps.setString(4,PontoDeInteresse.getLink_para_maps());
+        ps.setString(4, PontoDeInteresse.getLink_para_maps());
         ps.setString(5, PontoDeInteresse.getPasta_de_imagens());
         int result = ps.executeUpdate();
         
