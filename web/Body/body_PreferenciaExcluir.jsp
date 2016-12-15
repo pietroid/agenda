@@ -15,9 +15,10 @@
 
 <%
 
-        int GEid = Integer.parseInt(request.getParameter("grupo"));
+        int preferenciaid = Integer.parseInt(request.getParameter("grupo"));
         Preferencia preferenciatn = new Preferencia();
-        boolean update = preferenciatn.excluirid(GEid);
+        PreferenciaDO preferencia = preferenciatn.buscar(preferenciaid);
+        boolean update = preferenciatn.excluir(preferencia);
         if (update){ %>Exclusão feita com sucesso!<%};
         if(!update) { %>Houve uma falha na exclusão <% };
 %>

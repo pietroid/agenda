@@ -168,7 +168,10 @@
                 UsuarioDO uss=ust.buscarPorID(mbr.getUSUid());
 %>
             <tr align="center">
-                <td><a href="Usuario.jsp?Usuario=<%=uss.getId()%>" ><%=uss.getNome()%></a></td>
+                <td>
+                    <a href="Usuario.jsp?Usuario=<%=uss.getId()%>" ><%=uss.getNome()%></a>
+                    <% if (isadm == true) {%><a href="TirarMembro.jsp?membro=<%=mbr.getId()%>"><font size="2" color="#ff0000">Excluir membro</a><%;}%>
+                </td>
             </tr>
             <%}
 }%>
@@ -223,6 +226,7 @@
         if(session.getAttribute("Usuario")!= null){
             UsuarioDO SUser = (UsuarioDO)session.getAttribute("Usuario");
             Membro mtn=new Membro();
+            int id = 0;
             List<MembroDO> membro=mtn.buscarPorUSUid(SUser.getId());
             boolean sameGE=false;
             for(MembroDO m : membro){
@@ -230,6 +234,18 @@
                     sameGE=true;
                     break;
                 }
+                if (m.getGEid() == ge.getId()) id = m.getId();
+            }
+            if (id != 0){
+                %>
+                <table align="center" border=1 cellpadding=10 width=50>
+                    <center>
+                    <tr>
+                        <td><a href="SairDoGrupo.jsp?membro=<%= id %>" style="color:red">Sair do grupo</a></td>
+                    </tr>
+                    </center>
+                </table>
+                <%
             }
             if (SUser.isSuperUser() || sameGE){
                 %>
@@ -242,7 +258,8 @@
         
         <%
         
-            }    
+            }
+            
         }
 }else{
 pageContext.forward("index.jsp");
