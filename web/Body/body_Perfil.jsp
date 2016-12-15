@@ -117,17 +117,7 @@
     </tr>
     <%}%>
     </table>
-    <table align =" left">
-        
-            <%if (ge.getImagem() != null && !(ge.getImagem().equals(""))){
-                    imagem = "/agenda/PastadeImagens/" + usuario.getImagem();
-                }%>
-        <tr>
-            <td>
-                <img src ="<%= imagem %>" width = 200 height = 200>
-            </td>
-        </tr>
-    </table>
+    
 <%
     }%>
     

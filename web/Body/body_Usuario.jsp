@@ -6,6 +6,30 @@
 <%@page import= "java.util.Date"%>
 
 <html>
+    <head>
+        <style>
+    table {
+        font-family: "Verdana";
+        border-collapse: collapse;
+        width: 50%;
+    }
+    td, th {
+        height: 50px;
+        border: 1px solid #ddd;
+        padding: 8px;
+        background-color: #ffffff;
+    }
+    tr:nth-child(even){background-color: #f2f2f2;}
+    th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: center;
+        background-color: #4CAF50;
+        color: white;
+    }
+    
+    </style>
+    </head> 
 <body BGCOLOR = #f2f2f2>
 <font face="verdana">
 
@@ -25,10 +49,11 @@
     String bio = usuarioREQ.getBio();    
     String nome = usuarioREQ.getNome();
     String email = usuarioREQ.getEmail();    
-    String imagem = usuarioREQ.getImagem();
+    
     Date data = usuarioREQ.getData();
     String curso = usuarioREQ.getCurso();  
-    
+    String imagem = "/agenda/PastadeImagens/padrao/logo.png";
+                
     Date ingresso = usuarioREQ.getIngresso();
 
 %>
@@ -43,17 +68,13 @@
 </table>
 
 <BR>
-
-<table align="right" border="1" cellpadding="10" width="200">
-    <tfoot>
-        <tr><th><a href="Fotos.jsp" target="_top">Mais Fotos</a></th></tr>
-    </tfoot>
-    <td width=200 height=200>
-        <img src =<%=imagem%> width = 100% height=100%>
-    </td>
-    
+<%if (usuarioREQ.getImagem() != null && !(usuarioREQ.getImagem().equals(""))){
+                    imagem = "/agenda/PastadeImagens/" + usuarioREQ.getImagem();
+                }%>
+<table align="center" border="1" cellpadding="200" width="200">
+    <center><img src =<%=imagem%> width = "150" height="200"></center>
 </table>
-<BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR>
+<BR><BR><BR><BR>
 
 
 <table align="left" border="1" cellpadding="10" width="500">

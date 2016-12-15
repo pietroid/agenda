@@ -50,7 +50,31 @@
         if(ge.getAutorizado()==1 || isAdm || sUser){
 %>
 <html>
-    <body BGCOLOR = #f2f2f2>
+      <head>
+        <style>
+    table {
+        font-family: "Verdana";
+        border-collapse: collapse;
+        width: 50%;
+    }
+    td, th {
+        height: 50px;
+        border: 1px solid #ddd;
+        padding: 8px;
+        background-color: #ffffff;
+    }
+    tr:nth-child(even){background-color: #f2f2f2;}
+    th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: center;
+        background-color: #4CAF50;
+        color: white;
+    }
+    
+    </style>
+    </head>    
+<body BGCOLOR = #f2f2f2>
         <font face="verdana">
         <%if(evento.isAtivo()){ %>
         <h1><center><%= evento.getNome() %></center></h1>
@@ -87,7 +111,7 @@
         </table>
         <%}%>
         
-            <BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR>
+            <BR><BR><BR><BR><BR><BR>
         <table align="left" border=1 cellpadding=10 width=500>
             <% 
         if (usuario != null&& !usuario.isSuperUser()){

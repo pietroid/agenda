@@ -64,7 +64,7 @@
 %>
         <h1><center><%= ge.getNome() %></center></h1>
         <BR><BR>
-        <%=ge.getImagem()%>
+        
         <table align="center" border=1 cellpadding=10 width=200>
             <%
                 String imagem = "/agenda/PastadeImagens/padrao/logo.png";

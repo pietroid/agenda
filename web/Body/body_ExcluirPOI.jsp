@@ -12,7 +12,30 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <body BGCOLOR = #f2f2f2>
+    <head>
+        <style>
+    table {
+        font-family: "Verdana";
+        border-collapse: collapse;
+        width: 50%;
+    }
+    td, th {
+        height: 50px;
+        border: 1px solid #ddd;
+        padding: 8px;
+        background-color: #ffffff;
+    }
+    tr:nth-child(even){background-color: #f2f2f2;}
+    th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: center;
+        background-color: #4CAF50;
+        color: white;
+    }
+    
+    </style>
+    </head> 
         <font face="verdana">
         <h1><center>Excluir ponto de interesse</center></h1>
         <BR>
