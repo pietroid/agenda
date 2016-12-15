@@ -170,6 +170,11 @@
             if (usdat.incluir(usuario)) {
         %> <font face="verdana">
         <h2><center>Cadastro bem sucedido!</center></h2> 
+        <form action=" FormularioImagensUsuario.jsp" method =" post">
+        <input type="hidden" name="username" value="<%=request.getParameter("username")%>"><BR>
+        <input type="submit" name="submit" value="Escolha uma Foto">
+        </form>
+
         <BR><a href="LoginOut.jsp" target="_top">Fazer login</a><%
                         }
                     }

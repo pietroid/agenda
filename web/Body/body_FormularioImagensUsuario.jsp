@@ -14,7 +14,7 @@
    
 Usuario us = new Usuario();
 UsuarioDO UsuarioImagem = new UsuarioDO();
-UsuarioImagem = us.buscarPorUsername("Username");
+UsuarioImagem = us.buscarPorUsername(request.getParameter("username"));
 
 %>
 
@@ -58,12 +58,9 @@ UsuarioImagem = us.buscarPorUsername("Username");
     </style>
     
     
-    <% if(request.getParameter("submit5")!=null){
-      if(request.getParameter("foto")=="imagem1") UsuarioImagem.setImagem("/agenda/PastadeImagens/man.png");
-      if(request.getParameter("foto")=="imagem2") UsuarioImagem.setImagem("/agenda/PastadeImagens/pink.png");
-      if(request.getParameter("foto")=="imagem3") UsuarioImagem.setImagem("/agenda/PastadeImagens/amarelo.png");
-      if(request.getParameter("foto")=="imagem4") UsuarioImagem.setImagem("/agenda/PastadeImagens/anonimo.png");
-
+    <% if(request.getParameter("submit5")!=null && UsuarioImagem != null){
+     UsuarioImagem.setImagem(request.getParameter("foto"));
+     
 
      us.atualizar(UsuarioImagem);
     
@@ -93,10 +90,10 @@ UsuarioImagem = us.buscarPorUsername("Username");
   </tr>
   
   <tr>
-      <td><input type="radio" name="foto" value="imagem1" >Imagem 1</td>
-      <td><input type="radio" name="foto" value="imagem2" >Imagem 2</td>
-      <td><input type="radio" name="foto value="imagem3" >Imagem 3</td>
-      <td><input type="radio" name="foto" value="imagem4" >Imagem 4</td>
+      <td><input type="radio" name="foto" value="man.png" >Imagem 1</td>
+      <td><input type="radio" name="foto" value="pink.png" >Imagem 2</td>
+      <td><input type="radio" name="foto" value="amarelo.png" >Imagem 3</td>
+      <td><input type="radio" name="foto" value="anonimo.png" >Imagem 4</td>
   </tr>
   <tfoot width="50">
       <td colspan="4" align=" center" >

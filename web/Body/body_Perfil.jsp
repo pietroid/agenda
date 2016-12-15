@@ -43,6 +43,7 @@
 <%
     /*----------ALYSON-----------*/
     //Rotina para excluir notificacao
+    String imagem = "";
     int exclude;
     exclude=0;
     int IDToExclude;
@@ -115,6 +116,17 @@
         <td align="center"><font face="verdana" size="3"><a href="CriarEvento.jsp?GE=<%= ge.getId()%>">Criar evento</a></font></td>
     </tr>
     <%}%>
+    </table>
+    <table align =" left">
+        
+            <%if (ge.getImagem() != null && !(ge.getImagem().equals(""))){
+                    imagem = "/agenda/PastadeImagens/" + usuario.getImagem();
+                }%>
+        <tr>
+            <td>
+                <img src ="<%= imagem %>" width = 200 height = 200>
+            </td>
+        </tr>
     </table>
 <%
     }%>

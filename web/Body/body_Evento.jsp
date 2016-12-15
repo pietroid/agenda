@@ -22,6 +22,7 @@
 <%@page import="transacoes.Seguindo"%>
 <%@page import="data.SeguindoDO"%>
 
+
 <% 
     if (request.getParameter("evento") != null) {
         Comentario comentariotn = new Comentario();

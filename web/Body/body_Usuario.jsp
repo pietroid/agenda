@@ -25,7 +25,7 @@
     String bio = usuarioREQ.getBio();    
     String nome = usuarioREQ.getNome();
     String email = usuarioREQ.getEmail();    
-   
+    String imagem = usuarioREQ.getImagem();
     Date data = usuarioREQ.getData();
     String curso = usuarioREQ.getCurso();  
     
@@ -49,7 +49,7 @@
         <tr><th><a href="Fotos.jsp" target="_top">Mais Fotos</a></th></tr>
     </tfoot>
     <td width=200 height=200>
-        <img src ="/agenda/PastadeImagens/GrupodeExtensao1/Grupodeextensao1-imagem1.PNG" width = 100% height=100%>
+        <img src =<%=imagem%> width = 100% height=100%>
     </td>
     
 </table>

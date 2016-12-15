@@ -16,6 +16,7 @@
 <!DOCTYPE html>
 
 <html>
+    
     <%
     if ((request.getParameter("eve")) != null) {
         SeguindoDO seguindo = new SeguindoDO();
