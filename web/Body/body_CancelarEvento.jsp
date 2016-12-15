@@ -4,6 +4,8 @@
     Author     : Marcus
 --%>
 
+<%@page import="data.NotificacaoGeralDO"%>
+<%@page import="transacoes.NotificacaoGeral"%>
 <%@page import="data.RealizaDO"%>
 <%@page import="transacoes.Realiza"%>
 <%@page import="data.MembroDO"%>
@@ -46,6 +48,11 @@
                     EventoDO evento=evnt.buscar(Integer.parseInt(request.getParameter("evento")));
                     evento.setAtivo(false);
                     evnt.atualizar(evento);
+                    NotificacaoGeral ngt=new NotificacaoGeral();
+                    NotificacaoGeralDO not=new NotificacaoGeralDO();
+                    not.setClassificacao(0);
+                    not.setIDassociado(evento.getId());
+                    not.setMensagem(evento.getNome()+" foi cancelado!");
                     %><p>Evento cancelado!</p><%
                 } else {
                     pageContext.forward("Evento.jsp?evento="+request.getParameter("evento"));

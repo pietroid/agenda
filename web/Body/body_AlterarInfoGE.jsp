@@ -55,6 +55,7 @@ Tipo:<BR><INPUT type="text" name="tipo" value= "<%=ge.getTipo() %>"><BR><BR>
       <td><input type="radio" name="foto" value="social.png" >Imagem 3</td>
       <td><input type="radio" name="foto" value="capacete.png" >Imagem 4</td>
   </tr>
+     </table>
   <tfoot width="50">
     <td colspan="4" align=" center" >
 <INPUT type="submit" name="submit" value= "Salvar Mudanças">   
@@ -64,7 +65,7 @@ Tipo:<BR><INPUT type="text" name="tipo" value= "<%=ge.getTipo() %>"><BR><BR>
       </td>
   </tfoot>
      
-</table>
+
 
 </FORM>
 <%} else if(request.getParameter("submit")!=null) { 
@@ -111,6 +112,7 @@ Tipo:<BR><INPUT type="text" name="tipo" value= "<%=ge.getTipo() %>"><BR><BR>
       <td><input type="radio" name="foto" value="imagem3" >Imagem 3</td>
       <td><input type="radio" name="foto" value="imagem4" >Imagem 4</td>
   </tr>
+     </table>
   <tfoot width="50">
       <td colspan="4" align=" center" >
  <INPUT type="submit" name="submit" value= "Salvar Mudanças">   
@@ -120,7 +122,7 @@ Tipo:<BR><INPUT type="text" name="tipo" value= "<%=ge.getTipo() %>"><BR><BR>
       </td>
   </tfoot>
      
-</table>
+
 
 </FORM>
     <%

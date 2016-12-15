@@ -115,7 +115,19 @@
             </tfoot>
         </table>
         <%
-    }   
+    }
+    if(relacaomembro == 2 && !isadm && !superuser){
+%>
+
+        <table align="center" border=1 cellpadding=10 width=200>
+            <tfoot>
+                <tr><th><a href="SolicitarAdministracao.jsp?GEid=<%=ge.getId()%>" target="_top"><font color="FFFFFF">Solicitar administração</font></a></th></tr>
+                
+            </tfoot>
+        </table>
+<%
+}
+
 }
 %>          
         <br><br>
@@ -234,7 +246,7 @@
                     sameGE=true;
                     break;
                 }
-                if (m.getGEid() == ge.getId()) id = m.getId();
+                if (m.getGEid() == ge.getId() && m.getAprovado()==1) id = m.getId();
             }
             if (id != 0){
                 %>

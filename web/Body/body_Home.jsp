@@ -20,16 +20,18 @@
 <%@ page import= "data.RealizaDO"%>
 
 <%
-    if(session.getAttribute("Usuario")!= null) //HOME LOGADO
+    UsuarioDO Usu = (UsuarioDO)session.getAttribute("Usuario");
+    if(Usu!= null && !Usu.isSuperUser()) //HOME LOGADO
     {
- UsuarioDO Usu = (UsuarioDO)session.getAttribute("Usuario");
+ 
  String nome = Usu.getNome(); 
 %>
 
 <h1><center> Home </center> </h1>
 
-<h2><font face="verdana">Olá, <%=nome%>  </font></h2>            
-<h2><font face="verdana"> Grupos de extensão </font></h2>
+<h2><font face="verdana">Olá, <%=nome%>  </font></h2>  
+
+
 
 <%if(Usu!=null && !Usu.isSuperUser()){
     List<PreferenciaDO> pref;
@@ -37,6 +39,7 @@
     pref=preft.pesquisarPorUser(Usu);
     if(pref!=null && pref.size()>0){
         %><table align="left" border="1" cellpadding="10" width="1000">
+            <caption align="top"><h2><font face="verdana"> Grupos de extensão que você segue: </font></h2></caption>
             <th> Grupo de extensão </th>
 <%
         for(PreferenciaDO pr : pref){
@@ -44,10 +47,11 @@
             GEDO ge = getrn.buscar(pr.getGEid());
             ge.getNome();
             %><TR>
-                <TD> <center><a href="Evento.jsp?GE=<%=ge.getId()%>"><%=ge.getNome()%></a><center> </TD>
+                <TD> <center><a href="GE.jsp?GE=<%=ge.getId()%>"><%=ge.getNome()%></a><center> </TD>
             </TR><%
         }%>
-        </table><BR><BR><BR><BR><BR><BR>
+        <caption align="bottom"><p><font size="2" face="verdana"><a href="Preferencia.jsp">Visualizar preferências</a></font></p></caption>
+        </table>
         <%
     }else{
         %>
@@ -56,9 +60,9 @@
     <%
     }
 }%>
-<p><font size="2" face="verdana"><a href="Preferencia.jsp">Visualizar preferências</a></font></p>
 
 
+<BR><BR><BR>
 
 <%
     SeguindoDO seguindo = new SeguindoDO();
@@ -72,9 +76,10 @@
     listaSemana = eventotr.buscarSemana(today);
     if(lista != null){
         if (lista.size() !=0){ 
-           %><h2>Você segue estes eventos:</h2><br>
+%>
              <center>
              <table align="left" border="1" cellpadding="10" width="1000">
+                 <caption align="top"><h2>Você segue estes eventos:</h2></caption>
                  <th> Evento</th> <th>Grupo de extensão</th>
            <%}
         else{ %><p>Você não segue evento algum!</p><br><% }
@@ -112,6 +117,7 @@
     <h2>Os seus próximos eventos nessa semana são:</h2><br>
         <center>
         <table align="left" border=1 cellpadding=10 width=1000>
+            <caption align="top"><h2>Os seus próximos eventos nessa semana são:</h2></caption>
             <th> Evento <th>Grupo de extensão <th> Data
 <%}else %><p>Você não tem eventos essa semana!</p><br> <% 
 
@@ -126,8 +132,8 @@
         if(contem == true ){
 %>
         <TR>
-            <TD><center><a href="Evento.jsp?evento = "<%=eventoParte.getId()%>><%=eventoParte.getNome()%></a></center> </TD>
-            <TD><center><a href="GE.jsp?GE = "<%=ge.getId()%>><%=ge.getNome()%></a></center> </TD>
+            <TD><center><a href="Evento.jsp?evento=<%=eventoParte.getId()%>"><%=eventoParte.getNome()%></a></center> </TD>
+            <TD><center><a href="GE.jsp?GE="<%=ge.getId()%>"><%=ge.getNome()%></a></center> </TD>
             <TD><center><%=eventoParte.getData()%></center> </TD>
 
         </TR>
@@ -141,7 +147,7 @@
     else{
 %>
 
-<p>Você não segue evento algum!</p><br>
+<caption><p>Você não segue evento algum!</p><br></caption>
 <%
     }  
 
@@ -153,9 +159,7 @@
 
  %>
  <h1><center> Home</center> </h1>
- <h2><font face="verdana"> Grupos de extensão</font><h2>
-<p><font size="2" face="verdana"><a href="ListadosGE.jsp" target="_top">Clique aqui
- para ver uma lista com todos os Grupos de Extensão</a></font></p> 
+ <h2><font face="verdana"> Olá, bem vindo(a) ao Poli Agenda</font><h2>
 <p></p>
 <%@include  file="Calendario/body_Calendario.jsp"%>
 
