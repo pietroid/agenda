@@ -169,8 +169,8 @@
 %>
             <tr align="center">
                 <td>
-                    <a href="Usuario.jsp?Usuario=<%=uss.getId()%>" ><%=uss.getNome()%></a>
-                    <% if (isadm == true) {%><a href="TirarMembro.jsp?membro=<%=mbr.getId()%>"><font size="2" color="#ff0000">Excluir membro</a><%;}%>
+                     <p align="center"> <a href="Usuario.jsp?Usuario=<%=uss.getId()%>" ><%=uss.getNome()%></a> </p>
+                    <% if (isadm == true) {%><p align="right"><a href="TirarMembro.jsp?membro=<%=mbr.getId()%>"><font size="2" color="#ff0000">Excluir membro</a></p><%;}%>
                 </td>
             </tr>
             <%}
