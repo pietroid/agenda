@@ -37,15 +37,16 @@ public class QGData {
         int result = ps.executeUpdate();
     } // excluir
 
-    public QGDO buscar(int QGid, Transacao tr) throws Exception {
+    public QGDO buscarPorGE(int GEid, Transacao tr) throws Exception {
         Connection con = tr.obterConexao();
-        String sql = "select * from agenda.QG where QGid = ?";
+        String sql = "select * from agenda.QG where GEid = ?";
         PreparedStatement ps = con.prepareStatement(sql);
-        ps.setInt(1, QGid);
+        ps.setInt(1, GEid);
         ResultSet rs = ps.executeQuery();
+        rs.first();
         QGDO local = new QGDO();
         local.setId(rs.getInt("QGid"));
-        local.setPOI_id(rs.getInt("EVEid"));
+        local.setPOI_id(rs.getInt("POI_id"));
         local.setGEid(rs.getInt("GEid"));
         return local;
     } // buscar

@@ -33,17 +33,17 @@ public class QG {
         return false;
     } // incluir
     
-    public QGDO buscar(int QGid) throws Exception{
+    public QGDO buscarPorGE(int GEid) throws Exception{
         Transacao tr = new Transacao();
 	try{
             tr.beginReadOnly();
   	    QGData a = new QGData();
-	    QGDO i = a.buscar(QGid, tr);
+	    QGDO i = a.buscarPorGE(GEid, tr);
             tr.commit();
             return i;
 	} catch (Exception e) {
             tr.rollback();
-            System.out.println("Erro ao buscar" + QGid);
+            System.out.println("Erro ao buscar" + GEid);
             e.printStackTrace();
 	}
 	return null;
