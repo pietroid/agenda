@@ -43,6 +43,28 @@
 </FORM>      
     <%      }
             else if (request.getParameter("submit")!=null){
+
+            if(request.getParameter("nome").equals("")){%> O campo Nome é obrigatório! <br><br><br>
+            
+<FORM action="Cadastro_POI.jsp" method="post">
+    
+    Nome do ponto de interesse:<BR>
+    <INPUT type="text" name="nome"><BR><BR>
+    Descrição:<BR>
+    <INPUT type="text" name="descricao"><BR><BR>
+    Endereço:<BR>
+    <INPUT type="text" name="endereco"><BR><BR>
+    Link para Google Maps:<BR>
+    <INPUT type="text" name="link_para_maps"><BR><BR>
+    Pasta de Imagens:<BR>
+    <INPUT type="text" name="pasta_de_imagens"><BR><BR>
+    
+    <INPUT type="submit" name="submit" value="Cadastrar">
+      
+</FORM>
+            
+            <%}
+            else{
                 PontoDeInteresseDO ponto = new PontoDeInteresseDO();
                 ponto.setNome(request.getParameter("nome"));
                 ponto.setDescricao(request.getParameter("descricao"));
@@ -51,6 +73,7 @@
                 ponto.setPasta_de_imagens(request.getParameter("pasta_de_imagens"));
                 PontoDeInteresse novo=new PontoDeInteresse();
                 novo.incluir(ponto);
+                }
             }
         }
         else{%>Você não possui acesso a esta página<%}
