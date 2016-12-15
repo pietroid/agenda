@@ -137,7 +137,7 @@
 <!----------------------------- REDIRECIONA PARA BODY_FEEDBACK------------------------------------------->
 <%   LocalDate localDate = LocalDate.now();
     Date dateNow = Date.valueOf(localDate.toString());
-    if(evento.getData().before(dateNow)  && !usuario.isSuperUser() && evento.isAtivo()){        %>
+    if(evento.getData().before(dateNow) && evento.isAtivo()){        %>
 <p align="center"> <b>O que você achou do evento? </b></p> <BR>
 <FORM action="/agenda/Feedback.jsp" method="post">  
     <center><INPUT type="submit" name="deixar_feedback" value="Deixe seu feedback" ></center> <BR>
