@@ -169,8 +169,8 @@
 %>
             <tr align="center">
                 <td>
-                     <p align="center"> <a href="Usuario.jsp?Usuario=<%=uss.getId()%>" ><%=uss.getNome()%></a> </p>
-                    <% if (isadm == true) {%><p align="right"><a href="TirarMembro.jsp?membro=<%=mbr.getId()%>"><font size="2" color="#ff0000">Excluir membro</a></p><%;}%>
+                    <center><a href="Usuario.jsp?Usuario=<%=uss.getId()%>" ><%=uss.getNome()%></a></center>
+                    <% if (isadm == true) {%><right><a href="TirarMembro.jsp?membro=<%=mbr.getId()%>"><font size="2" color="#ff0000">Excluir membro</a></right><%;}%>
                 </td>
             </tr>
             <%}
@@ -217,7 +217,7 @@
             <table align="center" border=1 cellpadding=10 width=500>
                 <center>
                 <tr>
-                    <td><a href="CriarEvento.jsp?GE=<%= ge.getId() %>" style="color:red">Criar evento</a></td>
+                    <td><a href="CriarEvento.jsp?GE=<%= ge.getId() %>" style="color:red"><center>Criar evento</center></a></td>
                 </tr>
                 </center>
             </table>
@@ -241,7 +241,7 @@
                 <table align="center" border=1 cellpadding=10 width=50>
                     <center>
                     <tr>
-                        <td><a href="SairDoGrupo.jsp?membro=<%= id %>" style="color:red">Sair do grupo</a></td>
+                        <td><a href="SairDoGrupo.jsp?membro=<%= id %>" style="color:red"><center>Sair do grupo</center></a></td>
                     </tr>
                     </center>
                 </table>
