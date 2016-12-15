@@ -50,24 +50,7 @@ public class Feedback {
         return false;
     }
     
-    public boolean atualizar (FeedbackDO feedback) throws Exception{
-        
-        Transacao tr = new Transacao();
-        try {
-            
-            tr.begin();
-                FeedbackData a = new FeedbackData();
-                a.atualizar(feedback, tr);
-            tr.commit();
-            return true;
-       
-        } catch(Exception e) {
-            tr.rollback();
-            System.out.println("Erro ao atualizar");
-            e.printStackTrace();
-        }
-        return false;
-    }
+    
     public FeedbackDO buscar(int id) throws Exception{
         Transacao tr = new Transacao();
 	try{
@@ -84,6 +67,22 @@ public class Feedback {
 	return null;
     } // buscar
 
+    public List<FeedbackDO> listarPorUser(int id) throws Exception{
+        Transacao tr = new Transacao();
+	try{
+            tr.beginReadOnly();
+  	    FeedbackData a = new FeedbackData();
+	    List<FeedbackDO> i = a.listarPorUser(id, tr);
+            tr.commit();
+            return i;
+	} catch (Exception e) {
+            tr.rollback();
+            System.out.println("Erro ao buscar" + id);
+            e.printStackTrace();
+	}
+	return null;
+    }
+    
     private boolean isEmpty(String s) {
         if (null == s)
             return true;

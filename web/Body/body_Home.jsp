@@ -18,9 +18,10 @@
 <%@ page import= "data.RealizaDO"%>
 
 <%
-    if(session.getAttribute("Usuario")!= null) //HOME LOGADO
+    UsuarioDO Usu = (UsuarioDO)session.getAttribute("Usuario");
+    if(Usu!= null && !Usu.isSuperUser()) //HOME LOGADO
     {
- UsuarioDO Usu = (UsuarioDO)session.getAttribute("Usuario");
+ 
  String nome = Usu.getNome(); 
 %>
 
@@ -120,7 +121,7 @@
 %>
         <TR>
             <TD><center><a href="Evento.jsp?evento=<%=eventoParte.getId()%>"><%=eventoParte.getNome()%></a></center> </TD>
-            <TD><center><a href="GE.jsp?GE=<%=ge.getId()%>"><%=ge.getNome()%></a></center> </TD>
+            <TD><center><a href="GE.jsp?GE="<%=ge.getId()%>"><%=ge.getNome()%></a></center> </TD>
             <TD><center><%=eventoParte.getData()%></center> </TD>
 
         </TR>
