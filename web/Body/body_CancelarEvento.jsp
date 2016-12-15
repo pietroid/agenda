@@ -19,69 +19,43 @@
 <html>
     <body BGCOLOR = #f2f2f2>
         <font face="verdana">
+        <h1>Cancelar evento</h1>
         <%
-            UsuarioDO usuario=(UsuarioDO)request.getAttribute("Usuario");
+            UsuarioDO usuario = (UsuarioDO) session.getAttribute("Usuario");
             String evstr = request.getParameter("evento");
-            
-            if (evstr != null && usuario!=null){
-                Membro membrt=new Membro();
+
+            if (evstr != null && usuario != null) {
+                Membro membrt = new Membro();
                 Realiza rlzt = new Realiza();
-                RealizaDO realiza=rlzt.buscarPorEVE(Integer.parseInt(evstr));
-                //boolean isadm=membrt.isADM(0, USUid);
-                if(usuario.isSuperUser())
+                RealizaDO realiza = rlzt.buscarPorEVE(Integer.parseInt(evstr));
+                boolean isadm = membrt.isADM(realiza.getGEid(), usuario.getId());
+                if (usuario.isSuperUser() || isadm) {
+                    if (request.getParameter("submit") == null) {
         %>
-        <h1><center>Excluir comentário</center></h1>
-
-            <%
-                //Verifica se o usuário está logado
-                if (session.getAttribute("Usuario")!=null){
-                    UsuarioDO usuario = (UsuarioDO) session.getAttribute("Usuario");
-                    if (usuario.isSuperUser() == true || usuario.getId() == comentario.getUsuId()){
-                        if (request.getParameter("submit") == null){
-                            %>
-                            <center>
-                                 Deseja excluir o comentário?
-                                 <FORM action = "ExcluirComentario.jsp?comentario=<%= comentario.getId() %>" method = "post">
-                                     <input type="radio" name="acao" value="sim" checked> Sim<br>
-                                     <input type="radio" name="acao" value="nao"> Não<br>
-                                     <INPUT type="submit" name="submit" value= "Enviar">
-                                 </form>
-                             </center>
-                             <%
-                        }
-                        else{
-                            String action = request.getParameter("acao");
-                            boolean excluido = false;
-                            if (action != null){
-                                if (action.equals("sim")){
-                                    excluido = comentariotn.excluir(comentario);
-                                }
-                                if (excluido == true){
-                                    %>
-    
-                                    <center>
-                                        Comentário excluído. <BR>
-                                    </center>
-
-                                    <%
-                                }
-                                else{
-                                    %>
-
-                                    <center>
-                                        Comentário não exclúido. <BR>
-                                    </center>
-
-                                    <%
-                                }
-                            }
-                        }
-                    }
-                    else pageContext.forward("index.jsp");
+    <center>
+        <form action="CancelarEvento.jsp" method="post">
+            <p>Você tem certeza que quer cancelar o evento?</p> <br> <br>
+            <input type="submit" name="submit" value="Sim"> 
+            <input type="submit" name="submit" value="Não"> 
+            <input type="hidden" name="evento" value="<%=request.getParameter("evento")%>"> 
+        </form>
+    </center>
+    <%} else {
+                if (request.getParameter("submit").equals("Sim")) {
+                    Evento evnt=new Evento();
+                    EventoDO evento=evnt.buscar(Integer.parseInt(request.getParameter("evento")));
+                    evento.setAtivo(false);
+                    evnt.atualizar(evento);
+                    %><p>Evento cancelado!</p><%
+                } else {
+                    pageContext.forward("Evento.jsp?evento="+request.getParameter("evento"));
                 }
-                else pageContext.forward("index.jsp");
             }
-            else pageContext.forward("index.jsp");
-            %>
-    </body>
+        } else {
+            pageContext.forward("index.jsp");
+                        }
+                    } else {
+    pageContext.forward("index.jsp");
+    }%>
+</body>
 </html>
