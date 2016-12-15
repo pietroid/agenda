@@ -17,6 +17,7 @@
         
         if(request.getParameter("submit")==null){%>
 <FORM action="AltPass.jsp" method="post" id = "changePassForm">
+    <center>
 Nome:<BR><INPUT type="text" name="nome" value= "<% out.write(us.getNome()); %>"> <BR>
 E-mail:<BR><INPUT type="text" name="email" value= "<% out.write(us.getEmail()); %>"> <BR>
 Curso:<BR><INPUT type="text" name="curso" value= "<% out.write(us.getCurso()); %>"> <BR>
@@ -28,6 +29,7 @@ Repita a Nova Senha<BR><INPUT type="password" name="repNovaSenha" value= ""> <BR
 </FORM>
 <INPUT type ="submit" name="submit" value= "Submit" form="changePassForm">   
 <INPUT type ="reset" name="reset" value= "Reset" form = "changePassForm">
+    </center>
     <%
         } else if (request.getParameter("submit").equals("Submit")){
         

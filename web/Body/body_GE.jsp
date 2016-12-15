@@ -101,6 +101,7 @@
         <table align="center" border=1 cellpadding=10 width=200>
             <tfoot>
                 <tr><th><a href="SolicitarAdesao.jsp?GEDO=<%=ge.getId()%>" target="_top"><font color="FFFFFF">Solicitar adesão</font></a></th></tr>
+                <tr><th><a href="PreferenciaAdicionar.jsp?grupo=<%=ge.getId()%>" target="_top"><font color="FFFFFF">Seguir grupo de extensão</font></a></th></tr>
             </tfoot>
         </table>
 
@@ -167,7 +168,10 @@
                 UsuarioDO uss=ust.buscarPorID(mbr.getUSUid());
 %>
             <tr align="center">
-                <td><a href="Usuario.jsp?Usuario=<%=uss.getId()%>" ><%=uss.getNome()%></a></td>
+                <td>
+                    <a href="Usuario.jsp?Usuario=<%=uss.getId()%>" ><%=uss.getNome()%></a>
+                    <% if (isadm == true) {%><a href="TirarMembro.jsp?membro=<%=mbr.getId()%>"><font size="2" color="#ff0000">Excluir membro</a><%;}%>
+                </td>
             </tr>
             <%}
 }%>
