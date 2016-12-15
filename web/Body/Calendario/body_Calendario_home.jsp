@@ -166,26 +166,50 @@
 
                     //PARA USUÁRIO COMUM -------------------------------------------------------------------- 
                     Seguindo trs = new Seguindo();
-                    List<SeguindoDO> eventos_matched = new ArrayList<SeguindoDO>();
                     int eveID;
                     
                     if (!admin2) {
                         if (!eventos_do_Mes.isEmpty()) {
                             for (EventoDO evento_temp : eventos_do_Mes) {
-                                eveID = evento_temp.getId();
-                                eventos_matched = trs.matchUsrEvent(usrID, eveID);
-                                if (!eventos_matched.isEmpty()) { //Se o usuário seguir o evento
+                                eveID = evento_temp.getId(); // Pega o ID do evento da iteracao
+                                if (trs.isSeguindo(usrID, eveID)) { //Se o usuário seguir o evento
                                     date_tempday = evento_temp.getData(); // pega a data com formato Date
                                     tempday2 = date_tempday.getDate(); // converte a data para Int
                                     eventos[tempday2]++;
                                 } 
-                                else {
-                                }
                             }
                         }
                     }
 
                     //FIM USUÁRIO COMUM --------------------------------------------------------------------
+                    
+                    //PARA USUÁRIO ADMIN -------------------------------------------------------------------- 
+                    Realiza trr = new Realiza();
+                    RealizaDO realizaDO = new RealizaDO();
+                    Membro trm2 = new Membro();
+                    int geID;
+                    
+                    if (admin2) {
+                        if (!eventos_do_Mes.isEmpty()) {
+                            for (EventoDO evento_temp : eventos_do_Mes) {
+                                eveID = evento_temp.getId(); // Pegamos o ID do evento da iteracao
+                                realizaDO = trr.buscarPorEVE(eveID);
+                                geID = realizaDO.getGEid(); // Pegamos o ID do GE que realiza o evento da iteracao
+                                if(trm2.isADM(geID, usrID)){
+                                    date_tempday = evento_temp.getData(); // pega a data com formato Date
+                                    tempday2 = date_tempday.getDate(); // converte a data para Int
+                                    eventos[tempday2]++; //adiciona no Array eventos                                                                    
+                                }
+                                if (trs.isSeguindo(usrID, eveID)) { //Se o usuário seguir o evento
+                                    date_tempday = evento_temp.getData(); // pega a data com formato Date
+                                    tempday2 = date_tempday.getDate(); // converte a data para Int
+                                    eventos[tempday2]++; //adiciona no Array eventos
+                                } 
+                            }
+                        }
+                    }
+
+                    //FIM USUÁRIO ADMIN --------------------------------------------------------------------                    
 
                     //INTERPOLAÇÃO ---------------------------------------------------
                     //XMÁX e XMIN (maximo e minimo numero de eventos em um mes)

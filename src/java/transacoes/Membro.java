@@ -131,6 +131,7 @@ public class Membro {
 	}
 	return false;
     }
+    
     //Retorna uma Lista de Relacoes de Membro para os quais o Usuario é ADM 
     public List<MembroDO> AdminedGroups(int usrID) throws Exception{
         Transacao tr = new Transacao();

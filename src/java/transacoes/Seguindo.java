@@ -110,6 +110,22 @@ public class Seguindo {
 	return null;
     }
     
+    public boolean isSeguindo(int USUid, int EVEid) throws Exception{
+        Transacao tr = new Transacao();
+	try{
+            tr.beginReadOnly();
+  	    SeguindoData a = new SeguindoData();
+	    boolean i = a.isSeguindo(USUid, EVEid, tr);
+            tr.commit();
+            return i;
+	} catch (Exception e) {
+            tr.rollback();
+            System.out.println("Erro ao buscar" + USUid);
+            e.printStackTrace();
+	}
+	return false;
+    }    
+    
      
     private boolean isEmpty(String s) {
         if (null == s)

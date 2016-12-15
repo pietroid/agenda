@@ -133,18 +133,18 @@
 
         <BR><BR><BR><BR><BR>
         
-        <!-------------------------------------------------------------------------------------------------->
-<!----------------------------- REDIRECIONA PARA FEEDBACK------------------------------------------->
+<!-------------------------------------------------------------------------------------------------->
+<!----------------------------- REDIRECIONA PARA BODY_FEEDBACK------------------------------------------->
 <%   LocalDate localDate = LocalDate.now();
     Date dateNow = Date.valueOf(localDate.toString());
-    if(evento.getData().before(dateNow)  && !usuario.isSuperUser() && evento.isAtivo()){        %>
+    if(evento.getData().before(dateNow) && evento.isAtivo()){        %>
 <p align="center"> <b>O que você achou do evento? </b></p> <BR>
 <FORM action="/agenda/Feedback.jsp" method="post">  
     <center><INPUT type="submit" name="deixar_feedback" value="Deixe seu feedback" ></center> <BR>
     <input type="hidden" name="id_eve" value="<%=evento.getId()%>">
 </form><%}
 %>
-<!---------------------------FIM DO REDICERIONADOR PARA FEEDBACK.JSP-------------------------------->
+<!---------------------------FIM DO REDICERIONADOR PARA BODY_FEEDBACK.JSP-------------------------------->
 <!-------------------------------------------------------------------------------------------------->
         
 <BR> <BR>
@@ -178,6 +178,7 @@
                 %>
         <center> <table align="center" border=1 cellpadding=10 width=500>
                         <tr>
+                          <td><a href="CancelarEvento.jsp?evento=<%= evento.getId() %>"><font  color="#ff0000">Cancelar evento</font></a></td>
                           <td><a href="ExcluirEvento.jsp?evento=<%= evento.getId() %>"><font  color="#ff0000">Excluir evento</font></a></td>
                           <td><a href="EditarEvento.jsp?evento=<%= evento.getId() %>"><font  color="#ff0000">Alterar evento</font></a></td>
                         </tr>

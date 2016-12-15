@@ -16,12 +16,12 @@ public class NotificacaoGeralData {
     
     public void incluir(NotificacaoGeralDO notificacaoGeral, Transacao tr) throws Exception {
         Connection con = tr.obterConexao();
-        String sql = "insert into notificacaoGeral (USERalvoid,mensagem,classificacao,EVEassociado) values (?,?,?,?)";
+        String sql = "insert into notificacaoGeral (USERalvoid,mensagem,classificacao,IDassociado) values (?,?,?,?)";
         PreparedStatement ps = con.prepareStatement(sql);  
         ps.setInt(1, notificacaoGeral.getUsuId());
         ps.setString(2,notificacaoGeral.getMensagem());
         ps.setInt(3, notificacaoGeral.getClassificacao());
-        ps.setInt(4,notificacaoGeral.getEVEassociado());
+        ps.setInt(4,notificacaoGeral.getIDassociado());
         int result = ps.executeUpdate();
         
         sql= "SELECT LAST_INSERT_ID();";
@@ -41,13 +41,13 @@ public class NotificacaoGeralData {
 
   public void atualizar(NotificacaoGeralDO notificacaoGeral, Transacao tr) throws Exception {
      Connection con = tr.obterConexao();
-     String sql = "update notificacaoGeral set  USERalvoid=?, mensagem=? where id=?, classificacao=?, EVEassociado=?;";
+     String sql = "update notificacaoGeral set  USERalvoid=?, mensagem=? where id=?, classificacao=?, IDassociado=?;";
      PreparedStatement ps = con.prepareStatement(sql);
      ps.setInt(1, notificacaoGeral.getUsuId());
      ps.setString(2,notificacaoGeral.getMensagem());
      ps.setInt(3, notificacaoGeral.getId());
      ps.setInt(4,notificacaoGeral.getClassificacao());
-     ps.setInt(5, notificacaoGeral.getEVEassociado());
+     ps.setInt(5, notificacaoGeral.getIDassociado());
      int result = ps.executeUpdate(); 
     } // atualizar
 
@@ -63,7 +63,7 @@ public class NotificacaoGeralData {
         notificacaoGeral.setUsuId(rs.getInt("USERalvoid"));
         notificacaoGeral.setMensagem(rs.getString("mensagem")); 
         notificacaoGeral.setClassificacao(rs.getInt("classificacao")); 
-        notificacaoGeral.setEVEassociado(rs.getInt("EVEassociado"));
+        notificacaoGeral.setIDassociado(rs.getInt("IDassociado"));
         return notificacaoGeral;
     } // buscar
  
@@ -80,7 +80,7 @@ public class NotificacaoGeralData {
             i.setUsuId (rs.getInt("USERalvoid"));
             i.setMensagem (rs.getString("mensagem"));
             i.setClassificacao (rs.getInt("classificacao"));
-            i.setEVEassociado (rs.getInt("EVEassociado"));
+            i.setIDassociado (rs.getInt("IDassociado"));
             Items.add(i);
         }
         return Items;
