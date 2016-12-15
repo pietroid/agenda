@@ -81,7 +81,7 @@ if(request.getParameter("submit") != null){
         for (MembroDO UsuADM: ListaMembros){
             /*Definindo os atributos da notificacao*/
             FeedbackNote.setUsuId(UsuADM.getUSUid());
-            FeedbackNote.setEVEassociado(EveId);
+            FeedbackNote.setIDassociado(EveId);
             FeedbackNote.setMensagem(message+nomeEvento);
             FeedbackNote.setClassificacao(2);
             if (Note.incluir(FeedbackNote)){
