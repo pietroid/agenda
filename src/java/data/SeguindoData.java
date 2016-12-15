@@ -111,7 +111,20 @@ public class SeguindoData {
             Items.add(i);
         }
         return Items;
-    }    
+    }
+        
+    public boolean isSeguindo(int USUid, int EVEid, Transacao tr) throws Exception {
+        Connection con = tr.obterConexao();
+        String sql = "select * from agenda.Membro where USUid = ? and EVEid = ?";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setInt(1, USUid);
+        ps.setInt(2, EVEid);
+        ResultSet rs = ps.executeQuery();
+        if(rs.next()){
+            return true;
+        }
+        return false;
+    }
     
 }
 

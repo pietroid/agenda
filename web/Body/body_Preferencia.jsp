@@ -95,7 +95,7 @@
             GE getn = new GE();
             GEDO ge = getn.buscar(GEid);            
 %>          
-            <option label="<%=ge.getNome()%>" value="<%=ge.getId()%>"><%=ge.getNome()%></option>
+            <option label="<%=ge.getNome()%>" value="<%=preferencia.getId()%>"><%=ge.getNome()%></option>
 <%}%>
             </select>
             <input type="submit" value="Excluir"></form>
