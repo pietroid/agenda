@@ -95,7 +95,7 @@ UsuarioImagem = us.buscarPorUsername("Username");
   <tr>
       <td><input type="radio" name="foto" value="imagem1" >Imagem 1</td>
       <td><input type="radio" name="foto" value="imagem2" >Imagem 2</td>
-      <td><input type="radio" name="foto value="imagem3" >Imagem 3</td>
+      <td><input type="radio" name="foto" value="imagem3" >Imagem 3</td>
       <td><input type="radio" name="foto" value="imagem4" >Imagem 4</td>
   </tr>
   <tfoot width="50">
